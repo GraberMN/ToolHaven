@@ -1,0 +1,76 @@
+body {
+    background-color: rgba(141, 199, 154, 0.482);
+}
+#calcTitle {
+    font-size: 40px;
+    font-family: cursive;
+    font-weight: bolder;
+    color: hsl(110, 74%, 41%);
+}
+input {
+    width: 500px;
+    height: 80px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 1);
+    border: solid 22px rgba(0, 0, 0, 0.705);
+    text-align: right;
+    font-family: cursive;
+    font-size: 30px;
+}
+#buttons {
+    width: 553px;
+    height: 450px;
+    margin: auto;
+    border-radius: 20px;
+    background-color: gray;
+    display: grid;
+    grid-template-columns: 105px 105px 105px 105px 105px;
+    grid-template-rows: 105px 105px 105px 105px;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+button {
+    font-family: cursive;
+    font-size: 30px;
+    border-radius: 50px;
+    border: none;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    background-color:aliceblue;
+    cursor: pointer;
+}
+button:hover {
+    background-color: hsl(210, 11%, 83%)
+}
+button:active {
+    background-color: hsl(210, 11%, 60%);
+}
+.operator {
+    background-color:rgb(245, 140, 102);
+}
+.operator:hover {
+    background-color: hsl(19, 69%, 55%);
+}
+.operator:active {
+    background-color: hsl(19, 69%, 45%);
+}
+.deleter {
+    background-color: rgb(247, 109, 99);
+}
+.deleter:hover {
+    background-color: hsl(7, 81%, 55%);
+}
+.deleter:active {
+    background-color: hsl(7, 81%, 45%);
+}
+#equals {
+    background-color:lightskyblue;
+}
+#equals:hover {
+    background-color: deepskyblue;
+}
+#equals:active {
+    background-color: rgb(25, 126, 189);
+}
