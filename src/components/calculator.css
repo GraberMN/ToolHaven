@@ -7,6 +7,13 @@ body {
     font-weight: bolder;
     color: hsl(110, 74%, 41%);
 }
+#settingsIcon {
+    position: absolute;
+    width: 75px;
+    height: auto;
+    margin: auto;
+    transform: translateX(285px);
+}
 input {
     width: 500px;
     height: 80px;

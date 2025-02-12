@@ -1,11 +1,12 @@
 import logo from './logo.svg';
+import settingsIcon from './Images/Settings Icon.svg'
 import './App.css';
 import Calculator from './components/Calculator';
 
 function App() {
   return (
     <div className="App">
-      <Calculator />
+      <Calculator settingsIcon={settingsIcon} />
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useRef } from 'react'
 import './calculator.css'
 
-function Calculator() {
+function Calculator({settingsIcon}) {
     const inputField = useRef("")
     const appendToDisplay = (input) => {
         inputField.current.value = inputField.current.value + input
@@ -23,6 +23,7 @@ function Calculator() {
     }
     return (
         <div>
+            <img id='settingsIcon' src={settingsIcon} alt='settingsIcon'/>
             <h1 id="calcTitle">Calculator</h1>
             <span id="calculator">
                 <input type="text" ref={inputField} readOnly />
