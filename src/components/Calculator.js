@@ -5,11 +5,18 @@ import './calculator.css'
 function Calculator({settingsIcon}) {
     const inputField = useRef("0")
     const appendToDisplay = (input, isNum) => {
-        if (inputField.current.value == "Error" || inputField.current.value == "NaN") {
+        if (inputField.current.value === "Error" || inputField.current.value === "NaN") {
             isNum ? inputField.current.value = "" : inputField.current.value = "0"
         }
-        if (inputField.current.value == "0" && isNum) {
+        if (inputField.current.value === "0" && isNum) {
             inputField.current.value = ""
+        }
+        if (input === " - " && inputField.current.value.substring(inputField.current.value.length - 1, inputField.current.value.length) === " ") {
+            input = "-"
+        }
+        if (input === " - " && inputField.current.value === "0") {
+            inputField.current.value = ""
+            input = "-"
         }
         inputField.current.value = inputField.current.value + input
     }
@@ -17,7 +24,7 @@ function Calculator({settingsIcon}) {
         inputField.current.value = "0"
     }
     const deleteLastFromDisplay = () => {
-        if (inputField.current.value.length > 1 && inputField.current.value != "Error") {
+        if (inputField.current.value.length > 1 && inputField.current.value !== "Error") {
             inputField.current.value = inputField.current.value.substring(0, inputField.current.value.length - 1)
         } else {
             inputField.current.value = "0"
@@ -60,7 +67,7 @@ function Calculator({settingsIcon}) {
                     <button onClick={() => appendToDisplay('0', true)} title='zero'>0</button>
                     <button onClick={() => appendToDisplay('.', false)} title='decimalPoint'>.</button>
                     <button onClick={() => calculateDisplay()} id='equals' title='equalSign'>=</button>
-                    <button onClick={() => appendToDisplay(' - ', false)} className='operator' title='minusSign'>-</button>
+                    <button onClick={() => appendToDisplay(' - ', false)} className='operator' title='minus/negativeSign'>-</button>
                 </span>
             </span>
         </div>
