@@ -4,6 +4,8 @@ import './calculator.css'
 
 function Calculator({settingsIcon}) {
     const inputField = useRef("0")
+    const ansField = useRef("ANS = 0")
+    let ans = "0"
     const appendToDisplay = (input, isNum) => {
         if (inputField.current.value === "Error" || inputField.current.value === "NaN") {
             isNum ? inputField.current.value = "" : inputField.current.value = "0"
@@ -33,6 +35,8 @@ function Calculator({settingsIcon}) {
     const calculateDisplay = () => {
         try {
             inputField.current.value = eval(inputField.current.value)
+            ans = inputField.current.value.toString()
+            ansField.current.value = "ANS = " + ans
         }
         catch (error) {
             inputField.current.value = "Error"
@@ -40,13 +44,15 @@ function Calculator({settingsIcon}) {
     }
     useEffect(() => {
         inputField.current.value = "0"
+        ansField.current.value = "ANS = 0"
     }, [])
     return (
         <div>
             <img id='settingsIcon' src={settingsIcon} alt='settingsIcon'/>
             <h1 id="calcTitle">Calculator</h1>
             <span id="calculator">
-                <input type="text" ref={inputField} readOnly />
+                <input type="text" id='inputField' ref={inputField} readOnly />
+                <input type='text' id='ansField' ref={ansField} readOnly />
                 <span id="buttons">
                     <button onClick={() => clearDisplay()} className='deleter' title='clearAll'>C</button>
                     <button onClick={() => appendToDisplay('7', true)} title='seven'>7</button>
@@ -71,7 +77,7 @@ function Calculator({settingsIcon}) {
                     <button onClick={() => appendToDisplay('√', false)} className='operator' title='squareRoot'>√</button>
                     <button onClick={() => appendToDisplay('π', true)} className='irrationalNum' title='pi'>π</button>
                     <button onClick={() => appendToDisplay('e', true)} className='irrationalNum' title="euler'sNumber">e</button>
-                    <button onClick={() => appendToDisplay('ANS', true)} id='ans' title='previousAnswer'>ANS</button>
+                    <button onClick={() => appendToDisplay(ans, true)} id='ans' title='previousAnswer'>ANS</button>
                     <button onClick={() => appendToDisplay('!', false)} className='operator' title='factorial'>!</button>
                 </span>
             </span>
