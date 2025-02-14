@@ -68,6 +68,11 @@ function Calculator({settingsIcon}) {
                     <button onClick={() => appendToDisplay('.', false)} title='decimalPoint'>.</button>
                     <button onClick={() => calculateDisplay()} id='equals' title='equalSign'>=</button>
                     <button onClick={() => appendToDisplay(' - ', false)} className='operator' title='minus/negativeSign'>-</button>
+                    <button onClick={() => appendToDisplay('√', false)} className='operator' title='squareRoot'>√</button>
+                    <button onClick={() => appendToDisplay('π', true)} className='irrationalNum' title='pi'>π</button>
+                    <button onClick={() => appendToDisplay('e', true)} className='irrationalNum' title="euler'sNumber">e</button>
+                    <button onClick={() => appendToDisplay('ANS', true)} id='ans' title='previousAnswer'>ANS</button>
+                    <button onClick={() => appendToDisplay('!', false)} className='operator' title='factorial'>!</button>
                 </span>
             </span>
         </div>

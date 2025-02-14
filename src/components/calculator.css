@@ -26,13 +26,13 @@ input {
 }
 #buttons {
     width: 553px;
-    height: 450px;
+    height: 550px;
     margin: auto;
     border-radius: 20px;
     background-color: gray;
     display: grid;
     grid-template-columns: 105px 105px 105px 105px 105px;
-    grid-template-rows: 105px 105px 105px 105px;
+    grid-template-rows: 105px 105px 105px 105px 105px;
     align-items: center;
     align-content: center;
     justify-content: center;
@@ -49,7 +49,7 @@ button {
     cursor: pointer;
 }
 button:hover {
-    background-color: hsl(210, 11%, 83%)
+    background-color: hsl(210, 11%, 75%)
 }
 button:active {
     background-color: hsl(210, 11%, 60%);
@@ -80,4 +80,24 @@ button:active {
 }
 #equals:active {
     background-color: rgb(25, 126, 189);
+}
+.irrationalNum {
+    background-color:lightgreen;
+}
+.irrationalNum:hover {
+    background-color:rgba(0, 255, 0, 0.568);
+}
+.irrationalNum:active {
+    background-color: rgba(0, 255, 0, 0.268);
+}
+#ans {
+    background-color:rgba(64, 224, 208, 1);
+}
+
+#ans:hover {
+    background-color:rgba(72, 209, 205, 0.76);
+}
+
+#ans:active {
+    background-color: rgba(72, 209, 205, 0.46);
 }
