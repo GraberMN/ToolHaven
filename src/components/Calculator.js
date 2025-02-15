@@ -5,6 +5,8 @@ import './calculator.css'
 function Calculator({settingsIcon, historyIcon}) {
     const inputField = useRef("0")
     const ansField = useRef("ANS = 0")
+    const settingsBox = useRef(null)
+    const historyBox = useRef(null)
     let ans = "0"
     const appendToDisplay = (input, isNum) => {
         if (inputField.current.value === "Error" || inputField.current.value === "NaN") {
@@ -42,18 +44,36 @@ function Calculator({settingsIcon, historyIcon}) {
             inputField.current.value = "Error"
         }
     }
+    const settingsOpenOrClose = () => {
+        if (settingsBox.current.style.visibility === "hidden") {
+            settingsBox.current.style.visibility = "visible"
+        } else {
+            settingsBox.current.style.visibility = "hidden"
+        }
+    }
+    const historyOpenOrClose = () => {
+        if (historyBox.current.style.visibility === "hidden") {
+            historyBox.current.style.visibility = "visible"
+        } else {
+            historyBox.current.style.visibility = "hidden"
+        }
+    }
     useEffect(() => {
         inputField.current.value = "0"
         ansField.current.value = "ANS = 0"
+        settingsBox.current.style.visibility = "hidden"
+        historyBox.current.style.visibility = "hidden"
     }, [])
     return (
         <div>
-            <img id='settingsIcon' src={settingsIcon} alt='settingsIcon' title="calculatorSettings"/>
+            <img onClick={() => settingsOpenOrClose()} id='settingsIcon' src={settingsIcon} alt='settingsIconOut' title="calculatorSettings" />
+            <span id='settingsBox' ref={settingsBox}></span>
             <h1 id="calcTitle">Calculator</h1>
             <span id="calculator">
                 <input type="text" id='inputField' ref={inputField} readOnly />
                 <input type='text' id='ansField' ref={ansField} readOnly />
-                <img id='historyIcon' src={historyIcon} alt='historyIcon' title='calculationHistory' />
+                <img onClick={() => historyOpenOrClose()} id='historyIcon' src={historyIcon} alt='historyIcon' title='calculationHistory' />
+                <span id='historyBox' ref={historyBox}></span>
                 <span id="buttons">
                     <button onClick={() => clearDisplay()} className='deleter' title='clearAll'>C</button>
                     <button onClick={() => appendToDisplay('7', true)} title='seven'>7</button>

@@ -16,7 +16,26 @@ body {
     cursor: pointer;
     border: solid hsl(110, 74%, 41%);
     border-radius: 15px;
-    background-color: rgb(46, 43, 43);
+    background-color: rgba(0, 0, 0, 0.705);
+    z-index: 999;
+}
+#settingsIcon:hover {
+    border-radius: 20px;
+}
+#settingsIcon:active {
+    border-style: dashed;
+}
+#settingsBox {
+    position: absolute;
+    width: 300px;
+    height: 400px;
+    border: solid;
+    margin: auto;
+    transform: translateX(60px);
+    border-color: hsl(110, 74%, 41%);
+    border-radius: 20px;
+    z-index: 998;
+    background-color: white;
 }
 #inputField {
     width: 500px;
@@ -30,13 +49,13 @@ body {
 }
 #ansField {
     position: absolute;
-    transform: translateX(-523px);
+    transform: translateX(-493px);
     top: 135px;
     text-align: right;
     font-family: cursive;
     font-size: 10px;
     border: none;
-    width: 495px;
+    width: 465px;
     font-weight: 500;
 }
 #historyIcon {
@@ -46,6 +65,25 @@ body {
     transform: translateX(-523px);
     top: 135px;
     cursor: pointer;
+    z-index: 999;
+    border: none;
+}
+#historyIcon:hover {
+    border-color: rgba(0, 0, 0, 0.705);
+    border-bottom-style: dashed;
+}
+#historyBox {
+    position: absolute;
+    width: 300px;
+    height: 400px;
+    border: solid;
+    margin: auto;
+    top: 125px;
+    transform: translateX(-531px);
+    border-color: rgba(0, 0, 0, 0.705);
+    border-radius: 20px;
+    z-index: 998;
+    background-color: white;
 }
 #buttons {
     width: 553px;
