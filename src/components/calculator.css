@@ -13,6 +13,10 @@ body {
     height: auto;
     margin: auto;
     transform: translateX(285px);
+    cursor: pointer;
+    border: solid hsl(110, 74%, 41%);
+    border-radius: 15px;
+    background-color: rgb(46, 43, 43);
 }
 #inputField {
     width: 500px;
@@ -26,12 +30,22 @@ body {
 }
 #ansField {
     position: absolute;
-    transform: translateX(-175px);
+    transform: translateX(-523px);
     top: 135px;
     text-align: right;
     font-family: cursive;
     font-size: 10px;
     border: none;
+    width: 495px;
+    font-weight: 500;
+}
+#historyIcon {
+    position: absolute;
+    width: 20px;
+    height: auto;
+    transform: translateX(-523px);
+    top: 135px;
+    cursor: pointer;
 }
 #buttons {
     width: 553px;

@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useRef, useEffect } from 'react'
 import './calculator.css'
 
-function Calculator({settingsIcon}) {
+function Calculator({settingsIcon, historyIcon}) {
     const inputField = useRef("0")
     const ansField = useRef("ANS = 0")
     let ans = "0"
@@ -48,11 +48,12 @@ function Calculator({settingsIcon}) {
     }, [])
     return (
         <div>
-            <img id='settingsIcon' src={settingsIcon} alt='settingsIcon'/>
+            <img id='settingsIcon' src={settingsIcon} alt='settingsIcon' title="calculatorSettings"/>
             <h1 id="calcTitle">Calculator</h1>
             <span id="calculator">
                 <input type="text" id='inputField' ref={inputField} readOnly />
                 <input type='text' id='ansField' ref={ansField} readOnly />
+                <img id='historyIcon' src={historyIcon} alt='historyIcon' title='calculationHistory' />
                 <span id="buttons">
                     <button onClick={() => clearDisplay()} className='deleter' title='clearAll'>C</button>
                     <button onClick={() => appendToDisplay('7', true)} title='seven'>7</button>
