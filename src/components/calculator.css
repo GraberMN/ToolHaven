@@ -67,6 +67,7 @@ body {
     cursor: pointer;
     z-index: 999;
     border: none;
+    padding-bottom: 1px;
 }
 #historyIcon:hover {
     border-color: rgba(0, 0, 0, 0.705);
@@ -75,7 +76,7 @@ body {
 #historyBox {
     position: absolute;
     width: 300px;
-    height: 400px;
+    height: 375px;
     border: solid;
     margin: auto;
     top: 125px;
@@ -84,6 +85,18 @@ body {
     border-radius: 20px;
     z-index: 998;
     background-color: white;
+    overflow-y: auto;
+    scrollbar-color: rgba(0, 0, 0, 0.705);
+}
+#historyTitle {
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 7px;
+}
+span > div {
+    font-family: cursive;
+    text-align: center;
+    margin: 7px;
 }
 #buttons {
     width: 553px;

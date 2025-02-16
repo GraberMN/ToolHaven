@@ -2,12 +2,14 @@ import React from 'react'
 import { useState, useRef, useEffect } from 'react'
 import './calculator.css'
 
-function Calculator({settingsIcon, historyIcon}) {
+function Calculator({ settingsIcon, historyIcon }) {
+    const [calcHistory, setCalcHistory] = useState([])
+    const beforeEval = useRef("0")
     const inputField = useRef("0")
     const ansField = useRef("ANS = 0")
     const settingsBox = useRef(null)
     const historyBox = useRef(null)
-    let ans = "0"
+    const ans = useRef("0")
     const appendToDisplay = (input, isNum) => {
         if (inputField.current.value === "Error" || inputField.current.value === "NaN") {
             isNum ? inputField.current.value = "" : inputField.current.value = "0"
@@ -23,6 +25,7 @@ function Calculator({settingsIcon, historyIcon}) {
             input = "-"
         }
         inputField.current.value = inputField.current.value + input
+        displayChange()
     }
     const clearDisplay = () => {
         inputField.current.value = "0"
@@ -36,12 +39,19 @@ function Calculator({settingsIcon, historyIcon}) {
     }
     const calculateDisplay = () => {
         try {
+            beforeEval.current = inputField.current.value
             inputField.current.value = eval(inputField.current.value)
-            ans = inputField.current.value.toString()
-            ansField.current.value = "ANS = " + ans
+            ans.current = inputField.current.value
+            ansField.current.value = "ANS = " + ans.current
+            setCalcHistory([...calcHistory, beforeEval.current + " = " + ans.current])
         }
         catch (error) {
             inputField.current.value = "Error"
+        }
+    }
+    const displayChange = () => {
+        if (inputField.current.value.length >= inputField.current.maxLength) {
+            inputField.current.value = inputField.current.value.slice(0, inputField.current.maxLength)
         }
     }
     const settingsOpenOrClose = () => {
@@ -63,6 +73,9 @@ function Calculator({settingsIcon, historyIcon}) {
         ansField.current.value = "ANS = 0"
         settingsBox.current.style.visibility = "hidden"
         historyBox.current.style.visibility = "hidden"
+        beforeEval.current = "0"
+        ans.current = "0"
+        setCalcHistory([])
     }, [])
     return (
         <div>
@@ -70,10 +83,17 @@ function Calculator({settingsIcon, historyIcon}) {
             <span id='settingsBox' ref={settingsBox}></span>
             <h1 id="calcTitle">Calculator</h1>
             <span id="calculator">
-                <input type="text" id='inputField' ref={inputField} readOnly />
+                <input type="text" id='inputField' ref={inputField} maxLength={27} readOnly />
                 <input type='text' id='ansField' ref={ansField} readOnly />
                 <img onClick={() => historyOpenOrClose()} id='historyIcon' src={historyIcon} alt='historyIcon' title='calculationHistory' />
-                <span id='historyBox' ref={historyBox}></span>
+                <span id='historyBox' ref={historyBox}>
+                    <div id='historyTitle'> History </div>
+                    {
+                        calcHistory.map((historyEntry, index) => 
+                            <div key={index}>{historyEntry}</div>
+                        )
+                    }
+                </span>
                 <span id="buttons">
                     <button onClick={() => clearDisplay()} className='deleter' title='clearAll'>C</button>
                     <button onClick={() => appendToDisplay('7', true)} title='seven'>7</button>
@@ -98,7 +118,7 @@ function Calculator({settingsIcon, historyIcon}) {
                     <button onClick={() => appendToDisplay('√', false)} className='operator' title='squareRoot'>√</button>
                     <button onClick={() => appendToDisplay('π', true)} className='irrationalNum' title='pi'>π</button>
                     <button onClick={() => appendToDisplay('e', true)} className='irrationalNum' title="euler'sNumber">e</button>
-                    <button onClick={() => appendToDisplay(ans, true)} id='ans' title='previousAnswer'>ANS</button>
+                    <button onClick={() => appendToDisplay(ans.current, true)} id='ans' title='previousAnswer'>ANS</button>
                     <button onClick={() => appendToDisplay('!', false)} className='operator' title='factorial'>!</button>
                 </span>
             </span>
