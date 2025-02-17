@@ -25,6 +25,9 @@ body {
 #settingsIcon:active {
     border-style: dashed;
 }
+#settingsIcon:not(:hover) ~ #settingsBox {
+    border-top-right-radius: 15px;
+}
 #settingsBox {
     position: absolute;
     width: 300px;
@@ -36,6 +39,12 @@ body {
     border-radius: 20px;
     z-index: 998;
     background-color: white;
+}
+#settingsTitle {
+    font-size: 30px;
+    font-weight: 600;
+    margin-top: 17px;
+    margin-right: 80px;
 }
 #inputField {
     width: 500px;
@@ -86,10 +95,24 @@ body {
     z-index: 998;
     background-color: white;
     overflow-y: auto;
-    scrollbar-color: rgba(0, 0, 0, 0.705);
+}
+#historyBox::-webkit-scrollbar {
+    scroll-behavior: smooth;
+    width: 20px;
+    height: auto;
+}
+#historyBox::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.705);
+    border-radius: 20px;
+}
+#historyBox::-webkit-scrollbar-track-piece {
+    background: none;
+    border-radius: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 #historyTitle {
-    font-size: 20px;
+    font-size: 30px;
     font-weight: 600;
     margin-top: 7px;
 }
@@ -167,11 +190,9 @@ button:active {
 #ans {
     background-color:rgba(64, 224, 208, 1);
 }
-
 #ans:hover {
     background-color:rgba(72, 209, 205, 0.76);
 }
-
 #ans:active {
     background-color: rgba(72, 209, 205, 0.46);
 }

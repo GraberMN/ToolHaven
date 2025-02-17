@@ -80,7 +80,10 @@ function Calculator({ settingsIcon, historyIcon }) {
     return (
         <div>
             <img onClick={() => settingsOpenOrClose()} id='settingsIcon' src={settingsIcon} alt='settingsIconOut' title="calculatorSettings" />
-            <span id='settingsBox' ref={settingsBox}></span>
+            <span id='settingsBox' ref={settingsBox}>
+                <div id='settingsTitle'>Settings</div>
+                
+            </span>
             <h1 id="calcTitle">Calculator</h1>
             <span id="calculator">
                 <input type="text" id='inputField' ref={inputField} maxLength={27} readOnly />
