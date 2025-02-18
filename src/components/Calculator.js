@@ -40,6 +40,17 @@ function Calculator({ settingsIcon, historyIcon }) {
     const calculateDisplay = () => {
         try {
             beforeEval.current = inputField.current.value
+            if (inputField.current.value.includes("e") || inputField.current.value.includes("π")) {
+                inputField.current.value = inputField.current.value.replaceAll("e", "Math.E")
+                inputField.current.value = inputField.current.value.replaceAll("π", "Math.PI")
+                const charArray = inputField.current.value.split("")
+                for (let i = 1; i < charArray.length; i++) {
+                    if (charArray[i] === "M" && (Number.isInteger(parseInt(charArray[i - 1])) || charArray[i - 1] === "E" || charArray[i - 1] === "I")) {
+                        charArray[i] = " * M"
+                    }
+                }
+                inputField.current.value = charArray.join("")
+            }
             inputField.current.value = eval(inputField.current.value)
             ans.current = inputField.current.value
             ansField.current.value = "ANS = " + ans.current
@@ -82,7 +93,7 @@ function Calculator({ settingsIcon, historyIcon }) {
             <img onClick={() => settingsOpenOrClose()} id='settingsIcon' src={settingsIcon} alt='settingsIconOut' title="calculatorSettings" />
             <span id='settingsBox' ref={settingsBox}>
                 <div id='settingsTitle'>Settings</div>
-                
+
             </span>
             <h1 id="calcTitle">Calculator</h1>
             <span id="calculator">

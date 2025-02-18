@@ -77,6 +77,7 @@ body {
     z-index: 999;
     border: none;
     padding-bottom: 1px;
+    background-color: white;
 }
 #historyIcon:hover {
     border-color: rgba(0, 0, 0, 0.705);
