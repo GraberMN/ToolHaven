@@ -2,16 +2,17 @@ import React from 'react'
 import { useState, useRef, useEffect } from 'react'
 import './calculator.css'
 
-function Calculator({ settingsIcon, historyIcon }) {
+function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
     const [calcHistory, setCalcHistory] = useState([])
     const beforeEval = useRef("0")
     const inputField = useRef("0")
     const ansField = useRef("ANS = 0")
+    const rulesBox = useRef(null)
     const settingsBox = useRef(null)
     const historyBox = useRef(null)
     const ans = useRef("0")
     const appendToDisplay = (input, isNum) => {
-        if (inputField.current.value === "Error" || inputField.current.value === "NaN") {
+        if (inputField.current.value === "Error" || inputField.current.value === "NaN" || inputField.current.value === "undefined") {
             isNum ? inputField.current.value = "" : inputField.current.value = "0"
         }
         if (inputField.current.value === "0" && isNum) {
@@ -65,23 +66,17 @@ function Calculator({ settingsIcon, historyIcon }) {
             inputField.current.value = inputField.current.value.slice(0, inputField.current.maxLength)
         }
     }
-    const settingsOpenOrClose = () => {
-        if (settingsBox.current.style.visibility === "hidden") {
-            settingsBox.current.style.visibility = "visible"
+    const openOrClose = (element) => {
+        if (element.current.style.visibility === "hidden") {
+            element.current.style.visibility = "visible"
         } else {
-            settingsBox.current.style.visibility = "hidden"
-        }
-    }
-    const historyOpenOrClose = () => {
-        if (historyBox.current.style.visibility === "hidden") {
-            historyBox.current.style.visibility = "visible"
-        } else {
-            historyBox.current.style.visibility = "hidden"
+            element.current.style.visibility = "hidden"
         }
     }
     useEffect(() => {
         inputField.current.value = "0"
         ansField.current.value = "ANS = 0"
+        rulesBox.current.style.visibility = "hidden"
         settingsBox.current.style.visibility = "hidden"
         historyBox.current.style.visibility = "hidden"
         beforeEval.current = "0"
@@ -90,7 +85,12 @@ function Calculator({ settingsIcon, historyIcon }) {
     }, [])
     return (
         <div>
-            <img onClick={() => settingsOpenOrClose()} id='settingsIcon' src={settingsIcon} alt='settingsIconOut' title="calculatorSettings" />
+            <img onClick={() => openOrClose(rulesBox)} id='rulesIcon' src={rulesIcon} alt='rulesIcon' title="calculatorRules" />
+            <span id='rulesBox' ref={rulesBox}>
+                <div id='rulesTitle'>Rules</div>
+
+            </span>
+            <img onClick={() => openOrClose(settingsBox)} id='settingsIcon' src={settingsIcon} alt='settingsIcon' title="calculatorSettings" />
             <span id='settingsBox' ref={settingsBox}>
                 <div id='settingsTitle'>Settings</div>
 
@@ -99,7 +99,7 @@ function Calculator({ settingsIcon, historyIcon }) {
             <span id="calculator">
                 <input type="text" id='inputField' ref={inputField} maxLength={27} readOnly />
                 <input type='text' id='ansField' ref={ansField} readOnly />
-                <img onClick={() => historyOpenOrClose()} id='historyIcon' src={historyIcon} alt='historyIcon' title='calculationHistory' />
+                <img onClick={() => openOrClose(historyBox)} id='historyIcon' src={historyIcon} alt='historyIcon' title='calculationHistory' />
                 <span id='historyBox' ref={historyBox}>
                     <div id='historyTitle'> History </div>
                     {

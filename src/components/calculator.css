@@ -2,10 +2,49 @@ body {
     background-color: rgba(141, 199, 154, 0.482);
 }
 #calcTitle {
-    font-size: 40px;
+    font-size: 43px;
     font-family: cursive;
     font-weight: bolder;
     color: hsl(110, 74%, 41%);
+}
+#rulesIcon {
+    position: absolute;
+    width: 75px;
+    height: auto;
+    margin: auto;
+    transform: translateX(-367px);
+    cursor: pointer;
+    border: solid hsl(110, 74%, 41%);
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.705);
+    z-index: 999;
+}
+#rulesIcon:hover {
+    border-radius: 20px;
+}
+#rulesIcon:active {
+    border-style: dashed;
+}
+#rulesIcon:not(:hover) ~ #rulesBox {
+    border-top-left-radius: 15px;
+}
+#rulesBox {
+    position: absolute;
+    width: 400px;
+    height: 500px;
+    border: solid;
+    margin: auto;
+    transform: translateX(-367px);
+    border-color: hsl(110, 74%, 41%);
+    border-radius: 20px;
+    z-index: 998;
+    background-color: white;
+}
+#rulesTitle {
+    font-size: 30px;
+    font-weight: 600;
+    margin-top: 17px;
+    margin-right: -60px;
 }
 #settingsIcon {
     position: absolute;
@@ -59,7 +98,7 @@ body {
 #ansField {
     position: absolute;
     transform: translateX(-493px);
-    top: 135px;
+    top: 143.5px;
     text-align: right;
     font-family: cursive;
     font-size: 10px;
@@ -72,9 +111,9 @@ body {
     width: 20px;
     height: auto;
     transform: translateX(-523px);
-    top: 135px;
+    top: 143px;
     cursor: pointer;
-    z-index: 999;
+    z-index: 997;
     border: none;
     padding-bottom: 1px;
     background-color: white;
@@ -89,11 +128,11 @@ body {
     height: 375px;
     border: solid;
     margin: auto;
-    top: 125px;
+    top: 133px;
     transform: translateX(-531px);
     border-color: rgba(0, 0, 0, 0.705);
     border-radius: 20px;
-    z-index: 998;
+    z-index: 996;
     background-color: white;
     overflow-y: auto;
 }
