@@ -88,7 +88,17 @@ function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
             <img onClick={() => openOrClose(rulesBox)} id='rulesIcon' src={rulesIcon} alt='rulesIcon' title="calculatorRules" />
             <span id='rulesBox' ref={rulesBox}>
                 <div id='rulesTitle'>Rules</div>
-
+                <ul>
+                    <li>Hover over each calculator or external button to find out what it is/represents.</li>
+                    <li>The top left clock icon opens the History tab, which shows you all prior valid calculations until page reload.</li>
+                    <li>The Settings tab lets you adjust the rounding of calculated numbers, maximum characters that can be entered, and more.</li>
+                    <li>The defaults/maxes for those settings are 16 decimal points and 27 characters.</li>
+                    <li>If an Error is generated, keep calculating by pressing any calculator button.</li>
+                    <li>Calculator Button-Specific Rules:</li>
+                    <li id='lvl2li'>Exponentiation: "^" is on the button since it is seen more commonly than "**".</li>
+                    <li id='lvl2li'>Factorial: only positive integers and 0 allowed (0 - infinity).</li>
+                    <li id='lvl2li'>Pi/e: no " * " needed between number and pi/e, always write number first.</li>
+                </ul>
             </span>
             <img onClick={() => openOrClose(settingsBox)} id='settingsIcon' src={settingsIcon} alt='settingsIcon' title="calculatorSettings" />
             <span id='settingsBox' ref={settingsBox}>

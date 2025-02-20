@@ -39,6 +39,23 @@ body {
     border-radius: 20px;
     z-index: 998;
     background-color: white;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+#rulesBox::-webkit-scrollbar {
+    scroll-behavior: smooth;
+    width: 20px;
+    height: auto;
+}
+#rulesBox::-webkit-scrollbar-thumb {
+    background: hsl(110, 74%, 41%);
+    border-radius: 20px;
+}
+#rulesBox::-webkit-scrollbar-track-piece {
+    background: none;
+    border-radius: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 #rulesTitle {
     font-size: 30px;
@@ -84,6 +101,22 @@ body {
     font-weight: 600;
     margin-top: 17px;
     margin-right: 80px;
+}
+ul {
+    margin-top: 35px;
+}
+li {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-family: cursive;
+    text-align: left;
+    list-style-type: square;
+    margin-right: 10px;
+}
+#lvl2li {
+    font-family: cursive;
+    margin-left: 25px;
+    list-style-type: circle;
 }
 #inputField {
     width: 500px;
