@@ -54,6 +54,18 @@ function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
                 }
                 inputField.current.value = charArray.join("")
             }
+            if (inputField.current.value.includes("!")) {
+                const wordArray = inputField.current.value.split(" ")
+                for (let i = 0; i < wordArray.length; i++) {
+                    if (wordArray[i].includes("!")) {
+                        wordArray[i] = factorial(wordArray[i].substring(0, wordArray[i].length - 1))
+                        if (wordArray[i] === "Error") {
+                            throw new Error()
+                        }
+                    }
+                }
+                inputField.current.value = wordArray.join(" ")
+            }
             inputField.current.value = eval(inputField.current.value)
             if (inputField.current.value.includes(".")) {
                 inputField.current.value = Number.parseFloat(inputField.current.value).toFixed(maxDecimalPlacesVal)
@@ -81,6 +93,19 @@ function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
             element.current.style.visibility = "hidden"
         }
     }
+    const factorial = (num) => {
+        if (num.includes("-")) {
+            return "Error"
+        }
+        num = eval(num)
+        num = Math.round(num)
+        let product = 1
+        while (num >= 2) {
+            product *= num
+            num--
+        }
+        return product
+    }
     useEffect(() => {
         inputField.current.value = "0"
         ansField.current.value = "ANS = 0"
@@ -104,7 +129,7 @@ function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
                     <li>If an Error is generated, keep calculating by pressing any calculator button.</li>
                     <li>Calculator Button-Specific Rules:</li>
                     <li id='lvl2li'>Exponentiation: "^" is on the button since it is seen more commonly than "**" for exponentiation.</li>
-                    <li id='lvl2li'>Factorial: only positive integers and 0 allowed (0 - infinity).</li>
+                    <li id='lvl2li'>Factorial: only positive integers and 0 allowed (0 - ∞), decimals rounded.</li>
                     <li id='lvl2li'>Pi/e: no " * " needed between number and pi/e, always write number first.</li>
                 </ul>
             </span>
@@ -122,8 +147,8 @@ function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
             </span>
             <h1 id="calcTitle">Calculator</h1>
             <span id="calculator">
-                <input type="text" id='inputField' ref={inputField} maxLength={maxCharVal} readOnly />
-                <input type='text' id='ansField' ref={ansField} readOnly />
+                <input type="text" id='inputField' ref={inputField} maxLength={maxCharVal} title='inputField' placeholder='Loading...' readOnly />
+                <input type='text' id='ansField' ref={ansField} title='answerField' placeholder='Loading...' readOnly />
                 <img onClick={() => openOrClose(historyBox)} id='historyIcon' src={historyIcon} alt='historyIcon' title='calculationHistory' />
                 <span id='historyBox' ref={historyBox}>
                     <div id='historyTitle'> History </div>
