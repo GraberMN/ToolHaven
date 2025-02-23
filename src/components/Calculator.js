@@ -4,6 +4,8 @@ import './calculator.css'
 
 function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
     const [calcHistory, setCalcHistory] = useState([])
+    const [maxCharVal, setMaxCarVal] = useState(27)
+    const [maxDecimalPlacesVal, setMaxDecimalPlacesVal] = useState(16)
     const beforeEval = useRef("0")
     const inputField = useRef("0")
     const ansField = useRef("ANS = 0")
@@ -53,6 +55,12 @@ function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
                 inputField.current.value = charArray.join("")
             }
             inputField.current.value = eval(inputField.current.value)
+            if (inputField.current.value.includes(".")) {
+                inputField.current.value = Number.parseFloat(inputField.current.value).toFixed(maxDecimalPlacesVal)
+                while (inputField.current.value.substring(inputField.current.value.length - 1, inputField.current.value.length) === "0") {
+                    inputField.current.value = inputField.current.value.substring(0, inputField.current.value.length - 1)
+                }
+            }
             ans.current = inputField.current.value
             ansField.current.value = "ANS = " + ans.current
             setCalcHistory([...calcHistory, beforeEval.current + " = " + ans.current])
@@ -81,7 +89,6 @@ function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
         historyBox.current.style.visibility = "hidden"
         beforeEval.current = "0"
         ans.current = "0"
-        setCalcHistory([])
     }, [])
     return (
         <div>
@@ -91,11 +98,12 @@ function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
                 <ul>
                     <li>Hover over each calculator or external button to find out what it is/represents.</li>
                     <li>The top left clock icon opens the History tab, which shows you all prior valid calculations until page reload.</li>
-                    <li>The Settings tab lets you adjust the rounding of calculated numbers, maximum characters that can be entered, and more.</li>
-                    <li>The defaults/maxes for those settings are 16 decimal points and 27 characters.</li>
+                    <li>The Settings tab lets you adjust the max decimal places of calculations, the max characters that can be entered, and more.</li>
+                    <li>The defaults/maxes for those settings are 16 decimal places and 27 characters.</li>
+                    <li>When multiplying or dividing with decimals, the answer can sometimes be off by a tiny and negligible amount, but it is always accurate for the first 5 decimal places.</li>
                     <li>If an Error is generated, keep calculating by pressing any calculator button.</li>
                     <li>Calculator Button-Specific Rules:</li>
-                    <li id='lvl2li'>Exponentiation: "^" is on the button since it is seen more commonly than "**".</li>
+                    <li id='lvl2li'>Exponentiation: "^" is on the button since it is seen more commonly than "**" for exponentiation.</li>
                     <li id='lvl2li'>Factorial: only positive integers and 0 allowed (0 - infinity).</li>
                     <li id='lvl2li'>Pi/e: no " * " needed between number and pi/e, always write number first.</li>
                 </ul>
@@ -103,11 +111,18 @@ function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
             <img onClick={() => openOrClose(settingsBox)} id='settingsIcon' src={settingsIcon} alt='settingsIcon' title="calculatorSettings" />
             <span id='settingsBox' ref={settingsBox}>
                 <div id='settingsTitle'>Settings</div>
-
+                <ul>
+                    <li>Max d. places of calculations:</li>
+                    <input type='range' min={2} max={16} value={maxDecimalPlacesVal} onChange={(e) => setMaxDecimalPlacesVal(e.target.value)}></input>
+                    <span title={maxDecimalPlacesVal + " decimal places"}>{maxDecimalPlacesVal}</span>
+                    <li>Max entered characters:</li>
+                    <input type='range' min={5} max={27} value={maxCharVal} onChange={(e) => setMaxCarVal(e.target.value)}></input>
+                    <span title={maxCharVal + " characters"}>{maxCharVal}</span>
+                </ul>
             </span>
             <h1 id="calcTitle">Calculator</h1>
             <span id="calculator">
-                <input type="text" id='inputField' ref={inputField} maxLength={27} readOnly />
+                <input type="text" id='inputField' ref={inputField} maxLength={maxCharVal} readOnly />
                 <input type='text' id='ansField' ref={ansField} readOnly />
                 <img onClick={() => openOrClose(historyBox)} id='historyIcon' src={historyIcon} alt='historyIcon' title='calculationHistory' />
                 <span id='historyBox' ref={historyBox}>

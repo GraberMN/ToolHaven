@@ -60,7 +60,7 @@ body {
 #rulesTitle {
     font-size: 30px;
     font-weight: 600;
-    margin-top: 17px;
+    margin-top: 28px;
     margin-right: -60px;
 }
 #settingsIcon {
@@ -95,15 +95,46 @@ body {
     border-radius: 20px;
     z-index: 998;
     background-color: white;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+#settingsBox::-webkit-scrollbar {
+    scroll-behavior: smooth;
+    width: 20px;
+    height: auto;
+}
+#settingsBox::-webkit-scrollbar-thumb {
+    background: hsl(110, 74%, 41%);
+    border-radius: 20px;
+}
+#settingsBox::-webkit-scrollbar-track-piece {
+    background: hsl(110, 74%, 41%);
+    border-radius: 20px;
+    margin-top: 85px;
+    margin-bottom: 5px;
+}
+ul > input {
+    margin-left: -40px;
+    width: 200px;
+}
+ul > input::-webkit-slider-thumb {
+    background: gray;
+}
+ul > input::-webkit-slider-runnable-track {
+    background: none;
+}
+ul > span {
+    position: absolute;
+    font-family: cursive;
 }
 #settingsTitle {
     font-size: 30px;
     font-weight: 600;
-    margin-top: 17px;
-    margin-right: 80px;
+    margin-top: 28px;
+    margin-right: 60px;
 }
 ul {
-    margin-top: 35px;
+    margin-top: 22px;
 }
 li {
     margin-top: 5px;
@@ -111,7 +142,7 @@ li {
     font-family: cursive;
     text-align: left;
     list-style-type: square;
-    margin-right: 10px;
+    margin-right: 19px;
 }
 #lvl2li {
     font-family: cursive;
