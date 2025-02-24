@@ -6,12 +6,15 @@ function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
     const [calcHistory, setCalcHistory] = useState([])
     const [maxCharVal, setMaxCarVal] = useState(27)
     const [maxDecimalPlacesVal, setMaxDecimalPlacesVal] = useState(16)
+    const [inputFieldBorderColorVal, setInputFieldBorderColorVal] = useState('#4B4B4B')
+    const [buttonContainerColorVal, setButtonContainerColorVal] = useState('#808080')
     const beforeEval = useRef("0")
     const inputField = useRef("0")
     const ansField = useRef("ANS = 0")
     const rulesBox = useRef(null)
     const settingsBox = useRef(null)
     const historyBox = useRef(null)
+    const buttonContainer = useRef(null)
     const ans = useRef("0")
     const appendToDisplay = (input, isNum) => {
         if (inputField.current.value === "Error" || inputField.current.value === "NaN" || inputField.current.value === "undefined") {
@@ -93,6 +96,14 @@ function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
             element.current.style.visibility = "hidden"
         }
     }
+    const onInputFieldBorderColorChange = (e) => {
+        setInputFieldBorderColorVal(e.target.value)
+        inputField.current.style.borderColor = inputFieldBorderColorVal
+    }
+    const onButtonContainerColorChange = (e) => {
+        setButtonContainerColorVal(e.target.value)
+        buttonContainer.current.style.backgroundColor = buttonContainerColorVal
+    }
     const factorial = (num) => {
         if (num.includes("-")) {
             return "Error"
@@ -138,11 +149,15 @@ function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
                 <div id='settingsTitle'>Settings</div>
                 <ul>
                     <li>Max d. places of calculations:</li>
-                    <input type='range' min={2} max={16} value={maxDecimalPlacesVal} onChange={(e) => setMaxDecimalPlacesVal(e.target.value)}></input>
+                    <input type='range' min={2} max={16} value={maxDecimalPlacesVal} onChange={(e) => setMaxDecimalPlacesVal(e.target.value)} title='maxDecimalPlacesSlider' placeholder='maxDecimalPlacesSlider'></input>
                     <span title={maxDecimalPlacesVal + " decimal places"}>{maxDecimalPlacesVal}</span>
                     <li>Max entered characters:</li>
-                    <input type='range' min={5} max={27} value={maxCharVal} onChange={(e) => setMaxCarVal(e.target.value)}></input>
+                    <input type='range' min={5} max={27} value={maxCharVal} onChange={(e) => setMaxCarVal(e.target.value)} title='maxCharSlider' placeholder='maxCharSlider'></input>
                     <span title={maxCharVal + " characters"}>{maxCharVal}</span>
+                    <li>Color of input field border:</li>
+                    <input type='color' value={inputFieldBorderColorVal} onChange={(e) => onInputFieldBorderColorChange(e)} title='inputFieldBorderColorPicker' placeholder='inputFieldBorderColorPicker'></input>
+                    <li>Color of button container:</li>
+                    <input type='color' value={buttonContainerColorVal} onChange={(e) => onButtonContainerColorChange(e)} title='buttonContainerColorPicker' placeholder='buttonContainerColorPicker'></input>
                 </ul>
             </span>
             <h1 id="calcTitle">Calculator</h1>
@@ -158,7 +173,7 @@ function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
                         )
                     }
                 </span>
-                <span id="buttons">
+                <span id="buttons" ref={buttonContainer}>
                     <button onClick={() => clearDisplay()} className='deleter' title='clearAll'>C</button>
                     <button onClick={() => appendToDisplay('7', true)} title='seven'>7</button>
                     <button onClick={() => appendToDisplay('8', true)} title='eight'>8</button>

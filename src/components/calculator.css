@@ -123,6 +123,9 @@ ul > input::-webkit-slider-thumb {
 ul > input::-webkit-slider-runnable-track {
     background: none;
 }
+ul > input[type='color' i] {
+    width: 200px;
+}
 ul > span {
     position: absolute;
     font-family: cursive;
