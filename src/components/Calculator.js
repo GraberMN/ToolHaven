@@ -31,6 +31,26 @@ function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
             input = "-"
         }
         inputField.current.value = inputField.current.value + input
+        if ((input === "π" || input === "e") && inputField.current.value.includes("√")) {
+            const termArray = inputField.current.value.split(" ")
+            let sqrtPast = false
+            for (let i = 0; i < termArray.length; i++) {
+                if (termArray[i].includes("√")) {
+                    sqrtPast = false
+                    const symbolArray = termArray[i].split("")
+                    for (let j = 0; j < symbolArray.length; j++) {
+                        if (sqrtPast && (symbolArray[j] === "e" || symbolArray[j] === "π") && (!isNaN(Number.parseInt(symbolArray[j - 1])) || symbolArray[j - 1] === "e" || symbolArray[j - 1] === "π")) {
+                            symbolArray[j] = " * " + symbolArray[j]
+                        }
+                        if (symbolArray[j] === "√" && !sqrtPast) {
+                            sqrtPast = true
+                        }
+                    }
+                    termArray[i] = symbolArray.join("")
+                }
+            }
+            inputField.current.value = termArray.join(" ")
+        }
         displayChange()
     }
     const clearDisplay = () => {
@@ -46,7 +66,7 @@ function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
     const calculateDisplay = () => {
         try {
             beforeEval.current = inputField.current.value
-            if (inputField.current.value.includes("e") || inputField.current.value.includes("π")) {
+            if (inputField.current.value.includes("e") || inputField.current.value.includes("π") || inputField.current.value.includes("√")) {
                 inputField.current.value = inputField.current.value.replaceAll("e", "Math.E")
                 inputField.current.value = inputField.current.value.replaceAll("π", "Math.PI")
                 const charArray = inputField.current.value.split("")
@@ -54,12 +74,21 @@ function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
                     if (charArray[i] === "M" && (Number.isInteger(parseInt(charArray[i - 1])) || charArray[i - 1] === "E" || charArray[i - 1] === "I")) {
                         charArray[i] = " * M"
                     }
+                    if (charArray[i] === "√" && (Number.isInteger(parseInt(charArray[i - 1])) || charArray[i - 1] === "E" || charArray[i - 1] === "I")) {
+                        charArray[i] = " * √"
+                    }
                 }
                 inputField.current.value = charArray.join("")
             }
-            if (inputField.current.value.includes("!")) {
+            if (inputField.current.value.includes("!") || inputField.current.value.includes("√")) {
                 const wordArray = inputField.current.value.split(" ")
                 for (let i = 0; i < wordArray.length; i++) {
+                    if (wordArray[i].includes("√")) {
+                        wordArray[i] = squareRoot(wordArray[i].substring(1))
+                        if (wordArray[i] === "Error") {
+                            throw new Error()
+                        }
+                    }
                     if (wordArray[i].includes("!")) {
                         wordArray[i] = factorial(wordArray[i].substring(0, wordArray[i].length - 1))
                         if (wordArray[i] === "Error") {
@@ -104,6 +133,14 @@ function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
         setButtonContainerColorVal(e.target.value)
         buttonContainer.current.style.backgroundColor = buttonContainerColorVal
     }
+    const squareRoot = (num) => {
+        if (num.includes("-")) {
+            return "Error"
+        }
+        num = eval(num)
+        let sqrtNum = Math.sqrt(num) 
+        return sqrtNum.toString()
+    }
     const factorial = (num) => {
         if (num.includes("-")) {
             return "Error"
@@ -115,7 +152,7 @@ function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
             product *= num
             num--
         }
-        return product
+        return product.toString()
     }
     useEffect(() => {
         inputField.current.value = "0"
@@ -142,6 +179,7 @@ function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
                     <li id='lvl2li'>Exponentiation: "^" is on the button since it is seen more commonly than "**" for exponentiation.</li>
                     <li id='lvl2li'>Factorial: only positive integers and 0 allowed (0 - ∞), decimals rounded.</li>
                     <li id='lvl2li'>Pi/e: no " * " needed between number and pi/e, always write number first.</li>
+                    <li id='lvl2li'>Square root: only 1 positive real number allowed inside, "2π" or "5.2e" count as 2, those allowed in front.</li>
                 </ul>
             </span>
             <img onClick={() => openOrClose(settingsBox)} id='settingsIcon' src={settingsIcon} alt='settingsIcon' title="calculatorSettings" />
@@ -194,7 +232,7 @@ function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
                     <button onClick={() => appendToDisplay('.', false)} title='decimalPoint'>.</button>
                     <button onClick={() => calculateDisplay()} id='equals' title='equalSign'>=</button>
                     <button onClick={() => appendToDisplay(' - ', false)} className='operator' title='minus/negativeSign'>-</button>
-                    <button onClick={() => appendToDisplay('√', false)} className='operator' title='squareRoot'>√</button>
+                    <button onClick={() => appendToDisplay('√', true)} className='operator' title='squareRoot'>√</button>
                     <button onClick={() => appendToDisplay('π', true)} className='irrationalNum' title='pi'>π</button>
                     <button onClick={() => appendToDisplay('e', true)} className='irrationalNum' title="euler'sNumber">e</button>
                     <button onClick={() => appendToDisplay(ans.current, true)} id='ans' title='previousAnswer'>ANS</button>
