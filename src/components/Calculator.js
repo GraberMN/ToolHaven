@@ -17,7 +17,7 @@ function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
     const buttonContainer = useRef(null)
     const ans = useRef("0")
     const appendToDisplay = (input, isNum) => {
-        if (inputField.current.value === "Error" || inputField.current.value === "NaN" || inputField.current.value === "undefined") {
+        if (inputField.current.value === "Error" || inputField.current.value === "NaN" || inputField.current.value === "undefined" || inputField.current.value === "Infinity") {
             isNum ? inputField.current.value = "" : inputField.current.value = "0"
         }
         if (inputField.current.value === "0" && isNum) {
@@ -65,7 +65,13 @@ function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
     }
     const calculateDisplay = () => {
         try {
+            if (inputField.current.value === "Error") {
+                throw new Error()
+            }
             beforeEval.current = inputField.current.value
+            if (inputField.current.value.includes("-√")) {
+                inputField.current.value = inputField.current.value.replaceAll("-√", "-1√")
+            }
             if (inputField.current.value.includes("e") || inputField.current.value.includes("π") || inputField.current.value.includes("√")) {
                 inputField.current.value = inputField.current.value.replaceAll("e", "Math.E")
                 inputField.current.value = inputField.current.value.replaceAll("π", "Math.PI")
@@ -175,11 +181,12 @@ function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
                     <li>The defaults/maxes for those settings are 16 decimal places and 27 characters.</li>
                     <li>When multiplying or dividing with decimals, the answer can sometimes be off by a tiny and negligible amount, but it is always accurate for the first 5 decimal places.</li>
                     <li>If an Error is generated, keep calculating by pressing any calculator button.</li>
+                    <li>"Error", "NaN", "undefined", and "Infinity" answers cannot be interacted with.</li>
                     <li>Calculator Button-Specific Rules:</li>
                     <li id='lvl2li'>Exponentiation: "^" is on the button since it is seen more commonly than "**" for exponentiation.</li>
                     <li id='lvl2li'>Factorial: only positive integers and 0 allowed (0 - ∞), decimals rounded.</li>
                     <li id='lvl2li'>Pi/e: no " * " needed between number and pi/e, always write number first.</li>
-                    <li id='lvl2li'>Square root: only 1 positive real number allowed inside, "2π" or "5.2e" count as 2, those allowed in front.</li>
+                    <li id='lvl2li'>Square root: only 1 positive real number allowed inside, "2π" or "5.2e" count as 2, all allowed in front.</li>
                 </ul>
             </span>
             <img onClick={() => openOrClose(settingsBox)} id='settingsIcon' src={settingsIcon} alt='settingsIcon' title="calculatorSettings" />
