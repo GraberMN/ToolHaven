@@ -8,6 +8,7 @@ function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
     const [maxDecimalPlacesVal, setMaxDecimalPlacesVal] = useState(16)
     const [inputFieldBorderColorVal, setInputFieldBorderColorVal] = useState('#4B4B4B')
     const [buttonContainerColorVal, setButtonContainerColorVal] = useState('#808080')
+    const [browserWidth, setBrowserWidth] = useState(window.innerWidth)
     const beforeEval = useRef("0")
     const inputField = useRef("0")
     const ansField = useRef("ANS = 0")
