@@ -114,20 +114,6 @@ body {
     margin-top: 85px;
     margin-bottom: 5px;
 }
-@media (max-width: 740px) {
-    #rulesIcon {
-        transform: translateX(-260px);
-    }
-    #rulesBox {
-        transform: translateX(-260px);
-    }
-    #settingsIcon {
-        transform: translateX(180px);
-    }
-    #settingsBox {
-        transform: translateX(-45px);
-    }
-}
 ul > input {
     margin-left: -40px;
     width: 200px;
@@ -318,6 +304,26 @@ button:active {
 #ans:active {
     background-color: rgba(72, 209, 205, 0.46);
 }
+#toRulers {
+    position: absolute;
+    width: 100px;
+    height: auto;
+    transform: translateX(270px);
+}
+@media (max-width: 740px) {
+    #rulesIcon {
+        transform: translateX(-260px);
+    }
+    #rulesBox {
+        transform: translateX(-260px);
+    }
+    #settingsIcon {
+        transform: translateX(180px);
+    }
+    #settingsBox {
+        transform: translateX(-45px);
+    }
+}
 @keyframes fadeLeft {
     from {
         opacity: 100;
@@ -325,7 +331,7 @@ button:active {
     }
     to {
         opacity: 0;
-        transform: -500px;
+        transform: translateX(-500px);
     }
 }
 @keyframes appearFromLeft {
@@ -346,7 +352,7 @@ button:active {
     }
     to {
         opacity: 0;
-        transform: 500px;
+        transform: translateX(500px);
     }
 }
 @keyframes appearFromRight {
@@ -354,7 +360,6 @@ button:active {
         opacity: 0;
         transform: translateX(500px);
     }
-
     to {
         opacity: 100;
         transform: translateX(0px);

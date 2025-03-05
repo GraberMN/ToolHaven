@@ -2,13 +2,13 @@ import React from 'react'
 import { useState, useRef, useEffect } from 'react'
 import './calculator.css'
 
-function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
+function Calculator({ imagesArray }) {
+    const [settingsIcon, historyIcon, rulesIcon, blueRightArrow] = imagesArray
     const [calcHistory, setCalcHistory] = useState([])
     const [maxCharVal, setMaxCarVal] = useState(27)
     const [maxDecimalPlacesVal, setMaxDecimalPlacesVal] = useState(16)
     const [inputFieldBorderColorVal, setInputFieldBorderColorVal] = useState('#4B4B4B')
     const [buttonContainerColorVal, setButtonContainerColorVal] = useState('#808080')
-    const [browserWidth, setBrowserWidth] = useState(window.innerWidth)
     const beforeEval = useRef("0")
     const inputField = useRef("0")
     const ansField = useRef("ANS = 0")
@@ -17,6 +17,8 @@ function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
     const historyBox = useRef(null)
     const buttonContainer = useRef(null)
     const ans = useRef("0")
+    const blueRightArrowArea = useRef(null)
+    const rightBlueArrow = useRef(null)
     const appendToDisplay = (input, isNum) => {
         if (inputField.current.value === "Error" || inputField.current.value === "NaN" || inputField.current.value === "undefined" || inputField.current.value === "Infinity") {
             isNum ? inputField.current.value = "" : inputField.current.value = "0"
@@ -140,6 +142,33 @@ function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
         setButtonContainerColorVal(e.target.value)
         buttonContainer.current.style.backgroundColor = buttonContainerColorVal
     }
+    const blurBlueRightArrow = () => {
+        rightBlueArrow.current.style.filter = 'blur(1px)'
+        blueRightArrowArea.current.style.cursor = 'pointer'
+        console.log(window.innerWidth)
+        if (window.innerWidth <= 740) {
+            rightBlueArrow.current.style.transform = 'translateX(165px) rotate(0.05turn)'
+        } else {
+            rightBlueArrow.current.style.transform = 'translateX(270px) rotate(0.05turn)'
+        }
+    }
+    const unBlurBlueRightArrow = () => {
+        rightBlueArrow.current.style.filter = 'blur(0px)'
+        if (window.innerWidth <= 740) {
+            rightBlueArrow.current.style.transform = 'translateX(165px) rotate(0turn)'
+        } else {
+            rightBlueArrow.current.style.transform = 'translateX(270px) rotate(0turn)'
+        }
+    }
+    const positionBlueRightArrow = () => {
+        if (rightBlueArrow.current.style.transform !== "null") {
+            if (window.innerWidth <= 740) {
+                rightBlueArrow.current.style.transform = 'translateX(165px)'
+            } else {
+                rightBlueArrow.current.style.transform = 'translateX(270px)'
+            }
+        }
+    }
     const squareRoot = (num) => {
         if (num.includes("-")) {
             return "Error"
@@ -169,6 +198,15 @@ function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
         historyBox.current.style.visibility = "hidden"
         beforeEval.current = "0"
         ans.current = "0"
+    }, [])
+    useEffect(() => {
+        window.addEventListener("resize", positionBlueRightArrow)
+        if (window.innerWidth <= 740) {
+            rightBlueArrow.current.style.transform = 'translateX(165px)'
+        }
+        return () => {
+            window.removeEventListener("resize", positionBlueRightArrow)
+        }
     }, [])
     return (
         <div>
@@ -247,6 +285,10 @@ function Calculator({ settingsIcon, historyIcon, rulesIcon }) {
                     <button onClick={() => appendToDisplay('!', false)} className='operator' title='factorial'>!</button>
                 </span>
             </span>
+            <map name='toRulersMap'>
+                <area onMouseOver={() => blurBlueRightArrow()} onMouseOut={() => unBlurBlueRightArrow()} id='toRulersMap' ref={blueRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' title='toRulers'></area>
+            </map>
+            <img id='toRulers' useMap='#toRulersMap' ref={rightBlueArrow} src={blueRightArrow} alt='toRulers'></img>
         </div>
     )
 }
