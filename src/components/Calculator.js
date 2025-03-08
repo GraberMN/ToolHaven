@@ -12,9 +12,13 @@ function Calculator({ imagesArray }) {
     const beforeEval = useRef("0")
     const inputField = useRef("0")
     const ansField = useRef("ANS = 0")
+    const rulesIconRef = useRef(null)
     const rulesBox = useRef(null)
+    const settingsIconRef = useRef(null)
     const settingsBox = useRef(null)
+    const historyIconRef = useRef(null)
     const historyBox = useRef(null)
+    const calcTitleRef = useRef(null)
     const buttonContainer = useRef(null)
     const ans = useRef("0")
     const blueRightArrowArea = useRef(null)
@@ -145,7 +149,6 @@ function Calculator({ imagesArray }) {
     const blurBlueRightArrow = () => {
         rightBlueArrow.current.style.filter = 'blur(1px)'
         blueRightArrowArea.current.style.cursor = 'pointer'
-        console.log(window.innerWidth)
         if (window.innerWidth <= 740) {
             rightBlueArrow.current.style.transform = 'translateX(165px) rotate(0.05turn)'
         } else {
@@ -169,6 +172,49 @@ function Calculator({ imagesArray }) {
             }
         }
     }
+    const readyForAnimation = (element) => {
+        element.current.style.animationName = 'none'
+        element.current.classList.remove('readyForAnim')
+        element.current.classList.add('readyForAnim')
+    }
+    const blueRightArrowTransition = (screenWidthBig) => {
+        rulesBox.current.style.visibility = "hidden"
+        settingsBox.current.style.visibility = "hidden"
+        historyBox.current.style.visibility = "hidden"
+        const changedRelativeElements = [inputField, buttonContainer, calcTitleRef]
+        for (let i = 0; i < changedRelativeElements.length; i++) {
+            readyForAnimation(changedRelativeElements[i])
+            changedRelativeElements[i].current.style.animationName = 'fadeLeft'
+        }
+        const changedRulesElements = [rulesIconRef, rulesBox]
+        for (let i = 0; i < changedRulesElements.length; i++) {
+            readyForAnimation(changedRulesElements[i])
+            if (screenWidthBig) {
+                changedRulesElements[i].current.style.animationName = 'fadeLeftRules'
+            } else {
+                changedRulesElements[i].current.style.animationName = 'fadeLeftRulesSmall'
+            }
+        }
+        readyForAnimation(settingsIconRef)
+        if (screenWidthBig) {
+            settingsIconRef.current.style.animationName = 'fadeLeftSettingsIcon'
+        } else {
+            settingsIconRef.current.style.animationName = 'fadeLeftSettingsIconSmall'
+        }
+        readyForAnimation(settingsBox)
+        if (screenWidthBig) {
+            settingsBox.current.style.animationName = 'fadeLeftSettingsBox'
+        } else {
+            settingsBox.current.style.animationName = 'fadeLeftSettingsBoxSmall'
+        }
+        const changedHistoryElements = [historyIconRef, historyBox]
+        for (let i = 0; i < changedHistoryElements.length; i++) {
+            readyForAnimation(changedHistoryElements[i])
+            changedHistoryElements[i].current.style.animationName = 'fadeLeftHistory'
+        }
+        readyForAnimation(ansField)
+        ansField.current.style.animationName = 'fadeLeftAnsField'
+    }
     const squareRoot = (num) => {
         if (num.includes("-")) {
             return "Error"
@@ -191,15 +237,6 @@ function Calculator({ imagesArray }) {
         return product.toString()
     }
     useEffect(() => {
-        inputField.current.value = "0"
-        ansField.current.value = "ANS = 0"
-        rulesBox.current.style.visibility = "hidden"
-        settingsBox.current.style.visibility = "hidden"
-        historyBox.current.style.visibility = "hidden"
-        beforeEval.current = "0"
-        ans.current = "0"
-    }, [])
-    useEffect(() => {
         window.addEventListener("resize", positionBlueRightArrow)
         if (window.innerWidth <= 740) {
             rightBlueArrow.current.style.transform = 'translateX(165px)'
@@ -208,9 +245,18 @@ function Calculator({ imagesArray }) {
             window.removeEventListener("resize", positionBlueRightArrow)
         }
     }, [])
+    useEffect(() => {
+        inputField.current.value = "0"
+        ansField.current.value = "ANS = 0"
+        rulesBox.current.style.visibility = "hidden"
+        settingsBox.current.style.visibility = "hidden"
+        historyBox.current.style.visibility = "hidden"
+        beforeEval.current = "0"
+        ans.current = "0"
+    }, [])
     return (
         <div>
-            <img onClick={() => openOrClose(rulesBox)} id='rulesIcon' src={rulesIcon} alt='rulesIcon' title="calculatorRules" />
+            <img onClick={() => openOrClose(rulesBox)} id='rulesIcon' src={rulesIcon} ref={rulesIconRef} alt='rulesIcon' title="calculatorRules" />
             <span id='rulesBox' ref={rulesBox}>
                 <div id='rulesTitle'>Rules</div>
                 <ul>
@@ -228,7 +274,7 @@ function Calculator({ imagesArray }) {
                     <li id='lvl2li'>Square root: only 1 positive real number allowed inside, "2π" or "5.2e" count as 2, all allowed in front.</li>
                 </ul>
             </span>
-            <img onClick={() => openOrClose(settingsBox)} id='settingsIcon' src={settingsIcon} alt='settingsIcon' title="calculatorSettings" />
+            <img onClick={() => openOrClose(settingsBox)} id='settingsIcon' src={settingsIcon} ref={settingsIconRef} alt='settingsIcon' title="calculatorSettings" />
             <span id='settingsBox' ref={settingsBox}>
                 <div id='settingsTitle'>Settings</div>
                 <ul>
@@ -244,11 +290,11 @@ function Calculator({ imagesArray }) {
                     <input type='color' value={buttonContainerColorVal} onChange={(e) => onButtonContainerColorChange(e)} title='buttonContainerColorPicker' placeholder='buttonContainerColorPicker'></input>
                 </ul>
             </span>
-            <h1 id="calcTitle">Calculator</h1>
+            <h1 id="calcTitle" ref={calcTitleRef}>Calculator</h1>
             <span id="calculator">
                 <input type="text" id='inputField' ref={inputField} maxLength={maxCharVal} title='inputField' placeholder='Loading...' readOnly />
                 <input type='text' id='ansField' ref={ansField} title='answerField' placeholder='Loading...' readOnly />
-                <img onClick={() => openOrClose(historyBox)} id='historyIcon' src={historyIcon} alt='historyIcon' title='calculationHistory' />
+                <img onClick={() => openOrClose(historyBox)} id='historyIcon' src={historyIcon} ref={historyIconRef} alt='historyIcon' title='calculationHistory' />
                 <span id='historyBox' ref={historyBox}>
                     <div id='historyTitle'> History </div>
                     {
@@ -286,7 +332,7 @@ function Calculator({ imagesArray }) {
                 </span>
             </span>
             <map name='toRulersMap'>
-                <area onMouseOver={() => blurBlueRightArrow()} onMouseOut={() => unBlurBlueRightArrow()} id='toRulersMap' ref={blueRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' title='toRulers'></area>
+                <area onClick={() => window.innerWidth > 740 ? blueRightArrowTransition(true) : blueRightArrowTransition(false)} onMouseOver={() => blurBlueRightArrow()} onMouseOut={() => unBlurBlueRightArrow()} id='toRulersMap' ref={blueRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' title='toRulers'></area>
             </map>
             <img id='toRulers' useMap='#toRulersMap' ref={rightBlueArrow} src={blueRightArrow} alt='toRulers'></img>
         </div>

@@ -310,6 +310,12 @@ button:active {
     height: auto;
     transform: translateX(270px);
 }
+.readyForAnim {
+    animation-duration: 3s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}
 @media (max-width: 740px) {
     #rulesIcon {
         transform: translateX(-260px);
@@ -327,41 +333,109 @@ button:active {
 @keyframes fadeLeft {
     from {
         opacity: 100;
-        transform: translateX(0px);
     }
     to {
         opacity: 0;
-        transform: translateX(-500px);
+        transform: translateX(-30vw);
+    }
+}
+@keyframes fadeLeftRules {
+    from {
+        opacity: 100;
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw - 367px));
+    }
+}
+@keyframes fadeLeftRulesSmall {
+    from {
+            opacity: 100;
+        }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw - 260px));
+    }
+}
+@keyframes fadeLeftSettingsIcon {
+    from {
+        opacity: 100;
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw + 285px));
+    }
+}
+@keyframes fadeLeftSettingsIconSmall {
+    from {
+        opacity: 100;
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw + 180px));
+    }
+}
+@keyframes fadeLeftSettingsBox {
+    from {
+        opacity: 100;
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw + 60px));
+    }
+}
+@keyframes fadeLeftSettingsBoxSmall {
+    from {
+        opacity: 100;
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw - 45px));
+    }
+}
+@keyframes fadeLeftHistory {
+    from {
+        opacity: 100;
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw - 523px));
+    }
+}
+@keyframes fadeLeftAnsField {
+    from {
+        opacity: 100;
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw - 493px));
     }
 }
 @keyframes appearFromLeft {
     from {
         opacity: 0;
-        transform: translateX(-500px);
+        transform: translateX(-30vw);
     }
-
     to {
         opacity: 100;
-        transform: translateX(0px);
+        transform: translateX(0vw);
     }
 }
 @keyframes fadeRight {
     from {
         opacity: 100;
-        transform: translateX(0px);
     }
     to {
         opacity: 0;
-        transform: translateX(500px);
+        transform: translateX(50vw);
     }
 }
 @keyframes appearFromRight {
     from {
         opacity: 0;
-        transform: translateX(500px);
     }
     to {
         opacity: 100;
-        transform: translateX(0px);
+        transform: translateX(0vw);
     }
 }
