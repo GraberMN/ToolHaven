@@ -2,13 +2,14 @@ import React from 'react'
 import { useState, useRef, useEffect } from 'react'
 import './calculator.css'
 
-function Calculator({ imagesArray }) {
+function Calculator({ imagesArray, moveToRulers, setMoveToRulers }) {
     const [settingsIcon, historyIcon, rulesIcon, blueRightArrow] = imagesArray
     const [calcHistory, setCalcHistory] = useState([])
     const [maxCharVal, setMaxCarVal] = useState(27)
     const [maxDecimalPlacesVal, setMaxDecimalPlacesVal] = useState(16)
     const [inputFieldBorderColorVal, setInputFieldBorderColorVal] = useState('#4B4B4B')
     const [buttonContainerColorVal, setButtonContainerColorVal] = useState('#808080')
+    const [blueRightArrowTransitionDone, setBlueRightArrowTransitionDone] = useState(false)
     const beforeEval = useRef("0")
     const inputField = useRef("0")
     const ansField = useRef("ANS = 0")
@@ -178,6 +179,7 @@ function Calculator({ imagesArray }) {
         element.current.classList.add('readyForAnim')
     }
     const blueRightArrowTransition = (screenWidthBig) => {
+        setMoveToRulers(true)
         rulesBox.current.style.visibility = "hidden"
         settingsBox.current.style.visibility = "hidden"
         historyBox.current.style.visibility = "hidden"
@@ -214,6 +216,8 @@ function Calculator({ imagesArray }) {
         }
         readyForAnimation(ansField)
         ansField.current.style.animationName = 'fadeLeftAnsField'
+        rightBlueArrow.current.style.display = 'none'
+        setTimeout(() => setBlueRightArrowTransitionDone(true), 3000)
     }
     const squareRoot = (num) => {
         if (num.includes("-")) {
@@ -236,6 +240,14 @@ function Calculator({ imagesArray }) {
         }
         return product.toString()
     }
+    useEffect(() => {
+        if (blueRightArrowTransitionDone) {
+            const animElements = [inputField, buttonContainer, calcTitleRef, rulesIconRef, rulesBox, settingsIconRef, settingsBox, historyIconRef, historyBox, ansField]
+            for (let i = 0; i < animElements.length; i++) {
+                animElements[i].current.style.display = 'none'
+            }
+        }
+    }, [blueRightArrowTransitionDone])
     useEffect(() => {
         window.addEventListener("resize", positionBlueRightArrow)
         if (window.innerWidth <= 740) {

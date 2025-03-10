@@ -7,6 +7,7 @@ body {
     font-family: cursive;
     font-weight: bolder;
     color: hsl(110, 74%, 41%);
+    display: block;
 }
 #rulesIcon {
     position: absolute;
@@ -19,6 +20,7 @@ body {
     border-radius: 15px;
     background-color: rgba(0, 0, 0, 0.705);
     z-index: 999;
+    display: inline;
 }
 #rulesIcon:hover {
     border-radius: 20px;
@@ -42,6 +44,7 @@ body {
     background-color: white;
     overflow-y: scroll;
     overflow-x: hidden;
+    display: inline;
 }
 #rulesBox::-webkit-scrollbar {
     scroll-behavior: smooth;
@@ -75,6 +78,7 @@ body {
     border-radius: 15px;
     background-color: rgba(0, 0, 0, 0.705);
     z-index: 999;
+    display: inline;
 }
 #settingsIcon:hover {
     border-radius: 20px;
@@ -98,6 +102,7 @@ body {
     background-color: white;
     overflow-y: scroll;
     overflow-x: hidden;
+    display: inline;
 }
 #settingsBox::-webkit-scrollbar {
     scroll-behavior: smooth;
@@ -162,6 +167,7 @@ li {
     text-align: right;
     font-family: cursive;
     font-size: 30px;
+    display: inline;
 }
 #ansField {
     position: absolute;
@@ -173,6 +179,7 @@ li {
     border: none;
     width: 465px;
     font-weight: 500;
+    display: inline;
 }
 #historyIcon {
     position: absolute;
@@ -185,6 +192,7 @@ li {
     border: none;
     padding-bottom: 1px;
     background-color: white;
+    display: inline;
 }
 #historyIcon:hover {
     border-color: rgba(0, 0, 0, 0.705);
@@ -203,6 +211,7 @@ li {
     z-index: 996;
     background-color: white;
     overflow-y: auto;
+    display: inline;
 }
 #historyBox::-webkit-scrollbar {
     scroll-behavior: smooth;
@@ -309,6 +318,7 @@ button:active {
     width: 100px;
     height: auto;
     transform: translateX(270px);
+    display: inline;
 }
 .readyForAnim {
     animation-duration: 3s;
