@@ -217,7 +217,7 @@ function Calculator({ imagesArray, moveToRulers, setMoveToRulers }) {
         readyForAnimation(ansField)
         ansField.current.style.animationName = 'fadeLeftAnsField'
         rightBlueArrow.current.style.display = 'none'
-        setTimeout(() => setBlueRightArrowTransitionDone(true), 3000)
+        setTimeout(() => setBlueRightArrowTransitionDone(true), 2000)
     }
     const squareRoot = (num) => {
         if (num.includes("-")) {

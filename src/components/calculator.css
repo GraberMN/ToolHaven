@@ -321,7 +321,7 @@ button:active {
     display: inline;
 }
 .readyForAnim {
-    animation-duration: 3s;
+    animation-duration: 2s;
     animation-iteration-count: 1;
     animation-direction: normal;
     animation-fill-mode: forwards;
@@ -437,7 +437,7 @@ button:active {
     }
     to {
         opacity: 0;
-        transform: translateX(50vw);
+        transform: translateX(30vw);
     }
 }
 @keyframes appearFromRight {
