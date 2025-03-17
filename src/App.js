@@ -9,11 +9,12 @@ import Calculator from './components/Calculator';
 import Rulers from './components/Rulers';
 
 function App() {
-  const imagesArray = [settingsIcon, historyIcon, rulesIcon, blueRightArrow]
+  const calcImagesArray = [settingsIcon, historyIcon, rulesIcon, blueRightArrow]
+  const rulersImagesArray = []
   const [moveToRulers, setMoveToRulers] = useState(false)
   return (
     <div className="App">
-      <Calculator imagesArray={imagesArray} moveToRulers={moveToRulers} setMoveToRulers={setMoveToRulers} />
+      <Calculator calcImagesArray={calcImagesArray} moveToRulers={moveToRulers} setMoveToRulers={setMoveToRulers} />
       <Rulers moveToRulers={moveToRulers} setMoveToRulers={setMoveToRulers} />
     </div>
   );

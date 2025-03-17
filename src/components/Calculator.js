@@ -2,8 +2,8 @@ import React from 'react'
 import { useState, useRef, useEffect } from 'react'
 import './calculator.css'
 
-function Calculator({ imagesArray, moveToRulers, setMoveToRulers }) {
-    const [settingsIcon, historyIcon, rulesIcon, blueRightArrow] = imagesArray
+function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers }) {
+    const [settingsIcon, historyIcon, rulesIcon, blueRightArrow] = calcImagesArray
     const [calcHistory, setCalcHistory] = useState([])
     const [maxCharVal, setMaxCarVal] = useState(27)
     const [maxDecimalPlacesVal, setMaxDecimalPlacesVal] = useState(16)
@@ -344,7 +344,7 @@ function Calculator({ imagesArray, moveToRulers, setMoveToRulers }) {
                 </span>
             </span>
             <map name='toRulersMap'>
-                <area onClick={() => window.innerWidth > 740 ? blueRightArrowTransition(true) : blueRightArrowTransition(false)} onMouseOver={() => blurBlueRightArrow()} onMouseOut={() => unBlurBlueRightArrow()} id='toRulersMap' ref={blueRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' title='toRulers'></area>
+                <area onClick={() => window.innerWidth > 740 ? blueRightArrowTransition(true) : blueRightArrowTransition(false)} onMouseOver={() => blurBlueRightArrow()} onMouseOut={() => unBlurBlueRightArrow()} id='toRulersMap' ref={blueRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toRulers' title='toRulers'></area>
             </map>
             <img id='toRulers' useMap='#toRulersMap' ref={rightBlueArrow} src={blueRightArrow} alt='toRulers'></img>
         </div>
