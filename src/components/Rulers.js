@@ -2,11 +2,13 @@ import React from 'react'
 import { useState, useRef, useEffect } from 'react'
 import './rulers.css'
 
-function Rulers({ moveToRulers, setMoveToRulers }) {
+function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
+    const [inchesRuler] = rulersImagesArray
     const mousePosXStart = useRef(0)
     const mousePosYStart = useRef(0)
     const mousePosXDiff = useRef(0)
     const mousePosYDiff = useRef(0)
+    const rulerTitle = useRef('inchesRuler')
     const rulersTitleRef = useRef(null)
     const rulerRef = useRef(null)
     const allowRulerDrag = () => {
@@ -74,7 +76,7 @@ function Rulers({ moveToRulers, setMoveToRulers }) {
     return (
         <div>
             <div id='rulersTitle' ref={rulersTitleRef}>Rulers</div>
-            <div id='ruler' ref={rulerRef}></div>
+            <img id='ruler' src={inchesRuler} ref={rulerRef} alt={rulerTitle.current} title={rulerTitle.current}/>
         </div>
     )
 }
