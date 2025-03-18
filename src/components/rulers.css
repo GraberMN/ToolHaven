@@ -16,9 +16,9 @@
     font-size: 30px;
     font-family: cursive;
     font-weight: 600;
-    width: 1252px;
-    height: 160px;
-    border: solid 3px rgba(40, 54, 56, 0.482);
+    width: 1152px;
+    height: auto;
+    border: solid 3px rgba(0, 0, 0, 0.575);
     display: block;
     cursor: move;
 }
