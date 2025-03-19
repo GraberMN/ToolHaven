@@ -20,7 +20,7 @@
     border: solid hsl(187, 74%, 41%);
     border-radius: 15px;
     background-color: rgba(0, 0, 0, 0.705);
-    z-index: 999;
+    z-index: 998;
     display: inline;
 }
 #rulersRulesIcon:hover {
@@ -41,7 +41,7 @@
     transform: translateX(-367px);
     border-color: hsl(187, 74%, 41%);
     border-radius: 20px;
-    z-index: 998;
+    z-index: 997;
     background-color: white;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -67,6 +67,49 @@
     font-weight: 600;
     margin-top: 28px;
     margin-right: -60px;
+}
+#rulersSettingsIcon {
+    position: absolute;
+    width: 75px;
+    height: auto;
+    margin: auto;
+    transform: translateX(285px);
+    cursor: pointer;
+    border: solid hsl(187, 74%, 41%);
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.705);
+    z-index: 997;
+    display: inline;
+}
+#rulersSettingsIcon:hover {
+    border-radius: 20px;
+}
+#rulersSettingsIcon:active {
+    border-style: dashed;
+}
+#rulersSettingsIcon:not(:hover) ~ #rulersSettingsBox {
+    border-top-right-radius: 15px;
+}
+#rulersSettingsBox {
+    position: absolute;
+    width: 300px;
+    height: 400px;
+    border: solid;
+    margin: auto;
+    transform: translateX(60px);
+    border-color: hsl(187, 74%, 41%);
+    border-radius: 20px;
+    z-index: 996;
+    background-color: white;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: inline;
+}
+#rulersSettingsTitle {
+    font-size: 30px;
+    font-weight: 600;
+    margin-top: 28px;
+    margin-right: 60px;
 }
 ul {
     margin-top: 22px;
@@ -95,6 +138,7 @@ li {
     border: solid 3px rgba(0, 0, 0, 0.575);
     display: block;
     cursor: move;
+    z-index: 999;
 }
 #readyForAnim {
     animation-duration: 2s;
@@ -148,6 +192,26 @@ li {
     to {
         opacity: 100;
         transform: translateX(calc(0vw - 367px));
+    }
+}
+@keyframes appearFromRightRulersSettings {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw + 285px));
+    }
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw + 285px));
+    }
+}
+@keyframes appearFromRightRulersSettingsBox {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw + 60px));
+    }
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw + 60px));
     }
 }
 @keyframes appearFromRightRuler {

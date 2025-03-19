@@ -50,13 +50,15 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
         }
     }
     const animateElements = () => {
-        const rulersElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulerRef]
+        const rulersElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, rulerRef]
         for (let i = 0; i < rulersElements.length; i++) {
             readyForAnimation(rulersElements[i])
         }
         rulersTitleRef.current.style.animationName = 'appearFromRight'
         rulersRulesIconRef.current.style.animationName = 'appearFromRightRulersRules'
         rulersRulesBox.current.style.animationName = 'appearFromRightRulersRules'
+        rulersSettingsIconRef.current.style.animationName = 'appearFromRightRulersSettings'
+        rulersSettingsBox.current.style.animationName = 'appearFromRightRulersSettingsBox'
         rulerRef.current.style.animationName = 'appearFromRightRuler'
     }
     const readyForAnimation = (element) => {
@@ -73,8 +75,11 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
             rulersRulesIconRef.current.style.display = 'inline'
             rulersRulesBox.current.style.display = 'inline'
             rulersRulesBox.current.style.visibility = 'hidden'
+            rulersSettingsIconRef.current.style.display = 'inline'
+            rulersSettingsBox.current.style.display = 'inline'
+            rulersSettingsBox.current.style.visibility = 'hidden'
             rulerRef.current.style.display = 'block'
-            const rulersElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulerRef]
+            const rulersElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, rulerRef]
             for (let i = 0; i < rulersElements.length; i++) {
                 readyForMove(rulersElements[i])
             }
@@ -89,16 +94,25 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
         rulersTitleRef.current.style.display = 'none'
         rulersRulesIconRef.current.style.display = 'none'
         rulersRulesBox.current.style.display = 'none'
+        rulersSettingsIconRef.current.style.display = 'none'
+        rulersSettingsBox.current.style.display = 'none'
         rulerRef.current.style.display = 'none'
     }, [])
     return (
         <div>
             <img onClick={() => openOrClose(rulersRulesBox)} id='rulersRulesIcon' src={rulesIcon} ref={rulersRulesIconRef} alt='rulersRulesIcon' title="rulersRules" />
             <span id='rulersRulesBox' ref={rulersRulesBox}>
-                <div id='rulesTitle'>Rules</div>
+                <div id='rulersRulesTitle'>Rules</div>
                 <ul>
                     <li></li>
                     <li id='lvl2li'></li>
+                </ul>
+            </span>
+            <img onClick={() => openOrClose(rulersSettingsBox)} id='rulersSettingsIcon' src={settingsIcon} ref={rulersSettingsIconRef} alt='rulersSettingsIcon' title="rulersSettings" />
+            <span id='rulersSettingsBox' ref={rulersSettingsBox}>
+                <div id='rulersSettingsTitle'>Settings</div>
+                <ul>
+                    <li></li>
                 </ul>
             </span>
             <div id='rulersTitle' ref={rulersTitleRef}>Rulers</div>
