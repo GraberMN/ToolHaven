@@ -100,7 +100,7 @@ body {
     border-radius: 20px;
     z-index: 998;
     background-color: white;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     display: inline;
 }

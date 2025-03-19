@@ -23,6 +23,67 @@
     z-index: 999;
     display: inline;
 }
+#rulersRulesIcon:hover {
+    border-radius: 20px;
+}
+#rulersRulesIcon:active {
+    border-style: dashed;
+}
+#rulersRulesIcon:not(:hover)~#rulersRulesBox {
+    border-top-left-radius: 15px;
+}
+#rulersRulesBox {
+    position: absolute;
+    width: 400px;
+    height: 500px;
+    border: solid;
+    margin: auto;
+    transform: translateX(-367px);
+    border-color: hsl(187, 74%, 41%);
+    border-radius: 20px;
+    z-index: 998;
+    background-color: white;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: inline;
+}
+#rulersRulesBox::-webkit-scrollbar {
+    scroll-behavior: smooth;
+    width: 20px;
+    height: auto;
+}
+#rulersRulesBox::-webkit-scrollbar-thumb {
+    background: hsl(110, 74%, 41%);
+    border-radius: 20px;
+}
+#rulersRulesBox::-webkit-scrollbar-track-piece {
+    background: none;
+    border-radius: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+#rulersRulesTitle {
+    font-size: 30px;
+    font-weight: 600;
+    margin-top: 28px;
+    margin-right: -60px;
+}
+ul {
+    margin-top: 22px;
+}
+li {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-family: cursive;
+    text-align: left;
+    list-style-type: square;
+    margin-right: 19px;
+}
+#lvl2li {
+    font-family: cursive;
+    margin-left: 25px;
+    list-style-type: circle;
+}
 #ruler {
     position: absolute;
     text-align: center;
