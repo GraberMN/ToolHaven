@@ -11,7 +11,7 @@ import Rulers from './components/Rulers';
 
 function App() {
   const calcImagesArray = [settingsIcon, historyIcon, rulesIcon, blueRightArrow]
-  const rulersImagesArray = [inchesRuler]
+  const rulersImagesArray = [inchesRuler, settingsIcon, rulesIcon]
   const [moveToRulers, setMoveToRulers] = useState(false)
   return (
     <div className="App">

@@ -268,7 +268,7 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers }) {
     }, [])
     return (
         <div>
-            <img onClick={() => openOrClose(rulesBox)} id='rulesIcon' src={rulesIcon} ref={rulesIconRef} alt='rulesIcon' title="calculatorRules" />
+            <img onClick={() => openOrClose(rulesBox)} id='rulesIcon' src={rulesIcon} ref={rulesIconRef} alt='calculatorRulesIcon' title="calculatorRules" />
             <span id='rulesBox' ref={rulesBox}>
                 <div id='rulesTitle'>Rules</div>
                 <ul>

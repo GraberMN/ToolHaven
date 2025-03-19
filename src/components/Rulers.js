@@ -3,11 +3,13 @@ import { useState, useRef, useEffect } from 'react'
 import './rulers.css'
 
 function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
-    const [inchesRuler] = rulersImagesArray
+    const [inchesRuler, settingsIcon, rulesIcon] = rulersImagesArray
     const mousePosXStart = useRef(0)
     const mousePosYStart = useRef(0)
     const mousePosXDiff = useRef(0)
     const mousePosYDiff = useRef(0)
+    const rulersRulesIconRef = useRef(null)
+    const settingsIconRef = useRef(null)
     const rulerTitle = useRef('inchesRuler')
     const rulersTitleRef = useRef(null)
     const rulerRef = useRef(null)
@@ -38,13 +40,21 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
         document.removeEventListener('mouseup', stopRulerDrag)
         document.removeEventListener('mousemove', rulerDrag)
     }
+    const openOrClose = (element) => {
+        if (element.current.style.visibility === "hidden") {
+            element.current.style.visibility = "visible"
+        } else {
+            element.current.style.visibility = "hidden"
+        }
+    }
     const animateElements = () => {
-        const rulersElements = [rulersTitleRef, rulerRef]
+        const rulersElements = [rulersTitleRef, rulersRulesIconRef, rulerRef]
         for (let i = 0; i < rulersElements.length; i++) {
             readyForAnimation(rulersElements[i])
         }
         rulersTitleRef.current.style.animationName = 'appearFromRight'
         rulerRef.current.style.animationName = 'appearFromRightRuler'
+        rulersRulesIconRef.current.style.animationName = 'appearFromRightRulersRules'
     }
     const readyForMove = (element) => {
         element.current.style.opacity = '0'
@@ -57,8 +67,9 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
     useEffect(() => {
         if (moveToRulers) {
             rulersTitleRef.current.style.display = 'block'
+            rulersRulesIconRef.current.style.display = 'inline'
             rulerRef.current.style.display = 'block'
-            const rulersElements = [rulersTitleRef, rulerRef]
+            const rulersElements = [rulersTitleRef, rulersRulesIconRef, rulerRef]
             for (let i = 0; i < rulersElements.length; i++) {
                 readyForMove(rulersElements[i])
             }
@@ -72,9 +83,11 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
     useEffect(() => {
         rulersTitleRef.current.style.display = 'none'
         rulerRef.current.style.display = 'none'
+        rulersRulesIconRef.current.style.display = 'none'
     }, [])
     return (
         <div>
+            <img onClick='{() => openOrClose(rulesBox)}' id='rulersRulesIcon' src={rulesIcon} ref={rulersRulesIconRef} alt='rulersRulesIcon' title="rulersRules" />
             <div id='rulersTitle' ref={rulersTitleRef}>Rulers</div>
             <img id='ruler' src={inchesRuler} ref={rulerRef} alt={rulerTitle.current} title={rulerTitle.current}/>
         </div>

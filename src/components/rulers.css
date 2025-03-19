@@ -8,7 +8,20 @@
     display: block;
     transform: translateX(30vw);
     margin-top: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 45px;
+}
+#rulersRulesIcon {
+    position: absolute;
+    width: 75px;
+    height: auto;
+    margin: auto;
+    transform: translateX(-367px);
+    cursor: pointer;
+    border: solid hsl(187, 74%, 41%);
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.705);
+    z-index: 999;
+    display: inline;
 }
 #ruler {
     position: absolute;
@@ -64,6 +77,16 @@
     to {
         opacity: 100;
         transform: translateX(0vw);
+    }
+}
+@keyframes appearFromRightRulersRules {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw - 367px));
+    }
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw - 367px));
     }
 }
 @keyframes appearFromRightRuler {
