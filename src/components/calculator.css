@@ -40,7 +40,7 @@ body {
     transform: translateX(-367px);
     border-color: hsl(110, 74%, 41%);
     border-radius: 20px;
-    z-index: 998;
+    z-index: 997;
     background-color: white;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -188,7 +188,7 @@ li {
     transform: translateX(-523px);
     top: 143px;
     cursor: pointer;
-    z-index: 997;
+    z-index: 996;
     border: none;
     padding-bottom: 1px;
     background-color: white;
@@ -208,7 +208,7 @@ li {
     transform: translateX(-531px);
     border-color: rgba(0, 0, 0, 0.705);
     border-radius: 20px;
-    z-index: 996;
+    z-index: 995;
     background-color: white;
     overflow-y: auto;
     display: inline;

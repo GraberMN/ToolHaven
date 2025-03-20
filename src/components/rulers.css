@@ -41,7 +41,7 @@
     transform: translateX(-367px);
     border-color: hsl(187, 74%, 41%);
     border-radius: 20px;
-    z-index: 997;
+    z-index: 996;
     background-color: white;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -78,7 +78,7 @@
     border: solid hsl(187, 74%, 41%);
     border-radius: 15px;
     background-color: rgba(0, 0, 0, 0.705);
-    z-index: 997;
+    z-index: 998;
     display: inline;
 }
 #rulersSettingsIcon:hover {
@@ -99,11 +99,22 @@
     transform: translateX(60px);
     border-color: hsl(187, 74%, 41%);
     border-radius: 20px;
-    z-index: 996;
+    z-index: 997;
     background-color: white;
     overflow-y: auto;
     overflow-x: hidden;
     display: inline;
+}
+ul > input {
+    margin-left: -40px;
+    width: 200px;
+}
+ul > input[type='color' i] {
+    width: 200px;
+}
+ul > span {
+    position: absolute;
+    font-family: cursive;
 }
 #rulersSettingsTitle {
     font-size: 30px;
@@ -194,7 +205,18 @@ li {
         transform: translateX(calc(0vw - 367px));
     }
 }
-@keyframes appearFromRightRulersSettings {
+@keyframes appearFromRightRulersRulesSmall {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw - 260px));
+    }
+
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw - 260px));
+    }
+}
+@keyframes appearFromRightRulersSettingsIcon {
     from {
         opacity: 0;
         transform: translateX(calc(30vw + 285px));
@@ -202,6 +224,16 @@ li {
     to {
         opacity: 100;
         transform: translateX(calc(0vw + 285px));
+    }
+}
+@keyframes appearFromRightRulersSettingsIconSmall {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw + 180px));
+    }
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw + 180px));
     }
 }
 @keyframes appearFromRightRulersSettingsBox {
@@ -212,6 +244,16 @@ li {
     to {
         opacity: 100;
         transform: translateX(calc(0vw + 60px));
+    }
+}
+@keyframes appearFromRightRulersSettingsBoxSmall {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw - 45px));
+    }
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw - 45px));
     }
 }
 @keyframes appearFromRightRuler {

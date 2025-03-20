@@ -276,6 +276,7 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers }) {
                     <li>The top left clock icon opens the History tab, which shows you all prior valid calculations until page reload.</li>
                     <li>The Settings tab lets you adjust the max decimal places of calculations, the max characters that can be entered, and more.</li>
                     <li>The defaults/maxes for those settings are 16 decimal places and 27 characters.</li>
+                    <li>When changing color in Settings, drag the pointer around for it to work seamlessly.</li>
                     <li>When multiplying or dividing with decimals, the answer can sometimes be off by a tiny and negligible amount, but it is always accurate for the first 5 decimal places.</li>
                     <li>If an Error is generated, keep calculating by pressing any calculator button.</li>
                     <li>"Error", "NaN", "undefined", and "Infinity" answers cannot be interacted with.</li>
