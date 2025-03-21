@@ -4,6 +4,10 @@ import './rulers.css'
 
 function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
     const [inchesRuler, settingsIcon, rulesIcon] = rulersImagesArray
+    const [inchesRulerCheckboxChecked, setInchesRulerCheckboxChecked] = useState(true)
+    const [centimetersRulerCheckboxChecked, setCentimetersRulerCheckboxChecked] = useState(false)
+    const [picasRulerCheckboxChecked, setPicasRulerCheckboxChecked] = useState(false)
+    const [pixelsRulerCheckboxChecked, setPixelsRulerCheckboxChecked] = useState(false)
     const [inchesRulerBorderColorVal, setInchesRulerBorderColorVal] = useState('#5F6B6B')
     const mousePosXStart = useRef(0)
     const mousePosYStart = useRef(0)
@@ -13,15 +17,14 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
     const rulersRulesBox = useRef(null)
     const rulersSettingsIconRef = useRef(null)
     const rulersSettingsBox = useRef(null)
-    const rulerTitle = useRef('inchesRuler')
     const rulersTitleRef = useRef(null)
-    const rulerRef = useRef(null)
+    const inchesRulerRef = useRef(null)
     const allowRulerDrag = () => {
         mousePosXStart.current = 0
         mousePosYStart.current = 0
         mousePosXDiff.current = 0
         mousePosYDiff.current = 0
-        rulerRef.current.addEventListener('mousedown', startRulerDrag)
+        inchesRulerRef.current.addEventListener('mousedown', startRulerDrag)
     }
     const startRulerDrag = (e) => {
         e.preventDefault()
@@ -36,8 +39,8 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
         mousePosYDiff.current = mousePosYStart.current - e.clientY
         mousePosXStart.current = e.clientX
         mousePosYStart.current = e.clientY
-        rulerRef.current.style.top = (rulerRef.current.offsetTop - mousePosYDiff.current) + 'px'
-        rulerRef.current.style.left = (rulerRef.current.offsetLeft - mousePosXDiff.current) + 'px'
+        inchesRulerRef.current.style.top = (inchesRulerRef.current.offsetTop - mousePosYDiff.current) + 'px'
+        inchesRulerRef.current.style.left = (inchesRulerRef.current.offsetLeft - mousePosXDiff.current) + 'px'
     }
     const stopRulerDrag = () => {
         document.removeEventListener('mouseup', stopRulerDrag)
@@ -52,7 +55,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
     }
     const onInchesRulerBorderColorChange = (e) => {
         setInchesRulerBorderColorVal(e.target.value)
-        rulerRef.current.style.borderColor = inchesRulerBorderColorVal
+        inchesRulerRef.current.style.borderColor = inchesRulerBorderColorVal
     }
     const onAdjustWindowWidth = () => {
         if (window.innerWidth <= 740) {
@@ -68,7 +71,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
         }
     }
     const animateElements = () => {
-        const rulersElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, rulerRef]
+        const rulersElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, inchesRulerRef]
         for (let i = 0; i < rulersElements.length; i++) {
             readyForAnimation(rulersElements[i])
         }
@@ -84,7 +87,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
             rulersSettingsIconRef.current.style.animationName = 'appearFromRightRulersSettingsIconSmall'
             rulersSettingsBox.current.style.animationName = 'appearFromRightRulersSettingsBoxSmall'
         }
-        rulerRef.current.style.animationName = 'appearFromRightRuler'
+        inchesRulerRef.current.style.animationName = 'appearFromRightRuler'
     }
     const readyForAnimation = (element) => {
         element.current.style.animationName = 'none'
@@ -95,6 +98,10 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
         element.current.style.opacity = '0'
     }
     useEffect(() => {
+        const booleanStates = [inchesRulerCheckboxChecked, centimetersRulerCheckboxChecked, picasRulerCheckboxChecked, pixelsRulerCheckboxChecked]
+        const rulersRulers = []
+    }, [inchesRulerCheckboxChecked, centimetersRulerCheckboxChecked, picasRulerCheckboxChecked, pixelsRulerCheckboxChecked])
+    useEffect(() => {
         if (moveToRulers) {
             rulersTitleRef.current.style.display = 'block'
             rulersRulesIconRef.current.style.display = 'inline'
@@ -103,8 +110,8 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
             rulersSettingsIconRef.current.style.display = 'inline'
             rulersSettingsBox.current.style.display = 'inline'
             rulersSettingsBox.current.style.visibility = 'hidden'
-            rulerRef.current.style.display = 'block'
-            const rulersElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, rulerRef]
+            inchesRulerRef.current.style.display = 'block'
+            const rulersElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, inchesRulerRef]
             for (let i = 0; i < rulersElements.length; i++) {
                 readyForMove(rulersElements[i])
             }
@@ -124,17 +131,15 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
         }
     }, [moveToRulers])
     useEffect(() => {
-        return () => {
-            window.removeEventListener("resize", onAdjustWindowWidth)
-        }
-    }, [])
-    useEffect(() => {
         rulersTitleRef.current.style.display = 'none'
         rulersRulesIconRef.current.style.display = 'none'
         rulersRulesBox.current.style.display = 'none'
         rulersSettingsIconRef.current.style.display = 'none'
         rulersSettingsBox.current.style.display = 'none'
-        rulerRef.current.style.display = 'none'
+        inchesRulerRef.current.style.display = 'none'
+        return () => {
+            window.removeEventListener("resize", onAdjustWindowWidth)
+        }
     }, [])
     return (
         <div>
@@ -146,7 +151,11 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
                     <li>The Settings tab lets you adjust the rulers that are displayed or hidden, each of their border colors, and more.</li>
                     <li>There are currently 4 rulers: the inches, centimeters, picas, and pixels rulers.</li>
                     <li>When changing color in Settings, drag the pointer around for it to work seamlessly.</li>
-                    <li id='lvl2li'></li>
+                    <li>Ruler-Specific Rules:</li>
+                    <li id='lvl2li'>Inches: "in." is shorthand for inches, each ruler gap is 1/8 inch.</li>
+                    <li id='lvl2li'>Centimeters: "cm" is shorthand for centimeters, each ruler gap is 1 mm.</li>
+                    <li id='lvl2li'>Picas: aaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</li>
+                    <li id='lvl2li'>Pixels: aaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</li>
                 </ul>
             </span>
             <img onClick={() => openOrClose(rulersSettingsBox)} id='rulersSettingsIcon' src={settingsIcon} ref={rulersSettingsIconRef} alt='rulersSettingsIcon' title="rulersSettings" />
@@ -154,7 +163,9 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
                 <div id='rulersSettingsTitle'>Settings</div>
                 <ul>
                     <li>Displayed rulers:</li>
-                    <p></p>
+                    <li id='invisLi'>
+                        in.: <input type='checkbox' /> cm: <input type='checkbox' /> picas: <input type='checkbox' /> px: <input type='checkbox' />
+                    </li>
                     <li>Color of inches ruler border:</li>
                     <input type='color' value={inchesRulerBorderColorVal} onChange={(e) => onInchesRulerBorderColorChange(e)} title='inchesRulerBorderColorPicker' placeholder='inchesRulerBorderColorPicker' />
                     <li>Color of cm ruler border:</li>
@@ -166,7 +177,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
                 </ul>
             </span>
             <div id='rulersTitle' ref={rulersTitleRef}>Rulers</div>
-            <img id='ruler' src={inchesRuler} ref={rulerRef} alt={rulerTitle.current} title={rulerTitle.current}/>
+            <img id='inchesRuler' src={inchesRuler} ref={inchesRulerRef} alt='inchesRuler' title='inchesRuler'/>
         </div>
     )
 }
