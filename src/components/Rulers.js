@@ -34,6 +34,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
     const centimetersRulerRef = useRef(null)
     const picasRulerRef = useRef(null)
     const pixelsRulerRef = useRef(null)
+    const inchesRulerCheckbox = useRef(null)
     const allowRulerDrag = () => {
         inchesRulerRef.current.addEventListener('mousedown', startInchesRulerDrag)
         centimetersRulerRef.current.addEventListener('mousedown', startCentimetersRulerDrag)
@@ -173,7 +174,16 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
     }
     useEffect(() => {
         const booleanStates = [inchesRulerCheckboxChecked, centimetersRulerCheckboxChecked, picasRulerCheckboxChecked, pixelsRulerCheckboxChecked]
-        const rulersRulers = []
+        const rulersRulers = [inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef]
+        for (let i = 0; i < rulersRulers.length; i++) {
+            if (booleanStates[i]) {
+                rulersRulers[i].current.style.animationName = 'none'
+                rulersRulers[i].current.style.display = 'block'
+                rulersRulers[i].current.style.opacity = '100'
+            } else {
+                rulersRulers[i].current.style.display = 'none'
+            }
+        }
     }, [inchesRulerCheckboxChecked, centimetersRulerCheckboxChecked, picasRulerCheckboxChecked, pixelsRulerCheckboxChecked])
     useEffect(() => {
         if (moveToRulers) {
@@ -189,6 +199,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
             for (let i = 0; i < rulersElements.length; i++) {
                 readyForMove(rulersElements[i])
             }
+            inchesRulerCheckbox.current.checked = true
             allowRulerDrag()
             document.body.style.backgroundColor = 'rgba(191, 248, 248, 0.48)'
             setTimeout(() => {
@@ -227,6 +238,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
                     <li>Hover over each ruler or each external button to find out what it is/represents.</li>
                     <li>The Settings tab lets you adjust the rulers that are displayed or hidden, each of their border colors, and more.</li>
                     <li>There are currently 4 rulers: the inches, centimeters, picas, and pixels rulers.</li>
+                    <li>The inches ruler is the only ruler that is displayed when switching to Rulers.</li>
                     <li>When changing color in Settings, drag the pointer around for it to work seamlessly.</li>
                     <li>Ruler-Specific Rules:</li>
                     <li id='lvl2li'>Inches: "in." is shorthand for inches, each ruler gap is 1/8 inch.</li>
@@ -241,7 +253,10 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
                 <ul>
                     <li>Displayed rulers:</li>
                     <li id='invisLi'>
-                        in.: <input type='checkbox' /> cm: <input type='checkbox' /> picas: <input type='checkbox' /> px: <input type='checkbox' />
+                        in.: <input type='checkbox' onClick={(e) => setInchesRulerCheckboxChecked(e.target.checked)} ref={inchesRulerCheckbox} />
+                        cm: <input type='checkbox' onClick={(e) => setCentimetersRulerCheckboxChecked(e.target.checked)} />
+                        picas: <input type='checkbox' onClick={(e) => setPicasRulerCheckboxChecked(e.target.checked)} />
+                        px: <input type='checkbox' onClick={(e) => setPixelsRulerCheckboxChecked(e.target.checked)} />
                     </li>
                     <li>Color of inches ruler border:</li>
                     <input type='color' value={inchesRulerBorderColorVal} onChange={(e) => onInchesRulerBorderColorChange(e)} title='inchesRulerBorderColorPicker' placeholder='inchesRulerBorderColorPicker' />
