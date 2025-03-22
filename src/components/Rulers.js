@@ -154,8 +154,8 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
                     <li>Ruler-Specific Rules:</li>
                     <li id='lvl2li'>Inches: "in." is shorthand for inches, each ruler gap is 1/8 inch.</li>
                     <li id='lvl2li'>Centimeters: "cm" is shorthand for centimeters, each ruler gap is 1 mm.</li>
-                    <li id='lvl2li'>Picas: aaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</li>
-                    <li id='lvl2li'>Pixels: aaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</li>
+                    <li id='lvl2li'>Picas: each small ruler gap is 1 pica, each large ruler gap is 1 inch.</li>
+                    <li id='lvl2li'>Pixels: each small ruler gap is 5 px, each large ruler gap is 50 px.</li>
                 </ul>
             </span>
             <img onClick={() => openOrClose(rulersSettingsBox)} id='rulersSettingsIcon' src={settingsIcon} ref={rulersSettingsIconRef} alt='rulersSettingsIcon' title="rulersSettings" />
@@ -177,7 +177,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
                 </ul>
             </span>
             <div id='rulersTitle' ref={rulersTitleRef}>Rulers</div>
-            <img id='inchesRuler' src={inchesRuler} ref={inchesRulerRef} alt='inchesRuler' title='inchesRuler'/>
+            <img id='inchesRuler' src={inchesRuler} ref={inchesRulerRef} alt='inchesRuler' title='inchesRuler' />
         </div>
     )
 }
