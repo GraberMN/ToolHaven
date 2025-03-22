@@ -20,7 +20,7 @@
     border: solid hsl(187, 74%, 41%);
     border-radius: 15px;
     background-color: rgba(0, 0, 0, 0.705);
-    z-index: 998;
+    z-index: 995;
     display: inline;
 }
 #rulersRulesIcon:hover {
@@ -41,7 +41,7 @@
     transform: translateX(-367px);
     border-color: hsl(187, 74%, 41%);
     border-radius: 20px;
-    z-index: 996;
+    z-index: 993;
     background-color: white;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -78,7 +78,7 @@
     border: solid hsl(187, 74%, 41%);
     border-radius: 15px;
     background-color: rgba(0, 0, 0, 0.705);
-    z-index: 998;
+    z-index: 995;
     display: inline;
 }
 #rulersSettingsIcon:hover {
@@ -99,7 +99,7 @@
     transform: translateX(60px);
     border-color: hsl(187, 74%, 41%);
     border-radius: 20px;
-    z-index: 997;
+    z-index: 994;
     background-color: white;
     overflow-y: auto;
     overflow-x: hidden;
@@ -153,7 +153,40 @@ input[type='checkbox' i] {
     border: solid 3px rgba(0, 0, 0, 0.575);
     display: block;
     cursor: move;
+    z-index: 996;
+}
+#centimetersRuler {
+    position: absolute;
+    text-align: center;
+    font-family: cursive;
+    width: 389px;
+    height: auto;
+    border: solid 2px rgba(0, 0, 0, 0.575);
+    display: block;
+    cursor: move;
     z-index: 999;
+}
+#picasRuler {
+    position: absolute;
+    text-align: center;
+    font-family: cursive;
+    width: 976px;
+    height: auto;
+    border: solid 3px rgba(0, 0, 0, 0.575);
+    display: block;
+    cursor: move;
+    z-index: 997;
+}
+#pixelsRuler {
+    position: absolute;
+    text-align: center;
+    font-family: cursive;
+    width: 1010px;
+    height: auto;
+    border: solid 2px rgba(0, 0, 0, 0.575);
+    display: block;
+    cursor: move;
+    z-index: 998;
 }
 #readyForAnim {
     animation-duration: 2s;

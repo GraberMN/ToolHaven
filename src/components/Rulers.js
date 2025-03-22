@@ -3,48 +3,122 @@ import { useState, useRef, useEffect } from 'react'
 import './rulers.css'
 
 function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
-    const [inchesRuler, settingsIcon, rulesIcon] = rulersImagesArray
+    const [inchesRuler, centimetersRuler, picasRuler, pixelsRuler, settingsIcon, rulesIcon] = rulersImagesArray
     const [inchesRulerCheckboxChecked, setInchesRulerCheckboxChecked] = useState(true)
     const [centimetersRulerCheckboxChecked, setCentimetersRulerCheckboxChecked] = useState(false)
     const [picasRulerCheckboxChecked, setPicasRulerCheckboxChecked] = useState(false)
     const [pixelsRulerCheckboxChecked, setPixelsRulerCheckboxChecked] = useState(false)
     const [inchesRulerBorderColorVal, setInchesRulerBorderColorVal] = useState('#5F6B6B')
-    const mousePosXStart = useRef(0)
-    const mousePosYStart = useRef(0)
-    const mousePosXDiff = useRef(0)
-    const mousePosYDiff = useRef(0)
+    const inchesRulerMousePosXStart = useRef(0)
+    const inchesRulerMousePosYStart = useRef(0)
+    const inchesRulerMousePosXDiff = useRef(0)
+    const inchesRulerMousePosYDiff = useRef(0)
+    const centimetersRulerMousePosXStart = useRef(0)
+    const centimetersRulerMousePosYStart = useRef(0)
+    const centimetersRulerMousePosXDiff = useRef(0)
+    const centimetersRulerMousePosYDiff = useRef(0)
+    const picasRulerMousePosXStart = useRef(0)
+    const picasRulerMousePosYStart = useRef(0)
+    const picasRulerMousePosXDiff = useRef(0)
+    const picasRulerMousePosYDiff = useRef(0)
+    const pixelsRulerMousePosXStart = useRef(0)
+    const pixelsRulerMousePosYStart = useRef(0)
+    const pixelsRulerMousePosXDiff = useRef(0)
+    const pixelsRulerMousePosYDiff = useRef(0)
     const rulersRulesIconRef = useRef(null)
     const rulersRulesBox = useRef(null)
     const rulersSettingsIconRef = useRef(null)
     const rulersSettingsBox = useRef(null)
     const rulersTitleRef = useRef(null)
     const inchesRulerRef = useRef(null)
+    const centimetersRulerRef = useRef(null)
+    const picasRulerRef = useRef(null)
+    const pixelsRulerRef = useRef(null)
     const allowRulerDrag = () => {
-        mousePosXStart.current = 0
-        mousePosYStart.current = 0
-        mousePosXDiff.current = 0
-        mousePosYDiff.current = 0
-        inchesRulerRef.current.addEventListener('mousedown', startRulerDrag)
+        inchesRulerRef.current.addEventListener('mousedown', startInchesRulerDrag)
+        centimetersRulerRef.current.addEventListener('mousedown', startCentimetersRulerDrag)
+        picasRulerRef.current.addEventListener('mousedown', startPicasRulerDrag)
+        pixelsRulerRef.current.addEventListener('mousedown', startPixelsRulerDrag)
     }
-    const startRulerDrag = (e) => {
+    const startInchesRulerDrag = (e) => {
         e.preventDefault()
-        mousePosXStart.current = e.clientX
-        mousePosYStart.current = e.clientY
-        document.addEventListener('mouseup', stopRulerDrag)
-        document.addEventListener('mousemove', rulerDrag)
+        inchesRulerMousePosXStart.current = e.clientX
+        inchesRulerMousePosYStart.current = e.clientY
+        document.addEventListener('mouseup', stopInchesRulerDrag)
+        document.addEventListener('mousemove', inchesRulerDrag)
     }
-    const rulerDrag = (e) => {
+    const inchesRulerDrag = (e) => {
         e.preventDefault()
-        mousePosXDiff.current = mousePosXStart.current - e.clientX
-        mousePosYDiff.current = mousePosYStart.current - e.clientY
-        mousePosXStart.current = e.clientX
-        mousePosYStart.current = e.clientY
-        inchesRulerRef.current.style.top = (inchesRulerRef.current.offsetTop - mousePosYDiff.current) + 'px'
-        inchesRulerRef.current.style.left = (inchesRulerRef.current.offsetLeft - mousePosXDiff.current) + 'px'
+        inchesRulerMousePosXDiff.current = inchesRulerMousePosXStart.current - e.clientX
+        inchesRulerMousePosYDiff.current = inchesRulerMousePosYStart.current - e.clientY
+        inchesRulerMousePosXStart.current = e.clientX
+        inchesRulerMousePosYStart.current = e.clientY
+        inchesRulerRef.current.style.top = (inchesRulerRef.current.offsetTop - inchesRulerMousePosYDiff.current) + 'px'
+        inchesRulerRef.current.style.left = (inchesRulerRef.current.offsetLeft - inchesRulerMousePosXDiff.current) + 'px'
     }
-    const stopRulerDrag = () => {
-        document.removeEventListener('mouseup', stopRulerDrag)
-        document.removeEventListener('mousemove', rulerDrag)
+    const stopInchesRulerDrag = () => {
+        document.removeEventListener('mouseup', stopInchesRulerDrag)
+        document.removeEventListener('mousemove', inchesRulerDrag)
+    }
+    const startCentimetersRulerDrag = (e) => {
+        e.preventDefault()
+        centimetersRulerMousePosXStart.current = e.clientX
+        centimetersRulerMousePosYStart.current = e.clientY
+        document.addEventListener('mouseup', stopCentimetersRulerDrag)
+        document.addEventListener('mousemove', centimetersRulerDrag)
+    }
+    const centimetersRulerDrag = (e) => {
+        e.preventDefault()
+        centimetersRulerMousePosXDiff.current = centimetersRulerMousePosXStart.current - e.clientX
+        centimetersRulerMousePosYDiff.current = centimetersRulerMousePosYStart.current - e.clientY
+        centimetersRulerMousePosXStart.current = e.clientX
+        centimetersRulerMousePosYStart.current = e.clientY
+        centimetersRulerRef.current.style.top = (centimetersRulerRef.current.offsetTop - centimetersRulerMousePosYDiff.current) + 'px'
+        centimetersRulerRef.current.style.left = (centimetersRulerRef.current.offsetLeft - centimetersRulerMousePosXDiff.current) + 'px'
+    }
+    const stopCentimetersRulerDrag = () => {
+        document.removeEventListener('mouseup', stopCentimetersRulerDrag)
+        document.removeEventListener('mousemove', centimetersRulerDrag)
+    }
+    const startPicasRulerDrag = (e) => {
+        e.preventDefault()
+        picasRulerMousePosXStart.current = e.clientX
+        picasRulerMousePosYStart.current = e.clientY
+        document.addEventListener('mouseup', stopPicasRulerDrag)
+        document.addEventListener('mousemove', picasRulerDrag)
+    }
+    const picasRulerDrag = (e) => {
+        e.preventDefault()
+        picasRulerMousePosXDiff.current = picasRulerMousePosXStart.current - e.clientX
+        picasRulerMousePosYDiff.current = picasRulerMousePosYStart.current - e.clientY
+        picasRulerMousePosXStart.current = e.clientX
+        picasRulerMousePosYStart.current = e.clientY
+        picasRulerRef.current.style.top = (picasRulerRef.current.offsetTop - picasRulerMousePosYDiff.current) + 'px'
+        picasRulerRef.current.style.left = (picasRulerRef.current.offsetLeft - picasRulerMousePosXDiff.current) + 'px'
+    }
+    const stopPicasRulerDrag = () => {
+        document.removeEventListener('mouseup', stopPicasRulerDrag)
+        document.removeEventListener('mousemove', picasRulerDrag)
+    }
+    const startPixelsRulerDrag = (e) => {
+        e.preventDefault()
+        pixelsRulerMousePosXStart.current = e.clientX
+        pixelsRulerMousePosYStart.current = e.clientY
+        document.addEventListener('mouseup', stopPixelsRulerDrag)
+        document.addEventListener('mousemove', pixelsRulerDrag)
+    }
+    const pixelsRulerDrag = (e) => {
+        e.preventDefault()
+        pixelsRulerMousePosXDiff.current = pixelsRulerMousePosXStart.current - e.clientX
+        pixelsRulerMousePosYDiff.current = pixelsRulerMousePosYStart.current - e.clientY
+        pixelsRulerMousePosXStart.current = e.clientX
+        pixelsRulerMousePosYStart.current = e.clientY
+        pixelsRulerRef.current.style.top = (pixelsRulerRef.current.offsetTop - pixelsRulerMousePosYDiff.current) + 'px'
+        pixelsRulerRef.current.style.left = (pixelsRulerRef.current.offsetLeft - pixelsRulerMousePosXDiff.current) + 'px'
+    }
+    const stopPixelsRulerDrag = () => {
+        document.removeEventListener('mouseup', stopPixelsRulerDrag)
+        document.removeEventListener('mousemove', pixelsRulerDrag)
     }
     const openOrClose = (element) => {
         if (element.current.style.visibility === "hidden") {
@@ -121,10 +195,10 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
                 animateElements()
             }, 2000)
             setTimeout(() => {
-                const rulersAbsoluteElements = [rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox]
-                for (let i = 0; i < rulersAbsoluteElements.length; i++) {
-                    rulersAbsoluteElements[i].current.style.animationName = 'none'
-                    rulersAbsoluteElements[i].current.style.opacity = '100'
+                const rulersNonRulerElements = [rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox]
+                for (let i = 0; i < rulersNonRulerElements.length; i++) {
+                    rulersNonRulerElements[i].current.style.animationName = 'none'
+                    rulersNonRulerElements[i].current.style.opacity = '100'
                 }
                 window.addEventListener('resize', onAdjustWindowWidth)
             }, 4000)
@@ -137,6 +211,9 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
         rulersSettingsIconRef.current.style.display = 'none'
         rulersSettingsBox.current.style.display = 'none'
         inchesRulerRef.current.style.display = 'none'
+        centimetersRulerRef.current.style.display = 'none'
+        picasRulerRef.current.style.display = 'none'
+        pixelsRulerRef.current.style.display = 'none'
         return () => {
             window.removeEventListener("resize", onAdjustWindowWidth)
         }
@@ -178,6 +255,9 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
             </span>
             <div id='rulersTitle' ref={rulersTitleRef}>Rulers</div>
             <img id='inchesRuler' src={inchesRuler} ref={inchesRulerRef} alt='inchesRuler' title='inchesRuler' />
+            <img id='centimetersRuler' src={centimetersRuler} ref={centimetersRulerRef} alt='centimetersRuler' title='centimetersRuler' />
+            <img id='picasRuler' src={picasRuler} ref={picasRulerRef} alt='picasRuler' title='picasRuler' />
+            <img id='pixelsRuler' src={pixelsRuler} ref={pixelsRulerRef} alt='pixelsRuler' title='pixelsRuler' />
         </div>
     )
 }

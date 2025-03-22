@@ -5,13 +5,16 @@ import historyIcon from './Images/History Icon.svg';
 import rulesIcon from './Images/Rules Icon.svg';
 import blueRightArrow from './Images/BlueRightArrow.png'
 import inchesRuler from './Images/inchesRuler.PNG'
+import centimetersRuler from './Images/centimetersRuler.PNG'
+import picasRuler from './Images/picasRuler.PNG'
+import pixelsRuler from './Images/pixelsRuler.PNG'
 import './App.css';
 import Calculator from './components/Calculator';
 import Rulers from './components/Rulers';
 
 function App() {
   const calcImagesArray = [settingsIcon, historyIcon, rulesIcon, blueRightArrow]
-  const rulersImagesArray = [inchesRuler, settingsIcon, rulesIcon]
+  const rulersImagesArray = [inchesRuler, centimetersRuler, picasRuler, pixelsRuler, settingsIcon, rulesIcon]
   const [moveToRulers, setMoveToRulers] = useState(false)
   return (
     <div className="App">
