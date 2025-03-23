@@ -293,13 +293,23 @@ input[type='checkbox' i] {
         transform: translateX(calc(0vw - 45px));
     }
 }
-@keyframes appearFromRightRuler {
+@keyframes appearFromRightRulersInchesRuler {
     from {
         opacity: 0;
         transform: translateX(calc(80vw - 50%));
     }
     to {
         opacity: 100;
+        transform: translateX(calc(50vw - 50%));
+    }
+}
+@keyframes appearFromRightRulersOtherRulers {
+    from {
+        opacity: 0;
+        transform: translateX(calc(80vw - 50%));
+    }
+    to {
+        opacity: 0;
         transform: translateX(calc(50vw - 50%));
     }
 }

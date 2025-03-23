@@ -9,6 +9,9 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
     const [picasRulerCheckboxChecked, setPicasRulerCheckboxChecked] = useState(false)
     const [pixelsRulerCheckboxChecked, setPixelsRulerCheckboxChecked] = useState(false)
     const [inchesRulerBorderColorVal, setInchesRulerBorderColorVal] = useState('#5F6B6B')
+    const [centimetersRulerBorderColorVal, setCentimetersRulerBorderColorVal] = useState('#5F6B6B')
+    const [picasRulerBorderColorVal, setPicasRulerBorderColorVal] = useState('#5F6B6B')
+    const [pixelsRulerBorderColorVal, setPixelsRulerBorderColorVal] = useState('#5F6B6B')
     const inchesRulerMousePosXStart = useRef(0)
     const inchesRulerMousePosYStart = useRef(0)
     const inchesRulerMousePosXDiff = useRef(0)
@@ -132,6 +135,18 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
         setInchesRulerBorderColorVal(e.target.value)
         inchesRulerRef.current.style.borderColor = inchesRulerBorderColorVal
     }
+    const onCentimetersRulerBorderColorChange = (e) => {
+        setCentimetersRulerBorderColorVal(e.target.value)
+        centimetersRulerRef.current.style.borderColor = centimetersRulerBorderColorVal
+    }
+    const onPicasRulerBorderColorChange = (e) => {
+        setPicasRulerBorderColorVal(e.target.value)
+        picasRulerRef.current.style.borderColor = picasRulerBorderColorVal
+    }
+    const onPixelsRulerBorderColorChange = (e) => {
+        setPixelsRulerBorderColorVal(e.target.value)
+        pixelsRulerRef.current.style.borderColor = pixelsRulerBorderColorVal
+    }
     const onAdjustWindowWidth = () => {
         if (window.innerWidth <= 740) {
             rulersRulesIconRef.current.style.transform = 'translateX(-260px)'
@@ -146,7 +161,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
         }
     }
     const animateElements = () => {
-        const rulersElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, inchesRulerRef]
+        const rulersElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef]
         for (let i = 0; i < rulersElements.length; i++) {
             readyForAnimation(rulersElements[i])
         }
@@ -162,7 +177,10 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
             rulersSettingsIconRef.current.style.animationName = 'appearFromRightRulersSettingsIconSmall'
             rulersSettingsBox.current.style.animationName = 'appearFromRightRulersSettingsBoxSmall'
         }
-        inchesRulerRef.current.style.animationName = 'appearFromRightRuler'
+        inchesRulerRef.current.style.animationName = 'appearFromRightRulersInchesRuler'
+        centimetersRulerRef.current.style.animationName = 'appearFromRightRulersOtherRulers'
+        picasRulerRef.current.style.animationName = 'appearFromRightRulersOtherRulers'
+        pixelsRulerRef.current.style.animationName = 'appearFromRightRulersOtherRulers'
     }
     const readyForAnimation = (element) => {
         element.current.style.animationName = 'none'
@@ -178,10 +196,12 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
         for (let i = 0; i < rulersRulers.length; i++) {
             if (booleanStates[i]) {
                 rulersRulers[i].current.style.animationName = 'none'
-                rulersRulers[i].current.style.display = 'block'
+                rulersRulers[i].current.style.visibility = 'visible'
+                rulersRulers[i].current.style.transform = 'translateX(calc(50vw - 50%))'
                 rulersRulers[i].current.style.opacity = '100'
             } else {
-                rulersRulers[i].current.style.display = 'none'
+                rulersRulers[i].current.style.opacity = '0'
+                rulersRulers[i].current.style.visibility = 'hidden'
             }
         }
     }, [inchesRulerCheckboxChecked, centimetersRulerCheckboxChecked, picasRulerCheckboxChecked, pixelsRulerCheckboxChecked])
@@ -195,7 +215,14 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
             rulersSettingsBox.current.style.display = 'inline'
             rulersSettingsBox.current.style.visibility = 'hidden'
             inchesRulerRef.current.style.display = 'block'
-            const rulersElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, inchesRulerRef]
+            inchesRulerRef.current.style.visibility = 'visible'
+            centimetersRulerRef.current.style.display = 'block'
+            centimetersRulerRef.current.style.visibility = 'hidden'
+            picasRulerRef.current.style.display = 'block'
+            picasRulerRef.current.style.visibility = 'hidden'
+            pixelsRulerRef.current.style.display = 'block'
+            pixelsRulerRef.current.style.visibility = 'hidden'
+            const rulersElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef]
             for (let i = 0; i < rulersElements.length; i++) {
                 readyForMove(rulersElements[i])
             }
@@ -261,11 +288,11 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
                     <li>Color of inches ruler border:</li>
                     <input type='color' value={inchesRulerBorderColorVal} onChange={(e) => onInchesRulerBorderColorChange(e)} title='inchesRulerBorderColorPicker' placeholder='inchesRulerBorderColorPicker' />
                     <li>Color of cm ruler border:</li>
-                    <input type='color' />
+                    <input type='color' value={centimetersRulerBorderColorVal} onChange={(e) => onCentimetersRulerBorderColorChange(e)} title='centimetersRulerBorderColorPicker' placeholder='centimetersRulerBorderColorPicker' />
                     <li>Color of picas ruler border:</li>
-                    <input type='color' />
+                    <input type='color' value={picasRulerBorderColorVal} onChange={(e) => onPicasRulerBorderColorChange(e)} title='picasRulerBorderColorPicker' placeholder='picasRulerBorderColorPicker' />
                     <li>Color of pixels ruler border:</li>
-                    <input type='color' />
+                    <input type='color' value={pixelsRulerBorderColorVal} onChange={(e) => onPixelsRulerBorderColorChange(e)} title='pixelsRulerBorderColorPicker' placeholder='pixelsRulerBorderColorPicker' />
                 </ul>
             </span>
             <div id='rulersTitle' ref={rulersTitleRef}>Rulers</div>
