@@ -1,271 +1,271 @@
-import React from 'react'
-import { useState, useRef, useEffect } from 'react'
-import './calculator.css'
+import React from 'react';
+import { useState, useRef, useEffect } from 'react';
+import './calculator.css';
 
 function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers }) {
-    const [settingsIcon, historyIcon, rulesIcon, blueRightArrow] = calcImagesArray
-    const [calcHistory, setCalcHistory] = useState([])
-    const [maxCharVal, setMaxCarVal] = useState(27)
-    const [maxDecimalPlacesVal, setMaxDecimalPlacesVal] = useState(16)
-    const [inputFieldBorderColorVal, setInputFieldBorderColorVal] = useState('#4B4B4B')
-    const [buttonContainerColorVal, setButtonContainerColorVal] = useState('#808080')
-    const [blueRightArrowTransitionDone, setBlueRightArrowTransitionDone] = useState(false)
-    const beforeEval = useRef("0")
-    const inputField = useRef("0")
-    const ansField = useRef("ANS = 0")
-    const rulesIconRef = useRef(null)
-    const rulesBox = useRef(null)
-    const settingsIconRef = useRef(null)
-    const settingsBox = useRef(null)
-    const historyIconRef = useRef(null)
-    const historyBox = useRef(null)
-    const calcTitleRef = useRef(null)
-    const buttonContainer = useRef(null)
-    const ans = useRef("0")
-    const blueRightArrowArea = useRef(null)
-    const rightBlueArrow = useRef(null)
+    const [settingsIcon, historyIcon, rulesIcon, blueRightArrow] = calcImagesArray;
+    const [calcHistory, setCalcHistory] = useState([]);
+    const [maxCharVal, setMaxCarVal] = useState(27);
+    const [maxDecimalPlacesVal, setMaxDecimalPlacesVal] = useState(16);
+    const [inputFieldBorderColorVal, setInputFieldBorderColorVal] = useState('#4B4B4B');
+    const [buttonContainerColorVal, setButtonContainerColorVal] = useState('#808080');
+    const [blueRightArrowTransitionDone, setBlueRightArrowTransitionDone] = useState(false);
+    const beforeEval = useRef("0");
+    const inputField = useRef("0");
+    const ansField = useRef("ANS = 0");
+    const rulesIconRef = useRef(null);
+    const rulesBox = useRef(null);
+    const settingsIconRef = useRef(null);
+    const settingsBox = useRef(null);
+    const historyIconRef = useRef(null);
+    const historyBox = useRef(null);
+    const calcTitleRef = useRef(null);
+    const buttonContainer = useRef(null);
+    const ans = useRef("0");
+    const blueRightArrowArea = useRef(null);
+    const rightBlueArrow = useRef(null);
     const appendToDisplay = (input, isNum) => {
         if (inputField.current.value === "Error" || inputField.current.value === "NaN" || inputField.current.value === "undefined" || inputField.current.value === "Infinity") {
-            isNum ? inputField.current.value = "" : inputField.current.value = "0"
+            isNum ? inputField.current.value = "" : inputField.current.value = "0";
         }
         if (inputField.current.value === "0" && isNum) {
-            inputField.current.value = ""
+            inputField.current.value = "";
         }
         if (input === " - " && inputField.current.value.substring(inputField.current.value.length - 1, inputField.current.value.length) === " ") {
-            input = "-"
+            input = "-";
         }
         if (input === " - " && inputField.current.value === "0") {
-            inputField.current.value = ""
-            input = "-"
+            inputField.current.value = "";
+            input = "-";
         }
-        inputField.current.value = inputField.current.value + input
+        inputField.current.value = inputField.current.value + input;
         if ((input === "π" || input === "e") && inputField.current.value.includes("√")) {
-            const termArray = inputField.current.value.split(" ")
-            let sqrtPast = false
+            const termArray = inputField.current.value.split(" ");
+            let sqrtPast = false;
             for (let i = 0; i < termArray.length; i++) {
                 if (termArray[i].includes("√")) {
-                    sqrtPast = false
-                    const symbolArray = termArray[i].split("")
+                    sqrtPast = false;
+                    const symbolArray = termArray[i].split("");
                     for (let j = 0; j < symbolArray.length; j++) {
                         if (sqrtPast && (symbolArray[j] === "e" || symbolArray[j] === "π") && (!isNaN(Number.parseInt(symbolArray[j - 1])) || symbolArray[j - 1] === "e" || symbolArray[j - 1] === "π")) {
-                            symbolArray[j] = " * " + symbolArray[j]
+                            symbolArray[j] = " * " + symbolArray[j];
                         }
                         if (symbolArray[j] === "√" && !sqrtPast) {
-                            sqrtPast = true
+                            sqrtPast = true;
                         }
                     }
-                    termArray[i] = symbolArray.join("")
+                    termArray[i] = symbolArray.join("");
                 }
             }
-            inputField.current.value = termArray.join(" ")
+            inputField.current.value = termArray.join(" ");
         }
-        displayChange()
+        displayChange();
     }
     const clearDisplay = () => {
-        inputField.current.value = "0"
+        inputField.current.value = "0";
     }
     const deleteLastFromDisplay = () => {
         if (inputField.current.value.length > 1 && inputField.current.value !== "Error") {
-            inputField.current.value = inputField.current.value.substring(0, inputField.current.value.length - 1)
+            inputField.current.value = inputField.current.value.substring(0, inputField.current.value.length - 1);
         } else {
-            inputField.current.value = "0"
+            inputField.current.value = "0";
         }
     }
     const calculateDisplay = () => {
         try {
             if (inputField.current.value === "Error") {
-                throw new Error()
+                throw new Error();
             }
             beforeEval.current = inputField.current.value
             if (inputField.current.value.includes("-√")) {
-                inputField.current.value = inputField.current.value.replaceAll("-√", "-1√")
+                inputField.current.value = inputField.current.value.replaceAll("-√", "-1√");
             }
             if (inputField.current.value.includes("e") || inputField.current.value.includes("π") || inputField.current.value.includes("√")) {
-                inputField.current.value = inputField.current.value.replaceAll("e", "Math.E")
-                inputField.current.value = inputField.current.value.replaceAll("π", "Math.PI")
-                const charArray = inputField.current.value.split("")
+                inputField.current.value = inputField.current.value.replaceAll("e", "Math.E");
+                inputField.current.value = inputField.current.value.replaceAll("π", "Math.PI");
+                const charArray = inputField.current.value.split("");
                 for (let i = 1; i < charArray.length; i++) {
                     if (charArray[i] === "M" && (Number.isInteger(parseInt(charArray[i - 1])) || charArray[i - 1] === "E" || charArray[i - 1] === "I")) {
-                        charArray[i] = " * M"
+                        charArray[i] = " * M";
                     }
                     if (charArray[i] === "√" && (Number.isInteger(parseInt(charArray[i - 1])) || charArray[i - 1] === "E" || charArray[i - 1] === "I")) {
-                        charArray[i] = " * √"
+                        charArray[i] = " * √";
                     }
                 }
-                inputField.current.value = charArray.join("")
+                inputField.current.value = charArray.join("");
             }
             if (inputField.current.value.includes("!") || inputField.current.value.includes("√")) {
-                const wordArray = inputField.current.value.split(" ")
+                const wordArray = inputField.current.value.split(" ");
                 for (let i = 0; i < wordArray.length; i++) {
                     if (wordArray[i].includes("√")) {
-                        wordArray[i] = squareRoot(wordArray[i].substring(1))
+                        wordArray[i] = squareRoot(wordArray[i].substring(1));
                         if (wordArray[i] === "Error") {
-                            throw new Error()
+                            throw new Error();
                         }
                     }
                     if (wordArray[i].includes("!")) {
                         wordArray[i] = factorial(wordArray[i].substring(0, wordArray[i].length - 1))
                         if (wordArray[i] === "Error") {
-                            throw new Error()
+                            throw new Error();
                         }
                     }
                 }
-                inputField.current.value = wordArray.join(" ")
+                inputField.current.value = wordArray.join(" ");
             }
             inputField.current.value = eval(inputField.current.value)
             if (inputField.current.value.includes(".")) {
-                inputField.current.value = Number.parseFloat(inputField.current.value).toFixed(maxDecimalPlacesVal)
+                inputField.current.value = Number.parseFloat(inputField.current.value).toFixed(maxDecimalPlacesVal);
                 while (inputField.current.value.substring(inputField.current.value.length - 1, inputField.current.value.length) === "0") {
-                    inputField.current.value = inputField.current.value.substring(0, inputField.current.value.length - 1)
+                    inputField.current.value = inputField.current.value.substring(0, inputField.current.value.length - 1);
                 }
             }
-            ans.current = inputField.current.value
-            ansField.current.value = "ANS = " + ans.current
-            setCalcHistory([...calcHistory, beforeEval.current + " = " + ans.current])
+            ans.current = inputField.current.value;
+            ansField.current.value = "ANS = " + ans.current;
+            setCalcHistory([...calcHistory, beforeEval.current + " = " + ans.current]);
         }
         catch (error) {
-            inputField.current.value = "Error"
+            inputField.current.value = "Error";
         }
     }
     const displayChange = () => {
         if (inputField.current.value.length >= inputField.current.maxLength) {
-            inputField.current.value = inputField.current.value.slice(0, inputField.current.maxLength)
+            inputField.current.value = inputField.current.value.slice(0, inputField.current.maxLength);
         }
     }
     const openOrClose = (element) => {
         if (element.current.style.visibility === "hidden") {
-            element.current.style.visibility = "visible"
+            element.current.style.visibility = "visible";
         } else {
-            element.current.style.visibility = "hidden"
+            element.current.style.visibility = "hidden";
         }
     }
     const onInputFieldBorderColorChange = (e) => {
-        setInputFieldBorderColorVal(e.target.value)
-        inputField.current.style.borderColor = inputFieldBorderColorVal
+        setInputFieldBorderColorVal(e.target.value);
+        inputField.current.style.borderColor = inputFieldBorderColorVal;
     }
     const onButtonContainerColorChange = (e) => {
-        setButtonContainerColorVal(e.target.value)
-        buttonContainer.current.style.backgroundColor = buttonContainerColorVal
+        setButtonContainerColorVal(e.target.value);
+        buttonContainer.current.style.backgroundColor = buttonContainerColorVal;
     }
     const blurBlueRightArrow = () => {
-        rightBlueArrow.current.style.filter = 'blur(1px)'
-        blueRightArrowArea.current.style.cursor = 'pointer'
+        rightBlueArrow.current.style.filter = 'blur(1px)';
+        blueRightArrowArea.current.style.cursor = 'pointer';
         if (window.innerWidth <= 740) {
-            rightBlueArrow.current.style.transform = 'translateX(165px) rotate(0.05turn)'
+            rightBlueArrow.current.style.transform = 'translateX(165px) rotate(0.05turn)';
         } else {
-            rightBlueArrow.current.style.transform = 'translateX(270px) rotate(0.05turn)'
+            rightBlueArrow.current.style.transform = 'translateX(270px) rotate(0.05turn)';
         }
     }
     const unBlurBlueRightArrow = () => {
-        rightBlueArrow.current.style.filter = 'blur(0px)'
+        rightBlueArrow.current.style.filter = 'blur(0px)';
         if (window.innerWidth <= 740) {
-            rightBlueArrow.current.style.transform = 'translateX(165px) rotate(0turn)'
+            rightBlueArrow.current.style.transform = 'translateX(165px) rotate(0turn)';
         } else {
-            rightBlueArrow.current.style.transform = 'translateX(270px) rotate(0turn)'
+            rightBlueArrow.current.style.transform = 'translateX(270px) rotate(0turn)';
         }
     }
     const positionBlueRightArrow = () => {
         if (rightBlueArrow.current.style.transform !== "null") {
             if (window.innerWidth <= 740) {
-                rightBlueArrow.current.style.transform = 'translateX(165px)'
+                rightBlueArrow.current.style.transform = 'translateX(165px)';
             } else {
-                rightBlueArrow.current.style.transform = 'translateX(270px)'
+                rightBlueArrow.current.style.transform = 'translateX(270px)';
             }
         }
     }
     const readyForAnimation = (element) => {
-        element.current.style.animationName = 'none'
-        element.current.classList.remove('readyForAnim')
-        element.current.classList.add('readyForAnim')
+        element.current.style.animationName = 'none';
+        element.current.classList.remove('readyForAnim');
+        element.current.classList.add('readyForAnim');
     }
     const blueRightArrowTransition = (screenWidthBig) => {
-        setMoveToRulers(true)
-        rulesBox.current.style.visibility = "hidden"
-        settingsBox.current.style.visibility = "hidden"
-        historyBox.current.style.visibility = "hidden"
-        const changedRelativeElements = [inputField, buttonContainer, calcTitleRef]
+        setMoveToRulers(true);
+        rulesBox.current.style.visibility = "hidden";
+        settingsBox.current.style.visibility = "hidden";
+        historyBox.current.style.visibility = "hidden";
+        const changedRelativeElements = [inputField, buttonContainer, calcTitleRef];
         for (let i = 0; i < changedRelativeElements.length; i++) {
-            readyForAnimation(changedRelativeElements[i])
-            changedRelativeElements[i].current.style.animationName = 'fadeLeft'
+            readyForAnimation(changedRelativeElements[i]);
+            changedRelativeElements[i].current.style.animationName = 'fadeLeft';
         }
-        const changedRulesElements = [rulesIconRef, rulesBox]
+        const changedRulesElements = [rulesIconRef, rulesBox];
         for (let i = 0; i < changedRulesElements.length; i++) {
-            readyForAnimation(changedRulesElements[i])
+            readyForAnimation(changedRulesElements[i]);
             if (screenWidthBig) {
-                changedRulesElements[i].current.style.animationName = 'fadeLeftRules'
+                changedRulesElements[i].current.style.animationName = 'fadeLeftRules';
             } else {
-                changedRulesElements[i].current.style.animationName = 'fadeLeftRulesSmall'
+                changedRulesElements[i].current.style.animationName = 'fadeLeftRulesSmall';
             }
         }
-        readyForAnimation(settingsIconRef)
+        readyForAnimation(settingsIconRef);
         if (screenWidthBig) {
-            settingsIconRef.current.style.animationName = 'fadeLeftSettingsIcon'
+            settingsIconRef.current.style.animationName = 'fadeLeftSettingsIcon';
         } else {
-            settingsIconRef.current.style.animationName = 'fadeLeftSettingsIconSmall'
+            settingsIconRef.current.style.animationName = 'fadeLeftSettingsIconSmall';
         }
         readyForAnimation(settingsBox)
         if (screenWidthBig) {
-            settingsBox.current.style.animationName = 'fadeLeftSettingsBox'
+            settingsBox.current.style.animationName = 'fadeLeftSettingsBox';
         } else {
-            settingsBox.current.style.animationName = 'fadeLeftSettingsBoxSmall'
+            settingsBox.current.style.animationName = 'fadeLeftSettingsBoxSmall';
         }
-        const changedHistoryElements = [historyIconRef, historyBox]
+        const changedHistoryElements = [historyIconRef, historyBox];
         for (let i = 0; i < changedHistoryElements.length; i++) {
-            readyForAnimation(changedHistoryElements[i])
-            changedHistoryElements[i].current.style.animationName = 'fadeLeftHistory'
+            readyForAnimation(changedHistoryElements[i]);
+            changedHistoryElements[i].current.style.animationName = 'fadeLeftHistory';
         }
-        readyForAnimation(ansField)
-        ansField.current.style.animationName = 'fadeLeftAnsField'
-        rightBlueArrow.current.style.display = 'none'
-        setTimeout(() => setBlueRightArrowTransitionDone(true), 2000)
+        readyForAnimation(ansField);
+        ansField.current.style.animationName = 'fadeLeftAnsField';
+        rightBlueArrow.current.style.display = 'none';
+        setTimeout(() => setBlueRightArrowTransitionDone(true), 2000);
     }
     const squareRoot = (num) => {
         if (num.includes("-")) {
-            return "Error"
+            return "Error";
         }
-        num = eval(num)
-        let sqrtNum = Math.sqrt(num) 
-        return sqrtNum.toString()
+        num = eval(num);
+        let sqrtNum = Math.sqrt(num); 
+        return sqrtNum.toString();
     }
     const factorial = (num) => {
         if (num.includes("-")) {
-            return "Error"
+            return "Error";
         }
-        num = eval(num)
-        num = Math.round(num)
-        let product = 1
+        num = eval(num);
+        num = Math.round(num);
+        let product = 1;
         while (num >= 2) {
-            product *= num
-            num--
+            product *= num;
+            num--;
         }
-        return product.toString()
+        return product.toString();
     }
     useEffect(() => {
         if (blueRightArrowTransitionDone) {
-            const animElements = [inputField, buttonContainer, calcTitleRef, rulesIconRef, rulesBox, settingsIconRef, settingsBox, historyIconRef, historyBox, ansField]
+            const animElements = [inputField, buttonContainer, calcTitleRef, rulesIconRef, rulesBox, settingsIconRef, settingsBox, historyIconRef, historyBox, ansField];
             for (let i = 0; i < animElements.length; i++) {
-                animElements[i].current.style.display = 'none'
+                animElements[i].current.style.display = 'none';
             }
         }
-    }, [blueRightArrowTransitionDone])
+    }, [blueRightArrowTransitionDone]);
     useEffect(() => {
-        window.addEventListener("resize", positionBlueRightArrow)
+        window.addEventListener("resize", positionBlueRightArrow);
         if (window.innerWidth <= 740) {
-            rightBlueArrow.current.style.transform = 'translateX(165px)'
+            rightBlueArrow.current.style.transform = 'translateX(165px)';
         }
         return () => {
-            window.removeEventListener("resize", positionBlueRightArrow)
+            window.removeEventListener("resize", positionBlueRightArrow);
         }
-    }, [])
+    }, []);
     useEffect(() => {
-        inputField.current.value = "0"
-        ansField.current.value = "ANS = 0"
-        rulesBox.current.style.visibility = "hidden"
-        settingsBox.current.style.visibility = "hidden"
-        historyBox.current.style.visibility = "hidden"
-        beforeEval.current = "0"
-        ans.current = "0"
-    }, [])
+        inputField.current.value = "0";
+        ansField.current.value = "ANS = 0";
+        rulesBox.current.style.visibility = "hidden";
+        settingsBox.current.style.visibility = "hidden";
+        historyBox.current.style.visibility = "hidden";
+        beforeEval.current = "0";
+        ans.current = "0";
+    }, []);
     return (
         <div>
             <img onClick={() => openOrClose(rulesBox)} id='rulesIcon' src={rulesIcon} ref={rulesIconRef} alt='calculatorRulesIcon' title="calculatorRules" />
@@ -292,15 +292,15 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers }) {
                 <div id='settingsTitle'>Settings</div>
                 <ul>
                     <li>Max d. places of calculations:</li>
-                    <input type='range' min={2} max={16} value={maxDecimalPlacesVal} onChange={(e) => setMaxDecimalPlacesVal(e.target.value)} title='maxDecimalPlacesSlider' placeholder='maxDecimalPlacesSlider'></input>
+                    <input type='range' min={2} max={16} value={maxDecimalPlacesVal} onChange={(e) => setMaxDecimalPlacesVal(e.target.value)} title='maxDecimalPlacesSlider' placeholder='maxDecimalPlacesSlider' />
                     <span title={maxDecimalPlacesVal + " decimal places"}>{maxDecimalPlacesVal}</span>
                     <li>Max entered characters:</li>
-                    <input type='range' min={5} max={27} value={maxCharVal} onChange={(e) => setMaxCarVal(e.target.value)} title='maxCharSlider' placeholder='maxCharSlider'></input>
+                    <input type='range' min={5} max={27} value={maxCharVal} onChange={(e) => setMaxCarVal(e.target.value)} title='maxCharSlider' placeholder='maxCharSlider' />
                     <span title={maxCharVal + " characters"}>{maxCharVal}</span>
                     <li>Color of input field border:</li>
-                    <input type='color' value={inputFieldBorderColorVal} onChange={(e) => onInputFieldBorderColorChange(e)} title='inputFieldBorderColorPicker' placeholder='inputFieldBorderColorPicker'></input>
+                    <input type='color' value={inputFieldBorderColorVal} onChange={(e) => onInputFieldBorderColorChange(e)} title='inputFieldBorderColorPicker' placeholder='inputFieldBorderColorPicker' />
                     <li>Color of button container:</li>
-                    <input type='color' value={buttonContainerColorVal} onChange={(e) => onButtonContainerColorChange(e)} title='buttonContainerColorPicker' placeholder='buttonContainerColorPicker'></input>
+                    <input type='color' value={buttonContainerColorVal} onChange={(e) => onButtonContainerColorChange(e)} title='buttonContainerColorPicker' placeholder='buttonContainerColorPicker' />
                 </ul>
             </span>
             <h1 id="calcTitle" ref={calcTitleRef}>Calculator</h1>
@@ -311,7 +311,7 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers }) {
                 <span id='historyBox' ref={historyBox}>
                     <div id='historyTitle'> History </div>
                     {
-                        calcHistory.map((historyEntry, index) => 
+                        calcHistory.map((historyEntry, index) =>
                             <div key={index}>{historyEntry}</div>
                         )
                     }
@@ -349,7 +349,7 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers }) {
             </map>
             <img id='toRulers' useMap='#toRulersMap' ref={rightBlueArrow} src={blueRightArrow} alt='toRulers'></img>
         </div>
-    )
+    );
 }
 
-export default Calculator
+export default Calculator;

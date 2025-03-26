@@ -1,261 +1,277 @@
-import React from 'react'
-import { useState, useRef, useEffect } from 'react'
-import './rulers.css'
+import React from 'react';
+import { useState, useRef, useEffect } from 'react';
+import './rulers.css';
 
 function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
-    const [inchesRuler, centimetersRuler, picasRuler, pixelsRuler, settingsIcon, rulesIcon] = rulersImagesArray
-    const [inchesRulerCheckboxChecked, setInchesRulerCheckboxChecked] = useState(true)
-    const [centimetersRulerCheckboxChecked, setCentimetersRulerCheckboxChecked] = useState(false)
-    const [picasRulerCheckboxChecked, setPicasRulerCheckboxChecked] = useState(false)
-    const [pixelsRulerCheckboxChecked, setPixelsRulerCheckboxChecked] = useState(false)
-    const [inchesRulerBorderColorVal, setInchesRulerBorderColorVal] = useState('#5F6B6B')
-    const [centimetersRulerBorderColorVal, setCentimetersRulerBorderColorVal] = useState('#5F6B6B')
-    const [picasRulerBorderColorVal, setPicasRulerBorderColorVal] = useState('#5F6B6B')
-    const [pixelsRulerBorderColorVal, setPixelsRulerBorderColorVal] = useState('#5F6B6B')
-    const inchesRulerMousePosXStart = useRef(0)
-    const inchesRulerMousePosYStart = useRef(0)
-    const inchesRulerMousePosXDiff = useRef(0)
-    const inchesRulerMousePosYDiff = useRef(0)
-    const centimetersRulerMousePosXStart = useRef(0)
-    const centimetersRulerMousePosYStart = useRef(0)
-    const centimetersRulerMousePosXDiff = useRef(0)
-    const centimetersRulerMousePosYDiff = useRef(0)
-    const picasRulerMousePosXStart = useRef(0)
-    const picasRulerMousePosYStart = useRef(0)
-    const picasRulerMousePosXDiff = useRef(0)
-    const picasRulerMousePosYDiff = useRef(0)
-    const pixelsRulerMousePosXStart = useRef(0)
-    const pixelsRulerMousePosYStart = useRef(0)
-    const pixelsRulerMousePosXDiff = useRef(0)
-    const pixelsRulerMousePosYDiff = useRef(0)
-    const rulersRulesIconRef = useRef(null)
-    const rulersRulesBox = useRef(null)
-    const rulersSettingsIconRef = useRef(null)
-    const rulersSettingsBox = useRef(null)
-    const rulersTitleRef = useRef(null)
-    const inchesRulerRef = useRef(null)
-    const centimetersRulerRef = useRef(null)
-    const picasRulerRef = useRef(null)
-    const pixelsRulerRef = useRef(null)
-    const inchesRulerCheckbox = useRef(null)
+    const [inchesRuler, centimetersRuler, picasRuler, pixelsRuler, settingsIcon, rulesIcon] = rulersImagesArray;
+    const [inchesRulerCheckboxChecked, setInchesRulerCheckboxChecked] = useState(true);
+    const [centimetersRulerCheckboxChecked, setCentimetersRulerCheckboxChecked] = useState(false);
+    const [picasRulerCheckboxChecked, setPicasRulerCheckboxChecked] = useState(false);
+    const [pixelsRulerCheckboxChecked, setPixelsRulerCheckboxChecked] = useState(false);
+    const [inchesRulerBorderColorVal, setInchesRulerBorderColorVal] = useState('#5F6B6B');
+    const [centimetersRulerBorderColorVal, setCentimetersRulerBorderColorVal] = useState('#5F6B6B');
+    const [picasRulerBorderColorVal, setPicasRulerBorderColorVal] = useState('#5F6B6B');
+    const [pixelsRulerBorderColorVal, setPixelsRulerBorderColorVal] = useState('#5F6B6B');
+    const inchesRulerMousePosXStart = useRef(0);
+    const inchesRulerMousePosYStart = useRef(0);
+    const inchesRulerMousePosXDiff = useRef(0);
+    const inchesRulerMousePosYDiff = useRef(0);
+    const centimetersRulerMousePosXStart = useRef(0);
+    const centimetersRulerMousePosYStart = useRef(0);
+    const centimetersRulerMousePosXDiff = useRef(0);
+    const centimetersRulerMousePosYDiff = useRef(0);
+    const picasRulerMousePosXStart = useRef(0);
+    const picasRulerMousePosYStart = useRef(0);
+    const picasRulerMousePosXDiff = useRef(0);
+    const picasRulerMousePosYDiff = useRef(0);
+    const pixelsRulerMousePosXStart = useRef(0);
+    const pixelsRulerMousePosYStart = useRef(0);
+    const pixelsRulerMousePosXDiff = useRef(0);
+    const pixelsRulerMousePosYDiff = useRef(0);
+    const rulersRulesIconRef = useRef(null);
+    const rulersRulesBox = useRef(null);
+    const rulersSettingsIconRef = useRef(null);
+    const rulersSettingsBox = useRef(null);
+    const rulersTitleRef = useRef(null);
+    const inchesRulerRef = useRef(null);
+    const centimetersRulerRef = useRef(null);
+    const picasRulerRef = useRef(null);
+    const pixelsRulerRef = useRef(null);
+    const inchesRulerCheckbox = useRef(null);
     const allowRulerDrag = () => {
-        inchesRulerRef.current.addEventListener('mousedown', startInchesRulerDrag)
-        centimetersRulerRef.current.addEventListener('mousedown', startCentimetersRulerDrag)
-        picasRulerRef.current.addEventListener('mousedown', startPicasRulerDrag)
-        pixelsRulerRef.current.addEventListener('mousedown', startPixelsRulerDrag)
+        inchesRulerRef.current.addEventListener('mousedown', startInchesRulerDrag);
+        centimetersRulerRef.current.addEventListener('mousedown', startCentimetersRulerDrag);
+        picasRulerRef.current.addEventListener('mousedown', startPicasRulerDrag);
+        pixelsRulerRef.current.addEventListener('mousedown', startPixelsRulerDrag);
     }
     const startInchesRulerDrag = (e) => {
-        e.preventDefault()
-        inchesRulerMousePosXStart.current = e.clientX
-        inchesRulerMousePosYStart.current = e.clientY
-        document.addEventListener('mouseup', stopInchesRulerDrag)
-        document.addEventListener('mousemove', inchesRulerDrag)
+        e.preventDefault();
+        inchesRulerMousePosXStart.current = e.clientX;
+        inchesRulerMousePosYStart.current = e.clientY;
+        document.addEventListener('mouseup', stopInchesRulerDrag);
+        document.addEventListener('mousemove', inchesRulerDrag);
     }
     const inchesRulerDrag = (e) => {
-        e.preventDefault()
-        inchesRulerMousePosXDiff.current = inchesRulerMousePosXStart.current - e.clientX
-        inchesRulerMousePosYDiff.current = inchesRulerMousePosYStart.current - e.clientY
-        inchesRulerMousePosXStart.current = e.clientX
-        inchesRulerMousePosYStart.current = e.clientY
-        inchesRulerRef.current.style.top = (inchesRulerRef.current.offsetTop - inchesRulerMousePosYDiff.current) + 'px'
-        inchesRulerRef.current.style.left = (inchesRulerRef.current.offsetLeft - inchesRulerMousePosXDiff.current) + 'px'
+        e.preventDefault();
+        inchesRulerMousePosXDiff.current = inchesRulerMousePosXStart.current - e.clientX;
+        inchesRulerMousePosYDiff.current = inchesRulerMousePosYStart.current - e.clientY;
+        inchesRulerMousePosXStart.current = e.clientX;
+        inchesRulerMousePosYStart.current = e.clientY;
+        inchesRulerRef.current.style.top = (inchesRulerRef.current.offsetTop - inchesRulerMousePosYDiff.current) + 'px';
+        inchesRulerRef.current.style.left = (inchesRulerRef.current.offsetLeft - inchesRulerMousePosXDiff.current) + 'px';
     }
     const stopInchesRulerDrag = () => {
-        document.removeEventListener('mouseup', stopInchesRulerDrag)
-        document.removeEventListener('mousemove', inchesRulerDrag)
+        document.removeEventListener('mouseup', stopInchesRulerDrag);
+        document.removeEventListener('mousemove', inchesRulerDrag);
     }
     const startCentimetersRulerDrag = (e) => {
-        e.preventDefault()
-        centimetersRulerMousePosXStart.current = e.clientX
-        centimetersRulerMousePosYStart.current = e.clientY
-        document.addEventListener('mouseup', stopCentimetersRulerDrag)
-        document.addEventListener('mousemove', centimetersRulerDrag)
+        e.preventDefault();
+        centimetersRulerMousePosXStart.current = e.clientX;
+        centimetersRulerMousePosYStart.current = e.clientY;
+        document.addEventListener('mouseup', stopCentimetersRulerDrag);
+        document.addEventListener('mousemove', centimetersRulerDrag);
     }
     const centimetersRulerDrag = (e) => {
-        e.preventDefault()
-        centimetersRulerMousePosXDiff.current = centimetersRulerMousePosXStart.current - e.clientX
-        centimetersRulerMousePosYDiff.current = centimetersRulerMousePosYStart.current - e.clientY
-        centimetersRulerMousePosXStart.current = e.clientX
-        centimetersRulerMousePosYStart.current = e.clientY
-        centimetersRulerRef.current.style.top = (centimetersRulerRef.current.offsetTop - centimetersRulerMousePosYDiff.current) + 'px'
-        centimetersRulerRef.current.style.left = (centimetersRulerRef.current.offsetLeft - centimetersRulerMousePosXDiff.current) + 'px'
+        e.preventDefault();
+        centimetersRulerMousePosXDiff.current = centimetersRulerMousePosXStart.current - e.clientX;
+        centimetersRulerMousePosYDiff.current = centimetersRulerMousePosYStart.current - e.clientY;
+        centimetersRulerMousePosXStart.current = e.clientX;
+        centimetersRulerMousePosYStart.current = e.clientY;
+        centimetersRulerRef.current.style.top = (centimetersRulerRef.current.offsetTop - centimetersRulerMousePosYDiff.current) + 'px';
+        centimetersRulerRef.current.style.left = (centimetersRulerRef.current.offsetLeft - centimetersRulerMousePosXDiff.current) + 'px';
     }
     const stopCentimetersRulerDrag = () => {
-        document.removeEventListener('mouseup', stopCentimetersRulerDrag)
-        document.removeEventListener('mousemove', centimetersRulerDrag)
+        document.removeEventListener('mouseup', stopCentimetersRulerDrag);
+        document.removeEventListener('mousemove', centimetersRulerDrag);
     }
     const startPicasRulerDrag = (e) => {
-        e.preventDefault()
-        picasRulerMousePosXStart.current = e.clientX
-        picasRulerMousePosYStart.current = e.clientY
-        document.addEventListener('mouseup', stopPicasRulerDrag)
-        document.addEventListener('mousemove', picasRulerDrag)
+        e.preventDefault();
+        picasRulerMousePosXStart.current = e.clientX;
+        picasRulerMousePosYStart.current = e.clientY;
+        document.addEventListener('mouseup', stopPicasRulerDrag);
+        document.addEventListener('mousemove', picasRulerDrag);
     }
     const picasRulerDrag = (e) => {
-        e.preventDefault()
-        picasRulerMousePosXDiff.current = picasRulerMousePosXStart.current - e.clientX
-        picasRulerMousePosYDiff.current = picasRulerMousePosYStart.current - e.clientY
-        picasRulerMousePosXStart.current = e.clientX
-        picasRulerMousePosYStart.current = e.clientY
-        picasRulerRef.current.style.top = (picasRulerRef.current.offsetTop - picasRulerMousePosYDiff.current) + 'px'
-        picasRulerRef.current.style.left = (picasRulerRef.current.offsetLeft - picasRulerMousePosXDiff.current) + 'px'
+        e.preventDefault();
+        picasRulerMousePosXDiff.current = picasRulerMousePosXStart.current - e.clientX;
+        picasRulerMousePosYDiff.current = picasRulerMousePosYStart.current - e.clientY;
+        picasRulerMousePosXStart.current = e.clientX;
+        picasRulerMousePosYStart.current = e.clientY;
+        picasRulerRef.current.style.top = (picasRulerRef.current.offsetTop - picasRulerMousePosYDiff.current) + 'px';
+        picasRulerRef.current.style.left = (picasRulerRef.current.offsetLeft - picasRulerMousePosXDiff.current) + 'px';
     }
     const stopPicasRulerDrag = () => {
-        document.removeEventListener('mouseup', stopPicasRulerDrag)
-        document.removeEventListener('mousemove', picasRulerDrag)
+        document.removeEventListener('mouseup', stopPicasRulerDrag);
+        document.removeEventListener('mousemove', picasRulerDrag);
     }
     const startPixelsRulerDrag = (e) => {
-        e.preventDefault()
-        pixelsRulerMousePosXStart.current = e.clientX
-        pixelsRulerMousePosYStart.current = e.clientY
-        document.addEventListener('mouseup', stopPixelsRulerDrag)
-        document.addEventListener('mousemove', pixelsRulerDrag)
+        e.preventDefault();
+        pixelsRulerMousePosXStart.current = e.clientX;
+        pixelsRulerMousePosYStart.current = e.clientY;
+        document.addEventListener('mouseup', stopPixelsRulerDrag);
+        document.addEventListener('mousemove', pixelsRulerDrag);
     }
     const pixelsRulerDrag = (e) => {
-        e.preventDefault()
-        pixelsRulerMousePosXDiff.current = pixelsRulerMousePosXStart.current - e.clientX
-        pixelsRulerMousePosYDiff.current = pixelsRulerMousePosYStart.current - e.clientY
-        pixelsRulerMousePosXStart.current = e.clientX
-        pixelsRulerMousePosYStart.current = e.clientY
-        pixelsRulerRef.current.style.top = (pixelsRulerRef.current.offsetTop - pixelsRulerMousePosYDiff.current) + 'px'
-        pixelsRulerRef.current.style.left = (pixelsRulerRef.current.offsetLeft - pixelsRulerMousePosXDiff.current) + 'px'
+        e.preventDefault();
+        pixelsRulerMousePosXDiff.current = pixelsRulerMousePosXStart.current - e.clientX;
+        pixelsRulerMousePosYDiff.current = pixelsRulerMousePosYStart.current - e.clientY;
+        pixelsRulerMousePosXStart.current = e.clientX;
+        pixelsRulerMousePosYStart.current = e.clientY;
+        pixelsRulerRef.current.style.top = (pixelsRulerRef.current.offsetTop - pixelsRulerMousePosYDiff.current) + 'px';
+        pixelsRulerRef.current.style.left = (pixelsRulerRef.current.offsetLeft - pixelsRulerMousePosXDiff.current) + 'px';
     }
     const stopPixelsRulerDrag = () => {
-        document.removeEventListener('mouseup', stopPixelsRulerDrag)
-        document.removeEventListener('mousemove', pixelsRulerDrag)
+        document.removeEventListener('mouseup', stopPixelsRulerDrag);
+        document.removeEventListener('mousemove', pixelsRulerDrag);
+    }
+    const allowRulerRotate = () => {
+        inchesRulerRef.current.addEventListener('mouseover', inchesRulerRotate);
+    }
+    const inchesRulerRotate = () => {
+        inchesRulerRef.current.addEventListener('keydown', (e) => {
+            switch (e.key) {
+                case 'ArrowUp':
+                    inchesRulerRef.current.style.transform = 'rotateX(-1deg)';
+                    break;
+                case 'ArrowDown':
+                    inchesRulerRef.current.style.transform = 'rotateX(1deg)';
+                    break;
+            }
+        });
     }
     const openOrClose = (element) => {
         if (element.current.style.visibility === "hidden") {
-            element.current.style.visibility = "visible"
+            element.current.style.visibility = "visible";
         } else {
-            element.current.style.visibility = "hidden"
+            element.current.style.visibility = "hidden";
         }
     }
     const onInchesRulerBorderColorChange = (e) => {
-        setInchesRulerBorderColorVal(e.target.value)
-        inchesRulerRef.current.style.borderColor = inchesRulerBorderColorVal
+        setInchesRulerBorderColorVal(e.target.value);
+        inchesRulerRef.current.style.borderColor = inchesRulerBorderColorVal;
     }
     const onCentimetersRulerBorderColorChange = (e) => {
-        setCentimetersRulerBorderColorVal(e.target.value)
-        centimetersRulerRef.current.style.borderColor = centimetersRulerBorderColorVal
+        setCentimetersRulerBorderColorVal(e.target.value);
+        centimetersRulerRef.current.style.borderColor = centimetersRulerBorderColorVal;
     }
     const onPicasRulerBorderColorChange = (e) => {
-        setPicasRulerBorderColorVal(e.target.value)
-        picasRulerRef.current.style.borderColor = picasRulerBorderColorVal
+        setPicasRulerBorderColorVal(e.target.value);
+        picasRulerRef.current.style.borderColor = picasRulerBorderColorVal;
     }
     const onPixelsRulerBorderColorChange = (e) => {
-        setPixelsRulerBorderColorVal(e.target.value)
-        pixelsRulerRef.current.style.borderColor = pixelsRulerBorderColorVal
+        setPixelsRulerBorderColorVal(e.target.value);
+        pixelsRulerRef.current.style.borderColor = pixelsRulerBorderColorVal;
     }
     const onAdjustWindowWidth = () => {
         if (window.innerWidth <= 740) {
-            rulersRulesIconRef.current.style.transform = 'translateX(-260px)'
-            rulersRulesBox.current.style.transform = 'translateX(-260px)'
-            rulersSettingsIconRef.current.style.transform = 'translateX(180px)'
-            rulersSettingsBox.current.style.transform = 'translateX(-45px)'
+            rulersRulesIconRef.current.style.transform = 'translateX(-260px)';
+            rulersRulesBox.current.style.transform = 'translateX(-260px)';
+            rulersSettingsIconRef.current.style.transform = 'translateX(180px)';
+            rulersSettingsBox.current.style.transform = 'translateX(-45px)';
         } else {
-            rulersRulesIconRef.current.style.transform = 'translateX(-367px)'
-            rulersRulesBox.current.style.transform = 'translateX(-367px)'
-            rulersSettingsIconRef.current.style.transform = 'translateX(285px)'
-            rulersSettingsBox.current.style.transform = 'translateX(60px)'
+            rulersRulesIconRef.current.style.transform = 'translateX(-367px)';
+            rulersRulesBox.current.style.transform = 'translateX(-367px)';
+            rulersSettingsIconRef.current.style.transform = 'translateX(285px)';
+            rulersSettingsBox.current.style.transform = 'translateX(60px)';
         }
     }
     const animateElements = () => {
-        const rulersElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef]
+        const rulersElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef];
         for (let i = 0; i < rulersElements.length; i++) {
-            readyForAnimation(rulersElements[i])
+            readyForAnimation(rulersElements[i]);
         }
-        rulersTitleRef.current.style.animationName = 'appearFromRight'
+        rulersTitleRef.current.style.animationName = 'appearFromRight';
         if (window.innerWidth > 740) {
-            rulersRulesIconRef.current.style.animationName = 'appearFromRightRulersRules'
-            rulersRulesBox.current.style.animationName = 'appearFromRightRulersRules'
-            rulersSettingsIconRef.current.style.animationName = 'appearFromRightRulersSettingsIcon'
-            rulersSettingsBox.current.style.animationName = 'appearFromRightRulersSettingsBox'
+            rulersRulesIconRef.current.style.animationName = 'appearFromRightRulersRules';
+            rulersRulesBox.current.style.animationName = 'appearFromRightRulersRules';
+            rulersSettingsIconRef.current.style.animationName = 'appearFromRightRulersSettingsIcon';
+            rulersSettingsBox.current.style.animationName = 'appearFromRightRulersSettingsBox';
         } else {
-            rulersRulesIconRef.current.style.animationName = 'appearFromRightRulersRulesSmall'
-            rulersRulesBox.current.style.animationName = 'appearFromRightRulersRulesSmall'
-            rulersSettingsIconRef.current.style.animationName = 'appearFromRightRulersSettingsIconSmall'
-            rulersSettingsBox.current.style.animationName = 'appearFromRightRulersSettingsBoxSmall'
+            rulersRulesIconRef.current.style.animationName = 'appearFromRightRulersRulesSmall';
+            rulersRulesBox.current.style.animationName = 'appearFromRightRulersRulesSmall';
+            rulersSettingsIconRef.current.style.animationName = 'appearFromRightRulersSettingsIconSmall';
+            rulersSettingsBox.current.style.animationName = 'appearFromRightRulersSettingsBoxSmall';
         }
-        inchesRulerRef.current.style.animationName = 'appearFromRightRulersInchesRuler'
-        centimetersRulerRef.current.style.animationName = 'appearFromRightRulersOtherRulers'
-        picasRulerRef.current.style.animationName = 'appearFromRightRulersOtherRulers'
-        pixelsRulerRef.current.style.animationName = 'appearFromRightRulersOtherRulers'
+        inchesRulerRef.current.style.animationName = 'appearFromRightRulersInchesRuler';
+        centimetersRulerRef.current.style.animationName = 'appearFromRightRulersOtherRulers';
+        picasRulerRef.current.style.animationName = 'appearFromRightRulersOtherRulers';
+        pixelsRulerRef.current.style.animationName = 'appearFromRightRulersOtherRulers';
     }
     const readyForAnimation = (element) => {
-        element.current.style.animationName = 'none'
-        element.current.classList.remove('readyForAnim')
-        element.current.classList.add('readyForAnim')
+        element.current.style.animationName = 'none';
+        element.current.classList.remove('readyForAnim');
+        element.current.classList.add('readyForAnim');
     }
     const readyForMove = (element) => {
-        element.current.style.opacity = '0'
+        element.current.style.opacity = '0';
     }
     useEffect(() => {
-        const booleanStates = [inchesRulerCheckboxChecked, centimetersRulerCheckboxChecked, picasRulerCheckboxChecked, pixelsRulerCheckboxChecked]
-        const rulersRulers = [inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef]
+        const booleanStates = [inchesRulerCheckboxChecked, centimetersRulerCheckboxChecked, picasRulerCheckboxChecked, pixelsRulerCheckboxChecked];
+        const rulersRulers = [inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef];
         for (let i = 0; i < rulersRulers.length; i++) {
             if (booleanStates[i]) {
-                rulersRulers[i].current.style.animationName = 'none'
-                rulersRulers[i].current.style.visibility = 'visible'
-                rulersRulers[i].current.style.transform = 'translateX(calc(50vw - 50%))'
-                rulersRulers[i].current.style.opacity = '100'
+                rulersRulers[i].current.style.animationName = 'none';
+                rulersRulers[i].current.style.visibility = 'visible';
+                rulersRulers[i].current.style.transform = 'translateX(calc(50vw - 50%))';
+                rulersRulers[i].current.style.opacity = '100';
             } else {
-                rulersRulers[i].current.style.opacity = '0'
-                rulersRulers[i].current.style.visibility = 'hidden'
+                rulersRulers[i].current.style.opacity = '0';
+                rulersRulers[i].current.style.visibility = 'hidden';
             }
         }
-    }, [inchesRulerCheckboxChecked, centimetersRulerCheckboxChecked, picasRulerCheckboxChecked, pixelsRulerCheckboxChecked])
+    }, [inchesRulerCheckboxChecked, centimetersRulerCheckboxChecked, picasRulerCheckboxChecked, pixelsRulerCheckboxChecked]);
     useEffect(() => {
         if (moveToRulers) {
-            rulersTitleRef.current.style.display = 'block'
-            rulersRulesIconRef.current.style.display = 'inline'
-            rulersRulesBox.current.style.display = 'inline'
-            rulersRulesBox.current.style.visibility = 'hidden'
-            rulersSettingsIconRef.current.style.display = 'inline'
-            rulersSettingsBox.current.style.display = 'inline'
-            rulersSettingsBox.current.style.visibility = 'hidden'
-            inchesRulerRef.current.style.display = 'block'
-            inchesRulerRef.current.style.visibility = 'visible'
-            centimetersRulerRef.current.style.display = 'block'
-            centimetersRulerRef.current.style.visibility = 'hidden'
-            picasRulerRef.current.style.display = 'block'
-            picasRulerRef.current.style.visibility = 'hidden'
-            pixelsRulerRef.current.style.display = 'block'
-            pixelsRulerRef.current.style.visibility = 'hidden'
-            const rulersElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef]
+            rulersTitleRef.current.style.display = 'block';
+            rulersRulesIconRef.current.style.display = 'inline';
+            rulersRulesBox.current.style.display = 'inline';
+            rulersRulesBox.current.style.visibility = 'hidden';
+            rulersSettingsIconRef.current.style.display = 'inline';
+            rulersSettingsBox.current.style.display = 'inline';
+            rulersSettingsBox.current.style.visibility = 'hidden';
+            inchesRulerRef.current.style.display = 'block';
+            inchesRulerRef.current.style.visibility = 'visible';
+            centimetersRulerRef.current.style.display = 'block';
+            centimetersRulerRef.current.style.visibility = 'hidden';
+            picasRulerRef.current.style.display = 'block';
+            picasRulerRef.current.style.visibility = 'hidden';
+            pixelsRulerRef.current.style.display = 'block';
+            pixelsRulerRef.current.style.visibility = 'hidden';
+            const rulersElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef];
             for (let i = 0; i < rulersElements.length; i++) {
-                readyForMove(rulersElements[i])
+                readyForMove(rulersElements[i]);
             }
-            inchesRulerCheckbox.current.checked = true
-            allowRulerDrag()
-            document.body.style.backgroundColor = 'rgba(191, 248, 248, 0.48)'
+            inchesRulerCheckbox.current.checked = true;
+            allowRulerDrag();
+            document.body.style.backgroundColor = 'rgba(191, 248, 248, 0.48)';
             setTimeout(() => {
-                animateElements()
-            }, 2000)
+                animateElements();
+            }, 2000);
             setTimeout(() => {
-                const rulersNonRulerElements = [rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox]
+                const rulersNonRulerElements = [rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox];
                 for (let i = 0; i < rulersNonRulerElements.length; i++) {
-                    rulersNonRulerElements[i].current.style.animationName = 'none'
-                    rulersNonRulerElements[i].current.style.opacity = '100'
+                    rulersNonRulerElements[i].current.style.animationName = 'none';
+                    rulersNonRulerElements[i].current.style.opacity = '100';
                 }
-                window.addEventListener('resize', onAdjustWindowWidth)
-            }, 4000)
+                window.addEventListener('resize', onAdjustWindowWidth);
+                allowRulerRotate();
+            }, 4000);
         }
-    }, [moveToRulers])
+    }, [moveToRulers]);
     useEffect(() => {
-        rulersTitleRef.current.style.display = 'none'
-        rulersRulesIconRef.current.style.display = 'none'
-        rulersRulesBox.current.style.display = 'none'
-        rulersSettingsIconRef.current.style.display = 'none'
-        rulersSettingsBox.current.style.display = 'none'
-        inchesRulerRef.current.style.display = 'none'
-        centimetersRulerRef.current.style.display = 'none'
-        picasRulerRef.current.style.display = 'none'
-        pixelsRulerRef.current.style.display = 'none'
+        rulersTitleRef.current.style.display = 'none';
+        rulersRulesIconRef.current.style.display = 'none';
+        rulersRulesBox.current.style.display = 'none';
+        rulersSettingsIconRef.current.style.display = 'none';
+        rulersSettingsBox.current.style.display = 'none';
+        inchesRulerRef.current.style.display = 'none';
+        centimetersRulerRef.current.style.display = 'none';
+        picasRulerRef.current.style.display = 'none';
+        pixelsRulerRef.current.style.display = 'none';
         return () => {
-            window.removeEventListener("resize", onAdjustWindowWidth)
+            window.removeEventListener("resize", onAdjustWindowWidth);
         }
-    }, [])
+    }, []);
     return (
         <div>
             <img onClick={() => openOrClose(rulersRulesBox)} id='rulersRulesIcon' src={rulesIcon} ref={rulersRulesIconRef} alt='rulersRulesIcon' title="rulersRules" />
@@ -280,19 +296,19 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
                 <ul>
                     <li>Displayed rulers:</li>
                     <li id='invisLi'>
-                        in.: <input type='checkbox' onClick={(e) => setInchesRulerCheckboxChecked(e.target.checked)} ref={inchesRulerCheckbox} />
-                        cm: <input type='checkbox' onClick={(e) => setCentimetersRulerCheckboxChecked(e.target.checked)} />
-                        picas: <input type='checkbox' onClick={(e) => setPicasRulerCheckboxChecked(e.target.checked)} />
-                        px: <input type='checkbox' onClick={(e) => setPixelsRulerCheckboxChecked(e.target.checked)} />
+                        in.: <input type='checkbox' onClick={(e) => setInchesRulerCheckboxChecked(e.target.checked)} ref={inchesRulerCheckbox} title='inchesRulerCheckbox' placeholder='inchesRulerCheckbox' />
+                        cm: <input type='checkbox' onClick={(e) => setCentimetersRulerCheckboxChecked(e.target.checked)} title='centimetersRulerCheckbox' placeholder='centimetersRulerCheckbox' />
+                        picas: <input type='checkbox' onClick={(e) => setPicasRulerCheckboxChecked(e.target.checked)} title='picasRulerCheckbox' placeholder='picasRulerCheckbox' />
+                        px: <input type='checkbox' onClick={(e) => setPixelsRulerCheckboxChecked(e.target.checked)} title='pixelsRulerCheckbox' placeholder='pixelsRulerCheckbox' />
                     </li>
                     <li>Color of inches ruler border:</li>
-                    <input type='color' value={inchesRulerBorderColorVal} onChange={(e) => onInchesRulerBorderColorChange(e)} title='inchesRulerBorderColorPicker' placeholder='inchesRulerBorderColorPicker' />
+                    <input type='color' value={inchesRulerBorderColorVal} onChange={(e) => onInchesRulerBorderColorChange(e)} id='inchesRulerBorderColorPicker' title='inchesRulerBorderColorPicker' placeholder='inchesRulerBorderColorPicker' />
                     <li>Color of cm ruler border:</li>
-                    <input type='color' value={centimetersRulerBorderColorVal} onChange={(e) => onCentimetersRulerBorderColorChange(e)} title='centimetersRulerBorderColorPicker' placeholder='centimetersRulerBorderColorPicker' />
+                    <input type='color' value={centimetersRulerBorderColorVal} onChange={(e) => onCentimetersRulerBorderColorChange(e)} id='centimetersRulerBorderColorPicker' title='centimetersRulerBorderColorPicker' placeholder='centimetersRulerBorderColorPicker' />
                     <li>Color of picas ruler border:</li>
-                    <input type='color' value={picasRulerBorderColorVal} onChange={(e) => onPicasRulerBorderColorChange(e)} title='picasRulerBorderColorPicker' placeholder='picasRulerBorderColorPicker' />
+                    <input type='color' value={picasRulerBorderColorVal} onChange={(e) => onPicasRulerBorderColorChange(e)} id='picasRulerBorderColorPicker' title='picasRulerBorderColorPicker' placeholder='picasRulerBorderColorPicker' />
                     <li>Color of pixels ruler border:</li>
-                    <input type='color' value={pixelsRulerBorderColorVal} onChange={(e) => onPixelsRulerBorderColorChange(e)} title='pixelsRulerBorderColorPicker' placeholder='pixelsRulerBorderColorPicker' />
+                    <input type='color' value={pixelsRulerBorderColorVal} onChange={(e) => onPixelsRulerBorderColorChange(e)} id='pixelsRulerBorderColorPicker' title='pixelsRulerBorderColorPicker' placeholder='pixelsRulerBorderColorPicker' />
                 </ul>
             </span>
             <div id='rulersTitle' ref={rulersTitleRef}>Rulers</div>
@@ -301,7 +317,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
             <img id='picasRuler' src={picasRuler} ref={picasRulerRef} alt='picasRuler' title='picasRuler' />
             <img id='pixelsRuler' src={pixelsRuler} ref={pixelsRulerRef} alt='pixelsRuler' title='pixelsRuler' />
         </div>
-    )
+    );
 }
 
-export default Rulers
+export default Rulers;
