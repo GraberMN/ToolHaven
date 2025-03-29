@@ -28,6 +28,10 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
     const pixelsRulerMousePosYStart = useRef(0);
     const pixelsRulerMousePosXDiff = useRef(0);
     const pixelsRulerMousePosYDiff = useRef(0);
+    const inchesRulerRotationTracker = useRef('0deg');
+    const centimetersRulerRotationTracker = useRef('0deg');
+    const picasRulerRotationTracker = useRef('0deg');
+    const pixelsRulerRotationTracker = useRef('0deg');
     const rulersRulesIconRef = useRef(null);
     const rulersRulesBox = useRef(null);
     const rulersSettingsIconRef = useRef(null);
@@ -126,18 +130,113 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
     }
     const allowRulerRotate = () => {
         inchesRulerRef.current.addEventListener('mouseover', inchesRulerRotate);
+        inchesRulerRef.current.addEventListener('mouseleave', stopInchesRulerRotate);
+        inchesRulerRef.current.style.animationName = 'none';
+        inchesRulerRef.current.transformOrigin = 'center';
+        inchesRulerRef.current.style.transform = 'translateX(calc(50vw - 50%))';
+        inchesRulerRef.current.style.opacity = '100';
+        centimetersRulerRef.current.addEventListener('mouseover', centimetersRulerRotate);
+        centimetersRulerRef.current.addEventListener('mouseleave', stopCentimetersRulerRotate);
+        picasRulerRef.current.addEventListener('mouseover', picasRulerRotate);
+        picasRulerRef.current.addEventListener('mouseleave', stopPicasRulerRotate);
+        pixelsRulerRef.current.addEventListener('mouseover', pixelsRulerRotate);
+        pixelsRulerRef.current.addEventListener('mouseleave', stopPixelsRulerRotate);
     }
     const inchesRulerRotate = () => {
-        inchesRulerRef.current.addEventListener('keydown', (e) => {
-            switch (e.key) {
-                case 'ArrowUp':
-                    inchesRulerRef.current.style.transform = 'rotateX(-1deg)';
-                    break;
-                case 'ArrowDown':
-                    inchesRulerRef.current.style.transform = 'rotateX(1deg)';
-                    break;
-            }
-        });
+        inchesRulerRef.current.tabIndex = '0';
+        inchesRulerRef.current.focus();
+        inchesRulerRef.current.removeEventListener('keydown', inchesRulerHandleKeyDown);
+        inchesRulerRef.current.addEventListener('keydown', inchesRulerHandleKeyDown);
+    }
+    const inchesRulerHandleKeyDown = (e) => inchesRulerRotateByKey(e);
+    const inchesRulerRotateByKey = (e) => {
+        switch (e.key) {
+            case 'a':
+                inchesRulerRotationTracker.current = (parseInt(inchesRulerRotationTracker.current) - 1).toString() + 'deg';
+                inchesRulerRef.current.style.rotate = `rotate(${inchesRulerRotationTracker.current})`;
+                break;
+            case 'd':
+                inchesRulerRotationTracker.current = (parseInt(inchesRulerRotationTracker.current) + 1).toString() + 'deg';
+                inchesRulerRef.current.style.transform = `rotate(${inchesRulerRotationTracker.current})`;
+                break;
+            default:
+                return;
+        }
+    }
+    const stopInchesRulerRotate = () => {
+        inchesRulerRef.current.removeEventListener('keydown', inchesRulerHandleKeyDown);
+    }
+    const centimetersRulerRotate = () => {
+        centimetersRulerRef.current.tabIndex = '0';
+        centimetersRulerRef.current.focus();
+        centimetersRulerRef.current.removeEventListener('keydown', centimetersRulerHandleKeyDown);
+        centimetersRulerRef.current.addEventListener('keydown', centimetersRulerHandleKeyDown);
+    }
+    const centimetersRulerHandleKeyDown = (e) => centimetersRulerRotateByKey(e);
+    const centimetersRulerRotateByKey = (e) => {
+        switch (e.key) {
+            case 'a':
+                centimetersRulerRotationTracker.current = (parseInt(centimetersRulerRotationTracker.current) - 1).toString() + 'deg';
+                centimetersRulerRef.current.style.rotate = `${centimetersRulerRotationTracker.current}`;
+                break;
+            case 'd':
+                centimetersRulerRotationTracker.current = (parseInt(centimetersRulerRotationTracker.current) + 1).toString() + 'deg';
+                centimetersRulerRef.current.style.rotate = `${centimetersRulerRotationTracker.current}`;
+                break;
+            default:
+                return;
+        }
+    }
+    const stopCentimetersRulerRotate = () => {
+        centimetersRulerRef.current.removeEventListener('keydown', centimetersRulerHandleKeyDown);
+    }
+    const picasRulerRotate = () => {
+        picasRulerRef.current.tabIndex = '0';
+        picasRulerRef.current.focus();
+        picasRulerRef.current.removeEventListener('keydown', picasRulerHandleKeyDown);
+        picasRulerRef.current.addEventListener('keydown', picasRulerHandleKeyDown);
+    }
+    const picasRulerHandleKeyDown = (e) => picasRulerRotateByKey(e);
+    const picasRulerRotateByKey = (e) => {
+        switch (e.key) {
+            case 'a':
+                picasRulerRotationTracker.current = (parseInt(picasRulerRotationTracker.current) - 1).toString() + 'deg';
+                picasRulerRef.current.style.rotate = `${picasRulerRotationTracker.current}`;
+                break;
+            case 'd':
+                picasRulerRotationTracker.current = (parseInt(picasRulerRotationTracker.current) + 1).toString() + 'deg';
+                picasRulerRef.current.style.rotate = `${picasRulerRotationTracker.current}`;
+                break;
+            default:
+                return;
+        }
+    }
+    const stopPicasRulerRotate = () => {
+        picasRulerRef.current.removeEventListener('keydown', picasRulerHandleKeyDown);
+    }
+    const pixelsRulerRotate = () => {
+        pixelsRulerRef.current.tabIndex = '0';
+        pixelsRulerRef.current.focus();
+        pixelsRulerRef.current.removeEventListener('keydown', pixelsRulerHandleKeyDown);
+        pixelsRulerRef.current.addEventListener('keydown', pixelsRulerHandleKeyDown);
+    }
+    const pixelsRulerHandleKeyDown = (e) => pixelsRulerRotateByKey(e);
+    const pixelsRulerRotateByKey = (e) => {
+        switch (e.key) {
+            case 'a':
+                pixelsRulerRotationTracker.current = (parseInt(pixelsRulerRotationTracker.current) - 1).toString() + 'deg';
+                pixelsRulerRef.current.style.rotate = `${pixelsRulerRotationTracker.current}`;
+                break;
+            case 'd':
+                pixelsRulerRotationTracker.current = (parseInt(pixelsRulerRotationTracker.current) + 1).toString() + 'deg';
+                pixelsRulerRef.current.style.rotate = `${pixelsRulerRotationTracker.current}`;
+                break;
+            default:
+                return;
+        }
+    }
+    const stopPixelsRulerRotate = () => {
+        pixelsRulerRef.current.removeEventListener('keydown', pixelsRulerHandleKeyDown);
     }
     const openOrClose = (element) => {
         if (element.current.style.visibility === "hidden") {

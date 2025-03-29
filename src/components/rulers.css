@@ -155,6 +155,9 @@ input[type='checkbox' i] {
     cursor: move;
     z-index: 996;
 }
+#inchesRuler:focus {
+    outline: none;
+}
 #centimetersRuler {
     position: absolute;
     text-align: center;
@@ -165,6 +168,9 @@ input[type='checkbox' i] {
     display: block;
     cursor: move;
     z-index: 999;
+}
+#centimetersRuler:focus {
+    outline: none;
 }
 #picasRuler {
     position: absolute;
@@ -177,6 +183,9 @@ input[type='checkbox' i] {
     cursor: move;
     z-index: 997;
 }
+#picasRuler:focus {
+    outline: none;
+}
 #pixelsRuler {
     position: absolute;
     text-align: center;
@@ -187,6 +196,9 @@ input[type='checkbox' i] {
     display: block;
     cursor: move;
     z-index: 998;
+}
+#pixelsRuler:focus {
+    outline: none;
 }
 #readyForAnim {
     animation-duration: 2s;
