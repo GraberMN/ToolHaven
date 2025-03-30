@@ -129,12 +129,14 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
         document.removeEventListener('mousemove', pixelsRulerDrag);
     }
     const allowRulerRotate = () => {
+        const rulers = [inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef];
+        for (let i = 0; i < rulers.length; i++) {
+            rulers[i].current.style.animationName = 'none';
+            rulers[i].current.transformOrigin = 'center';
+            rulers[i].current.style.opacity = '100';
+        }
         inchesRulerRef.current.addEventListener('mouseover', inchesRulerRotate);
         inchesRulerRef.current.addEventListener('mouseleave', stopInchesRulerRotate);
-        inchesRulerRef.current.style.animationName = 'none';
-        inchesRulerRef.current.transformOrigin = 'center';
-        inchesRulerRef.current.style.transform = 'translateX(calc(50vw - 50%))';
-        inchesRulerRef.current.style.opacity = '100';
         centimetersRulerRef.current.addEventListener('mouseover', centimetersRulerRotate);
         centimetersRulerRef.current.addEventListener('mouseleave', stopCentimetersRulerRotate);
         picasRulerRef.current.addEventListener('mouseover', picasRulerRotate);
@@ -142,22 +144,22 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
         pixelsRulerRef.current.addEventListener('mouseover', pixelsRulerRotate);
         pixelsRulerRef.current.addEventListener('mouseleave', stopPixelsRulerRotate);
     }
+    const inchesRulerHandleKeyDown = (e) => inchesRulerRotateByKey(e);
     const inchesRulerRotate = () => {
         inchesRulerRef.current.tabIndex = '0';
         inchesRulerRef.current.focus();
         inchesRulerRef.current.removeEventListener('keydown', inchesRulerHandleKeyDown);
         inchesRulerRef.current.addEventListener('keydown', inchesRulerHandleKeyDown);
     }
-    const inchesRulerHandleKeyDown = (e) => inchesRulerRotateByKey(e);
     const inchesRulerRotateByKey = (e) => {
         switch (e.key) {
             case 'a':
                 inchesRulerRotationTracker.current = (parseInt(inchesRulerRotationTracker.current) - 1).toString() + 'deg';
-                inchesRulerRef.current.style.rotate = `rotate(${inchesRulerRotationTracker.current})`;
+                inchesRulerRef.current.style.transform = `translateX(calc(50vw - 50%)) rotate(${inchesRulerRotationTracker.current})`;
                 break;
             case 'd':
                 inchesRulerRotationTracker.current = (parseInt(inchesRulerRotationTracker.current) + 1).toString() + 'deg';
-                inchesRulerRef.current.style.transform = `rotate(${inchesRulerRotationTracker.current})`;
+                inchesRulerRef.current.style.transform = `translateX(calc(50vw - 50%)) rotate(${inchesRulerRotationTracker.current})`;
                 break;
             default:
                 return;
@@ -166,22 +168,22 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
     const stopInchesRulerRotate = () => {
         inchesRulerRef.current.removeEventListener('keydown', inchesRulerHandleKeyDown);
     }
+    const centimetersRulerHandleKeyDown = (e) => centimetersRulerRotateByKey(e);
     const centimetersRulerRotate = () => {
         centimetersRulerRef.current.tabIndex = '0';
         centimetersRulerRef.current.focus();
         centimetersRulerRef.current.removeEventListener('keydown', centimetersRulerHandleKeyDown);
         centimetersRulerRef.current.addEventListener('keydown', centimetersRulerHandleKeyDown);
     }
-    const centimetersRulerHandleKeyDown = (e) => centimetersRulerRotateByKey(e);
     const centimetersRulerRotateByKey = (e) => {
         switch (e.key) {
             case 'a':
                 centimetersRulerRotationTracker.current = (parseInt(centimetersRulerRotationTracker.current) - 1).toString() + 'deg';
-                centimetersRulerRef.current.style.rotate = `${centimetersRulerRotationTracker.current}`;
+                centimetersRulerRef.current.style.transform = `translateX(calc(50vw - 50%)) rotate(${centimetersRulerRotationTracker.current})`;
                 break;
             case 'd':
                 centimetersRulerRotationTracker.current = (parseInt(centimetersRulerRotationTracker.current) + 1).toString() + 'deg';
-                centimetersRulerRef.current.style.rotate = `${centimetersRulerRotationTracker.current}`;
+                centimetersRulerRef.current.style.transform = `translateX(calc(50vw - 50%)) rotate(${centimetersRulerRotationTracker.current})`;
                 break;
             default:
                 return;
@@ -190,22 +192,22 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
     const stopCentimetersRulerRotate = () => {
         centimetersRulerRef.current.removeEventListener('keydown', centimetersRulerHandleKeyDown);
     }
+    const picasRulerHandleKeyDown = (e) => picasRulerRotateByKey(e);
     const picasRulerRotate = () => {
         picasRulerRef.current.tabIndex = '0';
         picasRulerRef.current.focus();
         picasRulerRef.current.removeEventListener('keydown', picasRulerHandleKeyDown);
         picasRulerRef.current.addEventListener('keydown', picasRulerHandleKeyDown);
     }
-    const picasRulerHandleKeyDown = (e) => picasRulerRotateByKey(e);
     const picasRulerRotateByKey = (e) => {
         switch (e.key) {
             case 'a':
                 picasRulerRotationTracker.current = (parseInt(picasRulerRotationTracker.current) - 1).toString() + 'deg';
-                picasRulerRef.current.style.rotate = `${picasRulerRotationTracker.current}`;
+                picasRulerRef.current.style.transform = `translateX(calc(50vw - 50%)) rotate(${picasRulerRotationTracker.current})`;
                 break;
             case 'd':
                 picasRulerRotationTracker.current = (parseInt(picasRulerRotationTracker.current) + 1).toString() + 'deg';
-                picasRulerRef.current.style.rotate = `${picasRulerRotationTracker.current}`;
+                picasRulerRef.current.style.transform = `translateX(calc(50vw - 50%)) rotate(${picasRulerRotationTracker.current})`;
                 break;
             default:
                 return;
@@ -214,22 +216,22 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
     const stopPicasRulerRotate = () => {
         picasRulerRef.current.removeEventListener('keydown', picasRulerHandleKeyDown);
     }
+    const pixelsRulerHandleKeyDown = (e) => pixelsRulerRotateByKey(e);
     const pixelsRulerRotate = () => {
         pixelsRulerRef.current.tabIndex = '0';
         pixelsRulerRef.current.focus();
         pixelsRulerRef.current.removeEventListener('keydown', pixelsRulerHandleKeyDown);
         pixelsRulerRef.current.addEventListener('keydown', pixelsRulerHandleKeyDown);
     }
-    const pixelsRulerHandleKeyDown = (e) => pixelsRulerRotateByKey(e);
     const pixelsRulerRotateByKey = (e) => {
         switch (e.key) {
             case 'a':
                 pixelsRulerRotationTracker.current = (parseInt(pixelsRulerRotationTracker.current) - 1).toString() + 'deg';
-                pixelsRulerRef.current.style.rotate = `${pixelsRulerRotationTracker.current}`;
+                pixelsRulerRef.current.style.transform = `translateX(calc(50vw - 50%)) rotate(${pixelsRulerRotationTracker.current})`;
                 break;
             case 'd':
                 pixelsRulerRotationTracker.current = (parseInt(pixelsRulerRotationTracker.current) + 1).toString() + 'deg';
-                pixelsRulerRef.current.style.rotate = `${pixelsRulerRotationTracker.current}`;
+                pixelsRulerRef.current.style.transform = `translateX(calc(50vw - 50%)) rotate(${pixelsRulerRotationTracker.current})`;
                 break;
             default:
                 return;
@@ -305,20 +307,49 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
         element.current.style.opacity = '0';
     }
     useEffect(() => {
-        const booleanStates = [inchesRulerCheckboxChecked, centimetersRulerCheckboxChecked, picasRulerCheckboxChecked, pixelsRulerCheckboxChecked];
-        const rulersRulers = [inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef];
-        for (let i = 0; i < rulersRulers.length; i++) {
-            if (booleanStates[i]) {
-                rulersRulers[i].current.style.animationName = 'none';
-                rulersRulers[i].current.style.visibility = 'visible';
-                rulersRulers[i].current.style.transform = 'translateX(calc(50vw - 50%))';
-                rulersRulers[i].current.style.opacity = '100';
-            } else {
-                rulersRulers[i].current.style.opacity = '0';
-                rulersRulers[i].current.style.visibility = 'hidden';
-            }
+        if (inchesRulerCheckboxChecked) {
+            inchesRulerRef.current.style.animationName = 'none';
+            inchesRulerRef.current.style.visibility = 'visible';
+            inchesRulerRef.current.style.transform = 'translateX(calc(50vw - 50%))';
+            inchesRulerRef.current.style.opacity = '100';
+        } else {
+            inchesRulerRef.current.style.opacity = '0';
+            inchesRulerRef.current.style.visibility = 'hidden';
         }
-    }, [inchesRulerCheckboxChecked, centimetersRulerCheckboxChecked, picasRulerCheckboxChecked, pixelsRulerCheckboxChecked]);
+    }, [inchesRulerCheckboxChecked]);
+    useEffect(() => {
+        if (centimetersRulerCheckboxChecked) {
+            centimetersRulerRef.current.style.animationName = 'none';
+            centimetersRulerRef.current.style.visibility = 'visible';
+            centimetersRulerRef.current.style.transform = 'translateX(calc(50vw - 50%))';
+            centimetersRulerRef.current.style.opacity = '100';
+        } else {
+            centimetersRulerRef.current.style.opacity = '0';
+            centimetersRulerRef.current.style.visibility = 'hidden';
+        }
+    }, [centimetersRulerCheckboxChecked]);
+    useEffect(() => {
+        if (picasRulerCheckboxChecked) {
+            picasRulerRef.current.style.animationName = 'none';
+            picasRulerRef.current.style.visibility = 'visible';
+            picasRulerRef.current.style.transform = 'translateX(calc(50vw - 50%))';
+            picasRulerRef.current.style.opacity = '100';
+        } else {
+            picasRulerRef.current.style.opacity = '0';
+            picasRulerRef.current.style.visibility = 'hidden';
+        }
+    }, [picasRulerCheckboxChecked]);
+    useEffect(() => {
+        if (pixelsRulerCheckboxChecked) {
+            pixelsRulerRef.current.style.animationName = 'none';
+            pixelsRulerRef.current.style.visibility = 'visible';
+            pixelsRulerRef.current.style.transform = 'translateX(calc(50vw - 50%))';
+            pixelsRulerRef.current.style.opacity = '100';
+        } else {
+            pixelsRulerRef.current.style.opacity = '0';
+            pixelsRulerRef.current.style.visibility = 'hidden';
+        }
+    }, [pixelsRulerCheckboxChecked]);
     useEffect(() => {
         if (moveToRulers) {
             rulersTitleRef.current.style.display = 'block';
@@ -381,6 +412,8 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
                     <li>The Settings tab lets you adjust the rulers that are displayed or hidden, each of their border colors, and more.</li>
                     <li>There are currently 4 rulers: the inches, centimeters, picas, and pixels rulers.</li>
                     <li>The inches ruler is the only ruler that is displayed when switching to Rulers.</li>
+                    <li>To rotate each ruler, hover over it and press/hold 'a' for counterclockwise rotation and 'd' for clockwise rotation.</li>
+                    <li>A ruler's rotation resets when it is hidden and displayed once again.</li>
                     <li>When changing color in Settings, drag the pointer around for it to work seamlessly.</li>
                     <li>Ruler-Specific Rules:</li>
                     <li id='lvl2li'>Inches: "in." is shorthand for inches, each ruler gap is 1/8 inch.</li>
