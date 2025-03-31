@@ -433,6 +433,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
                     <li>The inches ruler is the only ruler that is displayed when switching to Rulers.</li>
                     <li>To rotate each ruler, hover over it and press/hold 'a' for counterclockwise rotation and 'd' for clockwise rotation.</li>
                     <li>A ruler's rotation resets when it is hidden and displayed once again.</li>
+                    <li>The Reset button resets all 4 rulers' position and rotation, whether they are visible or not; not border colors though.</li>
                     <li>When changing color in Settings, drag the pointer around for it to work seamlessly.</li>
                     <li>Ruler-Specific Rules:</li>
                     <li id='lvl2li'>Inches: "in." is shorthand for inches, each ruler gap is 1/8 inch.</li>
