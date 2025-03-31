@@ -42,6 +42,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
     const picasRulerRef = useRef(null);
     const pixelsRulerRef = useRef(null);
     const inchesRulerCheckbox = useRef(null);
+    const rulersResetButtonRef = useRef(null);
     const allowRulerDrag = () => {
         inchesRulerRef.current.addEventListener('mousedown', startInchesRulerDrag);
         centimetersRulerRef.current.addEventListener('mousedown', startCentimetersRulerDrag);
@@ -240,6 +241,17 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
     const stopPixelsRulerRotate = () => {
         pixelsRulerRef.current.removeEventListener('keydown', pixelsRulerHandleKeyDown);
     }
+    const resetRulers = () => {
+        const rulerRefs = [inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef];
+        const rotationTrackers = [inchesRulerRotationTracker, centimetersRulerRotationTracker, picasRulerRotationTracker, pixelsRulerRotationTracker]
+        for (let i = 0; i < rulerRefs.length; i++) {
+            rulerRefs[i].current.style.top = '135px';
+            rulerRefs[i].current.style.left = '0px';
+            rotationTrackers[i].current = '0deg';
+            rulerRefs[i].current.style.animationName = 'none';
+            rulerRefs[i].current.style.transform = `translateX(calc(50vw - 50%)) rotate(${rotationTrackers[i].current})`;
+        }
+    }
     const openOrClose = (element) => {
         if (element.current.style.visibility === "hidden") {
             element.current.style.visibility = "visible";
@@ -277,7 +289,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
         }
     }
     const animateElements = () => {
-        const rulersElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef];
+        const rulersElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef, rulersResetButtonRef];
         for (let i = 0; i < rulersElements.length; i++) {
             readyForAnimation(rulersElements[i]);
         }
@@ -297,6 +309,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
         centimetersRulerRef.current.style.animationName = 'appearFromRightRulersOtherRulers';
         picasRulerRef.current.style.animationName = 'appearFromRightRulersOtherRulers';
         pixelsRulerRef.current.style.animationName = 'appearFromRightRulersOtherRulers';
+        rulersResetButtonRef.current.style.animationName = 'appearFromRight';
     }
     const readyForAnimation = (element) => {
         element.current.style.animationName = 'none';
@@ -310,44 +323,48 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
         if (inchesRulerCheckboxChecked) {
             inchesRulerRef.current.style.animationName = 'none';
             inchesRulerRef.current.style.visibility = 'visible';
-            inchesRulerRef.current.style.transform = 'translateX(calc(50vw - 50%))';
+            inchesRulerRef.current.style.transform = `translateX(calc(50vw - 50%)) rotate(${inchesRulerRotationTracker.current})`;
             inchesRulerRef.current.style.opacity = '100';
         } else {
             inchesRulerRef.current.style.opacity = '0';
             inchesRulerRef.current.style.visibility = 'hidden';
+            inchesRulerRotationTracker.current = '0deg';
         }
     }, [inchesRulerCheckboxChecked]);
     useEffect(() => {
         if (centimetersRulerCheckboxChecked) {
             centimetersRulerRef.current.style.animationName = 'none';
             centimetersRulerRef.current.style.visibility = 'visible';
-            centimetersRulerRef.current.style.transform = 'translateX(calc(50vw - 50%))';
+            centimetersRulerRef.current.style.transform = `translateX(calc(50vw - 50%)) rotate(${centimetersRulerRotationTracker.current})`;
             centimetersRulerRef.current.style.opacity = '100';
         } else {
             centimetersRulerRef.current.style.opacity = '0';
             centimetersRulerRef.current.style.visibility = 'hidden';
+            centimetersRulerRotationTracker.current = '0deg'
         }
     }, [centimetersRulerCheckboxChecked]);
     useEffect(() => {
         if (picasRulerCheckboxChecked) {
             picasRulerRef.current.style.animationName = 'none';
             picasRulerRef.current.style.visibility = 'visible';
-            picasRulerRef.current.style.transform = 'translateX(calc(50vw - 50%))';
+            picasRulerRef.current.style.transform = `translateX(calc(50vw - 50%)) rotate(${picasRulerRotationTracker.current})`;
             picasRulerRef.current.style.opacity = '100';
         } else {
             picasRulerRef.current.style.opacity = '0';
             picasRulerRef.current.style.visibility = 'hidden';
+            picasRulerRotationTracker.current = '0deg'
         }
     }, [picasRulerCheckboxChecked]);
     useEffect(() => {
         if (pixelsRulerCheckboxChecked) {
             pixelsRulerRef.current.style.animationName = 'none';
             pixelsRulerRef.current.style.visibility = 'visible';
-            pixelsRulerRef.current.style.transform = 'translateX(calc(50vw - 50%))';
+            pixelsRulerRef.current.style.transform = `translateX(calc(50vw - 50%)) rotate(${pixelsRulerRotationTracker.current})`;
             pixelsRulerRef.current.style.opacity = '100';
         } else {
             pixelsRulerRef.current.style.opacity = '0';
             pixelsRulerRef.current.style.visibility = 'hidden';
+            pixelsRulerRotationTracker.current = '0deg'
         }
     }, [pixelsRulerCheckboxChecked]);
     useEffect(() => {
@@ -367,7 +384,8 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
             picasRulerRef.current.style.visibility = 'hidden';
             pixelsRulerRef.current.style.display = 'block';
             pixelsRulerRef.current.style.visibility = 'hidden';
-            const rulersElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef];
+            rulersResetButtonRef.current.style.display = 'block';
+            const rulersElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef, rulersResetButtonRef];
             for (let i = 0; i < rulersElements.length; i++) {
                 readyForMove(rulersElements[i]);
             }
@@ -398,6 +416,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
         centimetersRulerRef.current.style.display = 'none';
         picasRulerRef.current.style.display = 'none';
         pixelsRulerRef.current.style.display = 'none';
+        rulersResetButtonRef.current.style.display = 'none';
         return () => {
             window.removeEventListener("resize", onAdjustWindowWidth);
         }
@@ -448,6 +467,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
             <img id='centimetersRuler' src={centimetersRuler} ref={centimetersRulerRef} alt='centimetersRuler' title='centimetersRuler' />
             <img id='picasRuler' src={picasRuler} ref={picasRulerRef} alt='picasRuler' title='picasRuler' />
             <img id='pixelsRuler' src={pixelsRuler} ref={pixelsRulerRef} alt='pixelsRuler' title='pixelsRuler' />
+            <button onClick={() => resetRulers()} id='rulersResetButton' ref={rulersResetButtonRef}>Reset</button>
         </div>
     );
 }

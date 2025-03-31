@@ -200,6 +200,23 @@ input[type='checkbox' i] {
 #pixelsRuler:focus {
     outline: none;
 }
+#rulersResetButton {
+    width: 90px;
+    height: 50px;
+    font-family: cursive;
+    font-size: 20px;
+    border-radius: 15px;
+    border: solid 2px hsl(187, 74%, 41%);
+    background-color: lightskyblue;
+    cursor: pointer;
+    margin-top: 654px;
+}
+#rulersResetButton:hover {
+    background-color: deepskyblue;
+}
+#rulersResetButton:active {
+    background-color: rgb(25, 126, 189);
+}
 #readyForAnim {
     animation-duration: 2s;
     animation-iteration-count: 1;
@@ -238,6 +255,7 @@ input[type='checkbox' i] {
 @keyframes appearFromRight {
     from {
         opacity: 0;
+        transform: translateX(30vw);
     }
     to {
         opacity: 100;
