@@ -217,6 +217,13 @@ input[type='checkbox' i] {
 #rulersResetButton:active {
     background-color: rgb(25, 126, 189);
 }
+#toTimers {
+    position: absolute;
+    width: 100px;
+    height: auto;
+    transform: translateX(270px);
+    display: inline;
+}
 #readyForAnim {
     animation-duration: 2s;
     animation-iteration-count: 1;

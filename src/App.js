@@ -8,13 +8,14 @@ import inchesRuler from './Images/inchesRuler.PNG';
 import centimetersRuler from './Images/centimetersRuler.PNG';
 import picasRuler from './Images/picasRuler.PNG';
 import pixelsRuler from './Images/pixelsRuler.PNG';
+import orangeRightArrow from './Images/OrangeRightArrow.png'
 import './App.css';
 import Calculator from './components/Calculator';
 import Rulers from './components/Rulers';
 
 function App() {
   const calcImagesArray = [settingsIcon, historyIcon, rulesIcon, blueRightArrow];
-  const rulersImagesArray = [inchesRuler, centimetersRuler, picasRuler, pixelsRuler, settingsIcon, rulesIcon];
+  const rulersImagesArray = [inchesRuler, centimetersRuler, picasRuler, pixelsRuler, settingsIcon, rulesIcon, orangeRightArrow];
   const [moveToRulers, setMoveToRulers] = useState(false);
   return (
     <div className="App">

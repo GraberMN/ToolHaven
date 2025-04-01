@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import './rulers.css';
 
 function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
-    const [inchesRuler, centimetersRuler, picasRuler, pixelsRuler, settingsIcon, rulesIcon] = rulersImagesArray;
+    const [inchesRuler, centimetersRuler, picasRuler, pixelsRuler, settingsIcon, rulesIcon, orangeRightArrow] = rulersImagesArray;
     const [inchesRulerCheckboxChecked, setInchesRulerCheckboxChecked] = useState(true);
     const [centimetersRulerCheckboxChecked, setCentimetersRulerCheckboxChecked] = useState(false);
     const [picasRulerCheckboxChecked, setPicasRulerCheckboxChecked] = useState(false);
@@ -43,6 +43,8 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
     const pixelsRulerRef = useRef(null);
     const inchesRulerCheckbox = useRef(null);
     const rulersResetButtonRef = useRef(null);
+    const orangeRightArrowArea = useRef(null);
+    const rightOrangeArrow = useRef(null);
     const allowRulerDrag = () => {
         inchesRulerRef.current.addEventListener('mousedown', startInchesRulerDrag);
         centimetersRulerRef.current.addEventListener('mousedown', startCentimetersRulerDrag);
@@ -288,6 +290,32 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
             rulersSettingsBox.current.style.transform = 'translateX(60px)';
         }
     }
+    const blurOrangeRightArrow = () => {
+        rightOrangeArrow.current.style.filter = 'blur(1px)';
+        orangeRightArrowArea.current.style.cursor = 'pointer';
+        if (window.innerWidth <= 740) {
+            rightOrangeArrow.current.style.transform = 'translateX(165px) rotate(0.05turn)';
+        } else {
+            rightOrangeArrow.current.style.transform = 'translateX(270px) rotate(0.05turn)';
+        }
+    }
+    const unBlurOrangeRightArrow = () => {
+        rightOrangeArrow.current.style.filter = 'blur(0px)';
+        if (window.innerWidth <= 740) {
+            rightOrangeArrow.current.style.transform = 'translateX(165px) rotate(0turn)';
+        } else {
+            rightOrangeArrow.current.style.transform = 'translateX(270px) rotate(0turn)';
+        }
+    }
+    const positionOrangeRightArrow = () => {
+        if (rightOrangeArrow.current.style.transform !== "null") {
+            if (window.innerWidth <= 740) {
+                rightOrangeArrow.current.style.transform = 'translateX(165px)';
+            } else {
+                rightOrangeArrow.current.style.transform = 'translateX(270px)';
+            }
+        }
+    }
     const animateElements = () => {
         const rulersElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef, rulersResetButtonRef];
         for (let i = 0; i < rulersElements.length; i++) {
@@ -318,6 +346,9 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
     }
     const readyForMove = (element) => {
         element.current.style.opacity = '0';
+    }
+    const orangeRightArrowTransition = (screenWidthBig) => {
+
     }
     useEffect(() => {
         if (inchesRulerCheckboxChecked) {
@@ -403,9 +434,23 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
                 }
                 window.addEventListener('resize', onAdjustWindowWidth);
                 allowRulerRotate();
+                rightOrangeArrow.current.style.display = 'inline';
+                if (window.innerWidth <= 740) {
+                    rightOrangeArrow.current.style.transform = 'translateX(165px)';
+                    rulersRulesIconRef.current.style.transform = 'translateX(-260px)';
+                    rulersRulesBox.current.style.transform = 'translateX(-260px)';
+                    rulersSettingsIconRef.current.style.transform = 'translateX(180px)';
+                    rulersSettingsBox.current.style.transform = 'translateX(-45px)';
+                }
             }, 4000);
         }
     }, [moveToRulers]);
+    useEffect(() => {
+        window.addEventListener("resize", positionOrangeRightArrow);
+        return () => {
+            window.removeEventListener("resize", positionOrangeRightArrow);
+        }
+        }, []);
     useEffect(() => {
         rulersTitleRef.current.style.display = 'none';
         rulersRulesIconRef.current.style.display = 'none';
@@ -417,6 +462,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
         picasRulerRef.current.style.display = 'none';
         pixelsRulerRef.current.style.display = 'none';
         rulersResetButtonRef.current.style.display = 'none';
+        rightOrangeArrow.current.style.display = 'none';
         return () => {
             window.removeEventListener("resize", onAdjustWindowWidth);
         }
@@ -468,7 +514,11 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
             <img id='centimetersRuler' src={centimetersRuler} ref={centimetersRulerRef} alt='centimetersRuler' title='centimetersRuler' />
             <img id='picasRuler' src={picasRuler} ref={picasRulerRef} alt='picasRuler' title='picasRuler' />
             <img id='pixelsRuler' src={pixelsRuler} ref={pixelsRulerRef} alt='pixelsRuler' title='pixelsRuler' />
-            <button onClick={() => resetRulers()} id='rulersResetButton' ref={rulersResetButtonRef}>Reset</button>
+            <button onClick={() => resetRulers()} id='rulersResetButton' ref={rulersResetButtonRef} title='rulersResetButton'>Reset</button>
+            <map name='toTimersMap'>
+                <area onClick={() => window.innerWidth > 740 ? orangeRightArrowTransition(true) : orangeRightArrowTransition(false)} onMouseOver={() => blurOrangeRightArrow()} onMouseOut={() => unBlurOrangeRightArrow()} id='toTimersMap' ref={orangeRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toTimers' title='toTimers'></area>
+            </map>
+            <img id='toTimers' useMap='#toTimersMap' ref={rightOrangeArrow} src={orangeRightArrow} alt='toTimers'></img>
         </div>
     );
 }
