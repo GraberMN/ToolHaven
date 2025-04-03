@@ -17,10 +17,11 @@ function App() {
   const calcImagesArray = [settingsIcon, historyIcon, rulesIcon, blueRightArrow];
   const rulersImagesArray = [inchesRuler, centimetersRuler, picasRuler, pixelsRuler, settingsIcon, rulesIcon, orangeRightArrow];
   const [moveToRulers, setMoveToRulers] = useState(false);
+  const [moveToTimers, setMoveToTimers] = useState(false);
   return (
     <div className="App">
       <Calculator calcImagesArray={calcImagesArray} moveToRulers={moveToRulers} setMoveToRulers={setMoveToRulers} />
-      <Rulers rulersImagesArray={rulersImagesArray} moveToRulers={moveToRulers} setMoveToRulers={setMoveToRulers} />
+      <Rulers rulersImagesArray={rulersImagesArray} moveToRulers={moveToRulers} setMoveToRulers={setMoveToRulers} moveToTimers={moveToTimers} setMoveToTimers={setMoveToTimers} />
     </div>
   );
 }

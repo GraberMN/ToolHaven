@@ -224,19 +224,90 @@ input[type='checkbox' i] {
     transform: translateX(270px);
     display: inline;
 }
-#readyForAnim {
+.readyForAnim {
     animation-duration: 2s;
     animation-iteration-count: 1;
     animation-direction: normal;
     animation-fill-mode: forwards;
 }
-@keyframes fadeLeft {
+@keyframes fadeLeftRulers {
     from {
         opacity: 100;
+        transform: translateX(0vw);
     }
     to {
         opacity: 0;
         transform: translateX(-30vw);
+    }
+}
+@keyframes fadeLeftRulersRules {
+    from {
+        opacity: 100;
+        transform: translateX(calc(0vw - 367px));
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw - 367px));
+    }
+}
+@keyframes fadeLeftRulersRulesSmall {
+    from {
+        opacity: 100;
+        transform: translateX(calc(0vw - 260px));
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw - 260px));
+    }
+}
+@keyframes fadeLeftRulersSettingsIcon {
+    from {
+        opacity: 100;
+        transform: translateX(calc(0vw + 285px));
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw + 285px));
+    }
+}
+@keyframes fadeLeftRulersSettingsIconSmall {
+    from {
+        opacity: 100;
+        transform: translateX(calc(0vw + 180px));
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw + 180px));
+    }
+}
+@keyframes fadeLeftRulersSettingsBox {
+    from {
+        opacity: 100;
+        transform: translateX(calc(0vw + 60px));
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw + 60px));
+    }
+}
+@keyframes fadeLeftRulersSettingsBoxSmall {
+    from {
+        opacity: 100;
+        transform: translateX(calc(0vw - 45px));
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw - 45px));
+    }
+}
+@keyframes fadeLeftRulersAllRulers {
+    from {
+        opacity: 100;
+        transform: translateX(calc(50vw - 50%));
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(20vw - 50%));
     }
 }
 @keyframes appearFromLeft {

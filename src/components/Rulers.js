@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import './rulers.css';
 
-function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
+function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers, setMoveToTimers }) {
     const [inchesRuler, centimetersRuler, picasRuler, pixelsRuler, settingsIcon, rulesIcon, orangeRightArrow] = rulersImagesArray;
     const [inchesRulerCheckboxChecked, setInchesRulerCheckboxChecked] = useState(true);
     const [centimetersRulerCheckboxChecked, setCentimetersRulerCheckboxChecked] = useState(false);
@@ -12,6 +12,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
     const [centimetersRulerBorderColorVal, setCentimetersRulerBorderColorVal] = useState('#5F6B6B');
     const [picasRulerBorderColorVal, setPicasRulerBorderColorVal] = useState('#5F6B6B');
     const [pixelsRulerBorderColorVal, setPixelsRulerBorderColorVal] = useState('#5F6B6B');
+    const [orangeRightArrowTransitionDone, setOrangeRightArrowTransitionDone] = useState(false);
     const inchesRulerMousePosXStart = useRef(0);
     const inchesRulerMousePosYStart = useRef(0);
     const inchesRulerMousePosXDiff = useRef(0);
@@ -348,7 +349,45 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
         element.current.style.opacity = '0';
     }
     const orangeRightArrowTransition = (screenWidthBig) => {
-
+        setMoveToTimers(true);
+        resetRulers();
+        const hiddenElements = [rulersRulesBox, rulersSettingsBox, centimetersRulerRef, picasRulerRef, pixelsRulerRef];
+        for (let i = 0; i < hiddenElements.length; i++) {
+            hiddenElements[i].current.style.visibility = 'hidden';
+        }
+        const centeredElements = [rulersTitleRef, rulersResetButtonRef];
+        for (let i = 0; i < centeredElements.length; i++) {
+            readyForAnimation(centeredElements[i]);
+            centeredElements[i].current.style.animationName = 'fadeLeftRulers';
+        }
+        const rulersRulesElements = [rulersRulesIconRef, rulersRulesBox];
+        for (let i = 0; i < rulersRulesElements.length; i++) {
+            readyForAnimation(rulersRulesElements[i]);
+            if (screenWidthBig) {
+                rulersRulesElements[i].current.style.animationName = 'fadeLeftRulersRules';
+            } else {
+                rulersRulesElements[i].current.style.animationName = 'fadeLeftRulersRulesSmall';
+            }
+        }
+        readyForAnimation(rulersSettingsIconRef);
+        if (screenWidthBig) {
+            rulersSettingsIconRef.current.style.animationName = 'fadeLeftRulersSettingsIcon';
+        } else {
+            rulersSettingsIconRef.current.style.animationName = 'fadeLeftRulersSettingsIconSmall';
+        }
+        readyForAnimation(rulersSettingsBox);
+        if (screenWidthBig) {
+            rulersSettingsBox.current.style.animationName = 'fadeLeftRulersSettingsBox';
+        } else {
+            rulersSettingsBox.current.style.animationName = 'fadeLeftRulersSettingsBoxSmall';
+        }
+        const rulersRulerRefs = [inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef];
+        for (let i = 0; i < rulersRulerRefs.length; i++) {
+            readyForAnimation(rulersRulerRefs[i])
+            rulersRulerRefs[i].current.style.animationName = 'fadeLeftRulersAllRulers';
+        }
+        rightOrangeArrow.current.style.display = 'none';
+        setTimeout(() => setOrangeRightArrowTransitionDone(true), 2000);
     }
     useEffect(() => {
         if (inchesRulerCheckboxChecked) {
@@ -395,9 +434,17 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
         } else {
             pixelsRulerRef.current.style.opacity = '0';
             pixelsRulerRef.current.style.visibility = 'hidden';
-            pixelsRulerRotationTracker.current = '0deg'
+            pixelsRulerRotationTracker.current = '0deg';
         }
     }, [pixelsRulerCheckboxChecked]);
+    useEffect(() => {
+        if (orangeRightArrowTransitionDone) {
+            const animRulersElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef, rulersResetButtonRef];
+            for (let i = 0; i < animRulersElements.length; i++) {
+                animRulersElements[i].current.style.display = 'none';
+            }
+        }
+    }, [orangeRightArrowTransitionDone])
     useEffect(() => {
         if (moveToRulers) {
             rulersTitleRef.current.style.display = 'block';
@@ -452,17 +499,10 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers }) {
         }
         }, []);
     useEffect(() => {
-        rulersTitleRef.current.style.display = 'none';
-        rulersRulesIconRef.current.style.display = 'none';
-        rulersRulesBox.current.style.display = 'none';
-        rulersSettingsIconRef.current.style.display = 'none';
-        rulersSettingsBox.current.style.display = 'none';
-        inchesRulerRef.current.style.display = 'none';
-        centimetersRulerRef.current.style.display = 'none';
-        picasRulerRef.current.style.display = 'none';
-        pixelsRulerRef.current.style.display = 'none';
-        rulersResetButtonRef.current.style.display = 'none';
-        rightOrangeArrow.current.style.display = 'none';
+        const goneElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef, rulersResetButtonRef, rightOrangeArrow];
+        for (let i = 0; i < goneElements.length; i++) {
+            goneElements[i].current.style.display = 'none';
+        }
         return () => {
             window.removeEventListener("resize", onAdjustWindowWidth);
         }
