@@ -444,7 +444,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
                 animRulersElements[i].current.style.display = 'none';
             }
         }
-    }, [orangeRightArrowTransitionDone])
+    }, [orangeRightArrowTransitionDone]);
     useEffect(() => {
         if (moveToRulers) {
             rulersTitleRef.current.style.display = 'block';

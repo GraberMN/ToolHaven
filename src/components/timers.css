@@ -1,0 +1,88 @@
+#timersTitle {
+    position: relative;
+    text-align: center;
+    font-size: 43px;
+    font-family: cursive;
+    font-weight: bolder;
+    color: hsl(24, 100%, 50%);
+    display: block;
+    transform: translateX(30vw);
+    margin-top: 30px;
+    margin-bottom: 45px;
+}
+.readyForAnim {
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}
+@keyframes appearFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(30vw);
+    }
+    to {
+        opacity: 100;
+        transform: translateX(0vw);
+    }
+}
+@keyframes appearFromRightRulersRules {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw - 367px));
+    }
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw - 367px));
+    }
+}
+@keyframes appearFromRightRulersRulesSmall {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw - 260px));
+    }
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw - 260px));
+    }
+}
+@keyframes appearFromRightRulersSettingsIcon {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw + 285px));
+    }
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw + 285px));
+    }
+}
+@keyframes appearFromRightRulersSettingsIconSmall {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw + 180px));
+    }
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw + 180px));
+    }
+}
+@keyframes appearFromRightRulersSettingsBox {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw + 60px));
+    }
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw + 60px));
+    }
+}
+@keyframes appearFromRightRulersSettingsBoxSmall {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw - 45px));
+    }
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw - 45px));
+    }
+}
