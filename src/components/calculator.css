@@ -343,6 +343,7 @@ button:active {
 @keyframes fadeLeft {
     from {
         opacity: 100;
+        transform: translateX(0vw);
     }
     to {
         opacity: 0;
@@ -352,6 +353,7 @@ button:active {
 @keyframes fadeLeftRules {
     from {
         opacity: 100;
+        transform: translateX(calc(0vw - 367px));
     }
     to {
         opacity: 0;
@@ -360,8 +362,9 @@ button:active {
 }
 @keyframes fadeLeftRulesSmall {
     from {
-            opacity: 100;
-        }
+        opacity: 100;
+        transform: translateX(calc(0vw - 260px));
+    }
     to {
         opacity: 0;
         transform: translateX(calc(-30vw - 260px));
@@ -370,6 +373,7 @@ button:active {
 @keyframes fadeLeftSettingsIcon {
     from {
         opacity: 100;
+        transform: translateX(calc(0vw + 285px));
     }
     to {
         opacity: 0;
@@ -379,6 +383,7 @@ button:active {
 @keyframes fadeLeftSettingsIconSmall {
     from {
         opacity: 100;
+        transform: translateX(calc(0vw + 180px));
     }
     to {
         opacity: 0;
@@ -388,6 +393,7 @@ button:active {
 @keyframes fadeLeftSettingsBox {
     from {
         opacity: 100;
+        transform: translateX(calc(0vw + 60px));
     }
     to {
         opacity: 0;
@@ -397,6 +403,7 @@ button:active {
 @keyframes fadeLeftSettingsBoxSmall {
     from {
         opacity: 100;
+        transform: translateX(calc(0vw - 45px));
     }
     to {
         opacity: 0;
@@ -406,6 +413,7 @@ button:active {
 @keyframes fadeLeftHistory {
     from {
         opacity: 100;
+        transform: translateX(calc(0vw - 523px));
     }
     to {
         opacity: 0;
@@ -415,6 +423,7 @@ button:active {
 @keyframes fadeLeftAnsField {
     from {
         opacity: 100;
+        transform: translateX(calc(0vw - 493px));
     }
     to {
         opacity: 0;
@@ -434,6 +443,7 @@ button:active {
 @keyframes fadeRight {
     from {
         opacity: 100;
+        transform: translateX(0vw);
     }
     to {
         opacity: 0;
@@ -443,6 +453,7 @@ button:active {
 @keyframes appearFromRight {
     from {
         opacity: 0;
+        transform: translateX(30vw);
     }
     to {
         opacity: 100;

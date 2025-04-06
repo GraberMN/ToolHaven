@@ -246,12 +246,14 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
     }
     const resetRulers = () => {
         const rulerRefs = [inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef];
-        const rotationTrackers = [inchesRulerRotationTracker, centimetersRulerRotationTracker, picasRulerRotationTracker, pixelsRulerRotationTracker]
+        const rotationTrackers = [inchesRulerRotationTracker, centimetersRulerRotationTracker, picasRulerRotationTracker, pixelsRulerRotationTracker];
         for (let i = 0; i < rulerRefs.length; i++) {
+            rulerRefs[i].current.style.animationName = 'none';
+            rulerRefs[i].current.classList.remove('readyForAnim');
+            rulerRefs[i].current.classList.add('readyForAnim');
             rulerRefs[i].current.style.top = '135px';
             rulerRefs[i].current.style.left = '0px';
             rotationTrackers[i].current = '0deg';
-            rulerRefs[i].current.style.animationName = 'none';
             rulerRefs[i].current.style.transform = `translateX(calc(50vw - 50%)) rotate(${rotationTrackers[i].current})`;
         }
     }
@@ -322,7 +324,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
         for (let i = 0; i < rulersElements.length; i++) {
             readyForAnimation(rulersElements[i]);
         }
-        rulersTitleRef.current.style.animationName = 'appearFromRight';
+        rulersTitleRef.current.style.animationName = 'appearFromRightRulers';
         if (window.innerWidth > 740) {
             rulersRulesIconRef.current.style.animationName = 'appearFromRightRulersRules';
             rulersRulesBox.current.style.animationName = 'appearFromRightRulersRules';
@@ -338,7 +340,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
         centimetersRulerRef.current.style.animationName = 'appearFromRightRulersOtherRulers';
         picasRulerRef.current.style.animationName = 'appearFromRightRulersOtherRulers';
         pixelsRulerRef.current.style.animationName = 'appearFromRightRulersOtherRulers';
-        rulersResetButtonRef.current.style.animationName = 'appearFromRight';
+        rulersResetButtonRef.current.style.animationName = 'appearFromRightRulers';
     }
     const readyForAnimation = (element) => {
         element.current.style.animationName = 'none';

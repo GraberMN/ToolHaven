@@ -303,11 +303,11 @@ input[type='checkbox' i] {
 @keyframes fadeLeftRulersAllRulers {
     from {
         opacity: 100;
-        transform: translateX(calc(50vw - 50%));
+        transform: translateX(calc(-6px + 50vw - 50%));
     }
     to {
         opacity: 0;
-        transform: translateX(calc(20vw - 50%));
+        transform: translateX(calc(-6px + 20vw - 50%));
     }
 }
 @keyframes appearFromLeft {
@@ -330,7 +330,7 @@ input[type='checkbox' i] {
         transform: translateX(30vw);
     }
 }
-@keyframes appearFromRight {
+@keyframes appearFromRightRulers {
     from {
         opacity: 0;
         transform: translateX(30vw);
