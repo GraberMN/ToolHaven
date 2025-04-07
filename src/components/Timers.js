@@ -9,6 +9,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
     const timersSettingsIconRef = useRef(null);
     const timersSettingsBox = useRef(null);
     const timersTitleRef = useRef(null);
+    const timersContainerRef = useRef(null);
     const openOrClose = (element) => {
         if (element.current.style.visibility === "hidden") {
             element.current.style.visibility = "visible";
@@ -30,7 +31,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
         }
     }
     const animateElements = () => {
-        const timersElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox];
+        const timersElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox, timersContainerRef];
         for (let i = 0; i < timersElements.length; i++) {
             readyForAnimation(timersElements[i]);
         }
@@ -46,7 +47,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
             timersSettingsIconRef.current.style.animationName = 'appearFromRightTimersSettingsIconSmall';
             timersSettingsBox.current.style.animationName = 'appearFromRightTimersSettingsBoxSmall';
         }
-        
+        timersContainerRef.current.style.animationName = 'appearFromRightTimers'
     }
     const readyForAnimation = (element) => {
         element.current.style.animationName = 'none';
@@ -65,7 +66,8 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
             timersSettingsIconRef.current.style.display = 'inline';
             timersSettingsBox.current.style.display = 'inline';
             timersSettingsBox.current.style.visibility = 'hidden';
-            const timersElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox];
+            timersContainerRef.current.style.display = 'block';
+            const timersElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox, timersContainerRef];
             for (let i = 0; i < timersElements.length; i++) {
                 readyForMove(timersElements[i]);
             }
@@ -90,7 +92,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
         }
     }, [moveToTimers])
     useEffect(() => {
-        const goneElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox];
+        const goneElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox, timersContainerRef];
         for (let i = 0; i < goneElements.length; i++) {
             goneElements[i].current.style.display = 'none';
         }
@@ -115,11 +117,15 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
             <span id='timersSettingsBox' ref={timersSettingsBox}>
                 <div id='timersSettingsTitle'>Settings</div>
                 <ul>
-                    <li>Color of timer border:</li>
+                    <li>Color of countdown border:</li>
                     <li>Color of stopwatch border:</li>
                 </ul>
             </span>
             <div id='timersTitle' ref={timersTitleRef}>Timers</div>
+            <span id='timersContainer' ref={timersContainerRef}>
+                <span id='countdownTimerTab'>Countdown</span>
+                <span id='stopwatchTab'>Stopwatch</span>
+            </span>
         </div>
     )
 }

@@ -127,6 +127,45 @@ li {
     margin-left: 25px;
     list-style-type: circle;
 }
+#timersContainer {
+    width: 500px;
+    height: 600px;
+    display: block;
+    margin: auto;
+    background-color: rgb(230, 202, 167);
+    border: solid 10px rgba(53, 47, 47, 0.993);
+    border-radius: 40px;
+    transform: translateX(30vw);
+}
+#countdownTimerTab {
+    font-family: cursive;
+    font-size: 30px;
+    text-align: center;
+    border: solid 10px rgba(53, 47, 47, 0.993);
+    border-top: none;
+    border-left: none;
+    border-radius: 40px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+#stopwatchTab {
+    font-family: cursive;
+    font-size: 30px;
+    text-align: center;
+    border: solid 10px rgba(53, 47, 47, 0.993);
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-radius: 40px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    padding-left: 45px;
+    padding-right: 50px;
+}
 .readyForAnim {
     animation-duration: 2s;
     animation-iteration-count: 1;
