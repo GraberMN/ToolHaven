@@ -9,6 +9,7 @@
     transform: translateX(30vw);
     margin-top: 30px;
     margin-bottom: 45px;
+    user-select: none;
 }
 #rulersRulesIcon {
     position: absolute;
@@ -22,6 +23,7 @@
     background-color: rgba(0, 0, 0, 0.705);
     z-index: 995;
     display: inline;
+    user-select: none;
 }
 #rulersRulesIcon:hover {
     border-radius: 20px;
@@ -46,6 +48,7 @@
     overflow-y: scroll;
     overflow-x: hidden;
     display: inline;
+    user-select: none;
 }
 #rulersRulesBox::-webkit-scrollbar {
     scroll-behavior: smooth;
@@ -67,6 +70,7 @@
     font-weight: 600;
     margin-top: 28px;
     margin-right: -60px;
+    user-select: none;
 }
 #rulersSettingsIcon {
     position: absolute;
@@ -80,6 +84,7 @@
     background-color: rgba(0, 0, 0, 0.705);
     z-index: 995;
     display: inline;
+    user-select: none;
 }
 #rulersSettingsIcon:hover {
     border-radius: 20px;
@@ -104,6 +109,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     display: inline;
+    user-select: none;
 }
 ul > input {
     margin-left: -40px;
@@ -121,6 +127,7 @@ ul > span {
     font-weight: 600;
     margin-top: 28px;
     margin-right: 60px;
+    user-select: none;
 }
 ul {
     margin-top: 22px;
@@ -154,6 +161,7 @@ input[type='checkbox' i] {
     display: block;
     cursor: move;
     z-index: 996;
+    user-select: none;
 }
 #inchesRuler:focus {
     outline: none;
@@ -168,6 +176,7 @@ input[type='checkbox' i] {
     display: block;
     cursor: move;
     z-index: 999;
+    user-select: none;
 }
 #centimetersRuler:focus {
     outline: none;
@@ -182,6 +191,7 @@ input[type='checkbox' i] {
     display: block;
     cursor: move;
     z-index: 997;
+    user-select: none;
 }
 #picasRuler:focus {
     outline: none;
@@ -196,6 +206,7 @@ input[type='checkbox' i] {
     display: block;
     cursor: move;
     z-index: 998;
+    user-select: none;
 }
 #pixelsRuler:focus {
     outline: none;
@@ -210,6 +221,7 @@ input[type='checkbox' i] {
     background-color: lightskyblue;
     cursor: pointer;
     margin-top: 654px;
+    user-select: none;
 }
 #rulersResetButton:hover {
     background-color: deepskyblue;
@@ -223,6 +235,7 @@ input[type='checkbox' i] {
     height: auto;
     transform: translateX(270px);
     display: inline;
+    user-select: none;
 }
 .readyForAnim {
     animation-duration: 2s;

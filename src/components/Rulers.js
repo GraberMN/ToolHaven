@@ -511,9 +511,9 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
     }, []);
     return (
         <div>
-            <img onClick={() => openOrClose(rulersRulesBox)} id='rulersRulesIcon' src={rulesIcon} ref={rulersRulesIconRef} alt='rulersRulesIcon' title="rulersRules" />
-            <span id='rulersRulesBox' ref={rulersRulesBox}>
-                <div id='rulersRulesTitle'>Rules</div>
+            <img onClick={() => openOrClose(rulersRulesBox)} id='rulersRulesIcon' draggable={false} src={rulesIcon} ref={rulersRulesIconRef} alt='rulersRulesIcon' title="rulersRules" />
+            <span id='rulersRulesBox' draggable={false} ref={rulersRulesBox}>
+                <div id='rulersRulesTitle' draggable={false}>Rules</div>
                 <ul>
                     <li>Hover over each ruler or each external button to find out what it is/represents.</li>
                     <li>The Settings tab lets you adjust the rulers that are displayed or hidden, each of their border colors, and more.</li>
@@ -530,9 +530,9 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
                     <li id='lvl2li'>Pixels: each small ruler gap is 5 px, each large ruler gap is 50 px.</li>
                 </ul>
             </span>
-            <img onClick={() => openOrClose(rulersSettingsBox)} id='rulersSettingsIcon' src={settingsIcon} ref={rulersSettingsIconRef} alt='rulersSettingsIcon' title="rulersSettings" />
-            <span id='rulersSettingsBox' ref={rulersSettingsBox}>
-                <div id='rulersSettingsTitle'>Settings</div>
+            <img onClick={() => openOrClose(rulersSettingsBox)} id='rulersSettingsIcon' draggable={false} src={settingsIcon} ref={rulersSettingsIconRef} alt='rulersSettingsIcon' title="rulersSettings" />
+            <span id='rulersSettingsBox' draggable={false} ref={rulersSettingsBox}>
+                <div id='rulersSettingsTitle' draggable={false}>Settings</div>
                 <ul>
                     <li>Displayed rulers:</li>
                     <li id='invisLi'>
@@ -551,16 +551,16 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
                     <input type='color' value={pixelsRulerBorderColorVal} onChange={(e) => onPixelsRulerBorderColorChange(e)} id='pixelsRulerBorderColorPicker' title='pixelsRulerBorderColorPicker' placeholder='pixelsRulerBorderColorPicker' />
                 </ul>
             </span>
-            <div id='rulersTitle' ref={rulersTitleRef}>Rulers</div>
+            <div id='rulersTitle' draggable={false} ref={rulersTitleRef}>Rulers</div>
             <img id='inchesRuler' src={inchesRuler} ref={inchesRulerRef} alt='inchesRuler' title='inchesRuler' />
             <img id='centimetersRuler' src={centimetersRuler} ref={centimetersRulerRef} alt='centimetersRuler' title='centimetersRuler' />
             <img id='picasRuler' src={picasRuler} ref={picasRulerRef} alt='picasRuler' title='picasRuler' />
             <img id='pixelsRuler' src={pixelsRuler} ref={pixelsRulerRef} alt='pixelsRuler' title='pixelsRuler' />
-            <button onClick={() => resetRulers()} id='rulersResetButton' ref={rulersResetButtonRef} title='rulersResetButton'>Reset</button>
+            <button onClick={() => resetRulers()} id='rulersResetButton' draggable={false} ref={rulersResetButtonRef} title='rulersResetButton'>Reset</button>
             <map name='toTimersMap'>
                 <area onClick={() => window.innerWidth > 740 ? orangeRightArrowTransition(true) : orangeRightArrowTransition(false)} onMouseOver={() => blurOrangeRightArrow()} onMouseOut={() => unBlurOrangeRightArrow()} id='toTimersMap' ref={orangeRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toTimers' title='toTimers'></area>
             </map>
-            <img id='toTimers' useMap='#toTimersMap' ref={rightOrangeArrow} src={orangeRightArrow} alt='toTimers'></img>
+            <img id='toTimers' useMap='#toTimersMap' draggable={false} ref={rightOrangeArrow} src={orangeRightArrow} alt='toTimers'></img>
         </div>
     );
 }

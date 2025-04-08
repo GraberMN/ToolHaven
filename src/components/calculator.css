@@ -8,6 +8,7 @@ body {
     font-weight: bolder;
     color: hsl(110, 74%, 41%);
     display: block;
+    user-select: none;
 }
 #rulesIcon {
     position: absolute;
@@ -21,6 +22,7 @@ body {
     background-color: rgba(0, 0, 0, 0.705);
     z-index: 999;
     display: inline;
+    user-select: none;
 }
 #rulesIcon:hover {
     border-radius: 20px;
@@ -45,6 +47,7 @@ body {
     overflow-y: scroll;
     overflow-x: hidden;
     display: inline;
+    user-select: none;
 }
 #rulesBox::-webkit-scrollbar {
     scroll-behavior: smooth;
@@ -66,6 +69,7 @@ body {
     font-weight: 600;
     margin-top: 28px;
     margin-right: -60px;
+    user-select: none;
 }
 #settingsIcon {
     position: absolute;
@@ -79,6 +83,7 @@ body {
     background-color: rgba(0, 0, 0, 0.705);
     z-index: 999;
     display: inline;
+    user-select: none;
 }
 #settingsIcon:hover {
     border-radius: 20px;
@@ -103,6 +108,7 @@ body {
     overflow-y: auto;
     overflow-x: hidden;
     display: inline;
+    user-select: none;
 }
 #settingsBox::-webkit-scrollbar {
     scroll-behavior: smooth;
@@ -141,6 +147,7 @@ ul > span {
     font-weight: 600;
     margin-top: 28px;
     margin-right: 60px;
+    user-select: none;
 }
 ul {
     margin-top: 22px;
@@ -193,6 +200,7 @@ li {
     padding-bottom: 1px;
     background-color: white;
     display: inline;
+    user-select: none;
 }
 #historyIcon:hover {
     border-color: rgba(0, 0, 0, 0.705);
@@ -212,6 +220,7 @@ li {
     background-color: white;
     overflow-y: auto;
     display: inline;
+    user-select: none;
 }
 #historyBox::-webkit-scrollbar {
     scroll-behavior: smooth;
@@ -232,6 +241,7 @@ li {
     font-size: 30px;
     font-weight: 600;
     margin-top: 7px;
+    user-select: none;
 }
 span > div {
     font-family: cursive;
@@ -261,6 +271,7 @@ button {
     margin: auto;
     background-color:aliceblue;
     cursor: pointer;
+    user-select: none;
 }
 button:hover {
     background-color: hsl(210, 11%, 75%)
@@ -319,6 +330,7 @@ button:active {
     height: auto;
     transform: translateX(270px);
     display: inline;
+    user-select: none;
 }
 .readyForAnim {
     animation-duration: 2s;

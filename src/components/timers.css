@@ -9,6 +9,7 @@
     transform: translateX(30vw);
     margin-top: 30px;
     margin-bottom: 45px;
+    user-select: none;
 }
 #timersRulesIcon {
     position: absolute;
@@ -22,6 +23,7 @@
     background-color: rgba(0, 0, 0, 0.705);
     z-index: 999;
     display: inline;
+    user-select: none;
 }
 #timersRulesIcon:hover {
     border-radius: 20px;
@@ -46,6 +48,7 @@
     overflow-y: scroll;
     overflow-x: hidden;
     display: inline;
+    user-select: none;
 }
 #timersRulesBox::-webkit-scrollbar {
     scroll-behavior: smooth;
@@ -67,6 +70,7 @@
     font-weight: 600;
     margin-top: 28px;
     margin-right: -60px;
+    user-select: none;
 }
 #timersSettingsIcon {
     position: absolute;
@@ -80,6 +84,7 @@
     background-color: rgba(0, 0, 0, 0.705);
     z-index: 999;
     display: inline;
+    user-select: none;
 }
 #timersSettingsIcon:hover {
     border-radius: 20px;
@@ -104,12 +109,14 @@
     overflow-y: auto;
     overflow-x: hidden;
     display: inline;
+    user-select: none;
 }
 #timersSettingsTitle {
     font-size: 30px;
     font-weight: 600;
     margin-top: 28px;
     margin-right: 60px;
+    user-select: none;
 }
 ul {
     margin-top: 22px;
@@ -132,39 +139,66 @@ li {
     height: 600px;
     display: block;
     margin: auto;
-    background-color: rgb(230, 202, 167);
+    background-color: lemonchiffon;
     border: solid 10px rgba(53, 47, 47, 0.993);
     border-radius: 40px;
     transform: translateX(30vw);
+    padding-top: 12px;
+    user-select: none;
 }
-#countdownTimerTab {
+#countdownTab {
     font-family: cursive;
     font-size: 30px;
+    font-weight: bold;
     text-align: center;
+    background-color: lemonchiffon;
     border: solid 10px rgba(53, 47, 47, 0.993);
     border-top: none;
     border-left: none;
-    border-radius: 40px;
+    border-radius: 30px;
     border-bottom-left-radius: 0px;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 54px;
+    padding-right: 44px;
+    padding-top: 12px;
+    padding-bottom: 15px;
+    cursor: pointer;
+    user-select: none;
+}
+#countdownTab:hover {
+    background-color: whitesmoke;
+}
+#countdownTab:active {
+    background-color: lemonchiffon;
 }
 #stopwatchTab {
     font-family: cursive;
     font-size: 30px;
+    font-weight: bold;
     text-align: center;
+    background-color: wheat;
     border: solid 10px rgba(53, 47, 47, 0.993);
     border-top: none;
     border-right: none;
     border-left: none;
-    border-radius: 40px;
+    border-radius: 30px;
     border-bottom-left-radius: 0px;
     border-top-left-radius: 0px;
     border-bottom-right-radius: 0px;
-    padding-left: 45px;
-    padding-right: 50px;
+    padding-left: 47px;
+    padding-right: 45px;
+    padding-top: 12px;
+    padding-bottom: 15px;
+    cursor: pointer;
+    z-index: 998;
+    user-select: none;
+}
+#stopwatchTab:hover {
+    background-color: whitesmoke;
+}
+#stopwatchTab:active {
+    background-color: wheat;
 }
 .readyForAnim {
     animation-duration: 2s;

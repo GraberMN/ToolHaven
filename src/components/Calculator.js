@@ -268,9 +268,9 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers }) {
     }, []);
     return (
         <div>
-            <img onClick={() => openOrClose(rulesBox)} id='rulesIcon' src={rulesIcon} ref={rulesIconRef} alt='calculatorRulesIcon' title="calculatorRules" />
-            <span id='rulesBox' ref={rulesBox}>
-                <div id='rulesTitle'>Rules</div>
+            <img onClick={() => openOrClose(rulesBox)} id='rulesIcon' draggable={false} src={rulesIcon} ref={rulesIconRef} alt='calculatorRulesIcon' title="calculatorRules" />
+            <span id='rulesBox' draggable={false} ref={rulesBox}>
+                <div id='rulesTitle' draggable={false}>Rules</div>
                 <ul>
                     <li>Hover over each calculator or external button to find out what it is/represents.</li>
                     <li>The top left clock icon opens the History tab, which shows you all prior valid calculations until page reload.</li>
@@ -287,9 +287,9 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers }) {
                     <li id='lvl2li'>Square root: only 1 positive real number allowed inside, "2π" or "5.2e" count as 2, all allowed in front.</li>
                 </ul>
             </span>
-            <img onClick={() => openOrClose(settingsBox)} id='settingsIcon' src={settingsIcon} ref={settingsIconRef} alt='settingsIcon' title="calculatorSettings" />
-            <span id='settingsBox' ref={settingsBox}>
-                <div id='settingsTitle'>Settings</div>
+            <img onClick={() => openOrClose(settingsBox)} id='settingsIcon' draggable={false} src={settingsIcon} ref={settingsIconRef} alt='settingsIcon' title="calculatorSettings" />
+            <span id='settingsBox' draggable={false} ref={settingsBox}>
+                <div id='settingsTitle' draggable={false}>Settings</div>
                 <ul>
                     <li>Max d. places of calculations:</li>
                     <input type='range' min={2} max={16} value={maxDecimalPlacesVal} onChange={(e) => setMaxDecimalPlacesVal(e.target.value)} title='maxDecimalPlacesSlider' placeholder='maxDecimalPlacesSlider' />
@@ -303,12 +303,12 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers }) {
                     <input type='color' value={buttonContainerColorVal} onChange={(e) => onButtonContainerColorChange(e)} title='buttonContainerColorPicker' placeholder='buttonContainerColorPicker' />
                 </ul>
             </span>
-            <h1 id="calcTitle" ref={calcTitleRef}>Calculator</h1>
-            <span id="calculator">
+            <h1 id="calcTitle" draggable={false} ref={calcTitleRef}>Calculator</h1>
+            <span id="calculator" draggable={false}>
                 <input type="text" id='inputField' ref={inputField} maxLength={maxCharVal} title='inputField' placeholder='Loading...' readOnly />
                 <input type='text' id='ansField' ref={ansField} title='answerField' placeholder='Loading...' readOnly />
-                <img onClick={() => openOrClose(historyBox)} id='historyIcon' src={historyIcon} ref={historyIconRef} alt='historyIcon' title='calculationHistory' />
-                <span id='historyBox' ref={historyBox}>
+                <img onClick={() => openOrClose(historyBox)} id='historyIcon' draggable={false} src={historyIcon} ref={historyIconRef} alt='historyIcon' title='calculationHistory' />
+                <span id='historyBox' draggable={false} ref={historyBox}>
                     <div id='historyTitle'> History </div>
                     {
                         calcHistory.map((historyEntry, index) =>
@@ -316,7 +316,7 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers }) {
                         )
                     }
                 </span>
-                <span id="buttons" ref={buttonContainer}>
+                <span id="buttons" draggable={false} ref={buttonContainer}>
                     <button onClick={() => clearDisplay()} className='deleter' title='clearAll'>C</button>
                     <button onClick={() => appendToDisplay('7', true)} title='seven'>7</button>
                     <button onClick={() => appendToDisplay('8', true)} title='eight'>8</button>
@@ -347,7 +347,7 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers }) {
             <map name='toRulersMap'>
                 <area onClick={() => window.innerWidth > 740 ? blueRightArrowTransition(true) : blueRightArrowTransition(false)} onMouseOver={() => blurBlueRightArrow()} onMouseOut={() => unBlurBlueRightArrow()} id='toRulersMap' ref={blueRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toRulers' title='toRulers'></area>
             </map>
-            <img id='toRulers' useMap='#toRulersMap' ref={rightBlueArrow} src={blueRightArrow} alt='toRulers'></img>
+            <img id='toRulers' useMap='#toRulersMap' draggable={false} ref={rightBlueArrow} src={blueRightArrow} alt='toRulers'></img>
         </div>
     );
 }

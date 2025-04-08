@@ -17,6 +17,12 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
             element.current.style.visibility = "hidden";
         }
     }
+    const onCountdownTabClick = () => {
+        timersContainerRef.current.style.backgroundColor = 'lemonchiffon';
+    }
+    const onStopwatchTabClick = () => {
+        timersContainerRef.current.style.backgroundColor = 'wheat';
+    }
     const onAdjustWindowWidthTimers = () => {
         if (window.innerWidth <= 740) {
             timersRulesIconRef.current.style.transform = 'translateX(-260px)';
@@ -102,9 +108,9 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
     }, [])
     return (
         <div>
-            <img onClick={() => openOrClose(timersRulesBox)} id='timersRulesIcon' src={rulesIcon} ref={timersRulesIconRef} alt='timersRulesIcon' title="timersRules" />
-            <span id='timersRulesBox' ref={timersRulesBox}>
-                <div id='timersRulesTitle'>Rules</div>
+            <img onClick={() => openOrClose(timersRulesBox)} id='timersRulesIcon' draggable={false} src={rulesIcon} ref={timersRulesIconRef} alt='timersRulesIcon' title="timersRules" />
+            <span id='timersRulesBox' draggable={false} ref={timersRulesBox}>
+                <div id='timersRulesTitle' draggable={false}>Rules</div>
                 <ul>
                     <li>Hover over each timer or each item/ button to find out what it is/represents.</li>
                     <li>The Settings tab lets you  .</li>
@@ -113,18 +119,18 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                     <li id='lvl2li'></li>
                 </ul>
             </span>
-            <img onClick={() => openOrClose(timersSettingsBox)} id='timersSettingsIcon' src={settingsIcon} ref={timersSettingsIconRef} alt='timersSettingsIcon' title="timersSettings" />
-            <span id='timersSettingsBox' ref={timersSettingsBox}>
+            <img onClick={() => openOrClose(timersSettingsBox)} id='timersSettingsIcon' draggable={false} src={settingsIcon} ref={timersSettingsIconRef} alt='timersSettingsIcon' title="timersSettings" />
+            <span id='timersSettingsBox' draggable={false} ref={timersSettingsBox}>
                 <div id='timersSettingsTitle'>Settings</div>
                 <ul>
                     <li>Color of countdown border:</li>
                     <li>Color of stopwatch border:</li>
                 </ul>
             </span>
-            <div id='timersTitle' ref={timersTitleRef}>Timers</div>
-            <span id='timersContainer' ref={timersContainerRef}>
-                <span id='countdownTimerTab'>Countdown</span>
-                <span id='stopwatchTab'>Stopwatch</span>
+            <div id='timersTitle' draggable={false} ref={timersTitleRef}>Timers</div>
+            <span id='timersContainer' draggable={false} ref={timersContainerRef}>
+                <span onClick={() => onCountdownTabClick()} id='countdownTab' draggable={false}>Countdown</span>
+                <span onClick={() => onStopwatchTabClick()} id='stopwatchTab' draggable={false}>Stopwatch</span>
             </span>
         </div>
     )
