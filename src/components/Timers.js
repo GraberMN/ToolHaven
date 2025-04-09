@@ -10,6 +10,10 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
     const timersSettingsBox = useRef(null);
     const timersTitleRef = useRef(null);
     const timersContainerRef = useRef(null);
+    const countdownSettingsListRef = useRef(null);
+    const stopwatchSettingsListRef = useRef(null);
+    const countdownSettingsTitleRef = useRef(null);
+    const stopwatchSettingsTitleRef = useRef(null);
     const openOrClose = (element) => {
         if (element.current.style.visibility === "hidden") {
             element.current.style.visibility = "visible";
@@ -17,11 +21,29 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
             element.current.style.visibility = "hidden";
         }
     }
+    const highlight = (element) => {
+        element.current.style.fontWeight = '600';
+        element.current.style.textDecoration = 'solid 4px';
+        element.current.style.textDecorationLine = 'underline'
+    }
+    const unhighlight = (element) => {
+        element.current.style.fontWeight = '500';
+        element.current.style.textDecoration = 'none';
+        element.current.style.textDecorationLine = 'none';
+    }
     const onCountdownTabClick = () => {
         timersContainerRef.current.style.backgroundColor = 'lemonchiffon';
+        countdownSettingsListRef.current.style.display = 'block';
+        stopwatchSettingsListRef.current.style.display = 'none';
+        highlight(countdownSettingsTitleRef);
+        unhighlight(stopwatchSettingsTitleRef);
     }
     const onStopwatchTabClick = () => {
         timersContainerRef.current.style.backgroundColor = 'wheat';
+        countdownSettingsListRef.current.style.display = 'none';
+        stopwatchSettingsListRef.current.style.display = 'block';
+        highlight(stopwatchSettingsTitleRef);
+        unhighlight(countdownSettingsTitleRef);
     }
     const onAdjustWindowWidthTimers = () => {
         if (window.innerWidth <= 740) {
@@ -73,6 +95,8 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
             timersSettingsBox.current.style.display = 'inline';
             timersSettingsBox.current.style.visibility = 'hidden';
             timersContainerRef.current.style.display = 'block';
+            countdownSettingsListRef.current.style.display = 'block';
+            stopwatchSettingsListRef.current.style.display = 'none';
             const timersElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox, timersContainerRef];
             for (let i = 0; i < timersElements.length; i++) {
                 readyForMove(timersElements[i]);
@@ -122,8 +146,14 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
             <img onClick={() => openOrClose(timersSettingsBox)} id='timersSettingsIcon' draggable={false} src={settingsIcon} ref={timersSettingsIconRef} alt='timersSettingsIcon' title="timersSettings" />
             <span id='timersSettingsBox' draggable={false} ref={timersSettingsBox}>
                 <div id='timersSettingsTitle'>Settings</div>
-                <ul>
+                <span id='settingsTitleContainer'>
+                    <div id='countdownSettingsTitle' ref={countdownSettingsTitleRef}>Countdown</div>
+                    <div id='stopwatchSettingsTitle' ref={stopwatchSettingsTitleRef}>Stopwatch</div>
+                </span>
+                <ul id='countdownSettingsList' ref={countdownSettingsListRef}>
                     <li>Color of countdown border:</li>
+                </ul>
+                <ul id='stopwatchSettingsList' ref={stopwatchSettingsListRef}>
                     <li>Color of stopwatch border:</li>
                 </ul>
             </span>

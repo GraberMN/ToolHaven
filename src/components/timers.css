@@ -118,8 +118,32 @@
     margin-right: 60px;
     user-select: none;
 }
+#settingsTitleContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 14px;
+}
+#countdownSettingsTitle {
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: solid 4px;
+    text-decoration-line: underline;
+    font-family: cursive;
+    padding-right: 10px;
+}
+#stopwatchSettingsTitle {
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: none;
+    text-decoration-line: none;
+    font-family: cursive;
+    padding-right: 15px;
+}
 ul {
     margin-top: 22px;
+}
+#timersSettingsBox > ul {
+    margin-top: 0px;
 }
 li {
     margin-top: 5px;
