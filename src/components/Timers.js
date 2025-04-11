@@ -4,6 +4,8 @@ import './timers.css';
 
 function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
     const [settingsIcon, rulesIcon] = timersImagesArray;
+    const [countdownBorderColorVal, setCountdownBorderColorVal] = useState('#352f2ffd');
+    const [stopwatchBorderColorVal, setStopwatchBorderColorVal] = useState('#352f2ffd');
     const timersRulesIconRef = useRef(null);
     const timersRulesBox = useRef(null);
     const timersSettingsIconRef = useRef(null);
@@ -14,12 +16,24 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
     const stopwatchSettingsListRef = useRef(null);
     const countdownSettingsTitleRef = useRef(null);
     const stopwatchSettingsTitleRef = useRef(null);
+    const countdownContentRef = useRef(null);
+    const stopwatchContentRef = useRef(null);
+    const countdownTimerRef = useRef(null);
+    const stopwatchTimerRef = useRef(null);
     const openOrClose = (element) => {
         if (element.current.style.visibility === "hidden") {
             element.current.style.visibility = "visible";
         } else {
             element.current.style.visibility = "hidden";
         }
+    }
+    const onCountdownBorderColorChange = (e) => {
+        setCountdownBorderColorVal(e.target.value);
+        countdownTimerRef.current.style.borderColor = countdownBorderColorVal;
+    }
+    const onStopwatchBorderColorChange = (e) => {
+        setStopwatchBorderColorVal(e.target.value);
+        stopwatchTimerRef.current.style.borderColor = stopwatchBorderColorVal;
     }
     const highlight = (element) => {
         element.current.style.fontWeight = '600';
@@ -37,13 +51,17 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
         stopwatchSettingsListRef.current.style.display = 'none';
         highlight(countdownSettingsTitleRef);
         unhighlight(stopwatchSettingsTitleRef);
+        countdownContentRef.current.style.display = 'block';
+        stopwatchContentRef.current.style.display = 'none';
     }
     const onStopwatchTabClick = () => {
-        timersContainerRef.current.style.backgroundColor = 'wheat';
+        timersContainerRef.current.style.backgroundColor = 'rgb(228, 214, 92)';
         countdownSettingsListRef.current.style.display = 'none';
         stopwatchSettingsListRef.current.style.display = 'block';
         highlight(stopwatchSettingsTitleRef);
         unhighlight(countdownSettingsTitleRef);
+        countdownContentRef.current.style.display = 'none';
+        stopwatchContentRef.current.style.display = 'block';
     }
     const onAdjustWindowWidthTimers = () => {
         if (window.innerWidth <= 740) {
@@ -75,7 +93,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
             timersSettingsIconRef.current.style.animationName = 'appearFromRightTimersSettingsIconSmall';
             timersSettingsBox.current.style.animationName = 'appearFromRightTimersSettingsBoxSmall';
         }
-        timersContainerRef.current.style.animationName = 'appearFromRightTimers'
+        timersContainerRef.current.style.animationName = 'appearFromRightTimers';
     }
     const readyForAnimation = (element) => {
         element.current.style.animationName = 'none';
@@ -97,6 +115,8 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
             timersContainerRef.current.style.display = 'block';
             countdownSettingsListRef.current.style.display = 'block';
             stopwatchSettingsListRef.current.style.display = 'none';
+            countdownContentRef.current.style.display = 'block';
+            stopwatchContentRef.current.style.display = 'none';
             const timersElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox, timersContainerRef];
             for (let i = 0; i < timersElements.length; i++) {
                 readyForMove(timersElements[i]);
@@ -122,7 +142,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
         }
     }, [moveToTimers])
     useEffect(() => {
-        const goneElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox, timersContainerRef];
+        const goneElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox, timersContainerRef, countdownContentRef, stopwatchContentRef];
         for (let i = 0; i < goneElements.length; i++) {
             goneElements[i].current.style.display = 'none';
         }
@@ -152,15 +172,27 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                 </span>
                 <ul id='countdownSettingsList' ref={countdownSettingsListRef}>
                     <li>Color of countdown border:</li>
+                    <input type='color' value={countdownBorderColorVal} onChange={(e) => onCountdownBorderColorChange(e)} id='countdownBorderColorPicker' title='countdownBorderColorPicker' placeholder='countdownBorderColorPicker' />
                 </ul>
                 <ul id='stopwatchSettingsList' ref={stopwatchSettingsListRef}>
                     <li>Color of stopwatch border:</li>
+                    <input type='color' value={stopwatchBorderColorVal} onChange={(e) => onStopwatchBorderColorChange(e)} id='stopwatchBorderColorPicker' title='stopwatchBorderColorPicker' placeholder='stopwatchBorderColorPicker' />
                 </ul>
             </span>
             <div id='timersTitle' draggable={false} ref={timersTitleRef}>Timers</div>
             <span id='timersContainer' draggable={false} ref={timersContainerRef}>
                 <span onClick={() => onCountdownTabClick()} id='countdownTab' draggable={false}>Countdown</span>
                 <span onClick={() => onStopwatchTabClick()} id='stopwatchTab' draggable={false}>Stopwatch</span>
+                <div id='countdownContent' ref={countdownContentRef}>
+                    <div id='countdownTimer' ref={countdownTimerRef}>
+                        00:00:00
+                    </div>
+                </div>
+                <div id='stopwatchContent' ref={stopwatchContentRef}>
+                    <div id='stopwatchTimer' ref={stopwatchTimerRef}>
+                        00:00:01
+                    </div>
+                </div>
             </span>
         </div>
     )
