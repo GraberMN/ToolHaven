@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import './home.css';
 
 function Home({ homeImagesArray, moveToCalc, setMoveToCalc }) {
-    const [greenRightArrow] = homeImagesArray;
+    const [calculatorThumbnail, rulerThumbnail, timerThumbnail, greenRightArrow] = homeImagesArray;
     const [greenRightArrowTransitionDone, setGreenRightArrowTransitionDone] = useState(false);
     const homeTitleRef = useRef(null);
     const projectNameRef = useRef(null);
@@ -75,14 +75,19 @@ function Home({ homeImagesArray, moveToCalc, setMoveToCalc }) {
             <div id='projectName' draggable={false} ref={projectNameRef}>ToolHaven</div>
             <div id='toolsContainer' draggable={false} ref={toolsContainerRef}>
                 <div id='toolsTitle'>Tools:</div>
-                Placeholder
+                <span id='toolGrid'>
+                    <img class='tool' id='calcTool' src={calculatorThumbnail} title='Calculator'></img>
+                    <img class='tool' id='rulerTool' src={rulerThumbnail} title='Rulers'></img>
+                    <img class='tool' id='timerTool' src={timerThumbnail} title='Timers'></img>
+                    <img class='tool'></img>
+                </span>
             </div>
             <div id='byContainer' draggable={false} ref={byContainerRef}>
                 <div id='toolsTitle'>By:</div>
                 Placeholder
             </div>
             <map name='toCalcMap'>
-                <area onClick={() => window.innerWidth > 740 ? greenRightArrowTransition(true) : greenRightArrowTransition(false)} onMouseOver={() => blurGreenRightArrow()} onMouseOut={() => unBlurGreenRightArrow()} id='toCalcMap' ref={greenRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toCalc' title='toCalc'></area>
+                <area onClick={() => window.innerWidth > 740 ? greenRightArrowTransition(true) : greenRightArrowTransition(false)} onMouseOver={() => blurGreenRightArrow()} onMouseOut={() => unBlurGreenRightArrow()} id='toCalcMap' ref={greenRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toCalc' title='toCalculator'></area>
             </map>
             <img id='toCalc' useMap='#toCalcMap' draggable={false} ref={rightGreenArrow} src={greenRightArrow} alt='toCalc'></img>
         </div>

@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import logo from './logo.svg';
+import calculatorThumbnail from './Images/CalculatorThumbnail.jpg';
+import rulerThumbnail from './Images/RulerThumbnail.jpg';
+import timerThumbnail from './Images/TimerThumbnail.jpg'
 import greenRightArrow from './Images/GreenRightArrow.png';
 import settingsIcon from './Images/Settings Icon.svg';
 import historyIcon from './Images/History Icon.svg';
@@ -17,7 +20,7 @@ import Rulers from './components/Rulers';
 import Timers from './components/Timers';
 
 function App() {
-  const homeImagesArray = [greenRightArrow];
+  const homeImagesArray = [calculatorThumbnail, rulerThumbnail, timerThumbnail, greenRightArrow];
   const calcImagesArray = [settingsIcon, historyIcon, rulesIcon, blueRightArrow];
   const rulersImagesArray = [inchesRuler, centimetersRuler, picasRuler, pixelsRuler, settingsIcon, rulesIcon, orangeRightArrow];
   const timersImagesArray = [settingsIcon, rulesIcon];
