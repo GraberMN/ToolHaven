@@ -1,7 +1,3 @@
-body {
-    background-color: rgba(141, 199, 154, 0.482);
-    min-width: 600px;
-}
 #calcTitle {
     font-size: 43px;
     font-family: cursive;
@@ -422,7 +418,7 @@ button:active {
         transform: translateX(calc(-30vw - 45px));
     }
 }
-@keyframes fadeLeftHistory {
+@keyframes fadeLeftHistoryIcon {
     from {
         opacity: 100;
         transform: translateX(calc(0vw - 523px));
@@ -430,6 +426,16 @@ button:active {
     to {
         opacity: 0;
         transform: translateX(calc(-30vw - 523px));
+    }
+}
+@keyframes fadeLeftHistoryBox {
+    from {
+        opacity: 100;
+        transform: translateX(calc(0vw - 533px));
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw - 533px));
     }
 }
 @keyframes fadeLeftAnsField {
@@ -470,5 +476,96 @@ button:active {
     to {
         opacity: 100;
         transform: translateX(0vw);
+    }
+}
+@keyframes appearFromRightRules {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw - 367px));
+    }
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw - 367px));
+    }
+}
+@keyframes appearFromRightRulesSmall {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw - 260px));
+    }
+
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw - 260px));
+    }
+}
+@keyframes appearFromRightSettingsIcon {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw + 285px));
+    }
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw + 285px));
+    }
+}
+@keyframes appearFromRightSettingsIconSmall {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw + 180px));
+    }
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw + 180px));
+    }
+}
+@keyframes appearFromRightSettingsBox {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw + 60px));
+    }
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw + 60px));
+    }
+}
+@keyframes appearFromRightSettingsBoxSmall {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw - 45px));
+    }
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw - 45px));
+    }
+}
+@keyframes appearFromRightHistoryIcon {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw - 523px));
+    }
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw - 523px));
+    }
+}
+@keyframes appearFromRightHistoryBox {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw - 533px));
+    }
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw - 533px));
+    }
+}
+@keyframes appearFromRightAnsField {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw - 493px));
+    }
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw - 493px));
     }
 }

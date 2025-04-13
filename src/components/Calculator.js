@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import './calculator.css';
 
-function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers }) {
+function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc, setMoveToCalc }) {
     const [settingsIcon, historyIcon, rulesIcon, blueRightArrow] = calcImagesArray;
     const [calcHistory, setCalcHistory] = useState([]);
     const [maxCharVal, setMaxCarVal] = useState(27);
@@ -147,6 +147,19 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers }) {
         setButtonContainerColorVal(e.target.value);
         buttonContainer.current.style.backgroundColor = buttonContainerColorVal;
     }
+    const onAdjustWindowWidth = () => {
+        if (window.innerWidth <= 740) {
+            rulesIconRef.current.style.transform = 'translateX(-260px)';
+            rulesBox.current.style.transform = 'translateX(-260px)';
+            settingsIconRef.current.style.transform = 'translateX(180px)';
+            settingsBox.current.style.transform = 'translateX(-45px)';
+        } else {
+            rulesIconRef.current.style.transform = 'translateX(-367px)';
+            rulesBox.current.style.transform = 'translateX(-367px)';
+            settingsIconRef.current.style.transform = 'translateX(285px)';
+            settingsBox.current.style.transform = 'translateX(60px)';
+        }
+    }
     const blurBlueRightArrow = () => {
         rightBlueArrow.current.style.filter = 'blur(1px)';
         blueRightArrowArea.current.style.cursor = 'pointer';
@@ -173,10 +186,36 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers }) {
             }
         }
     }
+    const animateElements = () => {
+        const calcElements = [inputField, buttonContainer, calcTitleRef, rulesIconRef, rulesBox, settingsIconRef, settingsBox, historyIconRef, historyBox, ansField, rightBlueArrow];
+        for (let i = 0; i < calcElements.length; i++) {
+            readyForAnimation(calcElements[i]);
+        }
+        calcTitleRef.current.style.animationName = 'appearFromRight';
+        inputField.current.style.animationName = 'appearFromRight';
+        buttonContainer.current.style.animationName = 'appearFromRight';
+        if (window.innerWidth > 740) {
+            rulesIconRef.current.style.animationName = 'appearFromRightRules';
+            rulesBox.current.style.animationName = 'appearFromRightRules';
+            settingsIconRef.current.style.animationName = 'appearFromRightSettingsIcon';
+            settingsBox.current.style.animationName = 'appearFromRightSettingsBox';
+        } else {
+            rulesIconRef.current.style.animationName = 'appearFromRightRulesSmall';
+            rulesBox.current.style.animationName = 'appearFromRightRulesSmall';
+            settingsIconRef.current.style.animationName = 'appearFromRightSettingsIconSmall';
+            settingsBox.current.style.animationName = 'appearFromRightSettingsBoxSmall';
+        }
+        historyIconRef.current.style.animationName = 'appearFromRightHistoryIcon';
+        historyBox.current.style.animationName = 'appearFromRightHistoryBox';
+        ansField.current.style.animationName = 'appearFromRightAnsField';
+    }
     const readyForAnimation = (element) => {
         element.current.style.animationName = 'none';
         element.current.classList.remove('readyForAnim');
         element.current.classList.add('readyForAnim');
+    }
+    const readyForMove = (element) => {
+        element.current.style.opacity = '0';
     }
     const blueRightArrowTransition = (screenWidthBig) => {
         setMoveToRulers(true);
@@ -209,11 +248,10 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers }) {
         } else {
             settingsBox.current.style.animationName = 'fadeLeftSettingsBoxSmall';
         }
-        const changedHistoryElements = [historyIconRef, historyBox];
-        for (let i = 0; i < changedHistoryElements.length; i++) {
-            readyForAnimation(changedHistoryElements[i]);
-            changedHistoryElements[i].current.style.animationName = 'fadeLeftHistory';
-        }
+        readyForAnimation(historyIconRef);
+        historyIconRef.current.style.animationName = 'fadeLeftHistoryIcon';
+        readyForAnimation(historyBox);
+        historyBox.current.style.animationName = 'fadeLeftHistoryBox';
         readyForAnimation(ansField);
         ansField.current.style.animationName = 'fadeLeftAnsField';
         rightBlueArrow.current.style.display = 'none';
@@ -249,14 +287,49 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers }) {
         }
     }, [blueRightArrowTransitionDone]);
     useEffect(() => {
-        window.addEventListener("resize", positionBlueRightArrow);
-        if (window.innerWidth <= 740) {
-            rightBlueArrow.current.style.transform = 'translateX(165px)';
+        if (moveToCalc) {
+            inputField.current.style.display = 'inline';
+            buttonContainer.current.style.display = 'grid';
+            calcTitleRef.current.style.display = 'block';
+            rulesIconRef.current.style.display = 'inline';
+            rulesBox.current.style.display = 'inline';
+            settingsIconRef.current.style.display = 'inline';
+            settingsBox.current.style.display = 'inline';
+            historyIconRef.current.style.display = 'inline';
+            historyBox.current.style.display = 'inline';
+            ansField.current.style.display = 'inline';
+            const calcElements = [inputField, buttonContainer, calcTitleRef, rulesIconRef, rulesBox, settingsIconRef, settingsBox, historyIconRef, historyBox, ansField];
+            for (let i = 0; i < calcElements.length; i++) {
+                readyForMove(calcElements[i]);
+            }
+            document.body.style.backgroundColor = 'rgba(141, 199, 154, 0.482)';
+            setTimeout(() => {
+                animateElements();
+            }, 2000);
+            setTimeout(() => {
+                const calcNonCalcElements = [rulesIconRef, rulesBox, settingsIconRef, settingsBox];
+                for (let i = 0; i < calcNonCalcElements.length; i++) {
+                    calcNonCalcElements[i].current.style.animationName = 'none';
+                    calcNonCalcElements[i].current.style.opacity = '100';
+                }
+                window.addEventListener('resize', onAdjustWindowWidth);
+                rightBlueArrow.current.style.display = 'inline';
+                if (window.innerWidth <= 740) {
+                    rightBlueArrow.current.style.transform = 'translateX(165px)';
+                    rulesIconRef.current.style.transform = 'translateX(-260px)';
+                    rulesBox.current.style.transform = 'translateX(-260px)';
+                    settingsIconRef.current.style.transform = 'translateX(180px)';
+                    settingsBox.current.style.transform = 'translateX(-45px)';
+                }
+            }, 4000);
         }
-        return () => {
-            window.removeEventListener("resize", positionBlueRightArrow);
-        }
-    }, []);
+    }, [moveToCalc]);
+    useEffect(() => {
+            window.addEventListener("resize", positionBlueRightArrow);
+            return () => {
+                window.removeEventListener("resize", positionBlueRightArrow);
+            }
+        }, []);
     useEffect(() => {
         inputField.current.value = "0";
         ansField.current.value = "ANS = 0";
@@ -265,6 +338,13 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers }) {
         historyBox.current.style.visibility = "hidden";
         beforeEval.current = "0";
         ans.current = "0";
+        const calcElements = [inputField, buttonContainer, calcTitleRef, rulesIconRef, rulesBox, settingsIconRef, settingsBox, historyIconRef, historyBox, ansField, rightBlueArrow];
+        for (let i = 0; i < calcElements.length; i++) {
+            calcElements[i].current.style.display = 'none';
+        }
+        return () => {
+            window.removeEventListener("resize", positionBlueRightArrow);
+        }
     }, []);
     return (
         <div>

@@ -46,22 +46,22 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
         element.current.style.textDecorationLine = 'none';
     }
     const onCountdownTabClick = () => {
-        timersContainerRef.current.style.backgroundColor = 'lemonchiffon';
         countdownSettingsListRef.current.style.display = 'block';
         stopwatchSettingsListRef.current.style.display = 'none';
         highlight(countdownSettingsTitleRef);
         unhighlight(stopwatchSettingsTitleRef);
         countdownContentRef.current.style.display = 'block';
         stopwatchContentRef.current.style.display = 'none';
+        timersContainerRef.current.style.backgroundColor = 'rgb(255, 246, 162)';
     }
     const onStopwatchTabClick = () => {
-        timersContainerRef.current.style.backgroundColor = 'rgb(228, 214, 92)';
         countdownSettingsListRef.current.style.display = 'none';
         stopwatchSettingsListRef.current.style.display = 'block';
         highlight(stopwatchSettingsTitleRef);
         unhighlight(countdownSettingsTitleRef);
         countdownContentRef.current.style.display = 'none';
         stopwatchContentRef.current.style.display = 'block';
+        timersContainerRef.current.style.backgroundColor = 'rgb(228, 214, 92)';
     }
     const onAdjustWindowWidthTimers = () => {
         if (window.innerWidth <= 740) {
@@ -122,6 +122,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                 readyForMove(timersElements[i]);
             }
             document.body.style.backgroundColor = 'hsl(28, 77.80%, 85.90%)';
+            timersContainerRef.current.style.backgroundColor = 'rgb(255, 246, 162)';
             setTimeout(() => {
                 animateElements();
             }, 2000);
@@ -181,17 +182,23 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
             </span>
             <div id='timersTitle' draggable={false} ref={timersTitleRef}>Timers</div>
             <span id='timersContainer' draggable={false} ref={timersContainerRef}>
-                <span onClick={() => onCountdownTabClick()} id='countdownTab' draggable={false}>Countdown</span>
-                <span onClick={() => onStopwatchTabClick()} id='stopwatchTab' draggable={false}>Stopwatch</span>
+                <span onClick={() => onCountdownTabClick()} id='countdownTab' draggable={false} title='countdownTab'>Countdown</span>
+                <span onClick={() => onStopwatchTabClick()} id='stopwatchTab' draggable={false} title='stopwatchTab'>Stopwatch</span>
                 <div id='countdownContent' ref={countdownContentRef}>
-                    <div id='countdownTimer' ref={countdownTimerRef}>
+                    <div id='countdownTimer' ref={countdownTimerRef} title='countdownTimer'>
                         00:00:00
                     </div>
+                    <span id='countdownTimerButtons'>
+
+                    </span>
                 </div>
                 <div id='stopwatchContent' ref={stopwatchContentRef}>
-                    <div id='stopwatchTimer' ref={stopwatchTimerRef}>
-                        00:00:01
+                    <div id='stopwatchTimer' ref={stopwatchTimerRef} title='stopwatchTimer'>
+                        00:00:00
                     </div>
+                    <span id='stopwatchTimerButtons'>
+
+                    </span>
                 </div>
             </span>
         </div>

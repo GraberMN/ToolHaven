@@ -163,7 +163,6 @@ li {
     height: 600px;
     display: block;
     margin: auto;
-    background-color: lemonchiffon;
     border: solid 10px rgba(53, 47, 47, 0.993);
     border-radius: 40px;
     transform: translateX(30vw);
@@ -175,7 +174,7 @@ li {
     font-size: 30px;
     font-weight: bold;
     text-align: center;
-    background-color: lemonchiffon;
+    background-color: rgb(255, 246, 162);
     border: solid 10px rgba(53, 47, 47, 0.993);
     border-top: none;
     border-left: none;
@@ -194,14 +193,14 @@ li {
     background-color: whitesmoke;
 }
 #countdownTab:active {
-    background-color: lemonchiffon;
+    background-color: rgb(255, 246, 162);;
 }
 #stopwatchTab {
     font-family: cursive;
     font-size: 30px;
     font-weight: bold;
     text-align: center;
-    background-color:rgb(228, 214, 92);
+    background-color: rgb(228, 214, 92);
     border: solid 10px rgba(53, 47, 47, 0.993);
     border-top: none;
     border-right: none;
@@ -222,7 +221,7 @@ li {
     background-color: whitesmoke;
 }
 #stopwatchTab:active {
-    background-color: wheat;
+    background-color: rgb(228, 214, 92);
 }
 #countdownTimer {
     width: 300px;
@@ -236,6 +235,7 @@ li {
     font-weight: 500;
     text-align: center;
     padding-top: 10px;
+    background-color: azure;
 }
 #stopwatchTimer {
     width: 300px;
@@ -249,6 +249,7 @@ li {
     font-weight: 500;
     text-align: center;
     padding-top: 10px;
+    background-color: azure;
 }
 .readyForAnim {
     animation-duration: 2s;

@@ -1,0 +1,82 @@
+body {
+    background-color: lightgray;
+    min-width: 600px;
+}
+#homeTitle {
+    font-size: 43px;
+    font-family: cursive;
+    font-weight: bolder;
+    color: rgba(0, 0, 0, 0.705);
+    display: block;
+    user-select: none;
+    margin-top: 30px;
+    margin-bottom: 5px;
+}
+#projectName {
+    width: 350px;
+    border-radius: 20px;
+    margin: auto;
+    font-size: 60px;
+    font-family: cursive;
+    font-weight: bolder;
+    display: block;
+    user-select: none;
+    margin-bottom: 15px;
+    background-color: goldenrod;
+    color: black;
+    box-shadow: 0px 0px 20px 5px goldenrod;
+}
+#toolsContainer {
+    width: 500px;
+    height: 275px;
+    background-color: azure;
+    border: solid 10px rgba(0, 0, 0, 0.705);
+    border-radius: 30px;
+    font-family: cursive;
+    font-size: 33px;
+    display: block;
+    text-align: center;
+    margin: auto;
+    margin-top: 20px;
+    user-select: none;
+    box-shadow: 0px 0px 5px 5px goldenrod;
+}
+#byContainer {
+    width: 500px;
+    height: 250px;
+    background-color: azure;
+    border: solid 10px rgba(0, 0, 0, 0.705);
+    border-radius: 30px;
+    font-family: cursive;
+    font-size: 33px;
+    display: block;
+    text-align: center;
+    margin: auto;
+    margin-top: 20px;
+    user-select: none;
+    box-shadow: 0px 0px 5px 5px goldenrod;
+}
+#toCalc {
+    position: absolute;
+    width: 100px;
+    height: auto;
+    transform: translateX(270px);
+    display: inline;
+    user-select: none;
+}
+.readyForAnim {
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}
+@keyframes fadeLeft {
+    from {
+        opacity: 100;
+        transform: translateX(0vw);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-30vw);
+    }
+}

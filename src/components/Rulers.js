@@ -280,7 +280,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
         setPixelsRulerBorderColorVal(e.target.value);
         pixelsRulerRef.current.style.borderColor = pixelsRulerBorderColorVal;
     }
-    const onAdjustWindowWidth = () => {
+    const onAdjustWindowWidthRulers = () => {
         if (window.innerWidth <= 740) {
             rulersRulesIconRef.current.style.transform = 'translateX(-260px)';
             rulersRulesBox.current.style.transform = 'translateX(-260px)';
@@ -481,7 +481,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
                     rulersNonRulerElements[i].current.style.animationName = 'none';
                     rulersNonRulerElements[i].current.style.opacity = '100';
                 }
-                window.addEventListener('resize', onAdjustWindowWidth);
+                window.addEventListener('resize', onAdjustWindowWidthRulers);
                 allowRulerRotate();
                 rightOrangeArrow.current.style.display = 'inline';
                 if (window.innerWidth <= 740) {
@@ -499,14 +499,14 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
         return () => {
             window.removeEventListener("resize", positionOrangeRightArrow);
         }
-        }, []);
+    }, []);
     useEffect(() => {
         const goneElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef, rulersResetButtonRef, rightOrangeArrow];
         for (let i = 0; i < goneElements.length; i++) {
             goneElements[i].current.style.display = 'none';
         }
         return () => {
-            window.removeEventListener("resize", onAdjustWindowWidth);
+            window.removeEventListener("resize", onAdjustWindowWidthRulers);
         }
     }, []);
     return (
