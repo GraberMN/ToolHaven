@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import './home.css';
 
-function Home({ homeImagesArray, moveToCalc, setMoveToCalc }) {
+function Home({ homeImagesArray, moveToCalc, setMoveToCalc, moveToRulers, setMoveToRulers, moveToTimers, setMoveToTimers }) {
     const [calculatorThumbnail, rulerThumbnail, timerThumbnail, greenRightArrow] = homeImagesArray;
     const [greenRightArrowTransitionDone, setGreenRightArrowTransitionDone] = useState(false);
     const homeTitleRef = useRef(null);
@@ -42,7 +42,37 @@ function Home({ homeImagesArray, moveToCalc, setMoveToCalc }) {
         element.current.classList.remove('readyForAnim');
         element.current.classList.add('readyForAnim');
     }
-    const greenRightArrowTransition = (screenWidthBig) => {
+    const toCalcTransition = () => {
+        setMoveToCalc(true);
+        const changedRelativeElements = [homeTitleRef, projectNameRef, toolsContainerRef, byContainerRef];
+        for (let i = 0; i < changedRelativeElements.length; i++) {
+            readyForAnimation(changedRelativeElements[i]);
+            changedRelativeElements[i].current.style.animationName = 'fadeLeft';
+        }
+        rightGreenArrow.current.style.display = 'none';
+        setTimeout(() => setGreenRightArrowTransitionDone(true), 2000);
+    }
+    const toRulersTransition = () => {
+        setMoveToRulers(true);
+        const changedRelativeElements = [homeTitleRef, projectNameRef, toolsContainerRef, byContainerRef];
+        for (let i = 0; i < changedRelativeElements.length; i++) {
+            readyForAnimation(changedRelativeElements[i]);
+            changedRelativeElements[i].current.style.animationName = 'fadeLeft';
+        }
+        rightGreenArrow.current.style.display = 'none';
+        setTimeout(() => setGreenRightArrowTransitionDone(true), 2000);
+    }
+    const toTimersTransition = () => {
+        setMoveToTimers(true);
+        const changedRelativeElements = [homeTitleRef, projectNameRef, toolsContainerRef, byContainerRef];
+        for (let i = 0; i < changedRelativeElements.length; i++) {
+            readyForAnimation(changedRelativeElements[i]);
+            changedRelativeElements[i].current.style.animationName = 'fadeLeft';
+        }
+        rightGreenArrow.current.style.display = 'none';
+        setTimeout(() => setGreenRightArrowTransitionDone(true), 2000);
+    }
+    const greenRightArrowTransition = () => {
         setMoveToCalc(true);
         const changedRelativeElements = [homeTitleRef, projectNameRef, toolsContainerRef, byContainerRef];
         for (let i = 0; i < changedRelativeElements.length; i++) {
@@ -76,9 +106,9 @@ function Home({ homeImagesArray, moveToCalc, setMoveToCalc }) {
             <div id='toolsContainer' draggable={false} ref={toolsContainerRef}>
                 <div id='toolsTitle'>Tools:</div>
                 <span id='toolGrid'>
-                    <img class='tool' id='calcTool' src={calculatorThumbnail} title='Calculator'></img>
-                    <img class='tool' id='rulerTool' src={rulerThumbnail} title='Rulers'></img>
-                    <img class='tool' id='timerTool' src={timerThumbnail} title='Timers'></img>
+                    <img onClick={() => toCalcTransition()} class='tool' id='calcTool' src={calculatorThumbnail} draggable={false} title='Calculator'></img>
+                    <img onClick={() => toRulersTransition()} class='tool' id='rulerTool' src={rulerThumbnail} draggable={false} title='Rulers'></img>
+                    <img onClick={() => toTimersTransition()} class='tool' id='timerTool' src={timerThumbnail} draggable={false} title='Timers'></img>
                     <img class='tool'></img>
                 </span>
             </div>
@@ -87,7 +117,7 @@ function Home({ homeImagesArray, moveToCalc, setMoveToCalc }) {
                 Placeholder
             </div>
             <map name='toCalcMap'>
-                <area onClick={() => window.innerWidth > 740 ? greenRightArrowTransition(true) : greenRightArrowTransition(false)} onMouseOver={() => blurGreenRightArrow()} onMouseOut={() => unBlurGreenRightArrow()} id='toCalcMap' ref={greenRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toCalc' title='toCalculator'></area>
+                <area onClick={() => greenRightArrowTransition()} onMouseOver={() => blurGreenRightArrow()} onMouseOut={() => unBlurGreenRightArrow()} id='toCalcMap' ref={greenRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toCalc' title='toCalculator'></area>
             </map>
             <img id='toCalc' useMap='#toCalcMap' draggable={false} ref={rightGreenArrow} src={greenRightArrow} alt='toCalc'></img>
         </div>
