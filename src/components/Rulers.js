@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import './rulers.css';
 
 function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers, setMoveToTimers }) {
-    const [inchesRuler, centimetersRuler, picasRuler, pixelsRuler, settingsIcon, rulesIcon, orangeRightArrow] = rulersImagesArray;
+    const [inchesRuler, centimetersRuler, picasRuler, pixelsRuler, settingsIcon, rulesIcon, orangeRightArrow, homeButton] = rulersImagesArray;
     const [inchesRulerCheckboxChecked, setInchesRulerCheckboxChecked] = useState(true);
     const [centimetersRulerCheckboxChecked, setCentimetersRulerCheckboxChecked] = useState(false);
     const [picasRulerCheckboxChecked, setPicasRulerCheckboxChecked] = useState(false);
@@ -46,6 +46,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
     const rulersResetButtonRef = useRef(null);
     const orangeRightArrowArea = useRef(null);
     const rightOrangeArrow = useRef(null);
+    const rulersHomeButtonRef = useRef(null);
     const allowRulerDrag = () => {
         inchesRulerRef.current.addEventListener('mousedown', startInchesRulerDrag);
         centimetersRulerRef.current.addEventListener('mousedown', startCentimetersRulerDrag);
@@ -286,11 +287,13 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
             rulersRulesBox.current.style.transform = 'translateX(-260px)';
             rulersSettingsIconRef.current.style.transform = 'translateX(180px)';
             rulersSettingsBox.current.style.transform = 'translateX(-45px)';
+            rulersHomeButtonRef.current.style.transform = 'translateX(-260px)';
         } else {
             rulersRulesIconRef.current.style.transform = 'translateX(-367px)';
             rulersRulesBox.current.style.transform = 'translateX(-367px)';
             rulersSettingsIconRef.current.style.transform = 'translateX(285px)';
             rulersSettingsBox.current.style.transform = 'translateX(60px)';
+            rulersHomeButtonRef.current.style.transform = 'translateX(-367px)';
         }
     }
     const blurOrangeRightArrow = () => {
@@ -320,7 +323,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
         }
     }
     const animateElements = () => {
-        const rulersElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef, rulersResetButtonRef];
+        const rulersElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef, rulersResetButtonRef, rulersHomeButtonRef];
         for (let i = 0; i < rulersElements.length; i++) {
             readyForAnimation(rulersElements[i]);
         }
@@ -330,11 +333,13 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
             rulersRulesBox.current.style.animationName = 'appearFromRightRulersRules';
             rulersSettingsIconRef.current.style.animationName = 'appearFromRightRulersSettingsIcon';
             rulersSettingsBox.current.style.animationName = 'appearFromRightRulersSettingsBox';
+            rulersHomeButtonRef.current.style.animationName = 'appearFromRightRulersRules';
         } else {
             rulersRulesIconRef.current.style.animationName = 'appearFromRightRulersRulesSmall';
             rulersRulesBox.current.style.animationName = 'appearFromRightRulersRulesSmall';
             rulersSettingsIconRef.current.style.animationName = 'appearFromRightRulersSettingsIconSmall';
             rulersSettingsBox.current.style.animationName = 'appearFromRightRulersSettingsBoxSmall';
+            rulersHomeButtonRef.current.style.animationName = 'appearFromRightRulersRulesSmall';
         }
         inchesRulerRef.current.style.animationName = 'appearFromRightRulersInchesRuler';
         centimetersRulerRef.current.style.animationName = 'appearFromRightRulersOtherRulers';
@@ -362,7 +367,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
             readyForAnimation(centeredElements[i]);
             centeredElements[i].current.style.animationName = 'fadeLeftRulers';
         }
-        const rulersRulesElements = [rulersRulesIconRef, rulersRulesBox];
+        const rulersRulesElements = [rulersRulesIconRef, rulersRulesBox, rulersHomeButtonRef];
         for (let i = 0; i < rulersRulesElements.length; i++) {
             readyForAnimation(rulersRulesElements[i]);
             if (screenWidthBig) {
@@ -441,7 +446,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
     }, [pixelsRulerCheckboxChecked]);
     useEffect(() => {
         if (orangeRightArrowTransitionDone) {
-            const animRulersElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef, rulersResetButtonRef];
+            const animRulersElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef, rulersResetButtonRef, rulersHomeButtonRef];
             for (let i = 0; i < animRulersElements.length; i++) {
                 animRulersElements[i].current.style.display = 'none';
             }
@@ -465,7 +470,8 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
             pixelsRulerRef.current.style.display = 'block';
             pixelsRulerRef.current.style.visibility = 'hidden';
             rulersResetButtonRef.current.style.display = 'block';
-            const rulersElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef, rulersResetButtonRef];
+            rulersHomeButtonRef.current.style.display = 'inline';
+            const rulersElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef, rulersResetButtonRef, rulersHomeButtonRef];
             for (let i = 0; i < rulersElements.length; i++) {
                 readyForMove(rulersElements[i]);
             }
@@ -476,7 +482,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
                 animateElements();
             }, 2000);
             setTimeout(() => {
-                const rulersNonRulerElements = [rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox];
+                const rulersNonRulerElements = [rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, rulersHomeButtonRef];
                 for (let i = 0; i < rulersNonRulerElements.length; i++) {
                     rulersNonRulerElements[i].current.style.animationName = 'none';
                     rulersNonRulerElements[i].current.style.opacity = '100';
@@ -490,6 +496,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
                     rulersRulesBox.current.style.transform = 'translateX(-260px)';
                     rulersSettingsIconRef.current.style.transform = 'translateX(180px)';
                     rulersSettingsBox.current.style.transform = 'translateX(-45px)';
+                    rulersHomeButtonRef.current.style.transform = 'translateX(-260px)';
                 }
             }, 4000);
         }
@@ -501,7 +508,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
         }
     }, []);
     useEffect(() => {
-        const goneElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef, rulersResetButtonRef, rightOrangeArrow];
+        const goneElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef, rulersResetButtonRef, rightOrangeArrow, rulersHomeButtonRef];
         for (let i = 0; i < goneElements.length; i++) {
             goneElements[i].current.style.display = 'none';
         }
@@ -516,6 +523,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
                 <div id='rulersRulesTitle' draggable={false}>Rules</div>
                 <ul>
                     <li>Hover over each ruler or each external button to find out what it is/represents.</li>
+                    <li>The bottom left Home button takes you back to the Home page.</li>
                     <li>The Settings tab lets you adjust the rulers that are displayed or hidden, each of their border colors, and more.</li>
                     <li>There are currently 4 rulers: the inches, centimeters, picas, and pixels rulers.</li>
                     <li>The inches ruler is the only ruler that is displayed when switching to Rulers.</li>
@@ -557,6 +565,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
             <img id='picasRuler' src={picasRuler} ref={picasRulerRef} alt='picasRuler' title='picasRuler' />
             <img id='pixelsRuler' src={pixelsRuler} ref={pixelsRulerRef} alt='pixelsRuler' title='pixelsRuler' />
             <button onClick={() => resetRulers()} id='rulersResetButton' draggable={false} ref={rulersResetButtonRef} title='rulersResetButton'>Reset</button>
+            <img onClick={() => window.location.reload()} id='rulersHomeButton' draggable={false} ref={rulersHomeButtonRef} src={homeButton} alt='toHome' title='toHome' />
             <map name='toTimersMap'>
                 <area onClick={() => window.innerWidth > 740 ? orangeRightArrowTransition(true) : orangeRightArrowTransition(false)} onMouseOver={() => blurOrangeRightArrow()} onMouseOut={() => unBlurOrangeRightArrow()} id='toTimersMap' ref={orangeRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toTimers' title='toTimers'></area>
             </map>

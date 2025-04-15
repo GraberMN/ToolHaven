@@ -13,6 +13,7 @@ import centimetersRuler from './Images/centimetersRuler.PNG';
 import picasRuler from './Images/picasRuler.PNG';
 import pixelsRuler from './Images/pixelsRuler.PNG';
 import orangeRightArrow from './Images/OrangeRightArrow.png';
+import homeButton from './Images/HomeButton.png';
 import './App.css';
 import Home from './components/Home';
 import Calculator from './components/Calculator';
@@ -21,9 +22,9 @@ import Timers from './components/Timers';
 
 function App() {
   const homeImagesArray = [calculatorThumbnail, rulerThumbnail, timerThumbnail, greenRightArrow];
-  const calcImagesArray = [settingsIcon, historyIcon, rulesIcon, blueRightArrow];
-  const rulersImagesArray = [inchesRuler, centimetersRuler, picasRuler, pixelsRuler, settingsIcon, rulesIcon, orangeRightArrow];
-  const timersImagesArray = [settingsIcon, rulesIcon];
+  const calcImagesArray = [settingsIcon, historyIcon, rulesIcon, blueRightArrow, homeButton];
+  const rulersImagesArray = [inchesRuler, centimetersRuler, picasRuler, pixelsRuler, settingsIcon, rulesIcon, orangeRightArrow, homeButton];
+  const timersImagesArray = [settingsIcon, rulesIcon, homeButton];
   const [moveToCalc, setMoveToCalc] = useState(false);
   const [moveToRulers, setMoveToRulers] = useState(false);
   const [moveToTimers, setMoveToTimers] = useState(false);

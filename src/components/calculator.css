@@ -320,6 +320,27 @@ button:active {
 #ans:active {
     background-color: rgba(72, 209, 205, 0.46);
 }
+#homeButton {
+    position: absolute;
+    width: 75px;
+    height: auto;
+    margin: auto;
+    margin-top: 8px;
+    transform: translateX(-367px);
+    cursor: pointer;
+    border: solid hsl(110, 74%, 41%);
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.705);
+    z-index: 999;
+    display: inline;
+    user-select: none;
+}
+#homeButton:hover {
+    border-radius: 20px;
+}
+#homeButton:active {
+    border-style: dashed;
+}
 #toRulers {
     position: absolute;
     width: 100px;

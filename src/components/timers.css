@@ -8,7 +8,7 @@
     display: block;
     transform: translateX(30vw);
     margin-top: 30px;
-    margin-bottom: 45px;
+    margin-bottom: 30px;
     user-select: none;
 }
 #timersRulesIcon {
@@ -250,6 +250,27 @@ li {
     text-align: center;
     padding-top: 10px;
     background-color: azure;
+}
+#timersHomeButton {
+    position: absolute;
+    width: 75px;
+    height: auto;
+    margin: auto;
+    margin-top: 8px;
+    transform: translateX(-367px);
+    cursor: pointer;
+    border: solid hsl(24, 100%, 50%);
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.705);
+    z-index: 999;
+    display: inline;
+    user-select: none;
+}
+#timersHomeButton:hover {
+    border-radius: 20px;
+}
+#timersHomeButton:active {
+    border-style: dashed;
 }
 .readyForAnim {
     animation-duration: 2s;

@@ -229,6 +229,27 @@ input[type='checkbox' i] {
 #rulersResetButton:active {
     background-color: rgb(25, 126, 189);
 }
+#rulersHomeButton {
+    position: absolute;
+    width: 75px;
+    height: auto;
+    margin: auto;
+    margin-top: 8px;
+    transform: translateX(-367px);
+    cursor: pointer;
+    border: solid hsl(187, 74%, 41%);
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.705);
+    z-index: 995;
+    display: inline;
+    user-select: none;
+}
+#rulersHomeButton:hover {
+    border-radius: 20px;
+}
+#rulersHomeButton:active {
+    border-style: dashed;
+}
 #toTimers {
     position: absolute;
     width: 100px;

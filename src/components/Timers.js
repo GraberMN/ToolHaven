@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import './timers.css';
 
 function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
-    const [settingsIcon, rulesIcon] = timersImagesArray;
+    const [settingsIcon, rulesIcon, homeButton] = timersImagesArray;
     const [countdownBorderColorVal, setCountdownBorderColorVal] = useState('#352f2ffd');
     const [stopwatchBorderColorVal, setStopwatchBorderColorVal] = useState('#352f2ffd');
     const timersRulesIconRef = useRef(null);
@@ -20,6 +20,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
     const stopwatchContentRef = useRef(null);
     const countdownTimerRef = useRef(null);
     const stopwatchTimerRef = useRef(null);
+    const timersHomeButtonRef = useRef(null);
     const openOrClose = (element) => {
         if (element.current.style.visibility === "hidden") {
             element.current.style.visibility = "visible";
@@ -69,15 +70,17 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
             timersRulesBox.current.style.transform = 'translateX(-260px)';
             timersSettingsIconRef.current.style.transform = 'translateX(180px)';
             timersSettingsBox.current.style.transform = 'translateX(-45px)';
+            timersHomeButtonRef.current.style.transform = 'translateX(-260px)';
         } else {
             timersRulesIconRef.current.style.transform = 'translateX(-367px)';
             timersRulesBox.current.style.transform = 'translateX(-367px)';
             timersSettingsIconRef.current.style.transform = 'translateX(285px)';
             timersSettingsBox.current.style.transform = 'translateX(60px)';
+            timersHomeButtonRef.current.style.transform = 'translateX(-367px)';
         }
     }
     const animateElements = () => {
-        const timersElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox, timersContainerRef];
+        const timersElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox, timersContainerRef, timersHomeButtonRef];
         for (let i = 0; i < timersElements.length; i++) {
             readyForAnimation(timersElements[i]);
         }
@@ -87,11 +90,13 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
             timersRulesBox.current.style.animationName = 'appearFromRightTimersRules';
             timersSettingsIconRef.current.style.animationName = 'appearFromRightTimersSettingsIcon';
             timersSettingsBox.current.style.animationName = 'appearFromRightTimersSettingsBox';
+            timersHomeButtonRef.current.style.animationName = 'appearFromRightTimersRules';
         } else {
             timersRulesIconRef.current.style.animationName = 'appearFromRightTimersRulesSmall';
             timersRulesBox.current.style.animationName = 'appearFromRightTimersRulesSmall';
             timersSettingsIconRef.current.style.animationName = 'appearFromRightTimersSettingsIconSmall';
             timersSettingsBox.current.style.animationName = 'appearFromRightTimersSettingsBoxSmall';
+            timersHomeButtonRef.current.style.animationName = 'appearFromRightTimersRulesSmall';
         }
         timersContainerRef.current.style.animationName = 'appearFromRightTimers';
     }
@@ -117,7 +122,8 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
             stopwatchSettingsListRef.current.style.display = 'none';
             countdownContentRef.current.style.display = 'block';
             stopwatchContentRef.current.style.display = 'none';
-            const timersElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox, timersContainerRef];
+            timersHomeButtonRef.current.style.display = 'inline';
+            const timersElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox, timersContainerRef, timersHomeButtonRef];
             for (let i = 0; i < timersElements.length; i++) {
                 readyForMove(timersElements[i]);
             }
@@ -127,7 +133,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                 animateElements();
             }, 2000);
             setTimeout(() => {
-                const timersNonTimerElements = [timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox];
+                const timersNonTimerElements = [timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox, timersHomeButtonRef];
                 for (let i = 0; i < timersNonTimerElements.length; i++) {
                     timersNonTimerElements[i].current.style.animationName = 'none';
                     timersNonTimerElements[i].current.style.opacity = '100';
@@ -138,12 +144,13 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                     timersRulesBox.current.style.transform = 'translateX(-260px)';
                     timersSettingsIconRef.current.style.transform = 'translateX(180px)';
                     timersSettingsBox.current.style.transform = 'translateX(-45px)';
+                    timersHomeButtonRef.current.style.transform = 'translateX(-260px)';
                 }
             }, 4000);
         }
     }, [moveToTimers])
     useEffect(() => {
-        const goneElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox, timersContainerRef, countdownContentRef, stopwatchContentRef];
+        const goneElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox, timersContainerRef, countdownContentRef, stopwatchContentRef, timersHomeButtonRef];
         for (let i = 0; i < goneElements.length; i++) {
             goneElements[i].current.style.display = 'none';
         }
@@ -158,6 +165,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                 <div id='timersRulesTitle' draggable={false}>Rules</div>
                 <ul>
                     <li>Hover over each timer or each item/ button to find out what it is/represents.</li>
+                    <li>The bottom left Home button takes you back to the Home page.</li>
                     <li>The Settings tab lets you  .</li>
                     <li>When changing color in Settings, drag the pointer around for it to work seamlessly.</li>
                     <li>Timer-Specific Rules:</li>
@@ -201,6 +209,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                     </span>
                 </div>
             </span>
+            <img onClick={() => window.location.reload()} id='timersHomeButton' draggable={false} ref={timersHomeButtonRef} src={homeButton} alt='toHome' title='toHome' />
         </div>
     )
 }

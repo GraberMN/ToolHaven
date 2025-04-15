@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import './calculator.css';
 
 function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc, setMoveToCalc }) {
-    const [settingsIcon, historyIcon, rulesIcon, blueRightArrow] = calcImagesArray;
+    const [settingsIcon, historyIcon, rulesIcon, blueRightArrow, homeButton] = calcImagesArray;
     const [calcHistory, setCalcHistory] = useState([]);
     const [maxCharVal, setMaxCarVal] = useState(27);
     const [maxDecimalPlacesVal, setMaxDecimalPlacesVal] = useState(16);
@@ -24,6 +24,7 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
     const ans = useRef("0");
     const blueRightArrowArea = useRef(null);
     const rightBlueArrow = useRef(null);
+    const homeButtonRef = useRef(null);
     const appendToDisplay = (input, isNum) => {
         if (inputField.current.value === "Error" || inputField.current.value === "NaN" || inputField.current.value === "undefined" || inputField.current.value === "Infinity") {
             isNum ? inputField.current.value = "" : inputField.current.value = "0";
@@ -153,11 +154,13 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
             rulesBox.current.style.transform = 'translateX(-260px)';
             settingsIconRef.current.style.transform = 'translateX(180px)';
             settingsBox.current.style.transform = 'translateX(-45px)';
+            homeButtonRef.current.style.transform = 'translateX(-260px)';
         } else {
             rulesIconRef.current.style.transform = 'translateX(-367px)';
             rulesBox.current.style.transform = 'translateX(-367px)';
             settingsIconRef.current.style.transform = 'translateX(285px)';
             settingsBox.current.style.transform = 'translateX(60px)';
+            homeButtonRef.current.style.transform = 'translateX(-367px)';
         }
     }
     const blurBlueRightArrow = () => {
@@ -187,7 +190,7 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
         }
     }
     const animateElements = () => {
-        const calcElements = [inputField, buttonContainer, calcTitleRef, rulesIconRef, rulesBox, settingsIconRef, settingsBox, historyIconRef, historyBox, ansField, rightBlueArrow];
+        const calcElements = [inputField, buttonContainer, calcTitleRef, rulesIconRef, rulesBox, settingsIconRef, settingsBox, historyIconRef, historyBox, ansField, rightBlueArrow, homeButtonRef];
         for (let i = 0; i < calcElements.length; i++) {
             readyForAnimation(calcElements[i]);
         }
@@ -199,11 +202,13 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
             rulesBox.current.style.animationName = 'appearFromRightRules';
             settingsIconRef.current.style.animationName = 'appearFromRightSettingsIcon';
             settingsBox.current.style.animationName = 'appearFromRightSettingsBox';
+            homeButtonRef.current.style.animationName = 'appearFromRightRules';
         } else {
             rulesIconRef.current.style.animationName = 'appearFromRightRulesSmall';
             rulesBox.current.style.animationName = 'appearFromRightRulesSmall';
             settingsIconRef.current.style.animationName = 'appearFromRightSettingsIconSmall';
             settingsBox.current.style.animationName = 'appearFromRightSettingsBoxSmall';
+            homeButtonRef.current.style.animationName = 'appearFromRightRulesSmall';
         }
         historyIconRef.current.style.animationName = 'appearFromRightHistoryIcon';
         historyBox.current.style.animationName = 'appearFromRightHistoryBox';
@@ -227,7 +232,7 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
             readyForAnimation(changedRelativeElements[i]);
             changedRelativeElements[i].current.style.animationName = 'fadeLeft';
         }
-        const changedRulesElements = [rulesIconRef, rulesBox];
+        const changedRulesElements = [rulesIconRef, rulesBox, homeButtonRef];
         for (let i = 0; i < changedRulesElements.length; i++) {
             readyForAnimation(changedRulesElements[i]);
             if (screenWidthBig) {
@@ -280,7 +285,7 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
     }
     useEffect(() => {
         if (blueRightArrowTransitionDone) {
-            const animElements = [inputField, buttonContainer, calcTitleRef, rulesIconRef, rulesBox, settingsIconRef, settingsBox, historyIconRef, historyBox, ansField];
+            const animElements = [inputField, buttonContainer, calcTitleRef, rulesIconRef, rulesBox, settingsIconRef, settingsBox, historyIconRef, historyBox, ansField, homeButtonRef];
             for (let i = 0; i < animElements.length; i++) {
                 animElements[i].current.style.display = 'none';
             }
@@ -298,7 +303,8 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
             historyIconRef.current.style.display = 'inline';
             historyBox.current.style.display = 'inline';
             ansField.current.style.display = 'inline';
-            const calcElements = [inputField, buttonContainer, calcTitleRef, rulesIconRef, rulesBox, settingsIconRef, settingsBox, historyIconRef, historyBox, ansField];
+            homeButtonRef.current.style.display = 'inline';
+            const calcElements = [inputField, buttonContainer, calcTitleRef, rulesIconRef, rulesBox, settingsIconRef, settingsBox, historyIconRef, historyBox, ansField, homeButtonRef];
             for (let i = 0; i < calcElements.length; i++) {
                 readyForMove(calcElements[i]);
             }
@@ -307,7 +313,7 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
                 animateElements();
             }, 2000);
             setTimeout(() => {
-                const calcNonCalcElements = [rulesIconRef, rulesBox, settingsIconRef, settingsBox];
+                const calcNonCalcElements = [rulesIconRef, rulesBox, settingsIconRef, settingsBox, homeButtonRef];
                 for (let i = 0; i < calcNonCalcElements.length; i++) {
                     calcNonCalcElements[i].current.style.animationName = 'none';
                     calcNonCalcElements[i].current.style.opacity = '100';
@@ -320,6 +326,7 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
                     rulesBox.current.style.transform = 'translateX(-260px)';
                     settingsIconRef.current.style.transform = 'translateX(180px)';
                     settingsBox.current.style.transform = 'translateX(-45px)';
+                    homeButtonRef.current.style.transform = 'translateX(-260px)';
                 }
             }, 4000);
         }
@@ -338,7 +345,7 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
         historyBox.current.style.visibility = "hidden";
         beforeEval.current = "0";
         ans.current = "0";
-        const calcElements = [inputField, buttonContainer, calcTitleRef, rulesIconRef, rulesBox, settingsIconRef, settingsBox, historyIconRef, historyBox, ansField, rightBlueArrow];
+        const calcElements = [inputField, buttonContainer, calcTitleRef, rulesIconRef, rulesBox, settingsIconRef, settingsBox, historyIconRef, historyBox, ansField, rightBlueArrow, homeButtonRef];
         for (let i = 0; i < calcElements.length; i++) {
             calcElements[i].current.style.display = 'none';
         }
@@ -353,6 +360,7 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
                 <div id='rulesTitle' draggable={false}>Rules</div>
                 <ul>
                     <li>Hover over each calculator or external button to find out what it is/represents.</li>
+                    <li>The bottom left Home button takes you back to the Home page.</li>
                     <li>The top left clock icon opens the History tab, which shows you all prior valid calculations until page reload.</li>
                     <li>The Settings tab lets you adjust the max decimal places of calculations, the max characters that can be entered, and more.</li>
                     <li>The defaults/maxes for those settings are 16 decimal places and 27 characters.</li>
@@ -424,10 +432,11 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
                     <button onClick={() => appendToDisplay('!', false)} className='operator' title='factorial'>!</button>
                 </span>
             </span>
+            <img onClick={() => window.location.reload()} id='homeButton' draggable={false} ref={homeButtonRef} src={homeButton} alt='toHome' title='toHome'/>
             <map name='toRulersMap'>
                 <area onClick={() => window.innerWidth > 740 ? blueRightArrowTransition(true) : blueRightArrowTransition(false)} onMouseOver={() => blurBlueRightArrow()} onMouseOut={() => unBlurBlueRightArrow()} id='toRulersMap' ref={blueRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toRulers' title='toRulers'></area>
             </map>
-            <img id='toRulers' useMap='#toRulersMap' draggable={false} ref={rightBlueArrow} src={blueRightArrow} alt='toRulers'></img>
+            <img id='toRulers' useMap='#toRulersMap' draggable={false} ref={rightBlueArrow} src={blueRightArrow} alt='toRulers' />
         </div>
     );
 }
