@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import './home.css';
 
 function Home({ homeImagesArray, moveToCalc, setMoveToCalc, moveToRulers, setMoveToRulers, moveToTimers, setMoveToTimers }) {
-    const [calculatorThumbnail, rulerThumbnail, timerThumbnail, greenRightArrow] = homeImagesArray;
+    const [calculatorThumbnail, rulerThumbnail, timerThumbnail, bioPic, mateosPortfolio, greenRightArrow] = homeImagesArray;
     const [greenRightArrowTransitionDone, setGreenRightArrowTransitionDone] = useState(false);
     const homeTitleRef = useRef(null);
     const projectNameRef = useRef(null);
@@ -113,11 +113,21 @@ function Home({ homeImagesArray, moveToCalc, setMoveToCalc, moveToRulers, setMov
                 </span>
             </div>
             <div id='byContainer' draggable={false} ref={byContainerRef}>
-                <div id='toolsTitle'>By:</div>
-                Placeholder
+                <div id='byTitle'>By:</div>
+                <span id='bioContents'>
+                    <img id='bioPic' draggable={false} src={bioPic} />
+                    <span id='contactGrid'>
+                        <a href='https://mateos-portfolio.vercel.app/' target='_blank'><img class='contact' id='myPortfolioContact' src={mateosPortfolio} draggable={false} alt='MyPortfolio' title='MyPortfolio' /></a>
+                        <img class='contact' draggable={false} />
+                        <img class='contact' draggable={false} />
+                        <img class='contact' draggable={false} />
+                        <img class='contact' draggable={false} />
+                        <img class='contact' draggable={false} />
+                    </span>
+                </span>
             </div>
             <map name='toCalcMap'>
-                <area onClick={() => greenRightArrowTransition()} onMouseOver={() => blurGreenRightArrow()} onMouseOut={() => unBlurGreenRightArrow()} id='toCalcMap' ref={greenRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toCalc' title='toCalculator'></area>
+                <area onClick={() => greenRightArrowTransition()} onMouseOver={() => blurGreenRightArrow()} onMouseOut={() => unBlurGreenRightArrow()} id='toCalcMap' ref={greenRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toCalculator' title='toCalculator'></area>
             </map>
             <img id='toCalc' useMap='#toCalcMap' draggable={false} ref={rightGreenArrow} src={greenRightArrow} alt='toCalc'></img>
         </div>
