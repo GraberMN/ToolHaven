@@ -4,6 +4,8 @@ body {
 }
 a {
     display: inline-flex;
+    width: 50px;
+    height: 50px;
 }
 #homeTitle {
     font-size: 43px;
@@ -73,6 +75,7 @@ a {
     border: solid;
     border-radius: 20px;
     cursor: pointer;
+    user-select: none;
 }
 #calcTool:hover {
     border-color: hsl(110, 74%, 41%);
@@ -95,6 +98,10 @@ a {
 #bioContents {
     display: flex;
     margin-top: 10px;
+    user-select: none;
+}
+#byTitlePt2 {
+    font-size: 29px;
 }
 #bioPic {
     width: 100px;
@@ -105,6 +112,7 @@ a {
 }
 #contactGrid {
     margin-left: 47px;
+    margin-top: 5px;
     display: grid;
     grid-template-columns: 100px 100px 60px;
     grid-template-rows: 63px 63px;
@@ -115,18 +123,29 @@ a {
 .contact {
     width: 50px;
     height: auto;
+    background-color: rgba(0, 0, 0, 0.705);
     border: solid 3px black;
     border-radius: 10px;
     cursor: pointer;
+    user-select: none;
 }
-#myPortfolioContact {
-    background-color: rgba(0, 0, 0, 0.705);
-}
-#myPortfolioContact:hover {
+.contact:hover {
     border-radius: 15px;
 }
-#myPortfolioContact:active {
+.contact:active {
     border-style: dashed;
+}
+#linkedInContact {
+    background-color: white;
+}
+#gmailContact {
+    background-color: white;
+}
+#instagramContact {
+    background-color: white;
+}
+#facebookContact {
+    background-color: white;
 }
 #toCalc {
     position: absolute;

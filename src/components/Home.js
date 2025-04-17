@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import './home.css';
 
 function Home({ homeImagesArray, moveToCalc, setMoveToCalc, moveToRulers, setMoveToRulers, moveToTimers, setMoveToTimers }) {
-    const [calculatorThumbnail, rulerThumbnail, timerThumbnail, bioPic, mateosPortfolio, greenRightArrow] = homeImagesArray;
+    const [calculatorThumbnail, rulerThumbnail, timerThumbnail, bioPic, mateosPortfolio, gitHub, linkedIn, gmail, instagram, facebook, greenRightArrow] = homeImagesArray;
     const [greenRightArrowTransitionDone, setGreenRightArrowTransitionDone] = useState(false);
     const homeTitleRef = useRef(null);
     const projectNameRef = useRef(null);
@@ -113,16 +113,17 @@ function Home({ homeImagesArray, moveToCalc, setMoveToCalc, moveToRulers, setMov
                 </span>
             </div>
             <div id='byContainer' draggable={false} ref={byContainerRef}>
-                <div id='byTitle'>By:</div>
+                <div id='byTitle'>By: Mateo Graber, </div>
+                <div id='byTitlePt2'>UF Comp Sci Freshman</div>
                 <span id='bioContents'>
                     <img id='bioPic' draggable={false} src={bioPic} />
                     <span id='contactGrid'>
                         <a href='https://mateos-portfolio.vercel.app/' target='_blank'><img class='contact' id='myPortfolioContact' src={mateosPortfolio} draggable={false} alt='MyPortfolio' title='MyPortfolio' /></a>
-                        <img class='contact' draggable={false} />
-                        <img class='contact' draggable={false} />
-                        <img class='contact' draggable={false} />
-                        <img class='contact' draggable={false} />
-                        <img class='contact' draggable={false} />
+                        <a href='https://github.com/GraberMN' target='_blank'><img class='contact' id='gitHubContact' src={gitHub} draggable={false} alt='MyGitHub' title='MyGitHub' /></a>
+                        <a href='https://www.linkedin.com/in/mateo-g-33a20230b/' target='_blank'><img class='contact' id='linkedInContact' src={linkedIn} draggable={false} alt='myLinkedIn' title='MyLinkedIn' /></a>
+                        <a href='mailto:grabermn3@gmail.com' target='_blank'><img class='contact' id='gmailContact' src={gmail} draggable={false} alt='MyGmail' title='MyGmail' /></a>
+                        <a href='https://www.instagram.com/mayothebrotho' target='_blank'><img class='contact' id='instagramContact' src={instagram} draggable={false} alt='MyInstagram' title='MyInstagram' /></a>
+                        <a href='https://www.facebook.com/profile.php?id=100086580240269' target='_blank'><img class='contact' id='facebookContact' src={facebook} draggable={false} alt='MyFacebook' title='MyFacebook' /></a>
                     </span>
                 </span>
             </div>
