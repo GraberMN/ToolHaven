@@ -197,7 +197,18 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                         00:00:00
                     </div>
                     <span id='countdownTimerButtons'>
-
+                        <span class='countdownTimerButton'>Start</span>
+                        <span class='countdownTimerButton'>Pause</span>
+                        <span class='countdownTimerButton'>Reset</span>
+                        <span class='countdownTimerButton'>+1 sec</span>
+                        <span class='countdownTimerButton'>+5 sec</span>
+                        <span class='countdownTimerButton'>+10 sec</span>
+                        <span class='countdownTimerButton'>+30 sec</span>
+                        <span class='countdownTimerButton'>+1 min</span>
+                        <span class='countdownTimerButton'>+5 min</span>
+                        <span class='countdownTimerButton'>+30 min</span>
+                        <span class='countdownTimerButton'>+1 hr</span>
+                        <span class='countdownTimerButton'>+3 hr</span>
                     </span>
                 </div>
                 <div id='stopwatchContent' ref={stopwatchContentRef}>
