@@ -6,6 +6,9 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
     const [settingsIcon, rulesIcon, homeButton] = timersImagesArray;
     const [countdownBorderColorVal, setCountdownBorderColorVal] = useState('#352f2ffd');
     const [stopwatchBorderColorVal, setStopwatchBorderColorVal] = useState('#352f2ffd');
+    const hoursVal = useRef(0);
+    const minutesVal = useRef(0);
+    const secondsVal = useRef(0);
     const timersRulesIconRef = useRef(null);
     const timersRulesBox = useRef(null);
     const timersSettingsIconRef = useRef(null);
@@ -194,21 +197,21 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                 <span onClick={() => onStopwatchTabClick()} id='stopwatchTab' draggable={false} title='stopwatchTab'>Stopwatch</span>
                 <div id='countdownContent' ref={countdownContentRef}>
                     <div id='countdownTimer' ref={countdownTimerRef} title='countdownTimer'>
-                        00:00:00
+                        {hoursVal.current}<span class='timeMeasurement'>hr</span> {minutesVal.current}<span class='timeMeasurement'>min</span> {secondsVal.current}<span class='timeMeasurement'>sec</span>
                     </div>
                     <span id='countdownTimerButtons'>
-                        <span class='countdownTimerButton'>Start</span>
-                        <span class='countdownTimerButton'>Pause</span>
-                        <span class='countdownTimerButton'>Reset</span>
-                        <span class='countdownTimerButton'>+1 sec</span>
-                        <span class='countdownTimerButton'>+5 sec</span>
-                        <span class='countdownTimerButton'>+10 sec</span>
-                        <span class='countdownTimerButton'>+30 sec</span>
-                        <span class='countdownTimerButton'>+1 min</span>
-                        <span class='countdownTimerButton'>+5 min</span>
-                        <span class='countdownTimerButton'>+30 min</span>
-                        <span class='countdownTimerButton'>+1 hr</span>
-                        <span class='countdownTimerButton'>+3 hr</span>
+                        <span class='countdownTimerButton' id='countdownStart' title='countdownStart'>Start</span>
+                        <span class='countdownTimerButton' id='countdownPause' title='countdownPause'>Pause</span>
+                        <span class='countdownTimerButton' id='countdownReset' title='countdownReset'>Reset</span>
+                        <span class='countdownTimerButton' id='countdown+1sec' title='countdown+1sec'>+1 sec</span>
+                        <span class='countdownTimerButton' id='countdown+5sec' title='countdown+5sec'>+5 sec</span>
+                        <span class='countdownTimerButton' id='countdown+10sec' title='countdown+10sec'>+10 sec</span>
+                        <span class='countdownTimerButton' id='countdown+30sec' title='countdown+30sec'>+30 sec</span>
+                        <span class='countdownTimerButton' id='countdown+1min' title='countdown+1min'>+1 min</span>
+                        <span class='countdownTimerButton' id='countdown+5min' title='countdown+5min'>+5 min</span>
+                        <span class='countdownTimerButton' id='countdown+30min' title='countdown+30min'>+30 min</span>
+                        <span class='countdownTimerButton' id='countdown+1hr' title='countdown+1hr'>+1 hr</span>
+                        <span class='countdownTimerButton' id='countdown+3hr' title='countdown+3hr'>+3 hr</span>
                     </span>
                 </div>
                 <div id='stopwatchContent' ref={stopwatchContentRef}>
