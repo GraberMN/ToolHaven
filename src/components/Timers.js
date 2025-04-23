@@ -28,12 +28,14 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
     const stopwatchTimerRef = useRef(null);
     const timersHomeButtonRef = useRef(null);
     const plusArbitrarySec = (secIncrement) => {
-        if (secondsVal.current >= 60 - secIncrement) {
+        if (secondsVal.current >= (60 - secIncrement)) {
             secondsVal.current = secondsVal.current + secIncrement - 60;
             if (minutesVal.current == 59) {
                 minutesVal.current = 0;
                 if (hoursVal.current == 99) {
                     hoursVal.current = 99;
+                    minutesVal.current = 59;
+                    secondsVal.current = 59;
                 } else {
                     hoursVal.current = hoursVal.current + 1;
                 }
@@ -58,6 +60,50 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
     }
     const plus30Sec = () => {
         plusArbitrarySec(30);
+    }
+    const plusArbitraryMin = (minIncrement) => {
+        if (minutesVal.current >= (60 - minIncrement)) {
+            minutesVal.current = minutesVal.current + minIncrement - 60;
+            if (hoursVal.current == 99) {
+                hoursVal.current = 99;
+                minutesVal.current = 59;
+                secondsVal.current = 59;
+            } else {
+                hoursVal.current = hoursVal.current + 1;
+            }
+        } else {
+            minutesVal.current = minutesVal.current + minIncrement;
+        }
+        hoursValHolder.current.innerHTML = hoursVal.current.toString();
+        minutesValHolder.current.innerHTML = minutesVal.current.toString();
+        secondsValHolder.current.innerHTML = secondsVal.current.toString();
+    }
+    const plus1Min = () => {
+        plusArbitraryMin(1);
+    }
+    const plus5Min = () => {
+        plusArbitraryMin(5);
+    }
+    const plus30Min = () => {
+        plusArbitraryMin(30);
+    }
+    const plusArbitraryHour = (hourIncrement) => {
+        if (hoursVal.current >= (100 - hourIncrement)) {
+            hoursVal.current = 99;
+            minutesVal.current = 59;
+            secondsVal.current = 59;
+        } else {
+            hoursVal.current = hoursVal.current + hourIncrement;
+        }
+        hoursValHolder.current.innerHTML = hoursVal.current.toString();
+        minutesValHolder.current.innerHTML = minutesVal.current.toString();
+        secondsValHolder.current.innerHTML = secondsVal.current.toString();
+    }
+    const plus1Hr = () => {
+        plusArbitraryHour(1);
+    }
+    const plus3Hr = () => {
+        plusArbitraryHour(3);
     }
     const openOrClose = (element) => {
         if (element.current.style.visibility === "hidden") {
@@ -247,11 +293,11 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                         <span onClick={() => plus5Sec()} class='countdownTimerButton' id='countdown+5sec' title='countdown+5sec'>+5 sec</span>
                         <span onClick={() => plus10Sec()} class='countdownTimerButton' id='countdown+10sec' title='countdown+10sec'>+10 sec</span>
                         <span onClick={() => plus30Sec()} class='countdownTimerButton' id='countdown+30sec' title='countdown+30sec'>+30 sec</span>
-                        <span class='countdownTimerButton' id='countdown+1min' title='countdown+1min'>+1 min</span>
-                        <span class='countdownTimerButton' id='countdown+5min' title='countdown+5min'>+5 min</span>
-                        <span class='countdownTimerButton' id='countdown+30min' title='countdown+30min'>+30 min</span>
-                        <span class='countdownTimerButton' id='countdown+1hr' title='countdown+1hr'>+1 hr</span>
-                        <span class='countdownTimerButton' id='countdown+3hr' title='countdown+3hr'>+3 hr</span>
+                        <span onClick={() => plus1Min()} class='countdownTimerButton' id='countdown+1min' title='countdown+1min'>+1 min</span>
+                        <span onClick={() => plus5Min()} class='countdownTimerButton' id='countdown+5min' title='countdown+5min'>+5 min</span>
+                        <span onClick={() => plus30Min()} class='countdownTimerButton' id='countdown+30min' title='countdown+30min'>+30 min</span>
+                        <span onClick={() => plus1Hr()} class='countdownTimerButton' id='countdown+1hr' title='countdown+1hr'>+1 hr</span>
+                        <span onClick={() => plus3Hr()} class='countdownTimerButton' id='countdown+3hr' title='countdown+3hr'>+3 hr</span>
                     </span>
                 </div>
                 <div id='stopwatchContent' ref={stopwatchContentRef}>
