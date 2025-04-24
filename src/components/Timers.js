@@ -6,6 +6,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
     const [settingsIcon, rulesIcon, homeButton] = timersImagesArray;
     const [countdownBorderColorVal, setCountdownBorderColorVal] = useState('#352f2ffd');
     const [stopwatchBorderColorVal, setStopwatchBorderColorVal] = useState('#352f2ffd');
+    const countdownInterval = useRef(null);
     const hoursVal = useRef(0);
     const minutesVal = useRef(0);
     const secondsVal = useRef(0);
@@ -28,11 +29,10 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
     const stopwatchTimerRef = useRef(null);
     const timersHomeButtonRef = useRef(null);
     const startCountdown = () => {
-        let countdownInterval = null;
         if (hoursVal.current !== 0 || minutesVal.current !== 0 || secondsVal.current !== 0) {
-            countdownInterval = setInterval(() => {
+            countdownInterval.current = setInterval(() => {
                 if (hoursVal.current === 0 && minutesVal.current === 0 && secondsVal.current === 0) {
-                    clearInterval(countdownInterval);
+                    clearInterval(countdownInterval.current);
                     return;
                 }
                 if (secondsVal.current === 0) {
@@ -53,7 +53,9 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
         }
     }
     const pauseCountdown = () => {
-
+        if (countdownInterval.current !== null) {
+            clearInterval(countdownInterval.current);
+        }
     }
     const resetCountdown = () => {
         hoursVal.current = 0;
@@ -149,11 +151,11 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
         }
     }
     const onCountdownBorderColorChange = (e) => {
-        setCountdownBorderColorVal(e.target.innerHTML);
+        setCountdownBorderColorVal(e.target.value);
         countdownTimerRef.current.style.borderColor = countdownBorderColorVal;
     }
     const onStopwatchBorderColorChange = (e) => {
-        setStopwatchBorderColorVal(e.target.innerHTML);
+        setStopwatchBorderColorVal(e.target.value);
         stopwatchTimerRef.current.style.borderColor = stopwatchBorderColorVal;
     }
     const highlight = (element) => {
@@ -323,7 +325,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                     </div>
                     <span id='countdownTimerButtons'>
                         <span onClick={() => startCountdown()} class='countdownTimerButton' id='countdownStart' title='countdownStart'>Start</span>
-                        <span class='countdownTimerButton' id='countdownPause' title='countdownPause'>Pause</span>
+                        <span onClick={() => pauseCountdown()} class='countdownTimerButton' id='countdownPause' title='countdownPause'>Pause</span>
                         <span onClick={() => resetCountdown()} class='countdownTimerButton' id='countdownReset' title='countdownReset'>Reset</span>
                         <span onClick={() => plus1Sec()} class='countdownTimerButton' id='countdown+1sec' title='countdown+1sec'>+1 sec</span>
                         <span onClick={() => plus5Sec()} class='countdownTimerButton' id='countdown+5sec' title='countdown+5sec'>+5 sec</span>
