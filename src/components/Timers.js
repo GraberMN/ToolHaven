@@ -27,12 +27,48 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
     const countdownTimerRef = useRef(null);
     const stopwatchTimerRef = useRef(null);
     const timersHomeButtonRef = useRef(null);
+    const startCountdown = () => {
+        let countdownInterval = null;
+        if (hoursVal.current !== 0 || minutesVal.current !== 0 || secondsVal.current !== 0) {
+            countdownInterval = setInterval(() => {
+                if (hoursVal.current === 0 && minutesVal.current === 0 && secondsVal.current === 0) {
+                    clearInterval(countdownInterval);
+                    return;
+                }
+                if (secondsVal.current === 0) {
+                    secondsVal.current = 59;
+                    if (minutesVal.current === 0) {
+                        minutesVal.current = 59;
+                        hoursVal.current = hoursVal.current - 1;
+                    } else {
+                        minutesVal.current = minutesVal.current - 1;
+                    }
+                } else {
+                    secondsVal.current = secondsVal.current - 1;
+                }
+                hoursValHolder.current.innerHTML = hoursVal.current.toString();
+                minutesValHolder.current.innerHTML = minutesVal.current.toString();
+                secondsValHolder.current.innerHTML = secondsVal.current.toString();
+            }, 1000);
+        }
+    }
+    const pauseCountdown = () => {
+
+    }
+    const resetCountdown = () => {
+        hoursVal.current = 0;
+        minutesVal.current = 0;
+        secondsVal.current = 0;
+        hoursValHolder.current.innerHTML = hoursVal.current.toString();
+        minutesValHolder.current.innerHTML = minutesVal.current.toString();
+        secondsValHolder.current.innerHTML = secondsVal.current.toString();
+    }
     const plusArbitrarySec = (secIncrement) => {
         if (secondsVal.current >= (60 - secIncrement)) {
             secondsVal.current = secondsVal.current + secIncrement - 60;
-            if (minutesVal.current == 59) {
+            if (minutesVal.current === 59) {
                 minutesVal.current = 0;
-                if (hoursVal.current == 99) {
+                if (hoursVal.current === 99) {
                     hoursVal.current = 99;
                     minutesVal.current = 59;
                     secondsVal.current = 59;
@@ -64,7 +100,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
     const plusArbitraryMin = (minIncrement) => {
         if (minutesVal.current >= (60 - minIncrement)) {
             minutesVal.current = minutesVal.current + minIncrement - 60;
-            if (hoursVal.current == 99) {
+            if (hoursVal.current === 99) {
                 hoursVal.current = 99;
                 minutesVal.current = 59;
                 secondsVal.current = 59;
@@ -286,9 +322,9 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                         <span ref={hoursValHolder}>{hoursVal.current}</span><span class='timeMeasurement'>hr</span> <span ref={minutesValHolder}>{minutesVal.current}</span><span class='timeMeasurement'>min</span> <span ref={secondsValHolder}>{secondsVal.current}</span><span class='timeMeasurement'>sec</span>
                     </div>
                     <span id='countdownTimerButtons'>
-                        <span class='countdownTimerButton' id='countdownStart' title='countdownStart'>Start</span>
+                        <span onClick={() => startCountdown()} class='countdownTimerButton' id='countdownStart' title='countdownStart'>Start</span>
                         <span class='countdownTimerButton' id='countdownPause' title='countdownPause'>Pause</span>
-                        <span class='countdownTimerButton' id='countdownReset' title='countdownReset'>Reset</span>
+                        <span onClick={() => resetCountdown()} class='countdownTimerButton' id='countdownReset' title='countdownReset'>Reset</span>
                         <span onClick={() => plus1Sec()} class='countdownTimerButton' id='countdown+1sec' title='countdown+1sec'>+1 sec</span>
                         <span onClick={() => plus5Sec()} class='countdownTimerButton' id='countdown+5sec' title='countdown+5sec'>+5 sec</span>
                         <span onClick={() => plus10Sec()} class='countdownTimerButton' id='countdown+10sec' title='countdown+10sec'>+10 sec</span>
