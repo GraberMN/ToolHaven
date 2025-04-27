@@ -111,6 +111,17 @@
     display: inline;
     user-select: none;
 }
+ul > input {
+    margin-left: -40px;
+    width: 200px;
+}
+ul > input[type='color' i] {
+    width: 200px;
+}
+ul > span {
+    position: absolute;
+    font-family: cursive;
+}
 #timersSettingsTitle {
     font-size: 30px;
     font-weight: 600;
@@ -130,6 +141,9 @@
     text-decoration-line: underline;
     font-family: cursive;
     padding-right: 10px;
+}
+.countdownAlarmType {
+    padding-right: 4px;
 }
 #stopwatchSettingsTitle {
     font-size: 18px;
@@ -157,6 +171,10 @@ li {
     font-family: cursive;
     margin-left: 25px;
     list-style-type: circle;
+}
+#timerInvisLi {
+    list-style-type: none;
+    padding-left: 2px;
 }
 #timersContainer {
     width: 500px;
