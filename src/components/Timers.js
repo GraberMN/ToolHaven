@@ -5,6 +5,7 @@ import './timers.css';
 function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
     const [settingsIcon, rulesIcon, bedsideCountdownAlarm, digitalCountdownAlarm, chaoticCountdownAlarm, homeButton] = timersImagesArray;
     const [countdownAlarmSource, setCountdownAlarmSource] = useState(null);
+    const [countdownAlarmVolume, setCountdownAlarmVolume] = useState(20);
     const [countdownBorderColorVal, setCountdownBorderColorVal] = useState('#352f2ffd');
     const [stopwatchBorderColorVal, setStopwatchBorderColorVal] = useState('#352f2ffd');
     const countdownInterval = useRef(null);
@@ -328,11 +329,14 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
         }
     }, [moveToTimers]);
     useEffect(() => {
+        countdownAlarm.current.volume = countdownAlarmVolume / 100.0;
+    }, [countdownAlarmVolume]);
+    useEffect(() => {
         hoursValHolder.current.innerHTML = "0";
         minutesValHolder.current.innerHTML = "0";
         secondsValHolder.current.innerHTML = "0";
         setCountdownAlarmSource(bedsideCountdownAlarm);
-    }, [])
+    }, []);
     useEffect(() => {
         const goneElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox, timersContainerRef, countdownContentRef, stopwatchContentRef, timersHomeButtonRef];
         for (let i = 0; i < goneElements.length; i++) {
@@ -351,9 +355,10 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                     <li>Hover over each timer or each item/ button to find out what it is/represents.</li>
                     <li>The bottom left Home button takes you back to the Home page.</li>
                     <li>The Settings tab lets you  .</li>
+                    <li>Whichever timer tab you are on dictates which timer's settings show up.</li>
                     <li>When changing color in Settings, drag the pointer around for it to work seamlessly.</li>
                     <li>Timer-Specific Rules:</li>
-                    <li id='lvl2li'>Countdown: 3 alarm options (bedtime, digital, & chaotic), all last 8-10 sec.</li>
+                    <li id='lvl2li'>Countdown: 3 alarm options (bedtime, digital, & chaotic), all last 9-11 sec.</li>
                     <li id='lvl2li'>Countdown: any of the 12 buttons can be pressed to stop alarm instantly.</li>
                 </ul>
             </span>
@@ -374,6 +379,9 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                     <audio src={countdownAlarmSource} ref={countdownAlarm}>
                         <source ref={countdownAlarmSourceRef} />
                     </audio>
+                    <li>Volume of countdown alarm:</li>
+                    <input type='range' min={0} max={100} value={countdownAlarmVolume} onChange={(e) => setCountdownAlarmVolume(e.target.value)} title='countdownAlarmVolumeSlider' placeholder='countdownAlarmVolumeSlider' />
+                    <span title={countdownAlarmVolume + "% volume"}>{countdownAlarmVolume}</span>
                     <li>Color of countdown border:</li>
                     <input type='color' value={countdownBorderColorVal} onChange={(e) => onCountdownBorderColorChange(e)} id='countdownBorderColorPicker' title='countdownBorderColorPicker' placeholder='countdownBorderColorPicker' />
                 </ul>
