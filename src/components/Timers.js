@@ -3,8 +3,9 @@ import { useState, useRef, useEffect } from 'react';
 import './timers.css';
 
 function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
-    const [settingsIcon, rulesIcon, bedsideCountdownAlarm, digitalCountdownAlarm, chaoticCountdownAlarm, homeButton] = timersImagesArray;
+    const [settingsIcon, rulesIcon, bedsideCountdownAlarm, digitalCountdownAlarm, chaoticCountdownAlarm, coinStopwatchLapSound, joyousStopwatchLapSound, notifStopwatchLapSound, homeButton] = timersImagesArray;
     const [countdownAlarmSource, setCountdownAlarmSource] = useState(null);
+    const [stopwatchLapSoundSource, setStopwatchLapSoundSource] = useState(null);
     const [countdownAlarmVolume, setCountdownAlarmVolume] = useState(20);
     const [countdownBorderColorVal, setCountdownBorderColorVal] = useState('#352f2ffd');
     const [stopwatchBorderColorVal, setStopwatchBorderColorVal] = useState('#352f2ffd');
@@ -16,8 +17,16 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
     const minutesValHolder = useRef(null);
     const secondsValHolder = useRef(null);
     const countdownAlarm = useRef(null);
-    const countdownAlarmSourceRef = useRef(null);
     const firstCountdownAlarmOption = useRef(null);
+    const stopwatchInterval = useRef(null);
+    const stopwatchHoursVal = useRef(0);
+    const stopwatchMinutesVal = useRef(0);
+    const stopwatchSecondsVal = useRef(0);
+    const stopwatchHoursValHolder = useRef(null);
+    const stopwatchMinutesValHolder = useRef(null);
+    const stopwatchSecondsValHolder = useRef(null);
+    const stopwatchLapSound = useRef(null);
+    const firstStopwatchLapSoundOption = useRef(null);
     const timersRulesIconRef = useRef(null);
     const timersRulesBox = useRef(null);
     const timersSettingsIconRef = useRef(null);
@@ -115,7 +124,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
         hoursValHolder.current.innerHTML = hoursVal.current.toString();
         minutesValHolder.current.innerHTML = minutesVal.current.toString();
         secondsValHolder.current.innerHTML = secondsVal.current.toString();
-        if (countdownTimerRef.current.style.backgroundColor = 'red') {
+        if (countdownAlarm.current.currentTime !== 0) {
             countdownTimerRef.current.style.backgroundColor = 'azure';
             countdownAlarm.current.load();
         }
@@ -148,7 +157,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
         hoursValHolder.current.innerHTML = hoursVal.current.toString();
         minutesValHolder.current.innerHTML = minutesVal.current.toString();
         secondsValHolder.current.innerHTML = secondsVal.current.toString();
-        if (countdownTimerRef.current.style.backgroundColor = 'red') {
+        if (countdownAlarm.current.currentTime !== 0) {
             countdownTimerRef.current.style.backgroundColor = 'azure';
             countdownAlarm.current.load();
         }
@@ -173,7 +182,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
         hoursValHolder.current.innerHTML = hoursVal.current.toString();
         minutesValHolder.current.innerHTML = minutesVal.current.toString();
         secondsValHolder.current.innerHTML = secondsVal.current.toString();
-        if (countdownTimerRef.current.style.backgroundColor = 'red') {
+        if (countdownAlarm.current.currentTime !== 0) {
             countdownTimerRef.current.style.backgroundColor = 'azure';
             countdownAlarm.current.load();
         }
@@ -183,6 +192,36 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
     }
     const plus3Hr = () => {
         plusArbitraryHour(3);
+    }
+    const startStopwatch = () => {
+        if (stopwatchInterval.current !== null) {
+            return;
+        }
+        stopwatchTimerRef.current.style.backgroundColor = 'powderblue';
+        stopwatchInterval.current = setInterval(() => {
+            if (stopwatchSecondsVal.current === 59) {
+                stopwatchSecondsVal.current = 0;
+                if (stopwatchMinutesVal.current === 59) {
+                    stopwatchMinutesVal.current = 0;
+                    if (stopwatchHoursVal.current === 99) {
+                        stopwatchHoursVal.current = 99;
+                        stopwatchMinutesVal.current = 59;
+                        stopwatchSecondsVal.current = 59;
+                        clearInterval(stopwatchInterval.current);
+                        stopwatchInterval.current = null;
+                    } else {
+                        stopwatchHoursVal.current = stopwatchHoursVal.current + 1;
+                    }
+                } else {
+                    stopwatchMinutesVal.current = stopwatchMinutesVal.current + 1;
+                }
+            } else {
+                stopwatchSecondsVal.current = stopwatchSecondsVal.current + 1;
+            }
+            stopwatchHoursValHolder.current.innerHTML = stopwatchHoursVal.current.toString();
+            stopwatchMinutesValHolder.current.innerHTML = stopwatchMinutesVal.current.toString();
+            stopwatchSecondsValHolder.current.innerHTML = stopwatchSecondsVal.current.toString();
+        }, 1000);
     }
     const changeCountdownAlarmToBedside = (isChecked) => {
         if (isChecked) {
@@ -194,9 +233,24 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
             setCountdownAlarmSource(digitalCountdownAlarm);
         }
     }
-    const changeCountdownAlarmTochaotic = (isChecked) => {
+    const changeCountdownAlarmToChaotic = (isChecked) => {
         if (isChecked) {
             setCountdownAlarmSource(chaoticCountdownAlarm);
+        }
+    }
+    const changeStopwatchLapSoundToCoin = (isChecked) => {
+        if (isChecked) {
+            setStopwatchLapSoundSource(coinStopwatchLapSound);
+        }
+    }
+    const changeStopwatchLapSoundToJoyous = (isChecked) => {
+        if (isChecked) {
+            setStopwatchLapSoundSource(joyousStopwatchLapSound);
+        }
+    }
+    const changeStopwatchLapSoundToNotif = (isChecked) => {
+        if (isChecked) {
+            setStopwatchLapSoundSource(notifStopwatchLapSound);
         }
     }
     const openOrClose = (element) => {
@@ -241,6 +295,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
         countdownContentRef.current.style.display = 'none';
         stopwatchContentRef.current.style.display = 'block';
         timersContainerRef.current.style.backgroundColor = 'rgb(228, 214, 92)';
+        resetCountdown();
     }
     const onAdjustWindowWidthTimers = () => {
         if (window.innerWidth <= 740) {
@@ -306,6 +361,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                 readyForMove(timersElements[i]);
             }
             firstCountdownAlarmOption.current.checked = true;
+            firstStopwatchLapSoundOption.current.checked = true;
             document.body.style.backgroundColor = 'hsl(28, 77.80%, 85.90%)';
             timersContainerRef.current.style.backgroundColor = 'rgb(255, 246, 162)';
             setTimeout(() => {
@@ -336,6 +392,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
         minutesValHolder.current.innerHTML = "0";
         secondsValHolder.current.innerHTML = "0";
         setCountdownAlarmSource(bedsideCountdownAlarm);
+        setStopwatchLapSoundSource(coinStopwatchLapSound);
     }, []);
     useEffect(() => {
         const goneElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox, timersContainerRef, countdownContentRef, stopwatchContentRef, timersHomeButtonRef];
@@ -356,6 +413,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                     <li>The bottom left Home button takes you back to the Home page.</li>
                     <li>The Settings tab lets you  .</li>
                     <li>Whichever timer tab you are on dictates which timer's settings show up.</li>
+                    <li>Switching timer tabs causes the timer that was just left behind to reset.</li>
                     <li>When changing color in Settings, drag the pointer around for it to work seamlessly.</li>
                     <li>Timer-Specific Rules:</li>
                     <li id='lvl2li'>Countdown: 3 alarm options (bedtime, digital, & chaotic), all last 9-11 sec.</li>
@@ -374,11 +432,9 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                     <li id='timerInvisLi'>
                         <input type='radio' onClick={(e) => changeCountdownAlarmToBedside(e.target.checked)} name='countdownAlarmOptions' ref={firstCountdownAlarmOption} title='bedsideCountdownAlarmRadio' placeholder='bedsideCountdownAlarmRadio' /><span class='countdownAlarmType'>bedside</span>
                         <input type='radio' onClick={(e) => changeCountdownAlarmToDigital(e.target.checked)} name='countdownAlarmOptions' title='digitalCountdownAlarmRadio' placeholder='digitalCountdownAlarmRadio' /><span class='countdownAlarmType'>digital</span>
-                        <input type='radio' onClick={(e) => changeCountdownAlarmTochaotic(e.target.checked)} name='countdownAlarmOptions' title='chaoticCountdownAlarmRadio' placeholder='chaoticCountdownAlarmRadio' /><span class='countdownAlarmType'>chaotic</span>
+                        <input type='radio' onClick={(e) => changeCountdownAlarmToChaotic(e.target.checked)} name='countdownAlarmOptions' title='chaoticCountdownAlarmRadio' placeholder='chaoticCountdownAlarmRadio' /><span class='countdownAlarmType'>chaotic</span>
                     </li>
-                    <audio src={countdownAlarmSource} ref={countdownAlarm}>
-                        <source ref={countdownAlarmSourceRef} />
-                    </audio>
+                    <audio src={countdownAlarmSource} ref={countdownAlarm}></audio>
                     <li>Volume of countdown alarm:</li>
                     <input type='range' min={0} max={100} value={countdownAlarmVolume} onChange={(e) => setCountdownAlarmVolume(e.target.value)} title='countdownAlarmVolumeSlider' placeholder='countdownAlarmVolumeSlider' />
                     <span title={countdownAlarmVolume + "% volume"}>{countdownAlarmVolume}</span>
@@ -386,6 +442,16 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                     <input type='color' value={countdownBorderColorVal} onChange={(e) => onCountdownBorderColorChange(e)} id='countdownBorderColorPicker' title='countdownBorderColorPicker' placeholder='countdownBorderColorPicker' />
                 </ul>
                 <ul id='stopwatchSettingsList' ref={stopwatchSettingsListRef}>
+                    <li>Lap sounds for stopwatch:</li>
+                    <li id='timerInvisLi'>
+                        <input type='radio' onClick={(e) => changeStopwatchLapSoundToCoin(e.target.checked)} name='stopwatchLapSoundOptions' ref={firstStopwatchLapSoundOption} title='coinStopwatchLapSoundRadio' placeholder='coinStopwatchLapSoundRadio' /><span class='stopwatchLapSoundType'>coin</span>
+                        <input type='radio' onClick={(e) => changeStopwatchLapSoundToJoyous(e.target.checked)} name='stopwatchLapSoundOptions' title='joyousStopwatchLapSoundRadio' placeholder='joyousStopwatchLapSoundRadio' /><span class='stopwatchLapSoundType'>joyous</span>
+                        <input type='radio' onClick={(e) => changeStopwatchLapSoundToNotif(e.target.checked)} name='stopwatchLapSoundOptions' title='notifStopwatchLapSoundRadio' placeholder='notifStopwatchLapSoundRadio' /><span class='stopwatchLapSoundType'>notif</span>
+                    </li>
+                    <audio src={stopwatchLapSoundSource} ref={stopwatchLapSound}></audio>
+                    <li>Volume of stopwatch lap sound:</li>
+                    <input type='range' min={0} max={100} value={countdownAlarmVolume} onChange={(e) => setCountdownAlarmVolume(e.target.value)} title='countdownAlarmVolumeSlider' placeholder='countdownAlarmVolumeSlider' />
+                    <span title={countdownAlarmVolume + "% volume"}>{countdownAlarmVolume}</span>
                     <li>Color of stopwatch border:</li>
                     <input type='color' value={stopwatchBorderColorVal} onChange={(e) => onStopwatchBorderColorChange(e)} id='stopwatchBorderColorPicker' title='stopwatchBorderColorPicker' placeholder='stopwatchBorderColorPicker' />
                 </ul>
@@ -415,10 +481,13 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                 </div>
                 <div id='stopwatchContent' ref={stopwatchContentRef}>
                     <div id='stopwatchTimer' ref={stopwatchTimerRef} title='stopwatchTimer'>
-                        00:00:00
+                        <span ref={stopwatchHoursValHolder}>{stopwatchHoursVal.current}</span><span class='timeMeasurement'>hr</span> <span ref={stopwatchMinutesValHolder}>{stopwatchMinutesVal.current}</span><span class='timeMeasurement'>min</span> <span ref={stopwatchSecondsValHolder}>{stopwatchSecondsVal.current}</span><span class='timeMeasurement'>sec</span>
                     </div>
                     <span id='stopwatchTimerButtons'>
-
+                        <span onClick={() => startStopwatch()} class='stopwatchTimerButton' id='stopwatchStart' title='stopwatchStart'>Start</span>
+                        <span onClick='{() => pauseStopwatch()}' class='stopwatchTimerButton' id='stopwatchPause' title='stopwatchPause'>Pause</span>
+                        <span onClick='{() => nextLap()}' class='stopwatchTimerButton' id='stopwatchNextLap' title='stopwatchNextLap'>Next Lap</span>
+                        <span onClick='{() => resetStopwatch()}' class='stopwatchTimerButton' id='stopwatchReset' title='stopwatchReset'>Reset</span>
                     </span>
                 </div>
             </span>

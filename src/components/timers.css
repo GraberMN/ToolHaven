@@ -56,7 +56,7 @@
     height: auto;
 }
 #timersRulesBox::-webkit-scrollbar-thumb {
-    background: hsl(187, 74%, 41%);
+    background: hsl(24, 100%, 50%);
     border-radius: 20px;
 }
 #timersRulesBox::-webkit-scrollbar-track-piece {
@@ -160,6 +160,9 @@ ul > span {
     font-family: cursive;
     padding-right: 15px;
 }
+.stopwatchLapSoundType {
+    padding-right: 4px;
+}
 ul {
     margin-top: 22px;
 }
@@ -260,7 +263,6 @@ li {
     font-size: 40px;
     font-weight: 500;
     text-align: center;
-    padding-top: 10px;
     background-color: azure;
     text-wrap: center;
     padding-top: 20px;
@@ -293,16 +295,43 @@ li {
 }
 #stopwatchTimer {
     width: 300px;
-    height: 100px;
+    height: 80px;
     border: solid 10px rgba(53, 47, 47, 0.993);
     border-radius: 75px;
     margin: auto;
     margin-top: 80px;
     font-family: cursive;
-    font-size: 60px;
+    font-size: 40px;
     font-weight: 500;
     text-align: center;
-    padding-top: 10px;
+    background-color: azure;
+    text-wrap: center;
+    padding-top: 20px;
+}
+#stopwatchTimerButtons {
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: 165px 165px;
+    grid-template-rows: 75px 50px;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+.stopwatchTimerButton {
+    margin-left: 9px;
+    font-family: cursive;
+    font-size: 20px;
+    width: 140px;
+    height: 30px;
+    border: solid 4px rgba(53, 47, 47, 0.993);
+    border-radius: 20px;
+    background-color: azure;
+    cursor: pointer;
+}
+.stopwatchTimerButton:hover {
+    background-color: powderblue;
+}
+.stopwatchTimerButton:active {
     background-color: azure;
 }
 .timeMeasurement {
