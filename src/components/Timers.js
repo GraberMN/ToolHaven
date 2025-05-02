@@ -207,6 +207,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                         stopwatchHoursVal.current = 99;
                         stopwatchMinutesVal.current = 59;
                         stopwatchSecondsVal.current = 59;
+                        stopwatchTimerRef.current.style.backgroundColor = 'azure';
                         clearInterval(stopwatchInterval.current);
                         stopwatchInterval.current = null;
                     } else {
@@ -222,6 +223,25 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
             stopwatchMinutesValHolder.current.innerHTML = stopwatchMinutesVal.current.toString();
             stopwatchSecondsValHolder.current.innerHTML = stopwatchSecondsVal.current.toString();
         }, 1000);
+    }
+    const pauseStopwatch = () => {
+        if (stopwatchInterval.current !== null) {
+            stopwatchTimerRef.current.style.backgroundColor = 'azure';
+            clearInterval(stopwatchInterval.current);
+            stopwatchInterval.current = null;
+        }
+    }
+
+    const resetStopwatch = () => {
+        stopwatchHoursVal.current = 0;
+        stopwatchMinutesVal.current = 0;
+        stopwatchSecondsVal.current = 0;
+        stopwatchHoursValHolder.current.innerHTML = stopwatchHoursVal.current.toString();
+        stopwatchMinutesValHolder.current.innerHTML = stopwatchMinutesVal.current.toString();
+        stopwatchSecondsValHolder.current.innerHTML = stopwatchSecondsVal.current.toString();
+        clearInterval(stopwatchInterval.current);
+        stopwatchInterval.current = null;
+        stopwatchTimerRef.current.style.backgroundColor = 'azure';
     }
     const changeCountdownAlarmToBedside = (isChecked) => {
         if (isChecked) {
@@ -485,9 +505,9 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                     </div>
                     <span id='stopwatchTimerButtons'>
                         <span onClick={() => startStopwatch()} class='stopwatchTimerButton' id='stopwatchStart' title='stopwatchStart'>Start</span>
-                        <span onClick='{() => pauseStopwatch()}' class='stopwatchTimerButton' id='stopwatchPause' title='stopwatchPause'>Pause</span>
+                        <span onClick={() => pauseStopwatch()} class='stopwatchTimerButton' id='stopwatchPause' title='stopwatchPause'>Pause</span>
                         <span onClick='{() => nextLap()}' class='stopwatchTimerButton' id='stopwatchNextLap' title='stopwatchNextLap'>Next Lap</span>
-                        <span onClick='{() => resetStopwatch()}' class='stopwatchTimerButton' id='stopwatchReset' title='stopwatchReset'>Reset</span>
+                        <span onClick={() => resetStopwatch()} class='stopwatchTimerButton' id='stopwatchReset' title='stopwatchReset'>Reset</span>
                     </span>
                 </div>
             </span>
