@@ -7,6 +7,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
     const [countdownAlarmSource, setCountdownAlarmSource] = useState(null);
     const [stopwatchLapSoundSource, setStopwatchLapSoundSource] = useState(null);
     const [countdownAlarmVolume, setCountdownAlarmVolume] = useState(20);
+    const [stopwatchLapSoundVolume, setStopwatchLapSoundVolume] = useState(20);
     const [countdownBorderColorVal, setCountdownBorderColorVal] = useState('#352f2ffd');
     const [stopwatchBorderColorVal, setStopwatchBorderColorVal] = useState('#352f2ffd');
     const countdownInterval = useRef(null);
@@ -306,6 +307,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
         countdownContentRef.current.style.display = 'block';
         stopwatchContentRef.current.style.display = 'none';
         timersContainerRef.current.style.backgroundColor = 'rgb(255, 246, 162)';
+        resetStopwatch();
     }
     const onStopwatchTabClick = () => {
         countdownSettingsListRef.current.style.display = 'none';
@@ -408,6 +410,9 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
         countdownAlarm.current.volume = countdownAlarmVolume / 100.0;
     }, [countdownAlarmVolume]);
     useEffect(() => {
+        stopwatchLapSound.current.volume = stopwatchLapSoundVolume / 100.0;
+    }, [stopwatchLapSoundVolume]);
+    useEffect(() => {
         hoursValHolder.current.innerHTML = "0";
         minutesValHolder.current.innerHTML = "0";
         secondsValHolder.current.innerHTML = "0";
@@ -470,8 +475,8 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                     </li>
                     <audio src={stopwatchLapSoundSource} ref={stopwatchLapSound}></audio>
                     <li>Volume of stopwatch lap sound:</li>
-                    <input type='range' min={0} max={100} value={countdownAlarmVolume} onChange={(e) => setCountdownAlarmVolume(e.target.value)} title='countdownAlarmVolumeSlider' placeholder='countdownAlarmVolumeSlider' />
-                    <span title={countdownAlarmVolume + "% volume"}>{countdownAlarmVolume}</span>
+                    <input type='range' min={0} max={100} value={stopwatchLapSoundVolume} onChange={(e) => setStopwatchLapSoundVolume(e.target.value)} title='stopwatchLapSoundVolumeSlider' placeholder='stopwatchLapSoundVolumeSlider' />
+                    <span title={stopwatchLapSoundVolume + "% volume"}>{stopwatchLapSoundVolume}</span>
                     <li>Color of stopwatch border:</li>
                     <input type='color' value={stopwatchBorderColorVal} onChange={(e) => onStopwatchBorderColorChange(e)} id='stopwatchBorderColorPicker' title='stopwatchBorderColorPicker' placeholder='stopwatchBorderColorPicker' />
                 </ul>
