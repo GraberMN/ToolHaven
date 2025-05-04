@@ -334,6 +334,36 @@ li {
 .stopwatchTimerButton:active {
     background-color: azure;
 }
+#lapContainer {
+    font-family: cursive;
+    width: 306px;
+    height: 131px;
+    border: solid 4px rgba(53, 47, 47, 0.993);
+    border-radius: 30px;
+    background-color: azure;
+    margin: auto;
+    margin-top: 18px;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+#lapContainer::-webkit-scrollbar {
+    scroll-behavior: smooth;
+    width: 20px;
+    height: auto;
+}
+#lapContainer::-webkit-scrollbar-thumb {
+    background: rgba(53, 47, 47, 0.993);
+    border-radius: 10px;
+}
+#lapContainer::-webkit-scrollbar-track-piece {
+    background: none;
+    border-radius: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+#lapContainerTitle {
+    font-size: 25px;
+}
 .timeMeasurement {
     font-size: 20px;
 }

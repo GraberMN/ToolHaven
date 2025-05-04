@@ -514,6 +514,10 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                         <span onClick='{() => nextLap()}' class='stopwatchTimerButton' id='stopwatchNextLap' title='stopwatchNextLap'>Next Lap</span>
                         <span onClick={() => resetStopwatch()} class='stopwatchTimerButton' id='stopwatchReset' title='stopwatchReset'>Reset</span>
                     </span>
+                    <div id='lapContainer' title='stopwatchLaps'>
+                        <span id='lapContainerTitle'>Laps</span>
+                        
+                    </div>
                 </div>
             </span>
             <img onClick={() => window.location.reload()} id='timersHomeButton' draggable={false} ref={timersHomeButtonRef} src={homeButton} alt='toHome' title='toHome' />
