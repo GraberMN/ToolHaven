@@ -4,6 +4,7 @@ import './timers.css';
 
 function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
     const [settingsIcon, rulesIcon, bedsideCountdownAlarm, digitalCountdownAlarm, chaoticCountdownAlarm, coinStopwatchLapSound, joyousStopwatchLapSound, notifStopwatchLapSound, homeButton] = timersImagesArray;
+    const [lapHistory, setLapHistory] = useState([]);
     const [countdownAlarmSource, setCountdownAlarmSource] = useState(null);
     const [stopwatchLapSoundSource, setStopwatchLapSoundSource] = useState(null);
     const [countdownAlarmVolume, setCountdownAlarmVolume] = useState(20);
@@ -28,6 +29,8 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
     const stopwatchSecondsValHolder = useRef(null);
     const stopwatchLapSound = useRef(null);
     const firstStopwatchLapSoundOption = useRef(null);
+    const startLapArray = useRef([0, 0, 0]);
+    const endLapArray = useRef([0, 0, 0]);
     const timersRulesIconRef = useRef(null);
     const timersRulesBox = useRef(null);
     const timersSettingsIconRef = useRef(null);
@@ -232,7 +235,16 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
             stopwatchInterval.current = null;
         }
     }
-
+    const nextLap = () => {
+        if (stopwatchInterval.current !== null) {
+            endLapArray.current = [stopwatchHoursVal.current, stopwatchMinutesVal.current, stopwatchSecondsVal.current];
+            stopwatchLapSound.current.play();
+            let secDiff = convertToSeconds(endLapArray.current) - convertToSeconds(startLapArray.current);
+            const thisLapArray = convertToHrMinSec(secDiff);
+            startLapArray.current = endLapArray.current;
+            setLapHistory([`Lap ${lapHistory.length + 1}: ${thisLapArray[0]}hr ${thisLapArray[1]}min ${thisLapArray[2]}sec`, ...lapHistory]);
+        }
+    }
     const resetStopwatch = () => {
         stopwatchHoursVal.current = 0;
         stopwatchMinutesVal.current = 0;
@@ -243,6 +255,18 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
         clearInterval(stopwatchInterval.current);
         stopwatchInterval.current = null;
         stopwatchTimerRef.current.style.backgroundColor = 'azure';
+    }
+    const convertToSeconds = (hrMinSecArray) => {
+        const [hrNum, minNum, secNum] = hrMinSecArray;
+        let numSec = hrNum * 3600 + minNum * 60 + secNum;
+        return numSec;
+    }
+    const convertToHrMinSec = (numSec) => {
+        let hrNum = Math.floor(numSec / 3600);
+        let minNum = Math.floor((numSec % 3600) / 60);
+        let secNum = Math.floor((numSec % 3600) % 60);
+        const hrMinSecArray = [hrNum, minNum, secNum];
+        return hrMinSecArray;
     }
     const changeCountdownAlarmToBedside = (isChecked) => {
         if (isChecked) {
@@ -511,12 +535,16 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                     <span id='stopwatchTimerButtons'>
                         <span onClick={() => startStopwatch()} class='stopwatchTimerButton' id='stopwatchStart' title='stopwatchStart'>Start</span>
                         <span onClick={() => pauseStopwatch()} class='stopwatchTimerButton' id='stopwatchPause' title='stopwatchPause'>Pause</span>
-                        <span onClick='{() => nextLap()}' class='stopwatchTimerButton' id='stopwatchNextLap' title='stopwatchNextLap'>Next Lap</span>
+                        <span onClick={() => nextLap()} class='stopwatchTimerButton' id='stopwatchNextLap' title='stopwatchNextLap'>Next Lap</span>
                         <span onClick={() => resetStopwatch()} class='stopwatchTimerButton' id='stopwatchReset' title='stopwatchReset'>Reset</span>
                     </span>
                     <div id='lapContainer' title='stopwatchLaps'>
-                        <span id='lapContainerTitle'>Laps</span>
-                        
+                        <div id='lapContainerTitle'>Laps</div>
+                        {
+                            lapHistory.map((lapEntry, index) => 
+                                <div key={index}>{lapEntry}</div>
+                            )
+                        }
                     </div>
                 </div>
             </span>
