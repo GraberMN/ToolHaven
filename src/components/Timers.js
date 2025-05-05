@@ -201,6 +201,11 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
         if (stopwatchInterval.current !== null) {
             return;
         }
+        if (stopwatchHoursVal.current === 0 && stopwatchMinutesVal.current === 0 && stopwatchSecondsVal.current === 0) {
+            setLapHistory([]);
+            startLapArray.current = [0, 0, 0];
+            endLapArray.current = [0, 0, 0];
+        }
         stopwatchTimerRef.current.style.backgroundColor = 'powderblue';
         stopwatchInterval.current = setInterval(() => {
             if (stopwatchSecondsVal.current === 59) {
@@ -238,6 +243,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
     const nextLap = () => {
         if (stopwatchInterval.current !== null) {
             endLapArray.current = [stopwatchHoursVal.current, stopwatchMinutesVal.current, stopwatchSecondsVal.current];
+            stopwatchLapSound.current.load();
             stopwatchLapSound.current.play();
             let secDiff = convertToSeconds(endLapArray.current) - convertToSeconds(startLapArray.current);
             const thisLapArray = convertToHrMinSec(secDiff);
@@ -460,13 +466,15 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                 <ul>
                     <li>Hover over each timer or each item/ button to find out what it is/represents.</li>
                     <li>The bottom left Home button takes you back to the Home page.</li>
-                    <li>The Settings tab lets you  .</li>
+                    <li>The Settings tab lets you adjust the countdown's alarm sound, the stopwatch's lap sound effect, their volumes, and more.</li>
                     <li>Whichever timer tab you are on dictates which timer's settings show up.</li>
                     <li>Switching timer tabs causes the timer that was just left behind to reset.</li>
                     <li>When changing color in Settings, drag the pointer around for it to work seamlessly.</li>
                     <li>Timer-Specific Rules:</li>
                     <li id='lvl2li'>Countdown: 3 alarm options (bedtime, digital, & chaotic), all last 9-11 sec.</li>
                     <li id='lvl2li'>Countdown: any of the 12 buttons can be pressed to stop alarm instantly.</li>
+                    <li id='lvl2li'>Stopwatch: 3 lap sound options (coin, joyous, & notif), all last about 1 sec.</li>
+                    <li id='lvl2li'>Stopwatch: press Reset then Start to reset the displayed laps and lap times.</li>
                 </ul>
             </span>
             <img onClick={() => openOrClose(timersSettingsBox)} id='timersSettingsIcon' draggable={false} src={settingsIcon} ref={timersSettingsIconRef} alt='timersSettingsIcon' title="timersSettings" />
