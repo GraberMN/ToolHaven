@@ -364,6 +364,12 @@ li {
 #lapContainerTitle {
     font-size: 25px;
 }
+#bestLap {
+    display: none;
+}
+#worstLap {
+    display: none;
+}
 .timeMeasurement {
     font-size: 20px;
 }

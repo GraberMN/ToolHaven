@@ -31,6 +31,9 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
     const firstStopwatchLapSoundOption = useRef(null);
     const startLapArray = useRef([0, 0, 0]);
     const endLapArray = useRef([0, 0, 0]);
+    const bestLapDiv = useRef(null);
+    const worstLapDiv = useRef(null);
+    const lapSecArray = useRef([]);
     const timersRulesIconRef = useRef(null);
     const timersRulesBox = useRef(null);
     const timersSettingsIconRef = useRef(null);
@@ -205,6 +208,9 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
             setLapHistory([]);
             startLapArray.current = [0, 0, 0];
             endLapArray.current = [0, 0, 0];
+            bestLapDiv.current.style.display = 'none';
+            worstLapDiv.current.style.display = 'none';
+            lapSecArray.current = [];
         }
         stopwatchTimerRef.current.style.backgroundColor = 'powderblue';
         stopwatchInterval.current = setInterval(() => {
@@ -246,21 +252,49 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
             stopwatchLapSound.current.load();
             stopwatchLapSound.current.play();
             let secDiff = convertToSeconds(endLapArray.current) - convertToSeconds(startLapArray.current);
+            lapSecArray.current = [secDiff, ...lapSecArray.current];
             const thisLapArray = convertToHrMinSec(secDiff);
             startLapArray.current = endLapArray.current;
             setLapHistory([`Lap ${lapHistory.length + 1}: ${thisLapArray[0]}hr ${thisLapArray[1]}min ${thisLapArray[2]}sec`, ...lapHistory]);
         }
     }
     const resetStopwatch = () => {
-        stopwatchHoursVal.current = 0;
-        stopwatchMinutesVal.current = 0;
-        stopwatchSecondsVal.current = 0;
-        stopwatchHoursValHolder.current.innerHTML = stopwatchHoursVal.current.toString();
-        stopwatchMinutesValHolder.current.innerHTML = stopwatchMinutesVal.current.toString();
-        stopwatchSecondsValHolder.current.innerHTML = stopwatchSecondsVal.current.toString();
-        clearInterval(stopwatchInterval.current);
-        stopwatchInterval.current = null;
-        stopwatchTimerRef.current.style.backgroundColor = 'azure';
+        if (stopwatchHoursVal.current !== 0 || stopwatchMinutesVal.current !== 0 || stopwatchSecondsVal.current !== 0) {
+            stopwatchHoursVal.current = 0;
+            stopwatchMinutesVal.current = 0;
+            stopwatchSecondsVal.current = 0;
+            stopwatchHoursValHolder.current.innerHTML = stopwatchHoursVal.current.toString();
+            stopwatchMinutesValHolder.current.innerHTML = stopwatchMinutesVal.current.toString();
+            stopwatchSecondsValHolder.current.innerHTML = stopwatchSecondsVal.current.toString();
+            clearInterval(stopwatchInterval.current);
+            stopwatchInterval.current = null;
+            stopwatchTimerRef.current.style.backgroundColor = 'azure';
+            bestLapDiv.current.style.display = 'block';
+            worstLapDiv.current.style.display = 'block';
+            if (lapHistory.length >= 1) {
+                let fastestLap = 360000;
+                let fastestLapIndex = -1;
+                let slowestLap = -1;
+                let slowestLapIndex = -1;
+                for (let i = lapSecArray.current.length - 1; i >= 0; i--) {
+                    if (lapSecArray.current[i] < fastestLap) {
+                        fastestLap = lapSecArray.current[i];
+                        fastestLapIndex = i;
+                    }
+                }
+                for (let i = lapSecArray.current.length - 1; i >= 0; i--) {
+                    if (lapSecArray.current[i] > slowestLap) {
+                        slowestLap = lapSecArray.current[i];
+                        slowestLapIndex = i;
+                    }
+                }
+                bestLapDiv.current.innerHTML = `Best Lap: ${lapHistory[fastestLapIndex]}`;
+                worstLapDiv.current.innerHTML = `Worst Lap: ${lapHistory[slowestLapIndex]}`;
+            } else {
+                bestLapDiv.current.innerHTML = 'Best Lap: N/A';
+                worstLapDiv.current.innerHTML = 'Worst Lap: N/A';
+            }
+        }
     }
     const convertToSeconds = (hrMinSecArray) => {
         const [hrNum, minNum, secNum] = hrMinSecArray;
@@ -474,6 +508,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                     <li id='lvl2li'>Countdown: 3 alarm options (bedtime, digital, & chaotic), all last 9-11 sec.</li>
                     <li id='lvl2li'>Countdown: any of the 12 buttons can be pressed to stop alarm instantly.</li>
                     <li id='lvl2li'>Stopwatch: 3 lap sound options (coin, joyous, & notif), all last about 1 sec.</li>
+                    <li id='lvl2li'>Stopwatch: press Reset to display best & worst lap, tie goes to earliest lap.</li>
                     <li id='lvl2li'>Stopwatch: press Reset then Start to reset the displayed laps and lap times.</li>
                 </ul>
             </span>
@@ -548,6 +583,8 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                     </span>
                     <div id='lapContainer' title='stopwatchLaps'>
                         <div id='lapContainerTitle'>Laps</div>
+                        <div id='bestLap' ref={bestLapDiv}></div>
+                        <div id='worstLap' ref={worstLapDiv}></div>
                         {
                             lapHistory.map((lapEntry, index) => 
                                 <div key={index}>{lapEntry}</div>
