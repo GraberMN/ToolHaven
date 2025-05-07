@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import './timers.css';
 
 function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
-    const [settingsIcon, rulesIcon, bedsideCountdownAlarm, digitalCountdownAlarm, chaoticCountdownAlarm, coinStopwatchLapSound, joyousStopwatchLapSound, notifStopwatchLapSound, homeButton] = timersImagesArray;
+    const [settingsIcon, rulesIcon, bedsideCountdownAlarm, digitalCountdownAlarm, chaoticCountdownAlarm, coinStopwatchLapSound, joyousStopwatchLapSound, notifStopwatchLapSound, pinkRightArrow, homeButton] = timersImagesArray;
     const [lapHistory, setLapHistory] = useState([]);
     const [countdownAlarmSource, setCountdownAlarmSource] = useState(null);
     const [stopwatchLapSoundSource, setStopwatchLapSoundSource] = useState(null);
@@ -48,6 +48,8 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
     const stopwatchContentRef = useRef(null);
     const countdownTimerRef = useRef(null);
     const stopwatchTimerRef = useRef(null);
+    const pinkRightArrowArea = useRef(null);
+    const rightPinkArrow = useRef(null);
     const timersHomeButtonRef = useRef(null);
     const startCountdown = () => {
         if (countdownInterval.current !== null) {
@@ -398,6 +400,32 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
             timersHomeButtonRef.current.style.transform = 'translateX(-367px)';
         }
     }
+    const blurPinkRightArrow = () => {
+        rightPinkArrow.current.style.filter = 'blur(1px)';
+        pinkRightArrowArea.current.style.cursor = 'pointer';
+        if (window.innerWidth <= 740) {
+            rightPinkArrow.current.style.transform = 'translateX(165px) rotate(0.05turn)';
+        } else {
+            rightPinkArrow.current.style.transform = 'translateX(270px) rotate(0.05turn)';
+        }
+    }
+    const unBlurPinkRightArrow = () => {
+        rightPinkArrow.current.style.filter = 'blur(0px)';
+        if (window.innerWidth <= 740) {
+            rightPinkArrow.current.style.transform = 'translateX(165px) rotate(0turn)';
+        } else {
+            rightPinkArrow.current.style.transform = 'translateX(270px) rotate(0turn)';
+        }
+    }
+    const positionPinkRightArrow = () => {
+        if (rightPinkArrow.current.style.transform !== "null") {
+            if (window.innerWidth <= 740) {
+                rightPinkArrow.current.style.transform = 'translateX(165px)';
+            } else {
+                rightPinkArrow.current.style.transform = 'translateX(270px)';
+            }
+        }
+    }
     const animateElements = () => {
         const timersElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox, timersContainerRef, timersHomeButtonRef];
         for (let i = 0; i < timersElements.length; i++) {
@@ -427,6 +455,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
     const readyForMove = (element) => {
         element.current.style.opacity = '0';
     }
+    
     useEffect(() => {
         if (moveToTimers) {
             timersTitleRef.current.style.display = 'block';
@@ -460,7 +489,9 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                     timersNonTimerElements[i].current.style.opacity = '100';
                 }
                 window.addEventListener('resize', onAdjustWindowWidthTimers);
+                rightPinkArrow.current.style.display = 'inline';
                 if (window.innerWidth <= 740) {
+                    rightPinkArrow.current.style.transform = 'translateX(165px)';
                     timersRulesIconRef.current.style.transform = 'translateX(-260px)';
                     timersRulesBox.current.style.transform = 'translateX(-260px)';
                     timersSettingsIconRef.current.style.transform = 'translateX(180px)';
@@ -482,9 +513,13 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
         secondsValHolder.current.innerHTML = "0";
         setCountdownAlarmSource(bedsideCountdownAlarm);
         setStopwatchLapSoundSource(coinStopwatchLapSound);
+        window.addEventListener("resize", positionPinkRightArrow);
+        return () => {
+            window.removeEventListener("resize", positionPinkRightArrow);
+        }
     }, []);
     useEffect(() => {
-        const goneElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox, timersContainerRef, countdownContentRef, stopwatchContentRef, timersHomeButtonRef];
+        const goneElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox, timersContainerRef, countdownContentRef, stopwatchContentRef, rightPinkArrow, timersHomeButtonRef];
         for (let i = 0; i < goneElements.length; i++) {
             goneElements[i].current.style.display = 'none';
         }
@@ -594,6 +629,10 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                 </div>
             </span>
             <img onClick={() => window.location.reload()} id='timersHomeButton' draggable={false} ref={timersHomeButtonRef} src={homeButton} alt='toHome' title='toHome' />
+            <map name='toAIModelMap'>
+                <area onClick='{() => window.innerWidth > 740 ? pinkRightArrowTransition(true) : pinkRightArrowTransition(false)}' onMouseOver={() => blurPinkRightArrow()} onMouseOut={() => unBlurPinkRightArrow()} id='toAIModelMap' ref={pinkRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toAIModel' title='toAIModel'></area>
+            </map>
+            <img id='toAIModel' useMap='#toAIModelMap' draggable={false} ref={rightPinkArrow} src={pinkRightArrow} alt='toAIModel'></img>
         </div>
     )
 }

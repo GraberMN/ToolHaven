@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import logo from './logo.svg';
 import calculatorThumbnail from './Images/CalculatorThumbnail.jpg';
 import rulerThumbnail from './Images/RulerThumbnail.jpg';
 import timerThumbnail from './Images/TimerThumbnail.jpg';
@@ -26,6 +25,7 @@ import chaoticCountdownAlarm from './Images/chaoticCountdownAlarm.mp3';
 import coinStopwatchLapSound from './Images/coinStopwatchLapSound.mp3';
 import joyousStopwatchLapSound from './Images/happyStopwatchLapSound.mp3';
 import notifStopwatchLapSound from './Images/notifStopwatchLapSound.mp3';
+import pinkRightArrow from './Images/PinkRightArrow.png';
 import homeButton from './Images/HomeButton.png';
 import './App.css';
 import Home from './components/Home';
@@ -37,7 +37,7 @@ function App() {
   const homeImagesArray = [calculatorThumbnail, rulerThumbnail, timerThumbnail, bioPic, mateosPortfolio, gitHub, linkedIn, gmail, instagram, facebook, greenRightArrow];
   const calcImagesArray = [settingsIcon, historyIcon, rulesIcon, blueRightArrow, homeButton];
   const rulersImagesArray = [inchesRuler, centimetersRuler, picasRuler, pixelsRuler, settingsIcon, rulesIcon, orangeRightArrow, homeButton];
-  const timersImagesArray = [settingsIcon, rulesIcon, bedsideCountdownAlarm, digitalCountdownAlarm, chaoticCountdownAlarm, coinStopwatchLapSound, joyousStopwatchLapSound, notifStopwatchLapSound, homeButton];
+  const timersImagesArray = [settingsIcon, rulesIcon, bedsideCountdownAlarm, digitalCountdownAlarm, chaoticCountdownAlarm, coinStopwatchLapSound, joyousStopwatchLapSound, notifStopwatchLapSound, pinkRightArrow, homeButton];
   const [moveToCalc, setMoveToCalc] = useState(false);
   const [moveToRulers, setMoveToRulers] = useState(false);
   const [moveToTimers, setMoveToTimers] = useState(false);
