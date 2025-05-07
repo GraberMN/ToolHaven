@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import './timers.css';
 
-function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
+function Timers({ timersImagesArray, moveToTimers, setMoveToTimers, moveToAIModel, setMoveToAIModel }) {
     const [settingsIcon, rulesIcon, bedsideCountdownAlarm, digitalCountdownAlarm, chaoticCountdownAlarm, coinStopwatchLapSound, joyousStopwatchLapSound, notifStopwatchLapSound, pinkRightArrow, homeButton] = timersImagesArray;
     const [lapHistory, setLapHistory] = useState([]);
     const [countdownAlarmSource, setCountdownAlarmSource] = useState(null);
@@ -11,6 +11,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
     const [stopwatchLapSoundVolume, setStopwatchLapSoundVolume] = useState(20);
     const [countdownBorderColorVal, setCountdownBorderColorVal] = useState('#352f2ffd');
     const [stopwatchBorderColorVal, setStopwatchBorderColorVal] = useState('#352f2ffd');
+    const [pinkRightArrowTransitionDone, setPinkRightArrowTransitionDone] = useState(false);
     const countdownInterval = useRef(null);
     const hoursVal = useRef(0);
     const minutesVal = useRef(0);
@@ -373,7 +374,10 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
         countdownContentRef.current.style.display = 'block';
         stopwatchContentRef.current.style.display = 'none';
         timersContainerRef.current.style.backgroundColor = 'rgb(255, 246, 162)';
+        setLapHistory([]);
         resetStopwatch();
+        bestLapDiv.current.style.display = 'none';
+        worstLapDiv.current.style.display = 'none';
     }
     const onStopwatchTabClick = () => {
         countdownSettingsListRef.current.style.display = 'none';
@@ -455,7 +459,51 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
     const readyForMove = (element) => {
         element.current.style.opacity = '0';
     }
-    
+    const pinkRightArrowTransition = (screenWidthBig) => {
+        setMoveToAIModel(true);
+        resetCountdown();
+        onCountdownTabClick();
+        const hiddenElements = [timersRulesBox, timersSettingsBox];
+        for (let i = 0; i < hiddenElements.length; i++) {
+            hiddenElements[i].current.style.visibility = 'hidden';
+        }
+        const centeredElements = [timersTitleRef, timersContainerRef];
+        for (let i = 0; i < centeredElements.length; i++) {
+            readyForAnimation(centeredElements[i]);
+            centeredElements[i].current.style.animationName = 'fadeLeftTimers';
+        }
+        const timersRulesElements = [timersRulesIconRef, timersRulesBox, timersHomeButtonRef];
+        for (let i = 0; i < timersRulesElements.length; i++) {
+            readyForAnimation(timersRulesElements[i]);
+            if (screenWidthBig) {
+                timersRulesElements[i].current.style.animationName = 'fadeLeftTimersRules';
+            } else {
+                timersRulesElements[i].current.style.animationName = 'fadeLeftTimersRulesSmall';
+            }
+        }
+        readyForAnimation(timersSettingsIconRef);
+        if (screenWidthBig) {
+            timersSettingsIconRef.current.style.animationName = 'fadeLeftTimersSettingsIcon';
+        } else {
+            timersSettingsIconRef.current.style.animationName = 'fadeLeftTimersSettingsIconSmall';
+        }
+        readyForAnimation(timersSettingsBox);
+        if (screenWidthBig) {
+            timersSettingsBox.current.style.animationName = 'fadeLeftTimersSettingsBox';
+        } else {
+            timersSettingsBox.current.style.animationName = 'fadeLeftTimersSettingsBoxSmall';
+        }
+        rightPinkArrow.current.style.display = 'none';
+        setTimeout(() => setPinkRightArrowTransitionDone(true), 2000);
+    }
+    useEffect(() => {
+        if (pinkRightArrowTransitionDone) {
+            const animTimersElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox, timersContainerRef, countdownContentRef, stopwatchContentRef, rightPinkArrow, timersHomeButtonRef];
+            for (let i = 0; i < animTimersElements.length; i++) {
+                animTimersElements[i].current.style.display = 'none';
+            }
+        }
+    }, [pinkRightArrowTransitionDone]);
     useEffect(() => {
         if (moveToTimers) {
             timersTitleRef.current.style.display = 'block';
@@ -537,7 +585,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                     <li>The bottom left Home button takes you back to the Home page.</li>
                     <li>The Settings tab lets you adjust the countdown's alarm sound, the stopwatch's lap sound effect, their volumes, and more.</li>
                     <li>Whichever timer tab you are on dictates which timer's settings show up.</li>
-                    <li>Switching timer tabs causes the timer that was just left behind to reset.</li>
+                    <li>Switching timer tabs causes the timer and all that was just left behind to reset.</li>
                     <li>When changing color in Settings, drag the pointer around for it to work seamlessly.</li>
                     <li>Timer-Specific Rules:</li>
                     <li id='lvl2li'>Countdown: 3 alarm options (bedtime, digital, & chaotic), all last 9-11 sec.</li>
@@ -621,7 +669,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
                         <div id='bestLap' ref={bestLapDiv}></div>
                         <div id='worstLap' ref={worstLapDiv}></div>
                         {
-                            lapHistory.map((lapEntry, index) => 
+                            lapHistory.map((lapEntry, index) =>
                                 <div key={index}>{lapEntry}</div>
                             )
                         }
@@ -630,11 +678,11 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers }) {
             </span>
             <img onClick={() => window.location.reload()} id='timersHomeButton' draggable={false} ref={timersHomeButtonRef} src={homeButton} alt='toHome' title='toHome' />
             <map name='toAIModelMap'>
-                <area onClick='{() => window.innerWidth > 740 ? pinkRightArrowTransition(true) : pinkRightArrowTransition(false)}' onMouseOver={() => blurPinkRightArrow()} onMouseOut={() => unBlurPinkRightArrow()} id='toAIModelMap' ref={pinkRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toAIModel' title='toAIModel'></area>
+                <area onClick={() => window.innerWidth > 740 ? pinkRightArrowTransition(true) : pinkRightArrowTransition(false)} onMouseOver={() => blurPinkRightArrow()} onMouseOut={() => unBlurPinkRightArrow()} id='toAIModelMap' ref={pinkRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toAIModel' title='toAIModel'></area>
             </map>
             <img id='toAIModel' useMap='#toAIModelMap' draggable={false} ref={rightPinkArrow} src={pinkRightArrow} alt='toAIModel'></img>
         </div>
-    )
+    );
 }
 
 export default Timers

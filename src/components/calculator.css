@@ -514,7 +514,6 @@ button:active {
         opacity: 0;
         transform: translateX(calc(30vw - 260px));
     }
-
     to {
         opacity: 100;
         transform: translateX(calc(0vw - 260px));

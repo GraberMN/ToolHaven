@@ -344,26 +344,6 @@ input[type='checkbox' i] {
         transform: translateX(calc(-6px + 20vw - 50%));
     }
 }
-@keyframes appearFromLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-30vw);
-    }
-    to {
-        opacity: 100;
-        transform: translateX(0vw);
-    }
-}
-@keyframes fadeRight {
-    from {
-        opacity: 100;
-    }
-
-    to {
-        opacity: 0;
-        transform: translateX(30vw);
-    }
-}
 @keyframes appearFromRightRulers {
     from {
         opacity: 0;
