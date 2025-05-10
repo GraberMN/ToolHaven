@@ -32,12 +32,14 @@ import Home from './components/Home';
 import Calculator from './components/Calculator';
 import Rulers from './components/Rulers';
 import Timers from './components/Timers';
+import AIModel from './components/AIModel';
 
 function App() {
   const homeImagesArray = [calculatorThumbnail, rulerThumbnail, timerThumbnail, bioPic, mateosPortfolio, gitHub, linkedIn, gmail, instagram, facebook, greenRightArrow];
   const calcImagesArray = [settingsIcon, historyIcon, rulesIcon, blueRightArrow, homeButton];
   const rulersImagesArray = [inchesRuler, centimetersRuler, picasRuler, pixelsRuler, settingsIcon, rulesIcon, orangeRightArrow, homeButton];
   const timersImagesArray = [settingsIcon, rulesIcon, bedsideCountdownAlarm, digitalCountdownAlarm, chaoticCountdownAlarm, coinStopwatchLapSound, joyousStopwatchLapSound, notifStopwatchLapSound, pinkRightArrow, homeButton];
+  const aiModelImagesArray = [settingsIcon, rulesIcon, homeButton];
   const [moveToCalc, setMoveToCalc] = useState(false);
   const [moveToRulers, setMoveToRulers] = useState(false);
   const [moveToTimers, setMoveToTimers] = useState(false);
@@ -48,6 +50,7 @@ function App() {
       <Calculator calcImagesArray={calcImagesArray} moveToCalc={moveToCalc} setMoveToCalc={setMoveToCalc} moveToRulers={moveToRulers} setMoveToRulers={setMoveToRulers} />
       <Rulers rulersImagesArray={rulersImagesArray} moveToRulers={moveToRulers} setMoveToRulers={setMoveToRulers} moveToTimers={moveToTimers} setMoveToTimers={setMoveToTimers} />
       <Timers timersImagesArray={timersImagesArray} moveToTimers={moveToTimers} setMoveToTimers={setMoveToTimers} moveToAIModel={moveToAIModel} setMoveToAIModel={setMoveToAIModel} />
+      <AIModel aiModelImagesArray={aiModelImagesArray} moveToAIModel={moveToAIModel} setMoveToAIModel={setMoveToAIModel} />
     </div>
   );
 }

@@ -1,0 +1,264 @@
+#aiModelTitle {
+    position: relative;
+    text-align: center;
+    font-size: 43px;
+    font-family: cursive;
+    font-weight: bolder;
+    color: hsl(315, 100%, 50%);
+    display: block;
+    transform: translateX(30vw);
+    margin-top: 30px;
+    margin-bottom: 30px;
+    user-select: none;
+}
+#aiModelRulesIcon {
+    position: absolute;
+    width: 75px;
+    height: auto;
+    margin: auto;
+    transform: translateX(-367px);
+    cursor: pointer;
+    border: solid hsl(315, 100%, 50%);
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.705);
+    z-index: 999;
+    display: inline;
+    user-select: none;
+}
+#aiModelRulesIcon:hover {
+    border-radius: 20px;
+}
+#aiModelRulesIcon:active {
+    border-style: dashed;
+}
+#aiModelRulesIcon:not(:hover) ~ #aiModelRulesBox {
+    border-top-left-radius: 15px;
+}
+#aiModelRulesBox {
+    position: absolute;
+    width: 400px;
+    height: 500px;
+    border: solid;
+    margin: auto;
+    transform: translateX(-367px);
+    border-color: hsl(315, 100%, 50%);
+    border-radius: 20px;
+    z-index: 997;
+    background-color: white;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: inline;
+    user-select: none;
+}
+#aiModelRulesBox::-webkit-scrollbar {
+    scroll-behavior: smooth;
+    width: 20px;
+    height: auto;
+}
+#aiModelRulesBox::-webkit-scrollbar-thumb {
+    background: hsl(315, 100%, 50%);
+    border-radius: 20px;
+}
+#aiModelRulesBox::-webkit-scrollbar-track-piece {
+    background: none;
+    border-radius: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+#aiModelRulesTitle {
+    font-size: 30px;
+    font-weight: 600;
+    margin-top: 28px;
+    margin-right: -60px;
+    user-select: none;
+}
+#aiModelSettingsIcon {
+    position: absolute;
+    width: 75px;
+    height: auto;
+    margin: auto;
+    transform: translateX(285px);
+    cursor: pointer;
+    border: solid hsl(315, 100%, 50%);
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.705);
+    z-index: 999;
+    display: inline;
+    user-select: none;
+}
+#aiModelSettingsIcon:hover {
+    border-radius: 20px;
+}
+#aiModelSettingsIcon:active {
+    border-style: dashed;
+}
+#aiModelSettingsIcon:not(:hover) ~ #aiModelSettingsBox {
+    border-top-right-radius: 15px;
+}
+#aiModelSettingsBox {
+    position: absolute;
+    width: 300px;
+    height: 450px;
+    border: solid;
+    margin: auto;
+    transform: translateX(60px);
+    border-color: hsl(315, 100%, 50%);
+    border-radius: 20px;
+    z-index: 998;
+    background-color: white;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: inline;
+    user-select: none;
+}
+ul > input {
+    margin-left: -40px;
+    width: 200px;
+}
+ul > input::-webkit-slider-thumb {
+    background: gray;
+}
+ul > input::-webkit-slider-runnable-track {
+    background: none;
+}
+ul > input[type='color' i] {
+    width: 200px;
+}
+ul > span {
+    position: absolute;
+    font-family: cursive;
+}
+#aiModelSettingsTitle {
+    font-size: 30px;
+    font-weight: 600;
+    margin-top: 28px;
+    margin-right: 60px;
+    user-select: none;
+}
+ul {
+    margin-top: 22px;
+}
+li {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-family: cursive;
+    text-align: left;
+    list-style-type: square;
+    margin-right: 19px;
+}
+#lvl2li {
+    font-family: cursive;
+    margin-left: 25px;
+    list-style-type: circle;
+}
+#aiModelInvisLi {
+    list-style-type: none;
+}
+#aiModelContainer {
+    width: 500px;
+    height: 643px;
+    display: block;
+    margin: auto;
+    border: solid 10px rgba(53, 47, 47, 0.993);
+    border-radius: 40px;
+    transform: translateX(30vw);
+    padding-top: 12px;
+    user-select: none;
+}
+#aiModelHomeButton {
+    position: absolute;
+    width: 75px;
+    height: auto;
+    margin: auto;
+    margin-top: 8px;
+    transform: translateX(-367px);
+    cursor: pointer;
+    border: solid hsl(315, 100%, 50%);
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.705);
+    z-index: 999;
+    display: inline;
+    user-select: none;
+}
+#aiModelHomeButton:hover {
+    border-radius: 20px;
+}
+#aiModelHomeButton:active {
+    border-style: dashed;
+}
+.readyForAnim {
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}
+@keyframes appearFromRightAIModel {
+    from {
+        opacity: 0;
+        transform: translateX(30vw);
+    }
+    to {
+        opacity: 100;
+        transform: translateX(0vw);
+    }
+}
+@keyframes appearFromRightAIModelRules {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw - 367px));
+    }
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw - 367px));
+    }
+}
+@keyframes appearFromRightAIModelRulesSmall {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw - 260px));
+    }
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw - 260px));
+    }
+}
+@keyframes appearFromRightAIModelSettingsIcon {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw + 285px));
+    }
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw + 285px));
+    }
+}
+@keyframes appearFromRightAIModelSettingsIconSmall {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw + 180px));
+    }
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw + 180px));
+    }
+}
+@keyframes appearFromRightAIModelSettingsBox {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw + 60px));
+    }
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw + 60px));
+    }
+}
+@keyframes appearFromRightAIModelSettingsBoxSmall {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw - 45px));
+    }
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw - 45px));
+    }
+}

@@ -92,7 +92,7 @@
 #timersSettingsIcon:active {
     border-style: dashed;
 }
-#timersSettingsIcon:not(:hover)~#timersSettingsBox {
+#timersSettingsIcon:not(:hover) ~ #timersSettingsBox {
     border-top-right-radius: 15px;
 }
 #timersSettingsBox {
@@ -115,10 +115,10 @@ ul > input {
     margin-left: -40px;
     width: 200px;
 }
-ul>input::-webkit-slider-thumb {
+ul > input::-webkit-slider-thumb {
     background: gray;
 }
-ul>input::-webkit-slider-runnable-track {
+ul > input::-webkit-slider-runnable-track {
     background: none;
 }
 ul > input[type='color' i] {

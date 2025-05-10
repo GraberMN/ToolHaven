@@ -459,7 +459,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers, moveToAIMode
     const readyForMove = (element) => {
         element.current.style.opacity = '0';
     }
-    const pinkRightArrowTransition = (screenWidthBig) => {
+    const pinkRightArrowTransition = (windowWidthBig) => {
         setMoveToAIModel(true);
         resetCountdown();
         onCountdownTabClick();
@@ -475,20 +475,20 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers, moveToAIMode
         const timersRulesElements = [timersRulesIconRef, timersRulesBox, timersHomeButtonRef];
         for (let i = 0; i < timersRulesElements.length; i++) {
             readyForAnimation(timersRulesElements[i]);
-            if (screenWidthBig) {
+            if (windowWidthBig) {
                 timersRulesElements[i].current.style.animationName = 'fadeLeftTimersRules';
             } else {
                 timersRulesElements[i].current.style.animationName = 'fadeLeftTimersRulesSmall';
             }
         }
         readyForAnimation(timersSettingsIconRef);
-        if (screenWidthBig) {
+        if (windowWidthBig) {
             timersSettingsIconRef.current.style.animationName = 'fadeLeftTimersSettingsIcon';
         } else {
             timersSettingsIconRef.current.style.animationName = 'fadeLeftTimersSettingsIconSmall';
         }
         readyForAnimation(timersSettingsBox);
-        if (screenWidthBig) {
+        if (windowWidthBig) {
             timersSettingsBox.current.style.animationName = 'fadeLeftTimersSettingsBox';
         } else {
             timersSettingsBox.current.style.animationName = 'fadeLeftTimersSettingsBoxSmall';
@@ -536,7 +536,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers, moveToAIMode
                     timersNonTimerElements[i].current.style.animationName = 'none';
                     timersNonTimerElements[i].current.style.opacity = '100';
                 }
-                window.addEventListener('resize', onAdjustWindowWidthTimers);
+                window.addEventListener("resize", onAdjustWindowWidthTimers);
                 rightPinkArrow.current.style.display = 'inline';
                 if (window.innerWidth <= 740) {
                     rightPinkArrow.current.style.transform = 'translateX(165px)';
@@ -676,11 +676,11 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers, moveToAIMode
                     </div>
                 </div>
             </span>
-            <img onClick={() => window.location.reload()} id='timersHomeButton' draggable={false} ref={timersHomeButtonRef} src={homeButton} alt='toHome' title='toHome' />
+            <img onClick={() => window.location.reload()} id='timersHomeButton' draggable={false} ref={timersHomeButtonRef} src={homeButton} alt='toHome' title="toHome" />
             <map name='toAIModelMap'>
-                <area onClick={() => window.innerWidth > 740 ? pinkRightArrowTransition(true) : pinkRightArrowTransition(false)} onMouseOver={() => blurPinkRightArrow()} onMouseOut={() => unBlurPinkRightArrow()} id='toAIModelMap' ref={pinkRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toAIModel' title='toAIModel'></area>
+                <area onClick={() => window.innerWidth > 740 ? pinkRightArrowTransition(true) : pinkRightArrowTransition(false)} onMouseOver={() => blurPinkRightArrow()} onMouseOut={() => unBlurPinkRightArrow()} id='toAIModelMap' ref={pinkRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toAIModel' title="toAIModel"></area>
             </map>
-            <img id='toAIModel' useMap='#toAIModelMap' draggable={false} ref={rightPinkArrow} src={pinkRightArrow} alt='toAIModel'></img>
+            <img id='toAIModel' useMap='#toAIModelMap' draggable={false} ref={rightPinkArrow} src={pinkRightArrow} alt='toAIModel' />
         </div>
     );
 }

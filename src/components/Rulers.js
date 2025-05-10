@@ -355,7 +355,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
     const readyForMove = (element) => {
         element.current.style.opacity = '0';
     }
-    const orangeRightArrowTransition = (screenWidthBig) => {
+    const orangeRightArrowTransition = (windowWidthBig) => {
         setMoveToTimers(true);
         resetRulers();
         const hiddenElements = [rulersRulesBox, rulersSettingsBox, centimetersRulerRef, picasRulerRef, pixelsRulerRef];
@@ -370,20 +370,20 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
         const rulersRulesElements = [rulersRulesIconRef, rulersRulesBox, rulersHomeButtonRef];
         for (let i = 0; i < rulersRulesElements.length; i++) {
             readyForAnimation(rulersRulesElements[i]);
-            if (screenWidthBig) {
+            if (windowWidthBig) {
                 rulersRulesElements[i].current.style.animationName = 'fadeLeftRulersRules';
             } else {
                 rulersRulesElements[i].current.style.animationName = 'fadeLeftRulersRulesSmall';
             }
         }
         readyForAnimation(rulersSettingsIconRef);
-        if (screenWidthBig) {
+        if (windowWidthBig) {
             rulersSettingsIconRef.current.style.animationName = 'fadeLeftRulersSettingsIcon';
         } else {
             rulersSettingsIconRef.current.style.animationName = 'fadeLeftRulersSettingsIconSmall';
         }
         readyForAnimation(rulersSettingsBox);
-        if (screenWidthBig) {
+        if (windowWidthBig) {
             rulersSettingsBox.current.style.animationName = 'fadeLeftRulersSettingsBox';
         } else {
             rulersSettingsBox.current.style.animationName = 'fadeLeftRulersSettingsBoxSmall';
@@ -487,7 +487,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
                     rulersNonRulerElements[i].current.style.animationName = 'none';
                     rulersNonRulerElements[i].current.style.opacity = '100';
                 }
-                window.addEventListener('resize', onAdjustWindowWidthRulers);
+                window.addEventListener("resize", onAdjustWindowWidthRulers);
                 allowRulerRotate();
                 rightOrangeArrow.current.style.display = 'inline';
                 if (window.innerWidth <= 740) {
@@ -565,11 +565,11 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
             <img id='picasRuler' src={picasRuler} ref={picasRulerRef} alt='picasRuler' title='picasRuler' />
             <img id='pixelsRuler' src={pixelsRuler} ref={pixelsRulerRef} alt='pixelsRuler' title='pixelsRuler' />
             <button onClick={() => resetRulers()} id='rulersResetButton' draggable={false} ref={rulersResetButtonRef} title='rulersResetButton'>Reset</button>
-            <img onClick={() => window.location.reload()} id='rulersHomeButton' draggable={false} ref={rulersHomeButtonRef} src={homeButton} alt='toHome' title='toHome' />
+            <img onClick={() => window.location.reload()} id='rulersHomeButton' draggable={false} ref={rulersHomeButtonRef} src={homeButton} alt='toHome' title="toHome" />
             <map name='toTimersMap'>
-                <area onClick={() => window.innerWidth > 740 ? orangeRightArrowTransition(true) : orangeRightArrowTransition(false)} onMouseOver={() => blurOrangeRightArrow()} onMouseOut={() => unBlurOrangeRightArrow()} id='toTimersMap' ref={orangeRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toTimers' title='toTimers'></area>
+                <area onClick={() => window.innerWidth > 740 ? orangeRightArrowTransition(true) : orangeRightArrowTransition(false)} onMouseOver={() => blurOrangeRightArrow()} onMouseOut={() => unBlurOrangeRightArrow()} id='toTimersMap' ref={orangeRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toTimers' title="toTimers"></area>
             </map>
-            <img id='toTimers' useMap='#toTimersMap' draggable={false} ref={rightOrangeArrow} src={orangeRightArrow} alt='toTimers'></img>
+            <img id='toTimers' useMap='#toTimersMap' draggable={false} ref={rightOrangeArrow} src={orangeRightArrow} alt='toTimers' />
         </div>
     );
 }

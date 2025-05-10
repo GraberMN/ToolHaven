@@ -222,7 +222,7 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
     const readyForMove = (element) => {
         element.current.style.opacity = '0';
     }
-    const blueRightArrowTransition = (screenWidthBig) => {
+    const blueRightArrowTransition = (windowWidthBig) => {
         setMoveToRulers(true);
         rulesBox.current.style.visibility = "hidden";
         settingsBox.current.style.visibility = "hidden";
@@ -235,20 +235,20 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
         const changedRulesElements = [rulesIconRef, rulesBox, homeButtonRef];
         for (let i = 0; i < changedRulesElements.length; i++) {
             readyForAnimation(changedRulesElements[i]);
-            if (screenWidthBig) {
+            if (windowWidthBig) {
                 changedRulesElements[i].current.style.animationName = 'fadeLeftRules';
             } else {
                 changedRulesElements[i].current.style.animationName = 'fadeLeftRulesSmall';
             }
         }
         readyForAnimation(settingsIconRef);
-        if (screenWidthBig) {
+        if (windowWidthBig) {
             settingsIconRef.current.style.animationName = 'fadeLeftSettingsIcon';
         } else {
             settingsIconRef.current.style.animationName = 'fadeLeftSettingsIconSmall';
         }
         readyForAnimation(settingsBox)
-        if (screenWidthBig) {
+        if (windowWidthBig) {
             settingsBox.current.style.animationName = 'fadeLeftSettingsBox';
         } else {
             settingsBox.current.style.animationName = 'fadeLeftSettingsBoxSmall';
@@ -318,7 +318,7 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
                     calcNonCalcElements[i].current.style.animationName = 'none';
                     calcNonCalcElements[i].current.style.opacity = '100';
                 }
-                window.addEventListener('resize', onAdjustWindowWidth);
+                window.addEventListener("resize", onAdjustWindowWidth);
                 rightBlueArrow.current.style.display = 'inline';
                 if (window.innerWidth <= 740) {
                     rightBlueArrow.current.style.transform = 'translateX(165px)';
@@ -432,9 +432,9 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
                     <button onClick={() => appendToDisplay('!', false)} className='operator' title='factorial'>!</button>
                 </span>
             </span>
-            <img onClick={() => window.location.reload()} id='homeButton' draggable={false} ref={homeButtonRef} src={homeButton} alt='toHome' title='toHome'/>
+            <img onClick={() => window.location.reload()} id='homeButton' draggable={false} ref={homeButtonRef} src={homeButton} alt='toHome' title="toHome"/>
             <map name='toRulersMap'>
-                <area onClick={() => window.innerWidth > 740 ? blueRightArrowTransition(true) : blueRightArrowTransition(false)} onMouseOver={() => blurBlueRightArrow()} onMouseOut={() => unBlurBlueRightArrow()} id='toRulersMap' ref={blueRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toRulers' title='toRulers'></area>
+                <area onClick={() => window.innerWidth > 740 ? blueRightArrowTransition(true) : blueRightArrowTransition(false)} onMouseOver={() => blurBlueRightArrow()} onMouseOut={() => unBlurBlueRightArrow()} id='toRulersMap' ref={blueRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toRulers' title="toRulers"></area>
             </map>
             <img id='toRulers' useMap='#toRulersMap' draggable={false} ref={rightBlueArrow} src={blueRightArrow} alt='toRulers' />
         </div>
