@@ -2,6 +2,7 @@ import { useState } from 'react';
 import calculatorThumbnail from './Images/CalculatorThumbnail.jpg';
 import rulerThumbnail from './Images/RulerThumbnail.jpg';
 import timerThumbnail from './Images/TimerThumbnail.jpg';
+import aiModelThumbnail from './Images/AIModelThumbnail.jpg';
 import bioPic from './Images/Linkedin Bio Pic.jpg';
 import mateosPortfolio from './Images/MateosPortfolio.png';
 import gitHub from './Images/GitHub.png';
@@ -35,7 +36,7 @@ import Timers from './components/Timers';
 import AIModel from './components/AIModel';
 
 function App() {
-  const homeImagesArray = [calculatorThumbnail, rulerThumbnail, timerThumbnail, bioPic, mateosPortfolio, gitHub, linkedIn, gmail, instagram, facebook, greenRightArrow];
+  const homeImagesArray = [calculatorThumbnail, rulerThumbnail, timerThumbnail, aiModelThumbnail, bioPic, mateosPortfolio, gitHub, linkedIn, gmail, instagram, facebook, greenRightArrow];
   const calcImagesArray = [settingsIcon, historyIcon, rulesIcon, blueRightArrow, homeButton];
   const rulersImagesArray = [inchesRuler, centimetersRuler, picasRuler, pixelsRuler, settingsIcon, rulesIcon, orangeRightArrow, homeButton];
   const timersImagesArray = [settingsIcon, rulesIcon, bedsideCountdownAlarm, digitalCountdownAlarm, chaoticCountdownAlarm, coinStopwatchLapSound, joyousStopwatchLapSound, notifStopwatchLapSound, pinkRightArrow, homeButton];
@@ -46,7 +47,7 @@ function App() {
   const [moveToAIModel, setMoveToAIModel] = useState(false);
   return (
     <div className="App">
-      <Home homeImagesArray={homeImagesArray} moveToCalc={moveToCalc} setMoveToCalc={setMoveToCalc} moveToRulers={moveToRulers} setMoveToRulers={setMoveToRulers} moveToTimers={moveToTimers} setMoveToTimers={setMoveToTimers} />
+      <Home homeImagesArray={homeImagesArray} moveToCalc={moveToCalc} setMoveToCalc={setMoveToCalc} moveToRulers={moveToRulers} setMoveToRulers={setMoveToRulers} moveToTimers={moveToTimers} setMoveToTimers={setMoveToTimers} moveToAIModel={moveToAIModel} setMoveToAIModel={setMoveToAIModel} />
       <Calculator calcImagesArray={calcImagesArray} moveToCalc={moveToCalc} setMoveToCalc={setMoveToCalc} moveToRulers={moveToRulers} setMoveToRulers={setMoveToRulers} />
       <Rulers rulersImagesArray={rulersImagesArray} moveToRulers={moveToRulers} setMoveToRulers={setMoveToRulers} moveToTimers={moveToTimers} setMoveToTimers={setMoveToTimers} />
       <Timers timersImagesArray={timersImagesArray} moveToTimers={moveToTimers} setMoveToTimers={setMoveToTimers} moveToAIModel={moveToAIModel} setMoveToAIModel={setMoveToAIModel} />

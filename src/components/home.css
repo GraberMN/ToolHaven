@@ -95,6 +95,12 @@ a {
 #timerTool:active {
     border-style: dashed;
 }
+#aiModelTool:hover {
+    border-color: hsl(315, 100%, 50%);
+}
+#aiModelTool:active {
+    border-style: dashed;
+}
 #bioContents {
     display: flex;
     margin-top: 10px;
