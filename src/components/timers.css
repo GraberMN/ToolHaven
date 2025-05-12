@@ -394,7 +394,7 @@ li {
 #timersHomeButton:active {
     border-style: dashed;
 }
-#toAIModel {
+#toAIChatbot {
     position: absolute;
     width: 100px;
     height: auto;

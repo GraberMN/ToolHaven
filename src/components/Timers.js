@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import './timers.css';
 
-function Timers({ timersImagesArray, moveToTimers, setMoveToTimers, moveToAIModel, setMoveToAIModel }) {
+function Timers({ timersImagesArray, moveToTimers, setMoveToTimers, moveToAIChatbot, setMoveToAIChatbot }) {
     const [settingsIcon, rulesIcon, bedsideCountdownAlarm, digitalCountdownAlarm, chaoticCountdownAlarm, coinStopwatchLapSound, joyousStopwatchLapSound, notifStopwatchLapSound, pinkRightArrow, homeButton] = timersImagesArray;
     const [lapHistory, setLapHistory] = useState([]);
     const [countdownAlarmSource, setCountdownAlarmSource] = useState(null);
@@ -460,7 +460,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers, moveToAIMode
         element.current.style.opacity = '0';
     }
     const pinkRightArrowTransition = (windowWidthBig) => {
-        setMoveToAIModel(true);
+        setMoveToAIChatbot(true);
         resetCountdown();
         onCountdownTabClick();
         const hiddenElements = [timersRulesBox, timersSettingsBox];
@@ -677,10 +677,10 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers, moveToAIMode
                 </div>
             </span>
             <img onClick={() => window.location.reload()} id='timersHomeButton' draggable={false} ref={timersHomeButtonRef} src={homeButton} alt='toHome' title="toHome" />
-            <map name='toAIModelMap'>
-                <area onClick={() => window.innerWidth > 740 ? pinkRightArrowTransition(true) : pinkRightArrowTransition(false)} onMouseOver={() => blurPinkRightArrow()} onMouseOut={() => unBlurPinkRightArrow()} id='toAIModelMap' ref={pinkRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toAIModel' title="toAIModel"></area>
+            <map name='toAIChatbotMap'>
+                <area onClick={() => window.innerWidth > 740 ? pinkRightArrowTransition(true) : pinkRightArrowTransition(false)} onMouseOver={() => blurPinkRightArrow()} onMouseOut={() => unBlurPinkRightArrow()} id='toAIChatbotMap' ref={pinkRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toAIChatbot' title="toAIChatbot"></area>
             </map>
-            <img id='toAIModel' useMap='#toAIModelMap' draggable={false} ref={rightPinkArrow} src={pinkRightArrow} alt='toAIModel' />
+            <img id='toAIChatbot' useMap='#toAIChatbotMap' draggable={false} ref={rightPinkArrow} src={pinkRightArrow} alt='toAIChatbot' />
         </div>
     );
 }

@@ -1,4 +1,4 @@
-#aiModelTitle {
+#aiChatbotTitle {
     position: relative;
     text-align: center;
     font-size: 43px;
@@ -11,7 +11,7 @@
     margin-bottom: 30px;
     user-select: none;
 }
-#aiModelRulesIcon {
+#aiChatbotRulesIcon {
     position: absolute;
     width: 75px;
     height: auto;
@@ -25,16 +25,16 @@
     display: inline;
     user-select: none;
 }
-#aiModelRulesIcon:hover {
+#aiChatbotRulesIcon:hover {
     border-radius: 20px;
 }
-#aiModelRulesIcon:active {
+#aiChatbotRulesIcon:active {
     border-style: dashed;
 }
-#aiModelRulesIcon:not(:hover) ~ #aiModelRulesBox {
+#aiChatbotRulesIcon:not(:hover) ~ #aiChatbotRulesBox {
     border-top-left-radius: 15px;
 }
-#aiModelRulesBox {
+#aiChatbotRulesBox {
     position: absolute;
     width: 400px;
     height: 500px;
@@ -50,29 +50,29 @@
     display: inline;
     user-select: none;
 }
-#aiModelRulesBox::-webkit-scrollbar {
+#aiChatbotRulesBox::-webkit-scrollbar {
     scroll-behavior: smooth;
     width: 20px;
     height: auto;
 }
-#aiModelRulesBox::-webkit-scrollbar-thumb {
+#aiChatbotRulesBox::-webkit-scrollbar-thumb {
     background: hsl(315, 100%, 50%);
     border-radius: 20px;
 }
-#aiModelRulesBox::-webkit-scrollbar-track-piece {
+#aiChatbotRulesBox::-webkit-scrollbar-track-piece {
     background: none;
     border-radius: 20px;
     margin-top: 5px;
     margin-bottom: 5px;
 }
-#aiModelRulesTitle {
+#aiChatbotRulesTitle {
     font-size: 30px;
     font-weight: 600;
     margin-top: 28px;
     margin-right: -60px;
     user-select: none;
 }
-#aiModelSettingsIcon {
+#aiChatbotSettingsIcon {
     position: absolute;
     width: 75px;
     height: auto;
@@ -86,16 +86,16 @@
     display: inline;
     user-select: none;
 }
-#aiModelSettingsIcon:hover {
+#aiChatbotSettingsIcon:hover {
     border-radius: 20px;
 }
-#aiModelSettingsIcon:active {
+#aiChatbotSettingsIcon:active {
     border-style: dashed;
 }
-#aiModelSettingsIcon:not(:hover) ~ #aiModelSettingsBox {
+#aiChatbotSettingsIcon:not(:hover) ~ #aiChatbotSettingsBox {
     border-top-right-radius: 15px;
 }
-#aiModelSettingsBox {
+#aiChatbotSettingsBox {
     position: absolute;
     width: 300px;
     height: 450px;
@@ -128,7 +128,7 @@ ul > span {
     position: absolute;
     font-family: cursive;
 }
-#aiModelSettingsTitle {
+#aiChatbotSettingsTitle {
     font-size: 30px;
     font-weight: 600;
     margin-top: 28px;
@@ -151,10 +151,10 @@ li {
     margin-left: 25px;
     list-style-type: circle;
 }
-#aiModelInvisLi {
+#aiChatbotInvisLi {
     list-style-type: none;
 }
-#aiModelContainer {
+#aiChatbotContainer {
     width: 500px;
     height: 643px;
     display: block;
@@ -165,7 +165,7 @@ li {
     padding-top: 12px;
     user-select: none;
 }
-#aiModelHomeButton {
+#aiChatbotHomeButton {
     position: absolute;
     width: 75px;
     height: auto;
@@ -180,10 +180,10 @@ li {
     display: inline;
     user-select: none;
 }
-#aiModelHomeButton:hover {
+#aiChatbotHomeButton:hover {
     border-radius: 20px;
 }
-#aiModelHomeButton:active {
+#aiChatbotHomeButton:active {
     border-style: dashed;
 }
 .readyForAnim {
@@ -192,7 +192,7 @@ li {
     animation-direction: normal;
     animation-fill-mode: forwards;
 }
-@keyframes appearFromRightAIModel {
+@keyframes appearFromRightAIChatbot {
     from {
         opacity: 0;
         transform: translateX(30vw);
@@ -202,7 +202,7 @@ li {
         transform: translateX(0vw);
     }
 }
-@keyframes appearFromRightAIModelRules {
+@keyframes appearFromRightAIChatbotRules {
     from {
         opacity: 0;
         transform: translateX(calc(30vw - 367px));
@@ -212,7 +212,7 @@ li {
         transform: translateX(calc(0vw - 367px));
     }
 }
-@keyframes appearFromRightAIModelRulesSmall {
+@keyframes appearFromRightAIChatbotRulesSmall {
     from {
         opacity: 0;
         transform: translateX(calc(30vw - 260px));
@@ -222,7 +222,7 @@ li {
         transform: translateX(calc(0vw - 260px));
     }
 }
-@keyframes appearFromRightAIModelSettingsIcon {
+@keyframes appearFromRightAIChatbotSettingsIcon {
     from {
         opacity: 0;
         transform: translateX(calc(30vw + 285px));
@@ -232,7 +232,7 @@ li {
         transform: translateX(calc(0vw + 285px));
     }
 }
-@keyframes appearFromRightAIModelSettingsIconSmall {
+@keyframes appearFromRightAIChatbotSettingsIconSmall {
     from {
         opacity: 0;
         transform: translateX(calc(30vw + 180px));
@@ -242,7 +242,7 @@ li {
         transform: translateX(calc(0vw + 180px));
     }
 }
-@keyframes appearFromRightAIModelSettingsBox {
+@keyframes appearFromRightAIChatbotSettingsBox {
     from {
         opacity: 0;
         transform: translateX(calc(30vw + 60px));
@@ -252,7 +252,7 @@ li {
         transform: translateX(calc(0vw + 60px));
     }
 }
-@keyframes appearFromRightAIModelSettingsBoxSmall {
+@keyframes appearFromRightAIChatbotSettingsBoxSmall {
     from {
         opacity: 0;
         transform: translateX(calc(30vw - 45px));

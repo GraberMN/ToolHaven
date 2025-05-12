@@ -2,8 +2,8 @@ import React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import './home.css';
 
-function Home({ homeImagesArray, moveToCalc, setMoveToCalc, moveToRulers, setMoveToRulers, moveToTimers, setMoveToTimers, moveToAIModel, setMoveToAIModel }) {
-    const [calculatorThumbnail, rulerThumbnail, timerThumbnail, aiModelThumbnail, bioPic, mateosPortfolio, gitHub, linkedIn, gmail, instagram, facebook, greenRightArrow] = homeImagesArray;
+function Home({ homeImagesArray, moveToCalc, setMoveToCalc, moveToRulers, setMoveToRulers, moveToTimers, setMoveToTimers, moveToAIChatbot, setMoveToAIChatbot }) {
+    const [calculatorThumbnail, rulerThumbnail, timerThumbnail, aiChatbotThumbnail, bioPic, mateosPortfolio, gitHub, linkedIn, gmail, instagram, facebook, greenRightArrow] = homeImagesArray;
     const [greenRightArrowTransitionDone, setGreenRightArrowTransitionDone] = useState(false);
     const homeTitleRef = useRef(null);
     const projectNameRef = useRef(null);
@@ -72,8 +72,8 @@ function Home({ homeImagesArray, moveToCalc, setMoveToCalc, moveToRulers, setMov
         rightGreenArrow.current.style.display = 'none';
         setTimeout(() => setGreenRightArrowTransitionDone(true), 2000);
     }
-    const toAIModelTransition = () => {
-        setMoveToAIModel(true);
+    const toAIChatbotTransition = () => {
+        setMoveToAIChatbot(true);
         const changedRelativeElements = [homeTitleRef, projectNameRef, toolsContainerRef, byContainerRef];
         for (let i = 0; i < changedRelativeElements.length; i++) {
             readyForAnimation(changedRelativeElements[i]);
@@ -119,7 +119,7 @@ function Home({ homeImagesArray, moveToCalc, setMoveToCalc, moveToRulers, setMov
                     <img onClick={() => toCalcTransition()} class='tool' id='calcTool' src={calculatorThumbnail} draggable={false} title='Calculator' />
                     <img onClick={() => toRulersTransition()} class='tool' id='rulerTool' src={rulerThumbnail} draggable={false} title='Rulers' />
                     <img onClick={() => toTimersTransition()} class='tool' id='timerTool' src={timerThumbnail} draggable={false} title='Timers' />
-                    <img onClick={() => toAIModelTransition()} class='tool' id='aiModelTool' src={aiModelThumbnail} draggable={false} title='AI Model' />
+                    <img onClick={() => toAIChatbotTransition()} class='tool' id='aiChatbotTool' src={aiChatbotThumbnail} draggable={false} title='AI Chatbot' />
                 </span>
             </div>
             <div id='byContainer' draggable={false} ref={byContainerRef}>

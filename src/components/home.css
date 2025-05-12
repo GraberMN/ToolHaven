@@ -95,10 +95,10 @@ a {
 #timerTool:active {
     border-style: dashed;
 }
-#aiModelTool:hover {
+#aiChatbotTool:hover {
     border-color: hsl(315, 100%, 50%);
 }
-#aiModelTool:active {
+#aiChatbotTool:active {
     border-style: dashed;
 }
 #bioContents {

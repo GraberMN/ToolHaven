@@ -2,7 +2,7 @@ import { useState } from 'react';
 import calculatorThumbnail from './Images/CalculatorThumbnail.jpg';
 import rulerThumbnail from './Images/RulerThumbnail.jpg';
 import timerThumbnail from './Images/TimerThumbnail.jpg';
-import aiModelThumbnail from './Images/AIModelThumbnail.jpg';
+import aiChatbotThumbnail from './Images/AIChatbotThumbnail.jpg';
 import bioPic from './Images/Linkedin Bio Pic.jpg';
 import mateosPortfolio from './Images/MateosPortfolio.png';
 import gitHub from './Images/GitHub.png';
@@ -33,25 +33,25 @@ import Home from './components/Home';
 import Calculator from './components/Calculator';
 import Rulers from './components/Rulers';
 import Timers from './components/Timers';
-import AIModel from './components/AIModel';
+import AIChatbot from './components/AIChatbot';
 
 function App() {
-  const homeImagesArray = [calculatorThumbnail, rulerThumbnail, timerThumbnail, aiModelThumbnail, bioPic, mateosPortfolio, gitHub, linkedIn, gmail, instagram, facebook, greenRightArrow];
+  const homeImagesArray = [calculatorThumbnail, rulerThumbnail, timerThumbnail, aiChatbotThumbnail, bioPic, mateosPortfolio, gitHub, linkedIn, gmail, instagram, facebook, greenRightArrow];
   const calcImagesArray = [settingsIcon, historyIcon, rulesIcon, blueRightArrow, homeButton];
   const rulersImagesArray = [inchesRuler, centimetersRuler, picasRuler, pixelsRuler, settingsIcon, rulesIcon, orangeRightArrow, homeButton];
   const timersImagesArray = [settingsIcon, rulesIcon, bedsideCountdownAlarm, digitalCountdownAlarm, chaoticCountdownAlarm, coinStopwatchLapSound, joyousStopwatchLapSound, notifStopwatchLapSound, pinkRightArrow, homeButton];
-  const aiModelImagesArray = [settingsIcon, rulesIcon, homeButton];
+  const aiChatbotImagesArray = [settingsIcon, rulesIcon, homeButton];
   const [moveToCalc, setMoveToCalc] = useState(false);
   const [moveToRulers, setMoveToRulers] = useState(false);
   const [moveToTimers, setMoveToTimers] = useState(false);
-  const [moveToAIModel, setMoveToAIModel] = useState(false);
+  const [moveToAIChatbot, setMoveToAIChatbot] = useState(false);
   return (
     <div className="App">
-      <Home homeImagesArray={homeImagesArray} moveToCalc={moveToCalc} setMoveToCalc={setMoveToCalc} moveToRulers={moveToRulers} setMoveToRulers={setMoveToRulers} moveToTimers={moveToTimers} setMoveToTimers={setMoveToTimers} moveToAIModel={moveToAIModel} setMoveToAIModel={setMoveToAIModel} />
+      <Home homeImagesArray={homeImagesArray} moveToCalc={moveToCalc} setMoveToCalc={setMoveToCalc} moveToRulers={moveToRulers} setMoveToRulers={setMoveToRulers} moveToTimers={moveToTimers} setMoveToTimers={setMoveToTimers} moveToAIChatbot={moveToAIChatbot} setMoveToAIChatbot={setMoveToAIChatbot} />
       <Calculator calcImagesArray={calcImagesArray} moveToCalc={moveToCalc} setMoveToCalc={setMoveToCalc} moveToRulers={moveToRulers} setMoveToRulers={setMoveToRulers} />
       <Rulers rulersImagesArray={rulersImagesArray} moveToRulers={moveToRulers} setMoveToRulers={setMoveToRulers} moveToTimers={moveToTimers} setMoveToTimers={setMoveToTimers} />
-      <Timers timersImagesArray={timersImagesArray} moveToTimers={moveToTimers} setMoveToTimers={setMoveToTimers} moveToAIModel={moveToAIModel} setMoveToAIModel={setMoveToAIModel} />
-      <AIModel aiModelImagesArray={aiModelImagesArray} moveToAIModel={moveToAIModel} setMoveToAIModel={setMoveToAIModel} />
+      <Timers timersImagesArray={timersImagesArray} moveToTimers={moveToTimers} setMoveToTimers={setMoveToTimers} moveToAIChatbot={moveToAIChatbot} setMoveToAIChatbot={setMoveToAIChatbot} />
+      <AIChatbot aiChatbotImagesArray={aiChatbotImagesArray} moveToAIChatbot={moveToAIChatbot} setMoveToAIChatbot={setMoveToAIChatbot} />
     </div>
   );
 }
