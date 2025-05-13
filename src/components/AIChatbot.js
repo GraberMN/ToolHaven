@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import './aiChatbot.css';
 
 function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }) {
-    const [settingsIcon, rulesIcon, homeButton] = aiChatbotImagesArray;
+    const [settingsIcon, rulesIcon, aiChatbotThumbnailTransparent, homeButton] = aiChatbotImagesArray;
     const aiChatbotRulesIconRef = useRef(null);
     const aiChatbotRulesBox = useRef(null);
     const aiChatbotSettingsIconRef = useRef(null);
@@ -115,7 +115,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
             <span id='aiChatbotRulesBox' draggable={false} ref={aiChatbotRulesBox}>
                 <div id='aiChatbotRulesTitle' draggable={false}>Rules</div>
                 <ul>
-                    <li>Hover over the AI Chatbot or each external button to find out what it is/represents.</li>
+                    <li>Hover over the Chatbot or each external button to find out what it is/represents.</li>
                     <li>The bottom left Home button takes you back to the Home page.</li>
                     <li>The Settings tab lets you .</li>
                     <li>When changing color in Settings, drag the pointer around for it to work seamlessly.</li>
@@ -132,7 +132,13 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
             </span>
             <div id='aiChatbotTitle' draggable={false} ref={aiChatbotTitleRef}>AI Chatbot</div>
             <span id='aiChatbotContainer' draggable={false} ref={aiChatbotContainerRef}>
-
+                <div id='aiChatbotProfile'>
+                    <img id='aiChatbotPic' src={aiChatbotThumbnailTransparent} />
+                </div>
+                <div id='humanAIConvoContainer'>
+                    
+                </div>
+                <input type='text' id='userInputField' />
             </span>
             <img onClick={() => window.location.reload()} id='aiChatbotHomeButton' draggable={false} ref={aiChatbotHomeButtonRef} src={homeButton} alt='toHome' title="toHome" />
         </div>

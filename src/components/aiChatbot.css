@@ -163,7 +163,42 @@ li {
     border-radius: 40px;
     transform: translateX(30vw);
     padding-top: 12px;
+    background-color: azure;
     user-select: none;
+}
+#aiChatbotProfile {
+    width: 500px;
+    height: 200px;
+    margin: auto;
+    justify-content: center;
+    margin-top: -12px;
+    background-color: lavender;
+    border: none;
+    border-radius: 30px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+#aiChatbotPic {
+    width: 175px;
+    height: auto;
+    margin-top: 8px;
+}
+#humanAIConvoContainer {
+    width: 500px;
+    height: 280px;
+    margin: auto;
+    background-color: aliceblue;
+    border-top: solid 10px rgba(53, 47, 47, 0.993); 
+    border-bottom: solid 10px rgba(53, 47, 47, 0.993);
+}
+#userInputField {
+    width: 494px;
+    height: 153px;
+    font-family: cursive;
+    margin: auto;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    border: none;
 }
 #aiChatbotHomeButton {
     position: absolute;

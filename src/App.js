@@ -27,6 +27,7 @@ import coinStopwatchLapSound from './Images/coinStopwatchLapSound.mp3';
 import joyousStopwatchLapSound from './Images/happyStopwatchLapSound.mp3';
 import notifStopwatchLapSound from './Images/notifStopwatchLapSound.mp3';
 import pinkRightArrow from './Images/PinkRightArrow.png';
+import aiChatbotThumbnailTransparent from './Images/AIChatbotThumbnailTransparent.png';
 import homeButton from './Images/HomeButton.png';
 import './App.css';
 import Home from './components/Home';
@@ -40,7 +41,7 @@ function App() {
   const calcImagesArray = [settingsIcon, historyIcon, rulesIcon, blueRightArrow, homeButton];
   const rulersImagesArray = [inchesRuler, centimetersRuler, picasRuler, pixelsRuler, settingsIcon, rulesIcon, orangeRightArrow, homeButton];
   const timersImagesArray = [settingsIcon, rulesIcon, bedsideCountdownAlarm, digitalCountdownAlarm, chaoticCountdownAlarm, coinStopwatchLapSound, joyousStopwatchLapSound, notifStopwatchLapSound, pinkRightArrow, homeButton];
-  const aiChatbotImagesArray = [settingsIcon, rulesIcon, homeButton];
+  const aiChatbotImagesArray = [settingsIcon, rulesIcon, aiChatbotThumbnailTransparent, homeButton];
   const [moveToCalc, setMoveToCalc] = useState(false);
   const [moveToRulers, setMoveToRulers] = useState(false);
   const [moveToTimers, setMoveToTimers] = useState(false);
