@@ -185,7 +185,7 @@ li {
 }
 #humanAIConvoContainer {
     width: 500px;
-    height: 280px;
+    height: 320px;
     margin: auto;
     background-color: aliceblue;
     border-top: solid 10px rgba(53, 47, 47, 0.993); 
@@ -193,12 +193,14 @@ li {
 }
 #userInputField {
     width: 494px;
-    height: 153px;
+    height: 110px;
     font-family: cursive;
+    font-size: 16px;
     margin: auto;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
     border: none;
+    resize: none;
 }
 #aiChatbotHomeButton {
     position: absolute;

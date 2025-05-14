@@ -11,8 +11,23 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
     const aiChatbotTitleRef = useRef(null);
 
     const aiChatbotContainerRef = useRef(null);
+    const userInputFieldRef = useRef(null);
 
     const aiChatbotHomeButtonRef = useRef(null);
+    const limitLines = (e) => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            if (userInputFieldRef.current.value === "") {
+                return;
+            }
+            userInputFieldRef.current.value = userInputFieldRef.current.value.trim();
+            
+            userInputFieldRef.current.value = "";
+        }
+        while (userInputFieldRef.current.scrollHeight > userInputFieldRef.current.clientHeight) {
+            userInputFieldRef.current.value = userInputFieldRef.current.value.substring(0, userInputFieldRef.current.value.length - 1);
+        }
+    }
     const openOrClose = (element) => {
         if (element.current.style.visibility === "hidden") {
             element.current.style.visibility = "visible";
@@ -90,6 +105,8 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
                     aiChatbotNonAIChatbotElements[i].current.style.opacity = '100';
                 }
                 window.addEventListener("resize", onAdjustWindowWidthAIChatbot);
+                userInputFieldRef.current.addEventListener("keydown", (e) => limitLines(e));
+                userInputFieldRef.current.addEventListener("input", (e) => limitLines(e));
                 if (window.innerWidth <= 740) {
                     aiChatbotRulesIconRef.current.style.transform = 'translateX(-260px)';
                     aiChatbotRulesBox.current.style.transform = 'translateX(-260px)';
@@ -138,7 +155,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
                 <div id='humanAIConvoContainer'>
                     
                 </div>
-                <input type='text' id='userInputField' />
+                <textarea type='text' id='userInputField' wrap='hard' ref={userInputFieldRef} title='userInputField' placeholder={'Type here to converse with AI Chatbot\nPress ENTER to send'}></textarea>
             </span>
             <img onClick={() => window.location.reload()} id='aiChatbotHomeButton' draggable={false} ref={aiChatbotHomeButtonRef} src={homeButton} alt='toHome' title="toHome" />
         </div>
