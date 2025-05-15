@@ -153,7 +153,8 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
                     <img id='aiChatbotPic' src={aiChatbotThumbnailTransparent} />
                 </div>
                 <div id='humanAIConvoContainer'>
-                    
+                    <div class='aiDialogueBox'>Hello. What can I help you with?</div>
+                    <div class='userDialogueBox'>TEST</div>
                 </div>
                 <textarea type='text' id='userInputField' wrap='hard' ref={userInputFieldRef} title='userInputField' placeholder={'Type here to converse with AI Chatbot\nPress ENTER to send'}></textarea>
             </span>

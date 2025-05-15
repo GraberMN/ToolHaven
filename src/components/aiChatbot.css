@@ -191,6 +191,45 @@ li {
     border-top: solid 10px rgba(53, 47, 47, 0.993); 
     border-bottom: solid 10px rgba(53, 47, 47, 0.993);
 }
+.aiDialogueBox {
+    width: fit-content;
+    max-width: 350px;
+    height: auto;
+    border: solid 2px rgba(53, 47, 47, 0.993);
+    border-left: none;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: white;
+    margin-top: 15px;
+    font-family: cursive;
+    font-size: 16px;
+    text-align: left;
+    padding-left: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-right: 10px;
+    user-select: none;
+}
+.userDialogueBox {
+    width: fit-content;
+    max-width: 350px;
+    height: auto;
+    float: right;
+    border: solid 2px rgba(53, 47, 47, 0.993);
+    border-right: none;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: white;
+    margin-top: 15px;
+    font-family: cursive;
+    font-size: 16px;
+    text-align: left;
+    padding-left: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-right: 10px;
+    user-select: none;
+}
 #userInputField {
     width: 494px;
     height: 110px;
