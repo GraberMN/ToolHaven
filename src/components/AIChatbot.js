@@ -24,6 +24,22 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
                 return;
             }
             userInputFieldRef.current.value = userInputFieldRef.current.value.trim();
+            const userMessageWordArray = userInputFieldRef.current.value.split(" ");
+            for (let i = 0; i < userMessageWordArray.length; i++) {
+                if (userMessageWordArray[i].length > 21 && userMessageWordArray[i].length <= 41) {
+                    userMessageWordArray[i] = userMessageWordArray[i].substring(0, 21) + "-" + userMessageWordArray[i].substring(21);
+                    continue;
+                }
+                if (userMessageWordArray[i].length > 41 && userMessageWordArray[i].length <= 45) {
+                    userMessageWordArray[i] = userMessageWordArray[i].substring(0, 21) + "-" + userMessageWordArray[i].substring(21, 42) + "-" + userMessageWordArray[i].substring(42);
+                    continue;
+                }
+                if (userMessageWordArray[i].length > 45) {
+                    alert('Your message contains a word too long to be in the English language. Please try again.');
+                    return;
+                }
+            }
+            userInputFieldRef.current.value = userMessageWordArray.join(" ");
             setUserMessage(userInputFieldRef.current.value);
             userInputFieldRef.current.value = "";
         }
@@ -143,6 +159,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
                     <li>Hover over the Chatbot or each external button to find out what it is/represents.</li>
                     <li>The bottom left Home button takes you back to the Home page.</li>
                     <li>The Settings tab lets you .</li>
+                    <li>The input field allows any English word, but words longer than 21 letters are hyphened in chat to prevent text overflow. </li>
                     <li>When changing color in Settings, drag the pointer around for it to work seamlessly.</li>
                     <li>-Specific Rules:</li>
                     <li id='lvl2li'></li>

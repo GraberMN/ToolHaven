@@ -191,6 +191,25 @@ li {
     background-color: aliceblue;
     border-top: solid 10px rgba(53, 47, 47, 0.993); 
     border-bottom: solid 10px rgba(53, 47, 47, 0.993);
+    overflow-y: auto;
+}
+#humanAIConvoContainer::-webkit-scrollbar {
+    scroll-behavior: smooth;
+    width: 20px;
+    height: auto;
+}
+#humanAIConvoContainer::-webkit-scrollbar-thumb {
+    background-color: aliceblue;
+    border: solid 3px rgba(53, 47, 47, 0.993);
+    border-radius: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+#humanAIConvoContainer::-webkit-scrollbar-track-piece {
+    background-color: rgba(53, 47, 47, 0.993);
+}
+#humanAIConvoContainer::-webkit-scrollbar-track {
+    background-color: rgba(53, 47, 47, 0.993);
 }
 .aiDialogueBox {
     width: fit-content;
@@ -201,7 +220,7 @@ li {
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     background-color: white;
-    margin-top: 15px;
+    margin-top: 8px;
     margin-bottom: 7px;
     font-family: cursive;
     font-size: 16px;
@@ -217,7 +236,8 @@ li {
     width: fit-content;
     max-width: 350px;
     height: auto;
-    float: right;
+    margin-left: auto;
+    margin-right: 0px;
     border: solid 2px rgba(53, 47, 47, 0.993);
     border-right: none;
     border-top-left-radius: 20px;
