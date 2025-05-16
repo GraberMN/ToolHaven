@@ -4,6 +4,8 @@ import './aiChatbot.css';
 
 function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }) {
     const [settingsIcon, rulesIcon, aiChatbotThumbnailTransparent, homeButton] = aiChatbotImagesArray;
+    const [messageArray, setMessageArray] = useState([]);
+    const [userMessage, setUserMessage] = useState(null);
     const aiChatbotRulesIconRef = useRef(null);
     const aiChatbotRulesBox = useRef(null);
     const aiChatbotSettingsIconRef = useRef(null);
@@ -11,6 +13,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
     const aiChatbotTitleRef = useRef(null);
 
     const aiChatbotContainerRef = useRef(null);
+    const humanAIConvoContainerRef = useRef(null);
     const userInputFieldRef = useRef(null);
 
     const aiChatbotHomeButtonRef = useRef(null);
@@ -21,7 +24,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
                 return;
             }
             userInputFieldRef.current.value = userInputFieldRef.current.value.trim();
-            
+            setUserMessage(userInputFieldRef.current.value);
             userInputFieldRef.current.value = "";
         }
         while (userInputFieldRef.current.scrollHeight > userInputFieldRef.current.clientHeight) {
@@ -79,6 +82,11 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
     const readyForMove = (element) => {
         element.current.style.opacity = '0';
     }
+    useEffect(() => {
+        if (userMessage !== null) {
+            setMessageArray([...messageArray, { message: userMessage, class: 'userDialogueBox' }]);
+        }
+    }, [userMessage]);
     useEffect(() => {
         if (moveToAIChatbot) {
             aiChatbotTitleRef.current.style.display = 'block';
@@ -152,9 +160,13 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
                 <div id='aiChatbotProfile'>
                     <img id='aiChatbotPic' src={aiChatbotThumbnailTransparent} />
                 </div>
-                <div id='humanAIConvoContainer'>
+                <div id='humanAIConvoContainer' ref={humanAIConvoContainerRef}>
                     <div class='aiDialogueBox'>Hello. What can I help you with?</div>
-                    <div class='userDialogueBox'>TEST</div>
+                    {
+                        messageArray.map((messageObj, index) => 
+                            <div key={index} class={messageObj.class}>{messageObj.message}</div>
+                        )
+                    }
                 </div>
                 <textarea type='text' id='userInputField' wrap='hard' ref={userInputFieldRef} title='userInputField' placeholder={'Type here to converse with AI Chatbot\nPress ENTER to send'}></textarea>
             </span>
