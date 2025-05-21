@@ -544,10 +544,10 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
                 <ul>
                     <li>Displayed rulers:</li>
                     <li id='invisLi'>
-                        in.: <input type='checkbox' onClick={(e) => setInchesRulerCheckboxChecked(e.target.checked)} ref={inchesRulerCheckbox} title='inchesRulerCheckbox' placeholder='inchesRulerCheckbox' />
-                        cm: <input type='checkbox' onClick={(e) => setCentimetersRulerCheckboxChecked(e.target.checked)} title='centimetersRulerCheckbox' placeholder='centimetersRulerCheckbox' />
-                        picas: <input type='checkbox' onClick={(e) => setPicasRulerCheckboxChecked(e.target.checked)} title='picasRulerCheckbox' placeholder='picasRulerCheckbox' />
-                        px: <input type='checkbox' onClick={(e) => setPixelsRulerCheckboxChecked(e.target.checked)} title='pixelsRulerCheckbox' placeholder='pixelsRulerCheckbox' />
+                        in.: <input type='checkbox' onClick={(e) => setInchesRulerCheckboxChecked(e.target.checked)} ref={inchesRulerCheckbox} id='inchesRulerCheckbox' title='inchesRulerCheckbox' placeholder='inchesRulerCheckbox' />
+                        cm: <input type='checkbox' onClick={(e) => setCentimetersRulerCheckboxChecked(e.target.checked)} id='centimetersRulerCheckbox' title='centimetersRulerCheckbox' placeholder='centimetersRulerCheckbox' />
+                        picas: <input type='checkbox' onClick={(e) => setPicasRulerCheckboxChecked(e.target.checked)} id='picasRulerCheckbox' title='picasRulerCheckbox' placeholder='picasRulerCheckbox' />
+                        px: <input type='checkbox' onClick={(e) => setPixelsRulerCheckboxChecked(e.target.checked)} id='pixelsRulerCheckbox' title='pixelsRulerCheckbox' placeholder='pixelsRulerCheckbox' />
                     </li>
                     <li>Color of inches ruler border:</li>
                     <input type='color' value={inchesRulerBorderColorVal} onChange={(e) => onInchesRulerBorderColorChange(e)} id='inchesRulerBorderColorPicker' title='inchesRulerBorderColorPicker' placeholder='inchesRulerBorderColorPicker' />

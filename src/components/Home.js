@@ -116,17 +116,17 @@ function Home({ homeImagesArray, moveToCalc, setMoveToCalc, moveToRulers, setMov
             <div id='toolsContainer' draggable={false} ref={toolsContainerRef}>
                 <div id='toolsTitle'>Tools:</div>
                 <span id='toolGrid'>
-                    <img onClick={() => toCalcTransition()} class='tool' id='calcTool' src={calculatorThumbnail} draggable={false} title='Calculator' />
-                    <img onClick={() => toRulersTransition()} class='tool' id='rulerTool' src={rulerThumbnail} draggable={false} title='Rulers' />
-                    <img onClick={() => toTimersTransition()} class='tool' id='timerTool' src={timerThumbnail} draggable={false} title='Timers' />
-                    <img onClick={() => toAIChatbotTransition()} class='tool' id='aiChatbotTool' src={aiChatbotThumbnail} draggable={false} title='AI Chatbot' />
+                    <img onClick={() => toCalcTransition()} class='tool' id='calcTool' src={calculatorThumbnail} draggable={false} alt='Calculator' title='Calculator' />
+                    <img onClick={() => toRulersTransition()} class='tool' id='rulerTool' src={rulerThumbnail} draggable={false} alt='Rulers' title='Rulers' />
+                    <img onClick={() => toTimersTransition()} class='tool' id='timerTool' src={timerThumbnail} draggable={false} alt='Timers' title='Timers' />
+                    <img onClick={() => toAIChatbotTransition()} class='tool' id='aiChatbotTool' src={aiChatbotThumbnail} draggable={false} alt='AI Chatbot' title='AI Chatbot' />
                 </span>
             </div>
             <div id='byContainer' draggable={false} ref={byContainerRef}>
                 <div id='byTitle'>By: Mateo Graber, </div>
                 <div id='byTitlePt2'>UF Comp Sci Freshman</div>
                 <span id='bioContents'>
-                    <img id='bioPic' draggable={false} src={bioPic} />
+                    <img id='bioPic' draggable={false} src={bioPic} alt='myBioPic' title='myBioPic' />
                     <span id='contactGrid'>
                         <a href='https://mateos-portfolio.vercel.app/' target='_blank'><img class='contact' id='myPortfolioContact' src={mateosPortfolio} draggable={false} alt='MyPortfolio' title='MyPortfolio' /></a>
                         <a href='https://github.com/GraberMN' target='_blank'><img class='contact' id='gitHubContact' src={gitHub} draggable={false} alt='MyGitHub' title='MyGitHub' /></a>

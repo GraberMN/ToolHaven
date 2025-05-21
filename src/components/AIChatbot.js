@@ -1,11 +1,14 @@
 import React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import './aiChatbot.css';
+import { pipeline, TextStreamer } from '@huggingface/transformers';
 
 function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }) {
     const [settingsIcon, rulesIcon, aiChatbotThumbnailTransparent, homeButton] = aiChatbotImagesArray;
     const [messageArray, setMessageArray] = useState([]);
-    const [userMessage, setUserMessage] = useState(null);
+    const aiMessage = useRef("");
+    const userMessage = useRef(null);
+    const messageArrayLength = useRef(0);
     const aiChatbotRulesIconRef = useRef(null);
     const aiChatbotRulesBox = useRef(null);
     const aiChatbotSettingsIconRef = useRef(null);
@@ -17,12 +20,41 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
     const userInputFieldRef = useRef(null);
 
     const aiChatbotHomeButtonRef = useRef(null);
+    const generateResponse = async () => {
+        try {
+            const textGenerator = await pipeline('text-generation', 'HuggingFaceTB/SmolLM2-360M-Instruct', { dtype: 'q8' });
+            const messagesArray = [
+                { role: "system", content: "You are a helpful assistant." },
+                { role: "user", content: userMessage.current }
+            ];
+            const textStreamer = new TextStreamer(textGenerator.tokenizer, {
+                skip_prompt: true,
+                callback_function: (text) => {
+                    aiMessage.current = aiMessage.current + text;
+                    setMessageArray((prevMessages) => {
+                        return prevMessages.map((messageObj, index) => {
+                            if (index === prevMessages.length - 1) {
+                                return { message: aiMessage.current, class: 'aiDialogueBox' }
+                            }
+                            return messageObj;
+                        });
+                    });
+                }
+            });
+            const result = await textGenerator(messagesArray, { max_new_tokens: 50, do_sample: false, streamer: textStreamer });
+        }
+        catch (error) {
+            console.error(`Error generating response: ${error}`);
+        }
+    }
     const limitLines = (e) => {
         if (e.key === "Enter") {
             e.preventDefault();
             if (userInputFieldRef.current.value === "") {
                 return;
             }
+            userMessage.current = "";
+            aiMessage.current = "";
             userInputFieldRef.current.value = userInputFieldRef.current.value.trim();
             const userMessageWordArray = userInputFieldRef.current.value.split(" ");
             for (let i = 0; i < userMessageWordArray.length; i++) {
@@ -40,7 +72,10 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
                 }
             }
             userInputFieldRef.current.value = userMessageWordArray.join(" ");
-            setUserMessage(userInputFieldRef.current.value);
+            userMessage.current = userInputFieldRef.current.value;
+            if (userMessage.current !== null) {
+                setMessageArray((prevMessages) => [...prevMessages, { message: userMessage.current, class: 'userDialogueBox' }, { message: aiMessage.current, class: 'aiDialogueBox' }]);
+            }
             userInputFieldRef.current.value = "";
         }
         while (userInputFieldRef.current.scrollHeight > userInputFieldRef.current.clientHeight) {
@@ -99,10 +134,11 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
         element.current.style.opacity = '0';
     }
     useEffect(() => {
-        if (userMessage !== null) {
-            setMessageArray([...messageArray, { message: userMessage, class: 'userDialogueBox' }]);
+        if (messageArray.length > 0 && messageArray.length % 2 === 0 && messageArray.length !== messageArrayLength.current) {
+            messageArrayLength.current = messageArray.length;
+            generateResponse();
         }
-    }, [userMessage]);
+    }, [messageArray]);
     useEffect(() => {
         if (moveToAIChatbot) {
             aiChatbotTitleRef.current.style.display = 'block';
@@ -175,7 +211,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
             <div id='aiChatbotTitle' draggable={false} ref={aiChatbotTitleRef}>AI Chatbot</div>
             <span id='aiChatbotContainer' draggable={false} ref={aiChatbotContainerRef}>
                 <div id='aiChatbotProfile'>
-                    <img id='aiChatbotPic' src={aiChatbotThumbnailTransparent} />
+                    <img id='aiChatbotPic' src={aiChatbotThumbnailTransparent} alt='aiChatbotPic' title='aiChatbotPic' />
                 </div>
                 <div id='humanAIConvoContainer' ref={humanAIConvoContainerRef}>
                     <div class='aiDialogueBox'>Hello. What can I help you with?</div>
