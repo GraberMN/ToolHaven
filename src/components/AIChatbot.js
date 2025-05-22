@@ -16,6 +16,8 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
     const aiChatbotTitleRef = useRef(null);
 
     const aiChatbotContainerRef = useRef(null);
+    const citationBox = useRef(null);
+    const disclaimerBox = useRef(null);
     const humanAIConvoContainerRef = useRef(null);
     const userInputFieldRef = useRef(null);
 
@@ -149,6 +151,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
             aiChatbotSettingsBox.current.style.display = 'inline';
             aiChatbotSettingsBox.current.style.visibility = 'hidden';
             aiChatbotContainerRef.current.style.display = 'block';
+            citationBox.current.style.visibility = 'hidden';
             aiChatbotHomeButtonRef.current.style.display = 'inline';
             const aiChatbotElements = [aiChatbotTitleRef, aiChatbotRulesIconRef, aiChatbotRulesBox, aiChatbotSettingsIconRef, aiChatbotSettingsBox, aiChatbotContainerRef, aiChatbotHomeButtonRef];
             for (let i = 0; i < aiChatbotElements.length; i++) {
@@ -174,6 +177,15 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
                     aiChatbotSettingsBox.current.style.transform = 'translateX(-45px)';
                     aiChatbotHomeButtonRef.current.style.transform = 'translateX(-260px)';
                 }
+                citationBox.current.innerHTML = `@misc{allal2025smollm2smolgoesbig,
+        title={SmolLM2: When Smol Goes Big -- Data-Centric Training of a Small Language Model},
+        author={Loubna Ben Allal and Anton Lozhkov and Elie Bakouch and Gabriel Martín Blázquez and Guilherme Penedo and Lewis Tunstall and Andrés Marafioti and Hynek Kydlíček and Agustín Piqueres Lajarín and Vaibhav Srivastav and Joshua Lochner and Caleb Fahlgren and Xuan-Son Nguyen and Clémentine Fourrier and Ben Burtenshaw and Hugo Larcher and Haojun Zhao and Cyril Zakka and Mathieu Morlon and Colin Raffel and Leandro von Werra and Thomas Wolf}, 
+        year={2025},
+        eprint={2502.02737},
+        archivePrefix={arXiv},
+        primaryClass={cs.CL},
+        url={https://arxiv.org/abs/2502.02737},
+}`;
             }, 4000);
         }
     }, [moveToAIChatbot]);
@@ -211,7 +223,13 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
             <div id='aiChatbotTitle' draggable={false} ref={aiChatbotTitleRef}>AI Chatbot</div>
             <span id='aiChatbotContainer' draggable={false} ref={aiChatbotContainerRef}>
                 <div id='aiChatbotProfile'>
+                    <div id='disclaimerButton'>Disclaimer</div>
+                    <span id='disclaimerBox'>
+
+                    </span>
                     <img id='aiChatbotPic' src={aiChatbotThumbnailTransparent} alt='aiChatbotPic' title='aiChatbotPic' />
+                    <div onClick={() => openOrClose(citationBox)} id='citationButton'>Citation</div>
+                    <span id='citationBox' draggable={false} ref={citationBox}></span>
                 </div>
                 <div id='humanAIConvoContainer' ref={humanAIConvoContainerRef}>
                     <div class='aiDialogueBox'>Hello. What can I help you with?</div>

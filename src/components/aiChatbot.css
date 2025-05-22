@@ -166,6 +166,31 @@ li {
     background-color: azure;
     user-select: none;
 }
+#disclaimerButton {
+    position: absolute;
+    width: 95px;
+    height: 25px;
+    font-family: cursive;
+    border: solid 10px rgba(53, 47, 47, 0.993);
+    background-color: white;
+    transform: translateX(0px) translateY(164px);
+    border-left: none;
+    border-bottom: none;
+    border-top-right-radius: 20px;
+    padding-top: 1px;
+    cursor: pointer;
+}
+#disclaimerButton:hover {
+    background-color: rgb(204, 231, 255);
+}
+
+#disclaimerButton:active {
+    background-color: white;
+}
+#disclaimerBox {
+    position: absolute;
+
+}
 #aiChatbotProfile {
     width: 500px;
     height: 200px;
@@ -177,6 +202,56 @@ li {
     border-radius: 30px;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
+}
+#citationButton {
+    position: absolute;
+    width: 85px;
+    height: 25px;
+    font-family: cursive;
+    border: solid 10px rgba(53, 47, 47, 0.993);
+    background-color: white;
+    transform: translateX(405px) translateY(-25px);
+    border-right: none;
+    border-bottom: none;
+    border-top-left-radius: 20px;
+    padding-top: 1px;
+    cursor: pointer;
+}
+#citationButton:hover {
+    background-color: rgb(204, 231, 255);
+}
+#citationButton:active {
+    background-color: white;
+}
+#citationBox {
+    position: absolute;
+    width: 350px;
+    height: 225px;
+    border: solid 10px rgba(53, 47, 47, 0.993);
+    background-color: white;
+    transform: translateX(-202px) translateY(200px);
+    text-align: left;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: pre;
+    padding-top: 5px;
+    padding-left: 5px;
+    z-index: 996;
+}
+#citationBox::-webkit-scrollbar {
+    scroll-behavior: smooth;
+    width: auto;
+    height: 13px;
+}
+#citationBox::-webkit-scrollbar-thumb {
+    background-color: rgba(53, 47, 47, 0.993);
+    border-radius: 20px;
+}
+#citationBox::-webkit-scrollbar-track-piece {
+    background: none;
+    border-radius: 20px;
+    margin-right: 5px;
+    margin-left: 5px;
 }
 #aiChatbotPic {
     width: 175px;
