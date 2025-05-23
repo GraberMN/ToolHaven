@@ -183,13 +183,22 @@ li {
 #disclaimerButton:hover {
     background-color: rgb(204, 231, 255);
 }
-
 #disclaimerButton:active {
     background-color: white;
 }
 #disclaimerBox {
     position: absolute;
-
+    width: 311px;
+    height: 260px;
+    border: solid 10px rgba(53, 47, 47, 0.993);
+    background-color: white;
+    transform: translateX(-173px) translateY(200px);
+    text-align: left;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    padding-top: 5px;
+    padding-left: 9px;
+    z-index: 995;
 }
 #aiChatbotProfile {
     width: 500px;
@@ -229,7 +238,7 @@ li {
     height: 225px;
     border: solid 10px rgba(53, 47, 47, 0.993);
     background-color: white;
-    transform: translateX(-202px) translateY(200px);
+    transform: translateX(-203px) translateY(200px);
     text-align: left;
     overflow-x: scroll;
     overflow-y: hidden;
@@ -250,8 +259,8 @@ li {
 #citationBox::-webkit-scrollbar-track-piece {
     background: none;
     border-radius: 20px;
-    margin-right: 5px;
-    margin-left: 5px;
+    margin-left: 3px;
+    margin-right: 3px;
 }
 #aiChatbotPic {
     width: 175px;

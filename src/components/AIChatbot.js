@@ -223,12 +223,15 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
             <div id='aiChatbotTitle' draggable={false} ref={aiChatbotTitleRef}>AI Chatbot</div>
             <span id='aiChatbotContainer' draggable={false} ref={aiChatbotContainerRef}>
                 <div id='aiChatbotProfile'>
-                    <div id='disclaimerButton'>Disclaimer</div>
-                    <span id='disclaimerBox'>
-
+                    <div onClick={() => openOrClose(disclaimerBox)} id='disclaimerButton' title='toDisclaimer'>Disclaimer</div>
+                    <span id='disclaimerBox' draggable={false} ref={disclaimerBox}>
+                        The compact SmolLM2 models used for this AI Chatbot are much better at comprehending and outputing in English.
+                        The content that they generate may not always be correct, logical, or impartial. As a result, they should
+                        be used only to assist rather than as conclusive sources of knowledge. Users of this AI Chatbot should
+                        always make sure to verify its answers and generated information with their own logic and credible sources.
                     </span>
                     <img id='aiChatbotPic' src={aiChatbotThumbnailTransparent} alt='aiChatbotPic' title='aiChatbotPic' />
-                    <div onClick={() => openOrClose(citationBox)} id='citationButton'>Citation</div>
+                    <div onClick={() => openOrClose(citationBox)} id='citationButton' title='toCitation'>Citation</div>
                     <span id='citationBox' draggable={false} ref={citationBox}></span>
                 </div>
                 <div id='humanAIConvoContainer' ref={humanAIConvoContainerRef}>
