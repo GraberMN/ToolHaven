@@ -33,17 +33,17 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
                 skip_prompt: true,
                 callback_function: (text) => {
                     aiMessage.current = aiMessage.current + text;
-                    setMessageArray((prevMessages) => {
-                        return prevMessages.map((messageObj, index) => {
-                            if (index === prevMessages.length - 1) {
-                                return { message: aiMessage.current, class: 'aiDialogueBox' }
-                            }
-                            return messageObj;
-                        });
-                    });
                 }
             });
             const result = await textGenerator(messagesArray, { max_new_tokens: 50, do_sample: false, streamer: textStreamer });
+            setMessageArray((prevMessages) => {
+                return prevMessages.map((messageObj, index) => {
+                    if (index === prevMessages.length - 1) {
+                        return { message: aiMessage.current, class: 'aiDialogueBox' }
+                    }
+                    return messageObj;
+                });
+            });
         }
         catch (error) {
             console.error(`Error generating response: ${error}`);
@@ -57,6 +57,10 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
             }
             userMessage.current = "";
             aiMessage.current = "";
+            if (messageArrayLength.current === 16) {
+                alert('You have reached the maximum amount of messages that this AI model allows in 1 sitting (8). To converse with it more, go back to the Home page and make your way back here.');
+                return;
+            }
             userInputFieldRef.current.value = userInputFieldRef.current.value.trim();
             const userMessageWordArray = userInputFieldRef.current.value.split(" ");
             for (let i = 0; i < userMessageWordArray.length; i++) {
@@ -75,10 +79,10 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
             }
             userInputFieldRef.current.value = userMessageWordArray.join(" ");
             userMessage.current = userInputFieldRef.current.value;
+            userInputFieldRef.current.value = "";
             if (userMessage.current !== null) {
                 setMessageArray((prevMessages) => [...prevMessages, { message: userMessage.current, class: 'userDialogueBox' }, { message: aiMessage.current, class: 'aiDialogueBox' }]);
             }
-            userInputFieldRef.current.value = "";
         }
         while (userInputFieldRef.current.scrollHeight > userInputFieldRef.current.clientHeight) {
             userInputFieldRef.current.value = userInputFieldRef.current.value.substring(0, userInputFieldRef.current.value.length - 1);
@@ -152,6 +156,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
             aiChatbotSettingsBox.current.style.visibility = 'hidden';
             aiChatbotContainerRef.current.style.display = 'block';
             citationBox.current.style.visibility = 'hidden';
+            disclaimerBox.current.style.visibility = 'hidden';
             aiChatbotHomeButtonRef.current.style.display = 'inline';
             const aiChatbotElements = [aiChatbotTitleRef, aiChatbotRulesIconRef, aiChatbotRulesBox, aiChatbotSettingsIconRef, aiChatbotSettingsBox, aiChatbotContainerRef, aiChatbotHomeButtonRef];
             for (let i = 0; i < aiChatbotElements.length; i++) {
@@ -208,8 +213,9 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
                     <li>The bottom left Home button takes you back to the Home page.</li>
                     <li>The Settings tab lets you .</li>
                     <li>The input field allows any English word, but words longer than 21 letters are hyphened in chat to prevent text overflow. </li>
+                    <li>Highlighting and copy/pasting the text inside of the dialogue boxes is allowed.</li>
                     <li>When changing color in Settings, drag the pointer around for it to work seamlessly.</li>
-                    <li>-Specific Rules:</li>
+                    <li>AI Model-Specific Rules:</li>
                     <li id='lvl2li'></li>
                 </ul>
             </span>
