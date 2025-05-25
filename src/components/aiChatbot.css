@@ -166,6 +166,18 @@ li {
     background-color: azure;
     user-select: none;
 }
+#aiChatbotProfile {
+    width: 500px;
+    height: 200px;
+    margin: auto;
+    justify-content: center;
+    margin-top: -12px;
+    background-color: lavender;
+    border: none;
+    border-radius: 30px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
 #disclaimerButton {
     position: absolute;
     width: 95px;
@@ -200,17 +212,24 @@ li {
     padding-left: 9px;
     z-index: 995;
 }
-#aiChatbotProfile {
-    width: 500px;
-    height: 200px;
+#thinkingMessage {
+    position: absolute;
+    width: 200px;
+    height: 51px;
+    border: solid 5px black;
+    border-radius: 20px;
+    background-color: white;
+    font-family: cursive;
+    font-size: 30px;
     margin: auto;
-    justify-content: center;
-    margin-top: -12px;
-    background-color: lavender;
-    border: none;
-    border-radius: 30px;
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
+    transform: translateX(-17px) translateY(62.5px);
+    padding-top: 6px;
+    z-index: 999;
+}
+#aiChatbotPic {
+    width: 175px;
+    height: auto;
+    margin-top: 8px;
 }
 #citationButton {
     position: absolute;
@@ -261,11 +280,6 @@ li {
     border-radius: 20px;
     margin-left: 3px;
     margin-right: 3px;
-}
-#aiChatbotPic {
-    width: 175px;
-    height: auto;
-    margin-top: 8px;
 }
 #humanAIConvoContainer {
     width: 500px;
