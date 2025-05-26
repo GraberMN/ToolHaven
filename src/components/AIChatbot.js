@@ -36,7 +36,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
                     aiMessage.current = aiMessage.current + text;
                 }
             });
-            const result = await textGenerator(messagesArray, { max_new_tokens: 50, do_sample: false, streamer: textStreamer });
+            const result = await textGenerator(messagesArray, { max_new_tokens: 75, do_sample: false, streamer: textStreamer });
             setMessageArray((prevMessages) => {
                 return prevMessages.map((messageObj, index) => {
                     if (index === prevMessages.length - 1) {
