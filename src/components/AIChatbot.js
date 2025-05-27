@@ -6,6 +6,8 @@ import { pipeline, TextStreamer } from '@huggingface/transformers';
 function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }) {
     const [settingsIcon, rulesIcon, aiChatbotThumbnailTransparent, homeButton] = aiChatbotImagesArray;
     const [messageArray, setMessageArray] = useState([]);
+    const [profileBGColorVal, setProfileBGColorVal] = useState('#E6E6FA');
+    const [chatBGColorVal, setChatBGColorVal] = useState('#F0F8FF');
     const aiMessage = useRef("");
     const userMessage = useRef(null);
     const messageArrayLength = useRef(0);
@@ -16,6 +18,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
     const aiChatbotTitleRef = useRef(null);
 
     const aiChatbotContainerRef = useRef(null);
+    const aiChatbotProfileRef = useRef(null);
     const citationBox = useRef(null);
     const disclaimerBox = useRef(null);
     const thinkingMessageRef = useRef(null);
@@ -97,6 +100,14 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
         } else {
             element.current.style.visibility = "hidden";
         }
+    }
+    const onProfileBGColorChange = (e) => {
+        setProfileBGColorVal(e.target.value);
+        aiChatbotProfileRef.current.style.backgroundColor = profileBGColorVal;
+    }
+    const onChatBGColorChange = (e) => {
+        setChatBGColorVal(e.target.value);
+        humanAIConvoContainerRef.current.style.backgroundColor = chatBGColorVal;
     }
     const onAdjustWindowWidthAIChatbot = () => {
         if (window.innerWidth <= 740) {
@@ -228,11 +239,16 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
                 <div id='aiChatbotSettingsTitle' draggable={false}>Settings</div>
                 <ul>
                     <li></li>
+                    <li></li>
+                    <li>Color of profile background:</li>
+                    <input type='color' value={profileBGColorVal} onChange={(e) => onProfileBGColorChange(e)} id='profileBGColorPicker' title='profileBGColorPicker' placeholder='profileBGColorPicker' />
+                    <li>Color of chat background:</li>
+                    <input type='color' value={chatBGColorVal} onChange={(e) => onChatBGColorChange(e)} id='chatBGColorPicker' title='chatBGColorPicker' placeholder='chatBGColorPicker' />
                 </ul>
             </span>
             <div id='aiChatbotTitle' draggable={false} ref={aiChatbotTitleRef}>AI Chatbot</div>
             <span id='aiChatbotContainer' draggable={false} ref={aiChatbotContainerRef}>
-                <div id='aiChatbotProfile'>
+                <div id='aiChatbotProfile' ref={aiChatbotProfileRef}>
                     <div onClick={() => openOrClose(disclaimerBox)} id='disclaimerButton' title='toDisclaimer'>Disclaimer</div>
                     <span id='disclaimerBox' draggable={false} ref={disclaimerBox}>
                         The compact SmolLM2 models used for this AI Chatbot are much better at comprehending and outputing in English.
