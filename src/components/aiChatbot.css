@@ -98,7 +98,7 @@
 #aiChatbotSettingsBox {
     position: absolute;
     width: 300px;
-    height: 450px;
+    height: 400px;
     border: solid;
     margin: auto;
     transform: translateX(60px);
@@ -135,6 +135,9 @@ ul > span {
     margin-right: 60px;
     user-select: none;
 }
+#disclaimerSettingsText {
+    margin-right: 15px;
+}
 ul {
     margin-top: 22px;
 }
@@ -153,6 +156,11 @@ li {
 }
 #aiChatbotInvisLi {
     list-style-type: none;
+    padding-left: 2px;
+    margin-bottom: 10px;
+}
+input[type='checkbox' i] {
+    transform: translateX(-5px) translateY(1.25px);
 }
 #aiChatbotContainer {
     width: 500px;
@@ -204,7 +212,7 @@ li {
     height: 260px;
     border: solid 10px rgba(53, 47, 47, 0.993);
     background-color: white;
-    transform: translateX(-173px) translateY(200px);
+    transform: translateX(-172px) translateY(200px);
     text-align: left;
     overflow-x: hidden;
     overflow-y: hidden;
@@ -257,7 +265,7 @@ li {
     height: 225px;
     border: solid 10px rgba(53, 47, 47, 0.993);
     background-color: white;
-    transform: translateX(-203px) translateY(200px);
+    transform: translateX(-202px) translateY(200px);
     text-align: left;
     overflow-x: scroll;
     overflow-y: hidden;

@@ -19,8 +19,12 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
 
     const aiChatbotContainerRef = useRef(null);
     const aiChatbotProfileRef = useRef(null);
-    const citationBox = useRef(null);
     const disclaimerBox = useRef(null);
+    const disclaimerButtonRef = useRef(null);
+    const disclaimerButtonCheckboxRef = useRef(null);
+    const citationBox = useRef(null);
+    const citationButtonRef = useRef(null);
+    const citationButtonCheckboxRef = useRef(null);
     const thinkingMessageRef = useRef(null);
     const humanAIConvoContainerRef = useRef(null);
     const userInputFieldRef = useRef(null);
@@ -109,6 +113,14 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
         setChatBGColorVal(e.target.value);
         humanAIConvoContainerRef.current.style.backgroundColor = chatBGColorVal;
     }
+    const onDisclaimerCheck = () => {
+        openOrClose(disclaimerButtonRef);
+        disclaimerBox.current.style.visibility = 'hidden';
+    }
+    const onCitationCheck = () => {
+        openOrClose(citationButtonRef);
+        citationBox.current.style.visibility = 'hidden';
+    }
     const onAdjustWindowWidthAIChatbot = () => {
         if (window.innerWidth <= 740) {
             aiChatbotRulesIconRef.current.style.transform = 'translateX(-260px)';
@@ -177,6 +189,8 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
             for (let i = 0; i < aiChatbotElements.length; i++) {
                 readyForMove(aiChatbotElements[i]);
             }
+            disclaimerButtonCheckboxRef.current.checked = true;
+            citationButtonCheckboxRef.current.checked = true;
             document.body.style.backgroundColor = 'hsl(304, 100.00%, 91.60%)';
             setTimeout(() => {
                 animateElements();
@@ -239,7 +253,11 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
                 <div id='aiChatbotSettingsTitle' draggable={false}>Settings</div>
                 <ul>
                     <li></li>
-                    <li></li>
+                    <li>Show/hide certain buttons:</li>
+                    <li id='aiChatbotInvisLi'>
+                        <input type='checkbox' onClick={() => onDisclaimerCheck()} id='disclaimerButtonCheckbox' ref={disclaimerButtonCheckboxRef} title='disclaimerButtonCheckbox' placeholder='disclaimerButtonCheckbox' /><span id='disclaimerSettingsText'>Disclaimer</span>
+                        <input type='checkbox' onClick={() => onCitationCheck()} id='citationButtonCheckbox' ref={citationButtonCheckboxRef} title='citationButtonCheckbox' placeholder='citationButtonCheckbox' /><span id='citationSettingsText'>Citation</span>
+                    </li>
                     <li>Color of profile background:</li>
                     <input type='color' value={profileBGColorVal} onChange={(e) => onProfileBGColorChange(e)} id='profileBGColorPicker' title='profileBGColorPicker' placeholder='profileBGColorPicker' />
                     <li>Color of chat background:</li>
@@ -249,7 +267,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
             <div id='aiChatbotTitle' draggable={false} ref={aiChatbotTitleRef}>AI Chatbot</div>
             <span id='aiChatbotContainer' draggable={false} ref={aiChatbotContainerRef}>
                 <div id='aiChatbotProfile' ref={aiChatbotProfileRef}>
-                    <div onClick={() => openOrClose(disclaimerBox)} id='disclaimerButton' title='toDisclaimer'>Disclaimer</div>
+                    <div onClick={() => openOrClose(disclaimerBox)} id='disclaimerButton' ref={disclaimerButtonRef} title='toDisclaimer'>Disclaimer</div>
                     <span id='disclaimerBox' draggable={false} ref={disclaimerBox}>
                         The compact SmolLM2 models used for this AI Chatbot are much better at comprehending and outputing in English.
                         The content that they generate may not always be correct, logical, or impartial. As a result, they should
@@ -258,7 +276,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
                     </span>
                     <span id='thinkingMessage' ref={thinkingMessageRef}>Thinking...</span>
                     <img id='aiChatbotPic' draggable={false} src={aiChatbotThumbnailTransparent} alt='aiChatbotPic' title='aiChatbotPic' />
-                    <div onClick={() => openOrClose(citationBox)} id='citationButton' title='toCitation'>Citation</div>
+                    <div onClick={() => openOrClose(citationBox)} id='citationButton' ref={citationButtonRef} title='toCitation'>Citation</div>
                     <span id='citationBox' draggable={false} ref={citationBox}></span>
                 </div>
                 <div id='humanAIConvoContainer' ref={humanAIConvoContainerRef}>
