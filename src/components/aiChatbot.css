@@ -415,6 +415,76 @@ input[type='checkbox' i] {
     animation-direction: normal;
     animation-fill-mode: forwards;
 }
+@keyframes fadeLeftAIChatbot {
+    from {
+        opacity: 100;
+        transform: translateX(0vw);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-30vw);
+    }
+}
+@keyframes fadeLeftAIChatbotRules {
+    from {
+        opacity: 100;
+        transform: translateX(calc(0vw - 367px));
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw - 367px));
+    }
+}
+@keyframes fadeLeftAIChatbotRulesSmall {
+    from {
+        opacity: 100;
+        transform: translateX(calc(0vw - 260px));
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw - 260px));
+    }
+}
+@keyframes fadeLeftAIChatbotSettingsIcon {
+    from {
+        opacity: 100;
+        transform: translateX(calc(0vw + 285px));
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw + 285px));
+    }
+}
+@keyframes fadeLeftAIChatbotSettingsIconSmall {
+    from {
+        opacity: 100;
+        transform: translateX(calc(0vw + 180px));
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw + 180px));
+    }
+}
+@keyframes fadeLeftAIChatbotSettingsBox {
+    from {
+        opacity: 100;
+        transform: translateX(calc(0vw + 60px));
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw + 60px));
+    }
+}
+@keyframes fadeLeftAIChatbotSettingsBoxSmall {
+    from {
+        opacity: 100;
+        transform: translateX(calc(0vw - 45px));
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw - 45px));
+    }
+}
 @keyframes appearFromRightAIChatbot {
     from {
         opacity: 0;

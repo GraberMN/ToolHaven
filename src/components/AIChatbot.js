@@ -3,12 +3,13 @@ import { useState, useRef, useEffect } from 'react';
 import './aiChatbot.css';
 import { pipeline, TextStreamer } from '@huggingface/transformers';
 
-function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }) {
+function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot, moveToImgIdentifier, setMoveToImgIdentifier }) {
     const [settingsIcon, rulesIcon, aiChatbotThumbnailTransparent, redRightArrow, homeButton] = aiChatbotImagesArray;
     const [messageArray, setMessageArray] = useState([]);
     const [initialAIMessage, setInitialAIMessage] = useState('Hello. What can I help you with?');
     const [profileBGColorVal, setProfileBGColorVal] = useState('#E6E6FA');
     const [chatBGColorVal, setChatBGColorVal] = useState('#F0F8FF');
+    const [redRightArrowTransitionDone, setRedRightArrowTransitionDone] = useState(false);
     const aiMessage = useRef("");
     const userMessage = useRef(null);
     const messageArrayLength = useRef(0);
@@ -154,10 +155,30 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
         }
     }
     const blurRedRightArrow = () => {
-
+        rightRedArrow.current.style.filter = 'blur(1px)';
+        redRightArrowArea.current.style.cursor = 'pointer';
+        if (window.innerWidth <= 740) {
+            rightRedArrow.current.style.transform = 'translateX(165px) rotate(0.05turn)';
+        } else {
+            rightRedArrow.current.style.transform = 'translateX(270px) rotate(0.05turn)';
+        }
     }
     const unBlurRedRightArrow = () => {
-
+        rightRedArrow.current.style.filter = 'blur(0px)';
+        if (window.innerWidth <= 740) {
+            rightRedArrow.current.style.transform = 'translateX(165px) rotate(0turn)';
+        } else {
+            rightRedArrow.current.style.transform = 'translateX(270px) rotate(0turn)';
+        }
+    }
+    const positionRedRightArrow = () => {
+        if (rightRedArrow.current.style.transform !== "null") {
+            if (window.innerWidth <= 740) {
+                rightRedArrow.current.style.transform = 'translateX(165px)';
+            } else {
+                rightRedArrow.current.style.transform = 'translateX(270px)';
+            }
+        }
     }
     const animateElements = () => {
         const aiChatbotElements = [aiChatbotTitleRef, aiChatbotRulesIconRef, aiChatbotRulesBox, aiChatbotSettingsIconRef, aiChatbotSettingsBox, aiChatbotContainerRef, aiChatbotHomeButtonRef];
@@ -189,7 +210,43 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
         element.current.style.opacity = '0';
     }
     const redRightArrowTransition = (windowWidthBig) => {
-
+        setMoveToImgIdentifier(true);
+        const hiddenElements = [aiChatbotRulesBox, aiChatbotSettingsBox, disclaimerBox, citationBox];
+        for (let i = 0; i < hiddenElements.length; i++) {
+            hiddenElements[i].current.style.visibility = 'hidden';
+        }
+        const shownElements = [disclaimerButtonRef, citationButtonRef];
+        for (let i = 0; i < shownElements.length; i++) {
+            shownElements[i].current.style.visibility = 'visible';
+        }
+        const centeredElements = [aiChatbotTitleRef, aiChatbotContainerRef];
+        for (let i = 0; i < centeredElements.length; i++) {
+            readyForAnimation(centeredElements[i]);
+            centeredElements[i].current.style.animationName = 'fadeLeftAIChatbot';
+        }
+        const aiChatbotRulesElements = [aiChatbotRulesIconRef, aiChatbotRulesBox, aiChatbotHomeButtonRef];
+        for (let i = 0; i < aiChatbotRulesElements.length; i++) {
+            readyForAnimation(aiChatbotRulesElements[i]);
+            if (windowWidthBig) {
+                aiChatbotRulesElements[i].current.style.animationName = 'fadeLeftAIChatbotRules';
+            } else {
+                aiChatbotRulesElements[i].current.style.animationName = 'fadeLeftAIChatbotRulesSmall';
+            }
+        }
+        readyForAnimation(aiChatbotSettingsIconRef);
+        if (windowWidthBig) {
+            aiChatbotSettingsIconRef.current.style.animationName = 'fadeLeftAIChatbotSettingsIcon';
+        } else {
+            aiChatbotSettingsIconRef.current.style.animationName = 'fadeLeftAIChatbotSettingsIconSmall';
+        }
+        readyForAnimation(aiChatbotSettingsBox);
+        if (windowWidthBig) {
+            aiChatbotSettingsBox.current.style.animationName = 'fadeLeftAIChatbotSettingsBox';
+        } else {
+            aiChatbotSettingsBox.current.style.animationName = 'fadeLeftAIChatbotSettingsBoxSmall';
+        }
+        rightRedArrow.current.style.display = 'none';
+        setTimeout(() => setRedRightArrowTransitionDone(true), 2000);
     }
     useEffect(() => {
         if (messageArray.length > 0 && messageArray.length % 2 === 0 && messageArray.length !== messageArrayLength.current) {
@@ -197,6 +254,14 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
             generateResponse();
         }
     }, [messageArray]);
+    useEffect(() => {
+            if (redRightArrowTransitionDone) {
+                const animAIChatbotElements = [aiChatbotTitleRef, aiChatbotRulesIconRef, aiChatbotRulesBox, aiChatbotSettingsIconRef, aiChatbotSettingsBox, aiChatbotContainerRef, disclaimerBox, citationBox, rightRedArrow, aiChatbotHomeButtonRef];
+                for (let i = 0; i < animAIChatbotElements.length; i++) {
+                    animAIChatbotElements[i].current.style.display = 'none';
+                }
+            }
+        }, [redRightArrowTransitionDone]);
     useEffect(() => {
         if (moveToAIChatbot) {
             aiChatbotTitleRef.current.style.display = 'block';
@@ -257,8 +322,10 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
         for (let i = 0; i < goneElements.length; i++) {
             goneElements[i].current.style.display = 'none';
         }
+        window.addEventListener("resize", positionRedRightArrow);
         return () => {
             window.removeEventListener("resize", onAdjustWindowWidthAIChatbot);
+            window.removeEventListener("resize", positionRedRightArrow);
         }
     }, []);
     return (
