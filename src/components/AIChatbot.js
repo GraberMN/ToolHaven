@@ -48,7 +48,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
             setMessageArray((prevMessages) => {
                 return prevMessages.map((messageObj, index) => {
                     if (index === prevMessages.length - 1) {
-                        return { message: aiMessage.current, class: 'aiDialogueBox' };
+                        return { message: aiMessage.current, class: 'aiChatBubble' };
                     }
                     return messageObj;
                 });
@@ -92,7 +92,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
             userInputFieldRef.current.value = "";
             if (userMessage.current !== null) {
                 thinkingMessageRef.current.style.visibility = 'visible';
-                setMessageArray((prevMessages) => [...prevMessages, { message: userMessage.current, class: 'userDialogueBox' }, { message: aiMessage.current, class: 'aiDialogueBox' }]);
+                setMessageArray((prevMessages) => [...prevMessages, { message: userMessage.current, class: 'userChatBubble' }, { message: aiMessage.current, class: 'aiChatBubble' }]);
             }
         }
         while (userInputFieldRef.current.scrollHeight > userInputFieldRef.current.clientHeight) {
@@ -257,12 +257,13 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
                 <ul>
                     <li>Hover over the Chatbot or each external button to find out what it is/represents.</li>
                     <li>The bottom left Home button takes you back to the Home page.</li>
-                    <li>The Settings tab lets you .</li>
+                    <li>The Settings tab lets you change the initial AI message, show/hide the disclaimer/citation buttons, and change the profile and chat background colors.</li>
                     <li>The input field allows any English word, but words longer than 21 letters are hyphened in chat to prevent text overflow. </li>
-                    <li>Highlighting and copy/pasting the text inside of the dialogue boxes is allowed.</li>
+                    <li>Highlighting and copy/pasting the text inside of the chat bubbles is allowed.</li>
                     <li>When changing color in Settings, drag the pointer around for it to work seamlessly.</li>
                     <li>AI Model-Specific Rules:</li>
-                    <li id='lvl2li'></li>
+                    <li id='lvl2li'>This AI Chatbot uses the SmolLM2-360M-Instruct AI Model, a free compact model for devices/websites.</li>
+                    <li id='lvl2li'>It allows 8 user inputs/messages before requiring the user to go to Home and come back to this page.</li>
                 </ul>
             </span>
             <img onClick={() => openOrClose(aiChatbotSettingsBox)} id='aiChatbotSettingsIcon' draggable={false} src={settingsIcon} ref={aiChatbotSettingsIconRef} alt='aiChatbotSettingsIcon' title="aiChatbotSettings" />
@@ -302,7 +303,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
                     <span id='citationBox' draggable={false} ref={citationBox}></span>
                 </div>
                 <div id='humanAIConvoContainer' ref={humanAIConvoContainerRef}>
-                    <div class='aiDialogueBox'>{initialAIMessage}</div>
+                    <div class='aiChatBubble'>{initialAIMessage}</div>
                     {
                         messageArray.map((messageObj, index) => 
                             <div key={index} class={messageObj.class}>{messageObj.message}</div>

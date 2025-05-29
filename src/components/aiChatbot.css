@@ -325,7 +325,7 @@ input[type='checkbox' i] {
 #humanAIConvoContainer::-webkit-scrollbar-track {
     background-color: rgba(53, 47, 47, 0.993);
 }
-.aiDialogueBox {
+.aiChatBubble {
     width: fit-content;
     max-width: 350px;
     height: auto;
@@ -346,7 +346,7 @@ input[type='checkbox' i] {
     display: block;
     user-select: text;
 }
-.userDialogueBox {
+.userChatBubble {
     width: fit-content;
     max-width: 350px;
     height: auto;
