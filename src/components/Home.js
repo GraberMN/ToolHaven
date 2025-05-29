@@ -2,8 +2,8 @@ import React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import './home.css';
 
-function Home({ homeImagesArray, moveToCalc, setMoveToCalc, moveToRulers, setMoveToRulers, moveToTimers, setMoveToTimers, moveToAIChatbot, setMoveToAIChatbot }) {
-    const [calculatorThumbnail, rulerThumbnail, timerThumbnail, aiChatbotThumbnail, bioPic, mateosPortfolio, gitHub, linkedIn, gmail, instagram, facebook, greenRightArrow] = homeImagesArray;
+function Home({ homeImagesArray, moveToCalc, setMoveToCalc, moveToRulers, setMoveToRulers, moveToTimers, setMoveToTimers, moveToAIChatbot, setMoveToAIChatbot, moveToImgIdentifier, setMoveToImgIdentifier }) {
+    const [calculatorThumbnail, rulerThumbnail, timerThumbnail, aiChatbotThumbnail, imgIdentifierThumbnail, bioPic, mateosPortfolio, gitHub, linkedIn, gmail, instagram, facebook, greenRightArrow] = homeImagesArray;
     const [greenRightArrowTransitionDone, setGreenRightArrowTransitionDone] = useState(false);
     const homeTitleRef = useRef(null);
     const projectNameRef = useRef(null);
@@ -82,6 +82,16 @@ function Home({ homeImagesArray, moveToCalc, setMoveToCalc, moveToRulers, setMov
         rightGreenArrow.current.style.display = 'none';
         setTimeout(() => setGreenRightArrowTransitionDone(true), 2000);
     }
+    const toImgIdentifierTransition = () => {
+        setMoveToImgIdentifier(true);
+        const changedRelativeElements = [homeTitleRef, projectNameRef, toolsContainerRef, byContainerRef];
+        for (let i = 0; i < changedRelativeElements.length; i++) {
+            readyForAnimation(changedRelativeElements[i]);
+            changedRelativeElements[i].current.style.animationName = 'fadeLeft';
+        }
+        rightGreenArrow.current.style.display = 'none';
+        setTimeout(() => setGreenRightArrowTransitionDone(true), 2000);
+    }
     const greenRightArrowTransition = () => {
         setMoveToCalc(true);
         const changedRelativeElements = [homeTitleRef, projectNameRef, toolsContainerRef, byContainerRef];
@@ -120,6 +130,7 @@ function Home({ homeImagesArray, moveToCalc, setMoveToCalc, moveToRulers, setMov
                     <img onClick={() => toRulersTransition()} class='tool' id='rulerTool' src={rulerThumbnail} draggable={false} alt='Rulers' title='Rulers' />
                     <img onClick={() => toTimersTransition()} class='tool' id='timerTool' src={timerThumbnail} draggable={false} alt='Timers' title='Timers' />
                     <img onClick={() => toAIChatbotTransition()} class='tool' id='aiChatbotTool' src={aiChatbotThumbnail} draggable={false} alt='AI Chatbot' title='AI Chatbot' />
+                    <img onClick={() => toImgIdentifierTransition()} class='tool' id='imgIdentifierTool' src={imgIdentifierThumbnail} draggable={false} alt='Img Identifier' title='Img Identifier' />
                 </span>
             </div>
             <div id='byContainer' draggable={false} ref={byContainerRef}>

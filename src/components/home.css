@@ -101,6 +101,12 @@ a {
 #aiChatbotTool:active {
     border-style: dashed;
 }
+#imgIdentifierTool:hover {
+    border-color: hsl(0, 100%, 50%);
+}
+#imgIdentifierTool:active {
+    border-style: dashed;
+}
 #bioContents {
     display: flex;
     margin-top: 10px;
