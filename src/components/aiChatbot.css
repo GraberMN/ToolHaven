@@ -401,6 +401,14 @@ input[type='checkbox' i] {
 #aiChatbotHomeButton:active {
     border-style: dashed;
 }
+#toImgIdentifier {
+    position: absolute;
+    width: 100px;
+    height: auto;
+    transform: translateX(270px);
+    display: inline;
+    user-select: none;
+}
 .readyForAnim {
     animation-duration: 2s;
     animation-iteration-count: 1;

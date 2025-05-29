@@ -4,7 +4,7 @@ import './aiChatbot.css';
 import { pipeline, TextStreamer } from '@huggingface/transformers';
 
 function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }) {
-    const [settingsIcon, rulesIcon, aiChatbotThumbnailTransparent, homeButton] = aiChatbotImagesArray;
+    const [settingsIcon, rulesIcon, aiChatbotThumbnailTransparent, redRightArrow, homeButton] = aiChatbotImagesArray;
     const [messageArray, setMessageArray] = useState([]);
     const [initialAIMessage, setInitialAIMessage] = useState('Hello. What can I help you with?');
     const [profileBGColorVal, setProfileBGColorVal] = useState('#E6E6FA');
@@ -29,7 +29,8 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
     const thinkingMessageRef = useRef(null);
     const humanAIConvoContainerRef = useRef(null);
     const userInputFieldRef = useRef(null);
-
+    const redRightArrowArea = useRef(null);
+    const rightRedArrow = useRef(null);
     const aiChatbotHomeButtonRef = useRef(null);
     const generateResponse = async () => {
         try {
@@ -152,6 +153,12 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
             aiChatbotHomeButtonRef.current.style.transform = 'translateX(-367px)';
         }
     }
+    const blurRedRightArrow = () => {
+
+    }
+    const unBlurRedRightArrow = () => {
+
+    }
     const animateElements = () => {
         const aiChatbotElements = [aiChatbotTitleRef, aiChatbotRulesIconRef, aiChatbotRulesBox, aiChatbotSettingsIconRef, aiChatbotSettingsBox, aiChatbotContainerRef, aiChatbotHomeButtonRef];
         for (let i = 0; i < aiChatbotElements.length; i++) {
@@ -180,6 +187,9 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
     }
     const readyForMove = (element) => {
         element.current.style.opacity = '0';
+    }
+    const redRightArrowTransition = (windowWidthBig) => {
+
     }
     useEffect(() => {
         if (messageArray.length > 0 && messageArray.length % 2 === 0 && messageArray.length !== messageArrayLength.current) {
@@ -230,7 +240,9 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
                 window.addEventListener("resize", onAdjustWindowWidthAIChatbot);
                 userInputFieldRef.current.addEventListener("keydown", (e) => limitLines(e));
                 userInputFieldRef.current.addEventListener("input", (e) => limitLines(e));
+                rightRedArrow.current.style.display = 'inline';
                 if (window.innerWidth <= 740) {
+                    rightRedArrow.current.style.transform = 'translateX(165px)';
                     aiChatbotRulesIconRef.current.style.transform = 'translateX(-260px)';
                     aiChatbotRulesBox.current.style.transform = 'translateX(-260px)';
                     aiChatbotSettingsIconRef.current.style.transform = 'translateX(180px)';
@@ -241,7 +253,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
         }
     }, [moveToAIChatbot]);
     useEffect(() => {
-        const goneElements = [aiChatbotTitleRef, aiChatbotRulesIconRef, aiChatbotRulesBox, aiChatbotSettingsIconRef, aiChatbotSettingsBox, aiChatbotContainerRef, aiChatbotHomeButtonRef];
+        const goneElements = [aiChatbotTitleRef, aiChatbotRulesIconRef, aiChatbotRulesBox, aiChatbotSettingsIconRef, aiChatbotSettingsBox, aiChatbotContainerRef, rightRedArrow, aiChatbotHomeButtonRef];
         for (let i = 0; i < goneElements.length; i++) {
             goneElements[i].current.style.display = 'none';
         }
@@ -313,6 +325,10 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
                 <textarea type='text' id='userInputField' wrap='hard' ref={userInputFieldRef} title='userInputField' placeholder={'Type here to converse with AI Chatbot\nPress ENTER to send'}></textarea>
             </span>
             <img onClick={() => window.location.reload()} id='aiChatbotHomeButton' draggable={false} ref={aiChatbotHomeButtonRef} src={homeButton} alt='toHome' title="toHome" />
+            <map name='toImgIdentifierMap'>
+                <area onClick={() => window.innerWidth > 740 ? redRightArrowTransition(true) : redRightArrowTransition(false)} onMouseOver={() => blurRedRightArrow()} onMouseOut={() => unBlurRedRightArrow()} id='toImgIdentifierMap' ref={redRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toImgIdentifier' title="toImgIdentifier"></area>
+            </map>
+            <img id='toImgIdentifier' useMap='#toImgIdentifierMap' draggable={false} ref={rightRedArrow} src={redRightArrow} alt='toImgIdentifier' />
         </div>
     );
 }
