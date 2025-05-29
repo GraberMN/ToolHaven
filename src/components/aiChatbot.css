@@ -135,8 +135,11 @@ ul > span {
     margin-right: 60px;
     user-select: none;
 }
+.initialAIMessageType {
+    padding-right: 4px;
+}
 #disclaimerSettingsText {
-    margin-right: 15px;
+    margin-right: 22px;
 }
 ul {
     margin-top: 22px;
@@ -156,11 +159,16 @@ li {
 }
 #aiChatbotInvisLi {
     list-style-type: none;
-    padding-left: 2px;
+    padding-left: 4px;
+    margin-bottom: 10px;
+}
+#aiChatbotInvisLiFirst {
+    list-style-type: none;
+    padding-left: 0px;
     margin-bottom: 10px;
 }
 input[type='checkbox' i] {
-    transform: translateX(-5px) translateY(1.25px);
+    transform: translateX(-3px) translateY(1.25px);
 }
 #aiChatbotContainer {
     width: 500px;

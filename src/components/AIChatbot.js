@@ -6,17 +6,18 @@ import { pipeline, TextStreamer } from '@huggingface/transformers';
 function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }) {
     const [settingsIcon, rulesIcon, aiChatbotThumbnailTransparent, homeButton] = aiChatbotImagesArray;
     const [messageArray, setMessageArray] = useState([]);
+    const [initialAIMessage, setInitialAIMessage] = useState('Hello. What can I help you with?');
     const [profileBGColorVal, setProfileBGColorVal] = useState('#E6E6FA');
     const [chatBGColorVal, setChatBGColorVal] = useState('#F0F8FF');
     const aiMessage = useRef("");
     const userMessage = useRef(null);
     const messageArrayLength = useRef(0);
+    const firstInitialAIMessageOption = useRef(null);
     const aiChatbotRulesIconRef = useRef(null);
     const aiChatbotRulesBox = useRef(null);
     const aiChatbotSettingsIconRef = useRef(null);
     const aiChatbotSettingsBox = useRef(null);
     const aiChatbotTitleRef = useRef(null);
-
     const aiChatbotContainerRef = useRef(null);
     const aiChatbotProfileRef = useRef(null);
     const disclaimerBox = useRef(null);
@@ -96,6 +97,21 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
         }
         while (userInputFieldRef.current.scrollHeight > userInputFieldRef.current.clientHeight) {
             userInputFieldRef.current.value = userInputFieldRef.current.value.substring(0, userInputFieldRef.current.value.length - 1);
+        }
+    }
+    const changeInitialAIMessageToHelpful = (isChecked) => {
+        if (isChecked) {
+            setInitialAIMessage('Hello. What can I help you with?');
+        }
+    }
+    const changeInitialAIMessageToAnnoyed = (isChecked) => {
+        if (isChecked) {
+            setInitialAIMessage('You need my help again? What is it now?');
+        }
+    }
+    const changeInitialAIMessageToRobotic = (isChecked) => {
+        if (isChecked) {
+            setInitialAIMessage('*NEED. TO. HELP. USER. NOW.*');
         }
     }
     const openOrClose = (element) => {
@@ -189,6 +205,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
             for (let i = 0; i < aiChatbotElements.length; i++) {
                 readyForMove(aiChatbotElements[i]);
             }
+            firstInitialAIMessageOption.current.checked = true;
             disclaimerButtonCheckboxRef.current.checked = true;
             citationButtonCheckboxRef.current.checked = true;
             document.body.style.backgroundColor = 'hsl(304, 100.00%, 91.60%)';
@@ -252,7 +269,12 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
             <span id='aiChatbotSettingsBox' draggable={false} ref={aiChatbotSettingsBox}>
                 <div id='aiChatbotSettingsTitle' draggable={false}>Settings</div>
                 <ul>
-                    <li></li>
+                    <li>Initial AI message options:</li>
+                    <li id='aiChatbotInvisLiFirst'>
+                        <input type='radio' onClick={(e) => changeInitialAIMessageToHelpful(e.target.checked)} name='initialAIMessageOptions' ref={firstInitialAIMessageOption} title='helpfulInitialAIMessageRadio' placeholder='helpfulInitialAIMessageRadio' /><span class='initialAIMessageType'>helpful</span>
+                        <input type='radio' onClick={(e) => changeInitialAIMessageToAnnoyed(e.target.checked)} name='initialAIMessageOptions' title='annoyedInitialAIMessageRadio' placeholder='annoyedInitialAIMessageRadio' /><span class='initialAIMessageType'>annoyed</span>
+                        <input type='radio' onClick={(e) => changeInitialAIMessageToRobotic(e.target.checked)} name='initialAIMessageOptions' title='roboticInitialAIMessageRadio' placeholder='roboticInitialAIMessageRadio' /><span class='initialAIMessageType'>robotic</span>
+                    </li>
                     <li>Show/hide certain buttons:</li>
                     <li id='aiChatbotInvisLi'>
                         <input type='checkbox' onClick={() => onDisclaimerCheck()} id='disclaimerButtonCheckbox' ref={disclaimerButtonCheckboxRef} title='disclaimerButtonCheckbox' placeholder='disclaimerButtonCheckbox' /><span id='disclaimerSettingsText'>Disclaimer</span>
@@ -280,7 +302,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot }
                     <span id='citationBox' draggable={false} ref={citationBox}></span>
                 </div>
                 <div id='humanAIConvoContainer' ref={humanAIConvoContainerRef}>
-                    <div class='aiDialogueBox'>Hello. What can I help you with?</div>
+                    <div class='aiDialogueBox'>{initialAIMessage}</div>
                     {
                         messageArray.map((messageObj, index) => 
                             <div key={index} class={messageObj.class}>{messageObj.message}</div>
