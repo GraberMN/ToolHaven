@@ -37,6 +37,7 @@ import Calculator from './components/Calculator';
 import Rulers from './components/Rulers';
 import Timers from './components/Timers';
 import AIChatbot from './components/AIChatbot';
+import ImgIdentifier from './components/ImgIdentifier';
 
 function App() {
   const homeImagesArray = [calculatorThumbnail, rulerThumbnail, timerThumbnail, aiChatbotThumbnail, imgIdentifierThumbnail, bioPic, mateosPortfolio, gitHub, linkedIn, gmail, instagram, facebook, greenRightArrow];
@@ -44,6 +45,7 @@ function App() {
   const rulersImagesArray = [inchesRuler, centimetersRuler, picasRuler, pixelsRuler, settingsIcon, rulesIcon, orangeRightArrow, homeButton];
   const timersImagesArray = [settingsIcon, rulesIcon, bedsideCountdownAlarm, digitalCountdownAlarm, chaoticCountdownAlarm, coinStopwatchLapSound, joyousStopwatchLapSound, notifStopwatchLapSound, pinkRightArrow, homeButton];
   const aiChatbotImagesArray = [settingsIcon, rulesIcon, aiChatbotThumbnailTransparent, redRightArrow, homeButton];
+  const imgIdentifierImagesArray = [settingsIcon, rulesIcon, homeButton];
   const [moveToCalc, setMoveToCalc] = useState(false);
   const [moveToRulers, setMoveToRulers] = useState(false);
   const [moveToTimers, setMoveToTimers] = useState(false);
@@ -56,6 +58,7 @@ function App() {
       <Rulers rulersImagesArray={rulersImagesArray} moveToRulers={moveToRulers} setMoveToRulers={setMoveToRulers} moveToTimers={moveToTimers} setMoveToTimers={setMoveToTimers} />
       <Timers timersImagesArray={timersImagesArray} moveToTimers={moveToTimers} setMoveToTimers={setMoveToTimers} moveToAIChatbot={moveToAIChatbot} setMoveToAIChatbot={setMoveToAIChatbot} />
       <AIChatbot aiChatbotImagesArray={aiChatbotImagesArray} moveToAIChatbot={moveToAIChatbot} setMoveToAIChatbot={setMoveToAIChatbot} moveToImgIdentifier={moveToImgIdentifier} setMoveToImgIdentifier={setMoveToImgIdentifier} />
+      <ImgIdentifier imgIdentifierImagesArray={imgIdentifierImagesArray} moveToImgIdentifier={moveToImgIdentifier} setMoveToImgIdentifier={setMoveToImgIdentifier} />
     </div>
   );
 }
