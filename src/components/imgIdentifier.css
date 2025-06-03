@@ -1,3 +1,16 @@
+#imgIdentifierTitle {
+    position: relative;
+    text-align: center;
+    font-size: 43px;
+    font-family: cursive;
+    font-weight: bolder;
+    color: hsl(0, 100%, 50%);
+    display: block;
+    transform: translateX(30vw);
+    margin-top: 30px;
+    margin-bottom: 30px;
+    user-select: none;
+}
 #imgIdentifierRulesIcon {
     position: absolute;
     width: 75px;
@@ -104,6 +117,73 @@
     margin-top: 28px;
     margin-right: 60px;
     user-select: none;
+}
+ul {
+    margin-top: 22px;
+}
+li {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-family: cursive;
+    text-align: left;
+    list-style-type: square;
+    margin-right: 19px;
+}
+#lvl2li {
+    font-family: cursive;
+    margin-left: 25px;
+    list-style-type: circle;
+}
+#imgIdentifierInvisLi {
+    list-style-type: none;
+    padding-left: 4px;
+    margin-bottom: 10px;
+}
+#imgIdentifierImgChooser {
+    width: 500px;
+    height: 500px;
+    border-radius: 30px;
+    margin: auto;
+    background-color: lightgrey;
+    border: solid 10px rgba(0, 0, 0, 0.705);
+    z-index: 999;
+}
+#imgIdentifierPicContainer {
+    width: 400px;
+    height: 400px;
+    background-color: white;
+    border: solid;
+}
+#imgIdentifierImgIdentifier {
+    width: 500px;
+    height: 143px;
+    border: solid 10px rgba(0, 0, 0, 0.705);
+    border-radius: 30px;
+    border-top: none;
+    margin: auto;
+    background-color: lightgrey;
+    z-index: 999;
+}
+#imgIdentifierHomeButton {
+    position: absolute;
+    width: 75px;
+    height: auto;
+    margin: auto;
+    margin-top: 8px;
+    transform: translateX(-367px);
+    cursor: pointer;
+    border: solid hsl(0, 100%, 50%);
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.705);
+    z-index: 999;
+    display: inline;
+    user-select: none;
+}
+#imgIdentifierHomeButton:hover {
+    border-radius: 20px;
+}
+#imgIdentifierHomeButton:active {
+    border-style: dashed;
 }
 .readyForAnim {
     animation-duration: 2s;
