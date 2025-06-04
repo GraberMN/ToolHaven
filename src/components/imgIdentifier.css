@@ -142,10 +142,12 @@ li {
 #imgIdentifierImgChooser {
     width: 500px;
     height: 500px;
-    border-radius: 30px;
     margin: auto;
     background-color: lightgrey;
     border: solid 10px rgba(0, 0, 0, 0.705);
+    border-radius: 30px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
     z-index: 999;
     user-select: none;
 }
@@ -168,7 +170,7 @@ li {
     font-family: cursive;
     font-size: 16px;
 }
-#choosePicButtonVisible {
+#chooseImgButtonVisible {
     width: 125px;
     height: 35px;
     display: block;
@@ -184,18 +186,32 @@ li {
     background-color: white;
     cursor: pointer;
 }
+#chooseImgButtonVisible:hover {
+    background-color: lightcyan;
+}
 #imgSelected {
     margin-top: 29px;
 }
 #imgIdentifierImgIdentifier {
     width: 500px;
-    height: 143px;
+    height: 138px;
     border: solid 10px rgba(0, 0, 0, 0.705);
-    border-radius: 30px;
     border-top: none;
+    border-radius: 30px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
     margin: auto;
-    background-color: lightgrey;
+    background-color: white;
     z-index: 999;
+}
+#imgIdentifierTransparentImg {
+    width: 150px;
+    height: 138px;
+    border: none;
+    border-right: solid 10px rgba(0, 0, 0, 0.705);
+    border-bottom-left-radius: 60px;
+    background-color: white;
+    display: block;
 }
 #imgIdentifierHomeButton {
     position: absolute;

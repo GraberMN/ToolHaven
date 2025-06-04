@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import './imgIdentifier.css';
 
 function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveToImgIdentifier }) {
-    const [settingsIcon, rulesIcon, homeButton] = imgIdentifierImagesArray;
+    const [settingsIcon, rulesIcon, imgIdentifierThumbnailTransparent, homeButton] = imgIdentifierImagesArray;
     const [imgSource, setImgSource] = useState(null);
     const imgIdentifierRulesIconRef = useRef(null);
     const imgIdentifierRulesBox = useRef(null);
@@ -137,14 +137,14 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
                 <div id='imgIdentifierImgChooser' draggable={false}>
                     <img id='imgIdentifierPicContainer' draggable={false} src={imgSource} ref={imgIdentifierPicContainerRef} alt='imgIdentifierImage' title="imgIdentifierImage" />
                     
-                    <input type='file' id='chooseImgButton' accept='image/*' alt='chooseImgButton' title='chooseImgButton' hidden />
+                    <input type='file' id='chooseImgButton' accept='image/*' alt='chooseImgButton' title="chooseImgButton" hidden />
                     <div style={{ display: 'flex' }}>
-                        <label for='chooseImgButton' id='choosePicButtonVisible' alt='chooseImgButton' title='chooseImgButton'>Choose Image</label>
-                        <span id='imgSelected'>No image chosen</span>
+                        <label for='chooseImgButton' id='chooseImgButtonVisible' alt='chooseImgButton' title="chooseImgButton">Choose Image</label>
+                        <span id='imgSelected' alt='selectedImg' title="selectedImg">No image chosen</span>
                     </div>
                 </div>
                 <div id='imgIdentifierImgIdentifier' draggable={false}>
-                    <img id='imgIdentifierPic'  />
+                    <img id='imgIdentifierTransparentImg' src={imgIdentifierThumbnailTransparent} alt='imgIdentifierPic' title="imgIdentifierPic" />
                     <span id='imgIdentifierResponse'></span>
                 </div>
                 <div id='imgIdentifierClone' draggable={false}></div>
