@@ -205,13 +205,50 @@ li {
     z-index: 999;
 }
 #imgIdentifierTransparentImg {
-    width: 150px;
-    height: 138px;
+    width: 90px;
+    height: auto;
     border: none;
     border-right: solid 10px rgba(0, 0, 0, 0.705);
-    border-bottom-left-radius: 60px;
+    border-bottom: solid 10px rgba(0, 0, 0, 0.705);
     background-color: white;
     display: block;
+    user-select: none;
+}
+#startIdentificationButton {
+    position: absolute;
+    width: 90px;
+    height: 45px;
+    align-content: center;
+    transform: translateX(-250px);
+    border: none;
+    border-right: solid 10px rgba(0, 0, 0, 0.705);
+    border-bottom-left-radius: 25px;
+    background-color: white;
+    font-family: cursive;
+    font-size: 20px;
+    cursor: pointer;
+    user-select: none;
+}
+#startIdentificationButton:hover {
+    background-color: lightcyan;
+}
+#startIdentificationButton:active {
+    background-color: white;
+}
+#imgIdentifierIdentificationTitle {
+    position: absolute;
+    transform: translateX(-127px) translateY(-74px);
+    font-size: 16px;
+    user-select: none;
+}
+#imgIdentifierIdentificationText {
+    position: absolute;
+    width: 355px;
+    height: 70px;
+    transform: translateX(-127px) translateY(-44px);
+    text-align: left;
+    font-size: 16px;
+    user-select: text;
 }
 #imgIdentifierHomeButton {
     position: absolute;

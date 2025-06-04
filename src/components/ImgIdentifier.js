@@ -144,10 +144,11 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
                     </div>
                 </div>
                 <div id='imgIdentifierImgIdentifier' draggable={false}>
-                    <img id='imgIdentifierTransparentImg' src={imgIdentifierThumbnailTransparent} alt='imgIdentifierPic' title="imgIdentifierPic" />
-                    <span id='imgIdentifierResponse'></span>
+                    <img id='imgIdentifierTransparentImg' draggable={false} src={imgIdentifierThumbnailTransparent} alt='imgIdentifierPic' title="imgIdentifierPic" />
+                    <span id='startIdentificationButton' alt='startIdentificationButton' title="startIdentificationButton">Start</span>
+                    <span id='imgIdentifierIdentificationTitle'>Identification:</span>
+                    <span id='imgIdentifierIdentificationText' wrap='hard'>Sample text</span>
                 </div>
-                <div id='imgIdentifierClone' draggable={false}></div>
             </span>
             <img onClick={() => window.location.reload()} id='imgIdentifierHomeButton' draggable={false} ref={imgIdentifierHomeButtonRef} src={homeButton} alt='toHome' title="toHome" />
 
