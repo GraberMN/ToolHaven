@@ -157,10 +157,11 @@ li {
     margin: auto;
     margin-top: 38px;
     border: solid rgba(0, 0, 0, 0.705);
+    overflow: auto;
 }
 #imgIdentifierPic {
-    width: 375px;
-    height: 375px;
+    min-width: 375px;
+    min-height: 375px;
     display: block;
     margin: auto;
     background-color: white;
