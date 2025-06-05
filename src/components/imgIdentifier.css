@@ -154,11 +154,17 @@ li {
 #imgIdentifierPicContainer {
     width: 375px;
     height: 375px;
-    display: block;
     margin: auto;
     margin-top: 38px;
+    border: solid rgba(0, 0, 0, 0.705);
+}
+#imgIdentifierPic {
+    width: 375px;
+    height: 375px;
+    display: block;
+    margin: auto;
     background-color: white;
-    color: white;
+    color: transparent;
 }
 #choosePicButton {
     font-family: cursive;

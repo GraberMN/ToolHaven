@@ -4,7 +4,7 @@ import './imgIdentifier.css';
 
 function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveToImgIdentifier }) {
     const [settingsIcon, rulesIcon, imgIdentifierThumbnailTransparent, homeButton] = imgIdentifierImagesArray;
-    const [imgSource, setImgSource] = useState(null);
+    const [imgSource, setImgSource] = useState('');
     const imgIdentifierRulesIconRef = useRef(null);
     const imgIdentifierRulesBox = useRef(null);
     const imgIdentifierSettingsIconRef = useRef(null);
@@ -12,8 +12,40 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
     const imgIdentifierTitleRef = useRef(null);
     const imgIdentifierRef = useRef(null);
     const imgIdentifierPicContainerRef = useRef(null);
+    const chooseImgButtonRef = useRef(null);
+    const imgSelectedRef = useRef(null);
 
     const imgIdentifierHomeButtonRef = useRef(null);
+    const onFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            imgIdentifierPicContainerRef.current.style.backgroundColor = 'transparent';
+            let fileNameHolder = file.name;
+            let shortenString = false;
+            let k = -1;
+            const fileNameCharArray = fileNameHolder.split("");
+            for (let i = 0; i < fileNameCharArray.length; i++) {
+                if (fileNameCharArray[i] === "." && i >= fileNameCharArray.length - 6) {
+                    if (i >= 13) {
+                        shortenString = true;
+                        k = i;
+                        break;
+                    }
+                }
+            }
+            if (shortenString) {
+                let firstPart = fileNameHolder.substring(0, 7) + "..." + fileNameHolder.substring(k - 2, k);
+                let secondPart = fileNameHolder.substring(k);
+                fileNameHolder = firstPart + secondPart;
+            }
+            imgSelectedRef.current.innerHTML = fileNameHolder;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                setImgSource(e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    }
     const openOrClose = (element) => {
         if (element.current.style.visibility === "hidden") {
             element.current.style.visibility = "visible";
@@ -65,9 +97,6 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
     const readyForMove = (element) => {
         element.current.style.opacity = '0';
     }
-    useEffect(() => {
-
-    }, [imgSource]);
     useEffect(() => {
         if (moveToImgIdentifier) {
             imgIdentifierTitleRef.current.style.display = 'block';
@@ -135,19 +164,20 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
             <div id='imgIdentifierTitle' draggable={false} ref={imgIdentifierTitleRef}>Img Identifier</div>
             <span id='imgIdentifier' draggable={false} ref={imgIdentifierRef}>
                 <div id='imgIdentifierImgChooser' draggable={false}>
-                    <img id='imgIdentifierPicContainer' draggable={false} src={imgSource} ref={imgIdentifierPicContainerRef} alt='imgIdentifierImage' title="imgIdentifierImage" />
-                    
-                    <input type='file' id='chooseImgButton' accept='image/*' alt='chooseImgButton' title="chooseImgButton" hidden />
+                    <div id='imgIdentifierPicContainer' draggable={false}>
+                        <img id='imgIdentifierPic' draggable={false} src={imgSource} ref={imgIdentifierPicContainerRef} alt='imgIdentifierImage' title="imgIdentifierImage" />
+                    </div>
+                    <input type='file' onChange={(e) => onFileChange(e)} id='chooseImgButton' ref={chooseImgButtonRef} accept='image/*' alt='chooseImgButton' title="chooseImgButton" hidden />
                     <div style={{ display: 'flex' }}>
                         <label for='chooseImgButton' id='chooseImgButtonVisible' alt='chooseImgButton' title="chooseImgButton">Choose Image</label>
-                        <span id='imgSelected' alt='selectedImg' title="selectedImg">No image chosen</span>
+                        <span id='imgSelected' ref={imgSelectedRef} alt='selectedImg' title="selectedImg">No image chosen</span>
                     </div>
                 </div>
                 <div id='imgIdentifierImgIdentifier' draggable={false}>
                     <img id='imgIdentifierTransparentImg' draggable={false} src={imgIdentifierThumbnailTransparent} alt='imgIdentifierPic' title="imgIdentifierPic" />
                     <span id='startIdentificationButton' alt='startIdentificationButton' title="startIdentificationButton">Start</span>
                     <span id='imgIdentifierIdentificationTitle'>Identification:</span>
-                    <span id='imgIdentifierIdentificationText' wrap='hard'>Sample text</span>
+                    <span id='imgIdentifierIdentificationText' wrap='hard'></span>
                 </div>
             </span>
             <img onClick={() => window.location.reload()} id='imgIdentifierHomeButton' draggable={false} ref={imgIdentifierHomeButtonRef} src={homeButton} alt='toHome' title="toHome" />
