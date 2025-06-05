@@ -160,8 +160,10 @@ li {
     overflow: auto;
 }
 #imgIdentifierPic {
-    min-width: 375px;
-    min-height: 375px;
+    width: 375px;
+    height: 375px;
+    min-width: none;
+    min-height: none;
     display: block;
     margin: auto;
     background-color: white;
@@ -213,7 +215,7 @@ li {
 }
 #imgIdentifierTransparentImg {
     width: 90px;
-    height: auto;
+    height: 83px;
     border: none;
     border-right: solid 10px rgba(0, 0, 0, 0.705);
     border-bottom: solid 10px rgba(0, 0, 0, 0.705);
