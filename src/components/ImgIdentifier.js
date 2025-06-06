@@ -42,6 +42,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
                 fileNameHolder = firstPart + secondPart;
             }
             imgSelectedRef.current.innerHTML = fileNameHolder;
+            imgSelectedRef.current.title = file.name;
             const reader = new FileReader();
             reader.onload = (e) => {
                 setImgSource(e.target.result);
@@ -168,7 +169,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
             <span id='imgIdentifier' draggable={false} ref={imgIdentifierRef}>
                 <div id='imgIdentifierImgChooser' draggable={false}>
                     <div id='imgIdentifierPicContainer' draggable={false} ref={imgIdentifierPicContainerRef}>
-                        <img id='imgIdentifierPic' draggable={false} src={imgSource} alt='imgIdentifierImage' title="imgIdentifierImage" />
+                        <img id='imgIdentifierPic' draggable={false} src={imgSource} alt='chosenImage' title="chosenImage" />
                     </div>
                     <input type='file' onChange={(e) => onFileChange(e)} id='chooseImgButton' ref={chooseImgButtonRef} accept='image/*' alt='chooseImgButton' title="chooseImgButton" hidden />
                     <div style={{ display: 'flex' }}>
