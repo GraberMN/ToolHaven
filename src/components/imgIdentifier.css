@@ -157,6 +157,7 @@ li {
     margin: auto;
     margin-top: 38px;
     border: solid rgba(0, 0, 0, 0.705);
+    background-color: white;
     overflow: auto;
 }
 #imgIdentifierPic {
@@ -166,7 +167,6 @@ li {
     min-height: none;
     display: block;
     margin: auto;
-    background-color: white;
     color: transparent;
 }
 #choosePicButton {

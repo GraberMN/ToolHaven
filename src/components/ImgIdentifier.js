@@ -19,7 +19,10 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
     const onFileChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            imgIdentifierPicContainerRef.current.style.backgroundColor = 'transparent';
+            if (!(file.name.includes(".png")) && !(file.name.includes(".jpg")) && !(file.name.includes(".jpeg")) && !(file.name.includes(".svg")) && !(file.name.includes(".gif")) && !(file.name.includes(".PNG")) && !(file.name.includes(".webp")) && !(file.name.includes(".ico")) && !(file.name.includes(".bmp")) && !(file.name.includes(".tif")) && !(file.name.includes(".xbm")) && !(file.name.includes(".pjp")) && !(file.name.includes(".apng")) && !(file.name.includes(".heif")) && !(file.name.includes(".tiff")) && !(file.name.includes(".jfif")) && !(file.name.includes(".heic")) && !(file.name.includes(".pjpeg")) && !(file.name.includes(".avif"))) {
+                alert("This chosen file's file extension indicates that it is not an image. Please try again.");
+                return;
+            }
             let fileNameHolder = file.name;
             let shortenString = false;
             let k = -1;
@@ -164,8 +167,8 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
             <div id='imgIdentifierTitle' draggable={false} ref={imgIdentifierTitleRef}>Img Identifier</div>
             <span id='imgIdentifier' draggable={false} ref={imgIdentifierRef}>
                 <div id='imgIdentifierImgChooser' draggable={false}>
-                    <div id='imgIdentifierPicContainer' draggable={false}>
-                        <img id='imgIdentifierPic' draggable={false} src={imgSource} ref={imgIdentifierPicContainerRef} alt='imgIdentifierImage' title="imgIdentifierImage" />
+                    <div id='imgIdentifierPicContainer' draggable={false} ref={imgIdentifierPicContainerRef}>
+                        <img id='imgIdentifierPic' draggable={false} src={imgSource} alt='imgIdentifierImage' title="imgIdentifierImage" />
                     </div>
                     <input type='file' onChange={(e) => onFileChange(e)} id='chooseImgButton' ref={chooseImgButtonRef} accept='image/*' alt='chooseImgButton' title="chooseImgButton" hidden />
                     <div style={{ display: 'flex' }}>
