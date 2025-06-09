@@ -25,8 +25,8 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
             const textStreamer = new TextStreamer(imageIdentifier.tokenizer, {
                 skip_prompt: true
             });
-            const result = await imageIdentifier(url, { max_new_tokens: 30, do_sample: false, streamer: textStreamer });
-            imgIdentifierIdentificationTextRef.current.innerHTML = result[0].label;
+            const result = await imageIdentifier(url, { max_new_tokens: 20, do_sample: false, streamer: textStreamer });
+            imgIdentifierIdentificationTextRef.current.innerHTML = `${result[0].label}<br>Confidence: ${Math.floor(result[0].score * 100)}%`;
         }
         catch (error) {
             console.error(`Error generating identification: ${error}`);
