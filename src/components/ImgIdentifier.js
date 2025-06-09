@@ -6,6 +6,7 @@ import { pipeline, TextStreamer } from '@huggingface/transformers';
 function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveToImgIdentifier }) {
     const [settingsIcon, rulesIcon, imgIdentifierThumbnailTransparent, homeButton] = imgIdentifierImagesArray;
     const [imgSource, setImgSource] = useState(null);
+    const generateIdentificationCounter = useRef(0);
     const imgIdentifierRulesIconRef = useRef(null);
     const imgIdentifierRulesBox = useRef(null);
     const imgIdentifierSettingsIconRef = useRef(null);
@@ -21,6 +22,11 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
     const imgIdentifierHomeButtonRef = useRef(null);
     const generateIdentification = async () => {
         try {
+            (generateIdentificationCounter.current)++;
+            if (generateIdentificationCounter.current > 43) {
+                alert('You have reached the maximum amount of images that this AI model identifies in 1 sitting (43). To identify more images, go back to the Home page and make your way back here.');
+                return;
+            }
             imgIdentifierThinkingMessageRef.current.style.visibility = 'visible';
             const imageIdentifier = await pipeline('image-classification', 'Xenova/vit-base-patch16-224', { dtype: 'q8' });
             const url = imgSource;
@@ -200,9 +206,9 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
                 <div id='imgIdentifierImgIdentifier' draggable={false}>
                     <img id='imgIdentifierTransparentImg' draggable={false} src={imgIdentifierThumbnailTransparent} alt='imgIdentifierPic' title="imgIdentifierPic" />
                     <span id='imgIdentifierThinkingMessage' ref={imgIdentifierThinkingMessageRef}>Thinking...</span>
-                    <span onClick={() => generateIdentification()} id='startIdentificationButton' alt='startIdentificationButton' title="startIdentificationButton">Start</span>
-                    <span id='imgIdentifierIdentificationTitle'>Identification:</span>
-                    <span id='imgIdentifierIdentificationText' wrap='hard' ref={imgIdentifierIdentificationTextRef}></span>
+                    <span onClick={() => generateIdentification()} id='startIdentificationButton' draggable={false} alt='startIdentificationButton' title="startIdentificationButton">Start</span>
+                    <span id='imgIdentifierIdentificationTitle' draggable={false}>Identification:</span>
+                    <span id='imgIdentifierIdentificationText' wrap='hard' draggable={false} ref={imgIdentifierIdentificationTextRef}></span>
                 </div>
             </span>
             <img onClick={() => window.location.reload()} id='imgIdentifierHomeButton' draggable={false} ref={imgIdentifierHomeButtonRef} src={homeButton} alt='toHome' title="toHome" />
