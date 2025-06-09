@@ -15,11 +15,13 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
     const imgIdentifierPicContainerRef = useRef(null);
     const chooseImgButtonRef = useRef(null);
     const imgSelectedRef = useRef(null);
+    const imgIdentifierThinkingMessageRef = useRef(null);
     const imgIdentifierIdentificationTextRef = useRef(null);
 
     const imgIdentifierHomeButtonRef = useRef(null);
     const generateIdentification = async () => {
         try {
+            imgIdentifierThinkingMessageRef.current.style.visibility = 'visible';
             const imageIdentifier = await pipeline('image-classification', 'Xenova/vit-base-patch16-224', { dtype: 'q8' });
             const url = imgSource;
             const textStreamer = new TextStreamer(imageIdentifier.tokenizer, {
@@ -27,6 +29,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
             });
             const result = await imageIdentifier(url, { max_new_tokens: 20, do_sample: false, streamer: textStreamer });
             imgIdentifierIdentificationTextRef.current.innerHTML = `${result[0].label}<br>Confidence: ${Math.floor(result[0].score * 100)}%`;
+            imgIdentifierThinkingMessageRef.current.style.visibility = 'hidden';
         }
         catch (error) {
             console.error(`Error generating identification: ${error}`);
@@ -127,6 +130,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
             imgIdentifierSettingsBox.current.style.display = 'inline';
             imgIdentifierSettingsBox.current.style.visibility = 'hidden';
             imgIdentifierRef.current.style.display = 'block';
+            imgIdentifierThinkingMessageRef.current.style.visibility = 'hidden';
             imgIdentifierHomeButtonRef.current.style.display = 'inline';
             const imgIdentifierElements = [imgIdentifierTitleRef, imgIdentifierRulesIconRef, imgIdentifierRulesBox, imgIdentifierSettingsIconRef, imgIdentifierSettingsBox, imgIdentifierRef, imgIdentifierHomeButtonRef];
             for (let i = 0; i < imgIdentifierElements.length; i++) {
@@ -195,6 +199,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
                 </div>
                 <div id='imgIdentifierImgIdentifier' draggable={false}>
                     <img id='imgIdentifierTransparentImg' draggable={false} src={imgIdentifierThumbnailTransparent} alt='imgIdentifierPic' title="imgIdentifierPic" />
+                    <span id='imgIdentifierThinkingMessage' ref={imgIdentifierThinkingMessageRef}>Thinking...</span>
                     <span onClick={() => generateIdentification()} id='startIdentificationButton' alt='startIdentificationButton' title="startIdentificationButton">Start</span>
                     <span id='imgIdentifierIdentificationTitle'>Identification:</span>
                     <span id='imgIdentifierIdentificationText' wrap='hard' ref={imgIdentifierIdentificationTextRef}></span>

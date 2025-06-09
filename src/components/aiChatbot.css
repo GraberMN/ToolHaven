@@ -241,6 +241,7 @@ input[type='checkbox' i] {
     transform: translateX(-17px) translateY(62.5px);
     padding-top: 6px;
     z-index: 999;
+    user-select: none;
 }
 #aiChatbotPic {
     width: 175px;

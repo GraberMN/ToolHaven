@@ -223,6 +223,21 @@ li {
     display: block;
     user-select: none;
 }
+#imgIdentifierThinkingMessage {
+    position: absolute;
+    width: 130px;
+    height: 35px;
+    border: solid 5px black;
+    border-radius: 20px;
+    background-color: white;
+    font-family: cursive;
+    font-size: 20px;
+    margin: auto;
+    transform: translateX(-275.5px) translateY(-76.5px);
+    padding-top: 6px;
+    z-index: 999;
+    user-select: none;
+}
 #startIdentificationButton {
     position: absolute;
     width: 90px;
