@@ -1,10 +1,11 @@
 import React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import './imgIdentifier.css';
+import { pipeline, TextStreamer } from '@huggingface/transformers';
 
 function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveToImgIdentifier }) {
     const [settingsIcon, rulesIcon, imgIdentifierThumbnailTransparent, homeButton] = imgIdentifierImagesArray;
-    const [imgSource, setImgSource] = useState('');
+    const [imgSource, setImgSource] = useState(null);
     const imgIdentifierRulesIconRef = useRef(null);
     const imgIdentifierRulesBox = useRef(null);
     const imgIdentifierSettingsIconRef = useRef(null);
@@ -14,8 +15,23 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
     const imgIdentifierPicContainerRef = useRef(null);
     const chooseImgButtonRef = useRef(null);
     const imgSelectedRef = useRef(null);
+    const imgIdentifierIdentificationTextRef = useRef(null);
 
     const imgIdentifierHomeButtonRef = useRef(null);
+    const generateIdentification = async () => {
+        try {
+            const imageIdentifier = await pipeline('image-classification', 'Xenova/vit-base-patch16-224', { dtype: 'q8' });
+            const url = imgSource;
+            const textStreamer = new TextStreamer(imageIdentifier.tokenizer, {
+                skip_prompt: true
+            });
+            const result = await imageIdentifier(url, { max_new_tokens: 30, do_sample: false, streamer: textStreamer });
+            imgIdentifierIdentificationTextRef.current.innerHTML = result[0].label;
+        }
+        catch (error) {
+            console.error(`Error generating identification: ${error}`);
+        }
+    }
     const onFileChange = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -179,9 +195,9 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
                 </div>
                 <div id='imgIdentifierImgIdentifier' draggable={false}>
                     <img id='imgIdentifierTransparentImg' draggable={false} src={imgIdentifierThumbnailTransparent} alt='imgIdentifierPic' title="imgIdentifierPic" />
-                    <span id='startIdentificationButton' alt='startIdentificationButton' title="startIdentificationButton">Start</span>
+                    <span onClick={() => generateIdentification()} id='startIdentificationButton' alt='startIdentificationButton' title="startIdentificationButton">Start</span>
                     <span id='imgIdentifierIdentificationTitle'>Identification:</span>
-                    <span id='imgIdentifierIdentificationText' wrap='hard'></span>
+                    <span id='imgIdentifierIdentificationText' wrap='hard' ref={imgIdentifierIdentificationTextRef}></span>
                 </div>
             </span>
             <img onClick={() => window.location.reload()} id='imgIdentifierHomeButton' draggable={false} ref={imgIdentifierHomeButtonRef} src={homeButton} alt='toHome' title="toHome" />
