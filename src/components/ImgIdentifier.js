@@ -44,8 +44,12 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
     const onFileChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            if (!(file.name.includes(".png")) && !(file.name.includes(".jpg")) && !(file.name.includes(".jpeg")) && !(file.name.includes(".svg")) && !(file.name.includes(".gif")) && !(file.name.includes(".PNG")) && !(file.name.includes(".webp")) && !(file.name.includes(".ico")) && !(file.name.includes(".bmp")) && !(file.name.includes(".tif")) && !(file.name.includes(".xbm")) && !(file.name.includes(".pjp")) && !(file.name.includes(".apng")) && !(file.name.includes(".heif")) && !(file.name.includes(".tiff")) && !(file.name.includes(".jfif")) && !(file.name.includes(".heic")) && !(file.name.includes(".pjpeg")) && !(file.name.includes(".avif"))) {
+            if (!(file.name.includes(".png")) && !(file.name.includes(".jpg")) && !(file.name.includes(".jpeg")) && !(file.name.includes(".svg")) && !(file.name.includes(".gif")) && !(file.name.includes(".PNG")) && !(file.name.includes(".webp")) && !(file.name.includes(".JPG")) && !(file.name.includes(".ico")) && !(file.name.includes(".JPEG")) && !(file.name.includes(".bmp")) && !(file.name.includes(".tif")) && !(file.name.includes(".xbm")) && !(file.name.includes(".pjp")) && !(file.name.includes(".apng")) && !(file.name.includes(".heif")) && !(file.name.includes(".jfif")) && !(file.name.includes(".heic")) && !(file.name.includes(".avif"))) {
                 alert("This chosen file's file extension indicates that it is not an image. Please try again.");
+                return;
+            }
+            if (file.name.includes(".xbm") || file.name.includes(".tif") || file.name.includes(".svg") || file.name.includes(".heif") || file.name.includes(".heic")) {
+                alert("This chosen file's file extension may indicate that it is an image, but it is not supported. Convert it to a supported file extension to continue. See Rules for a complete list of supported file extensions.");
                 return;
             }
             let fileNameHolder = file.name;
@@ -178,6 +182,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
                     <li>Hover over the Identifier or any external button to find out what it is/represents.</li>
                     <li>The bottom left Home button takes you back to the Home page.</li>
                     <li>The Settings tab lets you </li>
+                    <li>The supported file extensions for this Image Identifier are .jpg, .jpeg, .png, their all caps equivalents, .jfif, .webp, .gif, .ico, .bmp, .apng, .pjp, .pjpeg, and .avif.</li>
                     <li></li>
                     <li>When changing color in Settings, drag the pointer around for it to work seamlessly.</li>
                     <li>AI Model-Specific Rules:</li>
@@ -197,7 +202,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
                     <div id='imgIdentifierPicContainer' draggable={false} ref={imgIdentifierPicContainerRef}>
                         <img id='imgIdentifierPic' draggable={false} src={imgSource} alt='chosenImage' title="chosenImage" />
                     </div>
-                    <input type='file' onChange={(e) => onFileChange(e)} id='chooseImgButton' ref={chooseImgButtonRef} accept='image/*' alt='chooseImgButton' title="chooseImgButton" hidden />
+                    <input type='file' onChange={(e) => onFileChange(e)} id='chooseImgButton' ref={chooseImgButtonRef} accept='.png, .apng, .jpg, .jpeg, .ico, .webp, .jfif, .gif, .pjp, .bmp, .pjpeg, .avif' alt='chooseImgButton' title="chooseImgButton" hidden />
                     <div style={{ display: 'flex' }}>
                         <label for='chooseImgButton' id='chooseImgButtonVisible' alt='chooseImgButton' title="chooseImgButton">Choose Image</label>
                         <span id='imgSelected' ref={imgSelectedRef} alt='selectedImg' title="selectedImg">No image chosen</span>
