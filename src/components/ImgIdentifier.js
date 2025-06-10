@@ -174,7 +174,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
         year={2021},
         eprint={2010.11929},
         archivePrefix={arXiv},
-        primaryClass={cs.CV},
+        primaryClass={cs.CV}, 
         url={https://arxiv.org/abs/2010.11929},
 }`;
             }, 2000);
