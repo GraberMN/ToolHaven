@@ -16,12 +16,20 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
     const imgIdentifierPicContainerRef = useRef(null);
     const chooseImgButtonRef = useRef(null);
     const imgSelectedRef = useRef(null);
+    const imgIdentifierDisclaimerBox = useRef(null);
+    const imgIdentifierDisclaimerButtonRef = useRef(null);
+    const imgIdentifierCitationBox = useRef(null);
+    const imgIdentifierCitationButtonRef = useRef(null);
     const imgIdentifierThinkingMessageRef = useRef(null);
     const imgIdentifierIdentificationTextRef = useRef(null);
 
     const imgIdentifierHomeButtonRef = useRef(null);
     const generateIdentification = async () => {
         try {
+            if (imgSource === null || imgSource === '') {
+                alert('Please choose an image before attempting to start the identification. Thank you.');
+                return;
+            }
             (generateIdentificationCounter.current)++;
             if (generateIdentificationCounter.current > 43) {
                 alert('You have reached the maximum amount of images that this AI model identifies in 1 sitting (43). To identify more images, go back to the Home page and make your way back here.');
@@ -82,8 +90,14 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
     const openOrClose = (element) => {
         if (element.current.style.visibility === "hidden") {
             element.current.style.visibility = "visible";
+            if (element === imgIdentifierDisclaimerBox && window.innerWidth <= 740) {
+                imgIdentifierHomeButtonRef.current.style.visibility = 'hidden';
+            }
         } else {
             element.current.style.visibility = "hidden";
+            if (element === imgIdentifierDisclaimerBox && window.innerWidth <= 740) {
+                imgIdentifierHomeButtonRef.current.style.visibility = 'visible';
+            }
         }
     }
     const onAdjustWindowWidthImgIdentifier = () => {
@@ -93,12 +107,16 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
             imgIdentifierSettingsIconRef.current.style.transform = 'translateX(180px)';
             imgIdentifierSettingsBox.current.style.transform = 'translateX(-45px)';
             imgIdentifierHomeButtonRef.current.style.transform = 'translateX(-260px)';
+            if (imgIdentifierDisclaimerBox.current.style.visibility === 'visible') {
+                imgIdentifierHomeButtonRef.current.style.visibility = 'hidden';
+            }
         } else {
             imgIdentifierRulesIconRef.current.style.transform = 'translateX(-367px)';
             imgIdentifierRulesBox.current.style.transform = 'translateX(-367px)';
             imgIdentifierSettingsIconRef.current.style.transform = 'translateX(285px)';
             imgIdentifierSettingsBox.current.style.transform = 'translateX(60px)';
             imgIdentifierHomeButtonRef.current.style.transform = 'translateX(-367px)';
+            imgIdentifierHomeButtonRef.current.style.visibility = 'visible';
         }
     }
     const animateElements = () => {
@@ -140,6 +158,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
             imgIdentifierSettingsBox.current.style.display = 'inline';
             imgIdentifierSettingsBox.current.style.visibility = 'hidden';
             imgIdentifierRef.current.style.display = 'block';
+            imgIdentifierDisclaimerBox.current.style.visibility = 'hidden';
             imgIdentifierThinkingMessageRef.current.style.visibility = 'hidden';
             imgIdentifierHomeButtonRef.current.style.display = 'inline';
             const imgIdentifierElements = [imgIdentifierTitleRef, imgIdentifierRulesIconRef, imgIdentifierRulesBox, imgIdentifierSettingsIconRef, imgIdentifierSettingsBox, imgIdentifierRef, imgIdentifierHomeButtonRef];
@@ -149,6 +168,15 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
             document.body.style.backgroundColor = 'hsl(0, 100.00%, 85.00%)';
             setTimeout(() => {
                 animateElements();
+                imgIdentifierCitationBox.current.innerHTML = `@misc{dosovitskiy2021imageworth16x16words,
+        title={An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale},
+        author={Alexey Dosovitskiy and Lucas Beyer and Alexander Kolesnikov and Dirk Weissenborn and Xiaohua Zhai and Thomas Unterthiner and Mostafa Dehghani and Matthias Minderer and Georg Heigold and Sylvain Gelly and Jakob Uszkoreit and Neil Houlsby}, 
+        year={2021},
+        eprint={2010.11929},
+        archivePrefix={arXiv},
+        primaryClass={cs.CV},
+        url={https://arxiv.org/abs/2010.11929},
+}`;
             }, 2000);
             setTimeout(() => {
                 const imgIdentifierNonImgIdentifierElements = [imgIdentifierRulesIconRef, imgIdentifierRulesBox, imgIdentifierSettingsIconRef, imgIdentifierSettingsBox, imgIdentifierHomeButtonRef];
@@ -207,6 +235,15 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
                         <label for='chooseImgButton' id='chooseImgButtonVisible' alt='chooseImgButton' title="chooseImgButton">Choose Image</label>
                         <span id='imgSelected' ref={imgSelectedRef} alt='selectedImg' title="selectedImg">No image chosen</span>
                     </div>
+                    <div onClick={() => openOrClose(imgIdentifierDisclaimerBox)} id='imgIdentifierDisclaimerButton' ref={imgIdentifierDisclaimerButtonRef} title='toDisclaimer'>Disclaimer</div>
+                    <span id='imgIdentifierDisclaimerBox' draggable={false} ref={imgIdentifierDisclaimerBox}>
+                        The Xenova model used for this Img Identifier is much better at identifying 1-object images, especially animals.
+                        Its generated content may not always be correct or logical. As a result, it should be used only to assist
+                        instead of as a conclusive source of knowledge. Users of this Img Identifier should always make sure to verify
+                        its answers and generated identifications with their own logic and the Internet (perhaps Google Images).
+                    </span>
+                    <div onClick={() => openOrClose(imgIdentifierCitationBox)} id='imgIdentifierCitationButton' ref={imgIdentifierCitationButtonRef} title='toCitation'>Citation</div>
+                    <span id='imgIdentifierCitationBox' draggable={false} ref={imgIdentifierCitationBox}></span>
                 </div>
                 <div id='imgIdentifierImgIdentifier' draggable={false}>
                     <img id='imgIdentifierTransparentImg' draggable={false} src={imgIdentifierThumbnailTransparent} alt='imgIdentifierPic' title="imgIdentifierPic" />

@@ -371,9 +371,9 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot, 
                 <div id='aiChatbotProfile' ref={aiChatbotProfileRef}>
                     <div onClick={() => openOrClose(disclaimerBox)} id='disclaimerButton' ref={disclaimerButtonRef} title='toDisclaimer'>Disclaimer</div>
                     <span id='disclaimerBox' draggable={false} ref={disclaimerBox}>
-                        The compact SmolLM2 models used for this AI Chatbot are much better at comprehending and outputing in English.
-                        The content that they generate may not always be correct, logical, or impartial. As a result, they should
-                        be used only to assist rather than as conclusive sources of knowledge. Users of this AI Chatbot should
+                        The compact SmolLM2 model used for this AI Chatbot is much better at comprehending and outputing in English.
+                        The content that it generates may not always be correct, logical, or impartial. As a result, it should
+                        be used only to assist rather than as a conclusive source of knowledge. Users of this AI Chatbot should
                         always make sure to verify its answers and generated information with their own logic and credible sources.
                     </span>
                     <span id='thinkingMessage' ref={thinkingMessageRef}>Thinking...</span>

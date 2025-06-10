@@ -155,7 +155,7 @@ li {
     width: 375px;
     height: 375px;
     margin: auto;
-    margin-top: 38px;
+    margin-top: 30px;
     border: solid rgba(0, 0, 0, 0.705);
     background-color: white;
     overflow: auto;
@@ -200,6 +200,90 @@ li {
 }
 #imgSelected {
     margin-top: 29px;
+}
+#imgIdentifierDisclaimerButton {
+    position: absolute;
+    width: 95px;
+    height: 25px;
+    font-family: cursive;
+    border: solid 10px rgba(53, 47, 47, 0.993);
+    background-color: white;
+    transform: translateX(0px) translateY(-8px);
+    border-left: none;
+    border-bottom: none;
+    border-top-right-radius: 20px;
+    padding-top: 1px;
+    cursor: pointer;
+}
+#imgIdentifierDisclaimerButton:hover {
+    background-color: rgb(204, 231, 255);
+}
+#imgIdentifierDisclaimerButton:active {
+    background-color: white;
+}
+#imgIdentifierDisclaimerBox {
+    position: absolute;
+    width: 313px;
+    height: 260px;
+    border: solid 10px rgba(53, 47, 47, 0.993);
+    background-color: white;
+    transform: translateX(-260px) translateY(28px);
+    text-align: left;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    padding-top: 5px;
+    padding-left: 9px;
+    z-index: 998;
+}
+#imgIdentifierCitationButton {
+    position: absolute;
+    width: 85px;
+    height: 25px;
+    font-family: cursive;
+    border: solid 10px rgba(53, 47, 47, 0.993);
+    background-color: white;
+    transform: translateX(405px) translateY(-8px);
+    border-right: none;
+    border-bottom: none;
+    border-top-left-radius: 20px;
+    padding-top: 1px;
+    cursor: pointer;
+}
+#imgIdentifierCitationButton:hover {
+    background-color: rgb(204, 231, 255);
+}
+#imgIdentifierCitationButton:active {
+    background-color: white;
+}
+#imgIdentifierCitationBox {
+    position: absolute;
+    width: 350px;
+    height: 225px;
+    border: solid 10px rgba(53, 47, 47, 0.993);
+    background-color: white;
+    transform: translateX(-115px) translateY(28px);
+    text-align: left;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: pre;
+    padding-top: 5px;
+    padding-left: 5px;
+    z-index: 999;
+}
+#imgIdentifierCitationBox::-webkit-scrollbar {
+    scroll-behavior: smooth;
+    width: auto;
+    height: 13px;
+}
+#imgIdentifierCitationBox::-webkit-scrollbar-thumb {
+    background-color: rgba(53, 47, 47, 0.993);
+    border-radius: 20px;
+}
+#imgIdentifierCitationBox::-webkit-scrollbar-track-piece {
+    background: none;
+    border-radius: 20px;
+    margin-left: 3px;
+    margin-right: 3px;
 }
 #imgIdentifierImgIdentifier {
     width: 500px;
@@ -285,7 +369,7 @@ li {
     border: solid hsl(0, 100%, 50%);
     border-radius: 15px;
     background-color: rgba(0, 0, 0, 0.705);
-    z-index: 999;
+    z-index: 997;
     display: inline;
     user-select: none;
 }
