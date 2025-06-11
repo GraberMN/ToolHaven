@@ -149,7 +149,8 @@ li {
     list-style-type: none;
 }
 input[type='checkbox' i] {
-    transform: translateX(-5px) translateY(1.25px);
+    transform: translateX(-4px) translateY(1.25px);
+    margin-right: 11px;
 }
 #inchesRuler {
     position: absolute;

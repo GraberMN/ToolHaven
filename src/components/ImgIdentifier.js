@@ -137,11 +137,9 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
     }
     const onImgBorderColorChange = (e) => {
         setImgBorderColorVal(e.target.value);
-        imgIdentifierPicContainerRef.current.style.borderColor = imgBorderColorVal;
     }
     const onProfileBGColorChange = (e) => {
         setProfileBGColorVal(e.target.value);
-        imgIdentifierThumbnailTransparentRef.current.style.backgroundColor = profileBGColorVal;
     }
     const onDisclaimerCheck = () => {
         openOrClose(imgIdentifierDisclaimerButtonRef);
@@ -302,7 +300,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
             <div id='imgIdentifierTitle' draggable={false} ref={imgIdentifierTitleRef}>Img Identifier</div>
             <span id='imgIdentifier' draggable={false} ref={imgIdentifierRef}>
                 <div id='imgIdentifierImgChooser' draggable={false}>
-                    <div id='imgIdentifierPicContainer' style={{backgroundColor: imgBGStyling}} draggable={false} ref={imgIdentifierPicContainerRef}>
+                    <div id='imgIdentifierPicContainer' style={{ borderColor: imgBorderColorVal }} draggable={false} ref={imgIdentifierPicContainerRef}>
                         <img id='imgIdentifierPic' draggable={false} ref={imgIdentifierPicRef} src={imgSource} alt='chosenImage' title="chosenImage" />
                     </div>
                     <input type='file' onChange={(e) => onFileChange(e)} id='chooseImgButton' ref={chooseImgButtonRef} accept='.png, .apng, .jpg, .jpeg, .ico, .webp, .jfif, .gif, .pjp, .bmp, .pjpeg, .avif' alt='chooseImgButton' title="chooseImgButton" hidden />
@@ -322,7 +320,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
                 </div>
                 <div id='imgIdentifierImgIdentifier' draggable={false}>
                     <div id='transparentImgContainer' draggable={false}>
-                        <img id='imgIdentifierTransparentImg' draggable={false} ref={imgIdentifierThumbnailTransparentRef} src={imgIdentifierThumbnailTransparent} alt='imgIdentifierPic' title="imgIdentifierPic" />
+                        <img id='imgIdentifierTransparentImg' style={{ backgroundColor: profileBGColorVal }} draggable={false} ref={imgIdentifierThumbnailTransparentRef} src={imgIdentifierThumbnailTransparent} alt='imgIdentifierPic' title="imgIdentifierPic" />
                     </div>
                     <span id='imgIdentifierThinkingMessage' ref={imgIdentifierThinkingMessageRef}>Thinking...</span>
                     <span onClick={() => generateIdentification()} id='startIdentificationButton' draggable={false} alt='startIdentificationButton' title="startIdentificationButton">Start</span>

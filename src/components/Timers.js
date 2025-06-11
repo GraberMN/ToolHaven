@@ -350,11 +350,9 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers, moveToAIChat
     }
     const onCountdownBorderColorChange = (e) => {
         setCountdownBorderColorVal(e.target.value);
-        countdownTimerRef.current.style.borderColor = countdownBorderColorVal;
     }
     const onStopwatchBorderColorChange = (e) => {
         setStopwatchBorderColorVal(e.target.value);
-        stopwatchTimerRef.current.style.borderColor = stopwatchBorderColorVal;
     }
     const highlight = (element) => {
         element.current.style.fontWeight = '600';
@@ -636,7 +634,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers, moveToAIChat
                 <span onClick={() => onCountdownTabClick()} id='countdownTab' draggable={false} title='countdownTab'>Countdown</span>
                 <span onClick={() => onStopwatchTabClick()} id='stopwatchTab' draggable={false} title='stopwatchTab'>Stopwatch</span>
                 <div id='countdownContent' ref={countdownContentRef}>
-                    <div id='countdownTimer' ref={countdownTimerRef} title='countdownTimer'>
+                    <div id='countdownTimer' style={{ borderColor: countdownBorderColorVal }} ref={countdownTimerRef} title='countdownTimer'>
                         <span ref={hoursValHolder}>{hoursVal.current}</span><span class='timeMeasurement'>hr</span> <span ref={minutesValHolder}>{minutesVal.current}</span><span class='timeMeasurement'>min</span> <span ref={secondsValHolder}>{secondsVal.current}</span><span class='timeMeasurement'>sec</span>
                     </div>
                     <span id='countdownTimerButtons'>
@@ -655,7 +653,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers, moveToAIChat
                     </span>
                 </div>
                 <div id='stopwatchContent' ref={stopwatchContentRef}>
-                    <div id='stopwatchTimer' ref={stopwatchTimerRef} title='stopwatchTimer'>
+                    <div id='stopwatchTimer' style={{ borderColor: stopwatchBorderColorVal }} ref={stopwatchTimerRef} title='stopwatchTimer'>
                         <span ref={stopwatchHoursValHolder}>{stopwatchHoursVal.current}</span><span class='timeMeasurement'>hr</span> <span ref={stopwatchMinutesValHolder}>{stopwatchMinutesVal.current}</span><span class='timeMeasurement'>min</span> <span ref={stopwatchSecondsValHolder}>{stopwatchSecondsVal.current}</span><span class='timeMeasurement'>sec</span>
                     </div>
                     <span id='stopwatchTimerButtons'>

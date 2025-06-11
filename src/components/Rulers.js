@@ -267,19 +267,15 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
     }
     const onInchesRulerBorderColorChange = (e) => {
         setInchesRulerBorderColorVal(e.target.value);
-        inchesRulerRef.current.style.borderColor = inchesRulerBorderColorVal;
     }
     const onCentimetersRulerBorderColorChange = (e) => {
         setCentimetersRulerBorderColorVal(e.target.value);
-        centimetersRulerRef.current.style.borderColor = centimetersRulerBorderColorVal;
     }
     const onPicasRulerBorderColorChange = (e) => {
         setPicasRulerBorderColorVal(e.target.value);
-        picasRulerRef.current.style.borderColor = picasRulerBorderColorVal;
     }
     const onPixelsRulerBorderColorChange = (e) => {
         setPixelsRulerBorderColorVal(e.target.value);
-        pixelsRulerRef.current.style.borderColor = pixelsRulerBorderColorVal;
     }
     const onAdjustWindowWidthRulers = () => {
         if (window.innerWidth <= 740) {
@@ -544,10 +540,10 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
                 <ul>
                     <li>Displayed rulers:</li>
                     <li id='invisLi'>
-                        in.: <input type='checkbox' onClick={(e) => setInchesRulerCheckboxChecked(e.target.checked)} ref={inchesRulerCheckbox} id='inchesRulerCheckbox' title='inchesRulerCheckbox' placeholder='inchesRulerCheckbox' />
-                        cm: <input type='checkbox' onClick={(e) => setCentimetersRulerCheckboxChecked(e.target.checked)} id='centimetersRulerCheckbox' title='centimetersRulerCheckbox' placeholder='centimetersRulerCheckbox' />
-                        picas: <input type='checkbox' onClick={(e) => setPicasRulerCheckboxChecked(e.target.checked)} id='picasRulerCheckbox' title='picasRulerCheckbox' placeholder='picasRulerCheckbox' />
-                        px: <input type='checkbox' onClick={(e) => setPixelsRulerCheckboxChecked(e.target.checked)} id='pixelsRulerCheckbox' title='pixelsRulerCheckbox' placeholder='pixelsRulerCheckbox' />
+                        in.:<input type='checkbox' onClick={(e) => setInchesRulerCheckboxChecked(e.target.checked)} ref={inchesRulerCheckbox} id='inchesRulerCheckbox' title='inchesRulerCheckbox' placeholder='inchesRulerCheckbox' />
+                        cm:<input type='checkbox' onClick={(e) => setCentimetersRulerCheckboxChecked(e.target.checked)} id='centimetersRulerCheckbox' title='centimetersRulerCheckbox' placeholder='centimetersRulerCheckbox' />
+                        picas:<input type='checkbox' onClick={(e) => setPicasRulerCheckboxChecked(e.target.checked)} id='picasRulerCheckbox' title='picasRulerCheckbox' placeholder='picasRulerCheckbox' />
+                        px:<input type='checkbox' onClick={(e) => setPixelsRulerCheckboxChecked(e.target.checked)} id='pixelsRulerCheckbox' title='pixelsRulerCheckbox' placeholder='pixelsRulerCheckbox' />
                     </li>
                     <li>Color of inches ruler border:</li>
                     <input type='color' value={inchesRulerBorderColorVal} onChange={(e) => onInchesRulerBorderColorChange(e)} id='inchesRulerBorderColorPicker' title='inchesRulerBorderColorPicker' placeholder='inchesRulerBorderColorPicker' />
@@ -560,10 +556,10 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
                 </ul>
             </span>
             <div id='rulersTitle' draggable={false} ref={rulersTitleRef}>Rulers</div>
-            <img id='inchesRuler' src={inchesRuler} ref={inchesRulerRef} alt='inchesRuler' title='inchesRuler' />
-            <img id='centimetersRuler' src={centimetersRuler} ref={centimetersRulerRef} alt='centimetersRuler' title='centimetersRuler' />
-            <img id='picasRuler' src={picasRuler} ref={picasRulerRef} alt='picasRuler' title='picasRuler' />
-            <img id='pixelsRuler' src={pixelsRuler} ref={pixelsRulerRef} alt='pixelsRuler' title='pixelsRuler' />
+            <img id='inchesRuler' style={{ borderColor: inchesRulerBorderColorVal }} src={inchesRuler} ref={inchesRulerRef} alt='inchesRuler' title='inchesRuler' />
+            <img id='centimetersRuler' style={{ borderColor: centimetersRulerBorderColorVal }} src={centimetersRuler} ref={centimetersRulerRef} alt='centimetersRuler' title='centimetersRuler' />
+            <img id='picasRuler' style={{ borderColor: picasRulerBorderColorVal }} src={picasRuler} ref={picasRulerRef} alt='picasRuler' title='picasRuler' />
+            <img id='pixelsRuler' style={{ borderColor: pixelsRulerBorderColorVal }} src={pixelsRuler} ref={pixelsRulerRef} alt='pixelsRuler' title='pixelsRuler' />
             <button onClick={() => resetRulers()} id='rulersResetButton' draggable={false} ref={rulersResetButtonRef} title='rulersResetButton'>Reset</button>
             <img onClick={() => window.location.reload()} id='rulersHomeButton' draggable={false} ref={rulersHomeButtonRef} src={homeButton} alt='toHome' title="toHome" />
             <map name='toTimersMap'>

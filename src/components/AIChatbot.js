@@ -125,11 +125,9 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot, 
     }
     const onProfileBGColorChange = (e) => {
         setProfileBGColorVal(e.target.value);
-        aiChatbotProfileRef.current.style.backgroundColor = profileBGColorVal;
     }
     const onChatBGColorChange = (e) => {
         setChatBGColorVal(e.target.value);
-        humanAIConvoContainerRef.current.style.backgroundColor = chatBGColorVal;
     }
     const onDisclaimerCheck = () => {
         openOrClose(disclaimerButtonRef);
@@ -368,7 +366,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot, 
             </span>
             <div id='aiChatbotTitle' draggable={false} ref={aiChatbotTitleRef}>AI Chatbot</div>
             <span id='aiChatbotContainer' draggable={false} ref={aiChatbotContainerRef}>
-                <div id='aiChatbotProfile' ref={aiChatbotProfileRef}>
+                <div id='aiChatbotProfile' style={{ backgroundColor: profileBGColorVal }} ref={aiChatbotProfileRef}>
                     <div onClick={() => openOrClose(disclaimerBox)} id='disclaimerButton' ref={disclaimerButtonRef} title='toDisclaimer'>Disclaimer</div>
                     <span id='disclaimerBox' draggable={false} ref={disclaimerBox}>
                         The compact SmolLM2 model used for this AI Chatbot is much better at comprehending and outputing in English.
@@ -381,7 +379,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot, 
                     <div onClick={() => openOrClose(citationBox)} id='citationButton' ref={citationButtonRef} title='toCitation'>Citation</div>
                     <span id='citationBox' draggable={false} ref={citationBox}></span>
                 </div>
-                <div id='humanAIConvoContainer' ref={humanAIConvoContainerRef}>
+                <div id='humanAIConvoContainer' style={{backgroundColor: chatBGColorVal}} ref={humanAIConvoContainerRef}>
                     <div class='aiChatBubble'>{initialAIMessage}</div>
                     {
                         messageArray.map((messageObj, index) => 

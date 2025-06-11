@@ -142,11 +142,9 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
     }
     const onInputFieldBorderColorChange = (e) => {
         setInputFieldBorderColorVal(e.target.value);
-        inputField.current.style.borderColor = inputFieldBorderColorVal;
     }
     const onButtonContainerColorChange = (e) => {
         setButtonContainerColorVal(e.target.value);
-        buttonContainer.current.style.backgroundColor = buttonContainerColorVal;
     }
     const onAdjustWindowWidth = () => {
         if (window.innerWidth <= 740) {
@@ -393,7 +391,7 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
             </span>
             <h1 id='calcTitle' draggable={false} ref={calcTitleRef}>Calculator</h1>
             <span id='calculator' draggable={false}>
-                <input type='text' id='inputField' ref={inputField} maxLength={maxCharVal} title='inputField' placeholder='Loading...' readOnly />
+                <input type='text' id='inputField' style={{ borderColor: inputFieldBorderColorVal }} ref={inputField} maxLength={maxCharVal} title='inputField' placeholder='Loading...' readOnly />
                 <input type='text' id='ansField' ref={ansField} title='answerField' placeholder='Loading...' readOnly />
                 <img onClick={() => openOrClose(historyBox)} id='historyIcon' draggable={false} src={historyIcon} ref={historyIconRef} alt='historyIcon' title='calculationHistory' />
                 <span id='historyBox' draggable={false} ref={historyBox}>
@@ -404,7 +402,7 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
                         )
                     }
                 </span>
-                <span id='buttons' draggable={false} ref={buttonContainer}>
+                <span id='buttons' style={{ backgroundColor: buttonContainerColorVal }} draggable={false} ref={buttonContainer}>
                     <button onClick={() => clearDisplay()} className='deleter' title='clearAll'>C</button>
                     <button onClick={() => appendToDisplay('7', true)} title='seven'>7</button>
                     <button onClick={() => appendToDisplay('8', true)} title='eight'>8</button>
