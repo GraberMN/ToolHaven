@@ -111,6 +111,17 @@
     display: inline;
     user-select: none;
 }
+ul > input {
+    margin-left: -40px;
+    width: 200px;
+}
+ul > input[type='color' i] {
+    width: 200px;
+}
+ul > span {
+    position: absolute;
+    font-family: cursive;
+}
 #imgIdentifierSettingsTitle {
     font-size: 30px;
     font-weight: 600;
@@ -303,12 +314,17 @@ input[type='checkbox' i] {
     background-color: white;
     z-index: 999;
 }
+#transparentImgContainer {
+    width: 90px;
+    height: 83px;
+    border-right: solid 10px rgba(0, 0, 0, 0.705);
+    border-bottom: solid 10px rgba(0, 0, 0, 0.705);
+    user-select: none;
+}
 #imgIdentifierTransparentImg {
     width: 90px;
     height: 83px;
     border: none;
-    border-right: solid 10px rgba(0, 0, 0, 0.705);
-    border-bottom: solid 10px rgba(0, 0, 0, 0.705);
     background-color: white;
     display: block;
     user-select: none;

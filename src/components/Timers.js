@@ -9,8 +9,8 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers, moveToAIChat
     const [stopwatchLapSoundSource, setStopwatchLapSoundSource] = useState(null);
     const [countdownAlarmVolume, setCountdownAlarmVolume] = useState(20);
     const [stopwatchLapSoundVolume, setStopwatchLapSoundVolume] = useState(20);
-    const [countdownBorderColorVal, setCountdownBorderColorVal] = useState('#352f2ffd');
-    const [stopwatchBorderColorVal, setStopwatchBorderColorVal] = useState('#352f2ffd');
+    const [countdownBorderColorVal, setCountdownBorderColorVal] = useState('#363030');
+    const [stopwatchBorderColorVal, setStopwatchBorderColorVal] = useState('#363030');
     const [pinkRightArrowTransitionDone, setPinkRightArrowTransitionDone] = useState(false);
     const countdownInterval = useRef(null);
     const hoursVal = useRef(0);

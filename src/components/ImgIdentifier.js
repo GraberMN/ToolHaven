@@ -6,6 +6,8 @@ import { pipeline, TextStreamer } from '@huggingface/transformers';
 function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveToImgIdentifier }) {
     const [settingsIcon, rulesIcon, imgIdentifierThumbnailTransparent, homeButton] = imgIdentifierImagesArray;
     const [imgSource, setImgSource] = useState(null);
+    const [imgBorderColorVal, setImgBorderColorVal] = useState('#4B4B4B');
+    const [profileBGColorVal, setProfileBGColorVal] = useState('#FFFFFF');
     const generateIdentificationCounter = useRef(0);
     const imgIdentifierRulesIconRef = useRef(null);
     const imgIdentifierRulesBox = useRef(null);
@@ -22,6 +24,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
     const imgIdentifierCitationBox = useRef(null);
     const imgIdentifierCitationButtonRef = useRef(null);
     const imgIdentifierCitationCheckboxRef = useRef(null);
+    const imgIdentifierThumbnailTransparentRef = useRef(null);
     const imgIdentifierThinkingMessageRef = useRef(null);
     const imgIdentifierIdentificationTextRef = useRef(null);
 
@@ -101,6 +104,14 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
                 imgIdentifierHomeButtonRef.current.style.visibility = 'visible';
             }
         }
+    }
+    const onImgBorderColorChange = (e) => {
+        setImgBorderColorVal(e.target.value);
+        imgIdentifierPicContainerRef.current.style.borderColor = imgBorderColorVal;
+    }
+    const onProfileBGColorChange = (e) => {
+        setProfileBGColorVal(e.target.value);
+        imgIdentifierThumbnailTransparentRef.current.style.backgroundColor = profileBGColorVal;
     }
     const onDisclaimerCheck = () => {
         openOrClose(imgIdentifierDisclaimerButtonRef);
@@ -242,7 +253,9 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
                         <input type='checkbox' onClick={() => onCitationCheck()} id='citationButtonCheckbox' ref={imgIdentifierCitationCheckboxRef} title='citationButtonCheckbox' placeholder='citationButtonCheckbox' /><span id='citationSettingsText'>Citation</span>
                     </li>
                     <li>Color of image border:</li>
+                    <input type='color' value={imgBorderColorVal} onChange={(e) => onImgBorderColorChange(e)} id='imgBorderColorPicker' title='imgBorderColorPicker' placeholder='imgBorderColorPicker' />
                     <li>Color of profile background:</li>
+                    <input type='color' value={profileBGColorVal} onChange={(e) => onProfileBGColorChange(e)} id='profileBGColorPicker' title='profileBGColorPicker' placeholder='profileBGColorPicker' />
                 </ul>
             </span>
             <div id='imgIdentifierTitle' draggable={false} ref={imgIdentifierTitleRef}>Img Identifier</div>
@@ -267,7 +280,9 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
                     <span id='imgIdentifierCitationBox' draggable={false} ref={imgIdentifierCitationBox}></span>
                 </div>
                 <div id='imgIdentifierImgIdentifier' draggable={false}>
-                    <img id='imgIdentifierTransparentImg' draggable={false} src={imgIdentifierThumbnailTransparent} alt='imgIdentifierPic' title="imgIdentifierPic" />
+                    <div id='transparentImgContainer' draggable={false}>
+                        <img id='imgIdentifierTransparentImg' draggable={false} ref={imgIdentifierThumbnailTransparentRef} src={imgIdentifierThumbnailTransparent} alt='imgIdentifierPic' title="imgIdentifierPic" />
+                    </div>
                     <span id='imgIdentifierThinkingMessage' ref={imgIdentifierThinkingMessageRef}>Thinking...</span>
                     <span onClick={() => generateIdentification()} id='startIdentificationButton' draggable={false} alt='startIdentificationButton' title="startIdentificationButton">Start</span>
                     <span id='imgIdentifierIdentificationTitle' draggable={false}>Identification:</span>
