@@ -6,9 +6,12 @@ import { pipeline, TextStreamer } from '@huggingface/transformers';
 function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveToImgIdentifier }) {
     const [settingsIcon, rulesIcon, imgIdentifierThumbnailTransparent, homeButton] = imgIdentifierImagesArray;
     const [imgSource, setImgSource] = useState(null);
-    const [imgBorderColorVal, setImgBorderColorVal] = useState('#4B4B4B');
+    const [imgBGStyling, setImgBGStyling] = useState('white');
+    const [imgBorderColorVal, setImgBorderColorVal] = useState('#363030');
     const [profileBGColorVal, setProfileBGColorVal] = useState('#FFFFFF');
     const generateIdentificationCounter = useRef(0);
+    const firstImageSizeOption = useRef(null);
+    const firstImageStyleOption = useRef(null);
     const imgIdentifierRulesIconRef = useRef(null);
     const imgIdentifierRulesBox = useRef(null);
     const imgIdentifierSettingsIconRef = useRef(null);
@@ -16,6 +19,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
     const imgIdentifierTitleRef = useRef(null);
     const imgIdentifierRef = useRef(null);
     const imgIdentifierPicContainerRef = useRef(null);
+    const imgIdentifierPicRef = useRef(null);
     const chooseImgButtonRef = useRef(null);
     const imgSelectedRef = useRef(null);
     const imgIdentifierDisclaimerBox = useRef(null);
@@ -92,6 +96,32 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
             reader.readAsDataURL(file);
         }
     }
+    const changeImageSizeToFitContainer = (isChecked) => {
+        if (isChecked) {
+            imgIdentifierPicRef.current.style.width = '375px';
+            imgIdentifierPicRef.current.style.height = '375px';
+            imgIdentifierPicRef.current.style.minWidth = 'none';
+            imgIdentifierPicRef.current.style.minHeight = 'none';
+        }
+    }
+    const changeImageSizeToRealSize = (isChecked) => {
+        if (isChecked) {
+            imgIdentifierPicRef.current.style.width = 'fit-content';
+            imgIdentifierPicRef.current.style.height = 'auto';
+            imgIdentifierPicRef.current.style.minWidth = '375px';
+            imgIdentifierPicRef.current.style.minHeight = '375px';
+        }
+    }
+    const changeImageStyleToVisible = (isChecked) => {
+        if (isChecked) {
+            setImgBGStyling('white');
+        }
+    }
+    const changeImageStyleToInvisible = (isChecked) => {
+        if (isChecked) {
+            setImgBGStyling('transparent');
+        }
+    }
     const openOrClose = (element) => {
         if (element.current.style.visibility === "hidden") {
             element.current.style.visibility = "visible";
@@ -116,6 +146,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
     const onDisclaimerCheck = () => {
         openOrClose(imgIdentifierDisclaimerButtonRef);
         imgIdentifierDisclaimerBox.current.style.visibility = 'hidden';
+        imgIdentifierHomeButtonRef.current.style.visibility = 'visible';
     }
     const onCitationCheck = () => {
         openOrClose(imgIdentifierCitationButtonRef);
@@ -187,6 +218,8 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
             for (let i = 0; i < imgIdentifierElements.length; i++) {
                 readyForMove(imgIdentifierElements[i]);
             }
+            firstImageSizeOption.current.checked = true;
+            firstImageStyleOption.current.checked = true;
             imgIdentifierDisclaimerCheckboxRef.current.checked = true;
             imgIdentifierCitationCheckboxRef.current.checked = true;
             document.body.style.backgroundColor = 'hsl(0, 100.00%, 85.00%)';
@@ -246,7 +279,15 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
                 <div id='imgIdentifierSettingsTitle' draggable={false}>Settings</div>
                 <ul>
                     <li>Size of image in container:</li>
+                    <li id='imgIdentifierInvisLiRadio'>
+                        <input type='radio' onClick={(e) => changeImageSizeToFitContainer(e.target.checked)} name='imageSizeOptions' ref={firstImageSizeOption} title='fitContainerImageSizeRadio' placeholder='fitContainerImageSizeRadio' /><span id='fitContainerSizeText'>fit container</span>
+                        <input type='radio' onClick={(e) => changeImageSizeToRealSize(e.target.checked)} name='imageSizeOptions' title='realImageSizeRadio' placeholder='realImageSizeRadio' /><span id='realSizeText'>real size</span>
+                    </li>
                     <li>Styling of image background:</li>
+                    <li id='imgIdentifierInvisLiRadio'>
+                        <input type='radio' onClick={(e) => changeImageStyleToVisible(e.target.checked)} name='imageStyleOptions' ref={firstImageStyleOption} title='visibleImageStyleRadio' placeholder='visibleImageStyleRadio' /><span id='visibleStyleText'>visible (white)</span>
+                        <input type='radio' onClick={(e) => changeImageStyleToInvisible(e.target.checked)} name='imageStyleOptions' title='invisibleImageStyleRadio' placeholder='invisibleImageStyleRadio' /><span id='invisibleStyleText'>invisible</span>
+                    </li>
                     <li>Show/hide certain buttons:</li>
                     <li id='imgIdentifierInvisLi'>
                         <input type='checkbox' onClick={() => onDisclaimerCheck()} id='disclaimerButtonCheckbox' ref={imgIdentifierDisclaimerCheckboxRef} title='disclaimerButtonCheckbox' placeholder='disclaimerButtonCheckbox' /><span id='disclaimerSettingsText'>Disclaimer</span>
@@ -261,8 +302,8 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
             <div id='imgIdentifierTitle' draggable={false} ref={imgIdentifierTitleRef}>Img Identifier</div>
             <span id='imgIdentifier' draggable={false} ref={imgIdentifierRef}>
                 <div id='imgIdentifierImgChooser' draggable={false}>
-                    <div id='imgIdentifierPicContainer' draggable={false} ref={imgIdentifierPicContainerRef}>
-                        <img id='imgIdentifierPic' draggable={false} src={imgSource} alt='chosenImage' title="chosenImage" />
+                    <div id='imgIdentifierPicContainer' style={{backgroundColor: imgBGStyling}} draggable={false} ref={imgIdentifierPicContainerRef}>
+                        <img id='imgIdentifierPic' draggable={false} ref={imgIdentifierPicRef} src={imgSource} alt='chosenImage' title="chosenImage" />
                     </div>
                     <input type='file' onChange={(e) => onFileChange(e)} id='chooseImgButton' ref={chooseImgButtonRef} accept='.png, .apng, .jpg, .jpeg, .ico, .webp, .jfif, .gif, .pjp, .bmp, .pjpeg, .avif' alt='chooseImgButton' title="chooseImgButton" hidden />
                     <div style={{ display: 'flex' }}>
