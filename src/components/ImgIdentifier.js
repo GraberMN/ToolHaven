@@ -18,8 +18,10 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
     const imgSelectedRef = useRef(null);
     const imgIdentifierDisclaimerBox = useRef(null);
     const imgIdentifierDisclaimerButtonRef = useRef(null);
+    const imgIdentifierDisclaimerCheckboxRef = useRef(null);
     const imgIdentifierCitationBox = useRef(null);
     const imgIdentifierCitationButtonRef = useRef(null);
+    const imgIdentifierCitationCheckboxRef = useRef(null);
     const imgIdentifierThinkingMessageRef = useRef(null);
     const imgIdentifierIdentificationTextRef = useRef(null);
 
@@ -27,7 +29,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
     const generateIdentification = async () => {
         try {
             if (imgSource === null || imgSource === '') {
-                alert('Please choose an image before attempting to start the identification. Thank you.');
+                alert('Please choose an image before attempting to start the identification.');
                 return;
             }
             (generateIdentificationCounter.current)++;
@@ -100,6 +102,14 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
             }
         }
     }
+    const onDisclaimerCheck = () => {
+        openOrClose(imgIdentifierDisclaimerButtonRef);
+        imgIdentifierDisclaimerBox.current.style.visibility = 'hidden';
+    }
+    const onCitationCheck = () => {
+        openOrClose(imgIdentifierCitationButtonRef);
+        imgIdentifierCitationBox.current.style.visibility = 'hidden';
+    }
     const onAdjustWindowWidthImgIdentifier = () => {
         if (window.innerWidth <= 740) {
             imgIdentifierRulesIconRef.current.style.transform = 'translateX(-260px)';
@@ -158,6 +168,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
             imgIdentifierSettingsBox.current.style.display = 'inline';
             imgIdentifierSettingsBox.current.style.visibility = 'hidden';
             imgIdentifierRef.current.style.display = 'block';
+            imgIdentifierCitationBox.current.style.visibility = 'hidden';
             imgIdentifierDisclaimerBox.current.style.visibility = 'hidden';
             imgIdentifierThinkingMessageRef.current.style.visibility = 'hidden';
             imgIdentifierHomeButtonRef.current.style.display = 'inline';
@@ -165,6 +176,8 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
             for (let i = 0; i < imgIdentifierElements.length; i++) {
                 readyForMove(imgIdentifierElements[i]);
             }
+            imgIdentifierDisclaimerCheckboxRef.current.checked = true;
+            imgIdentifierCitationCheckboxRef.current.checked = true;
             document.body.style.backgroundColor = 'hsl(0, 100.00%, 85.00%)';
             setTimeout(() => {
                 animateElements();
@@ -221,7 +234,15 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
             <span id='imgIdentifierSettingsBox' draggable={false} ref={imgIdentifierSettingsBox}>
                 <div id='imgIdentifierSettingsTitle' draggable={false}>Settings</div>
                 <ul>
-                    <li></li>
+                    <li>Size of image in container:</li>
+                    <li>Styling of image background:</li>
+                    <li>Show/hide certain buttons:</li>
+                    <li id='imgIdentifierInvisLi'>
+                        <input type='checkbox' onClick={() => onDisclaimerCheck()} id='disclaimerButtonCheckbox' ref={imgIdentifierDisclaimerCheckboxRef} title='disclaimerButtonCheckbox' placeholder='disclaimerButtonCheckbox' /><span id='disclaimerSettingsText'>Disclaimer</span>
+                        <input type='checkbox' onClick={() => onCitationCheck()} id='citationButtonCheckbox' ref={imgIdentifierCitationCheckboxRef} title='citationButtonCheckbox' placeholder='citationButtonCheckbox' /><span id='citationSettingsText'>Citation</span>
+                    </li>
+                    <li>Color of image border:</li>
+                    <li>Color of profile background:</li>
                 </ul>
             </span>
             <div id='imgIdentifierTitle' draggable={false} ref={imgIdentifierTitleRef}>Img Identifier</div>

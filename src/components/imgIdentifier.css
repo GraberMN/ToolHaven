@@ -118,6 +118,9 @@
     margin-right: 60px;
     user-select: none;
 }
+#disclaimerSettingsText {
+    margin-right: 22px;
+}
 ul {
     margin-top: 22px;
 }
@@ -138,6 +141,9 @@ li {
     list-style-type: none;
     padding-left: 4px;
     margin-bottom: 10px;
+}
+input[type='checkbox' i] {
+    transform: translateX(-3px) translateY(1.25px);
 }
 #imgIdentifierImgChooser {
     width: 500px;
