@@ -484,6 +484,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
                     rulersNonRulerElements[i].current.style.opacity = '100';
                 }
                 window.addEventListener("resize", onAdjustWindowWidthRulers);
+                window.addEventListener("resize", positionOrangeRightArrow);
                 allowRulerRotate();
                 rightOrangeArrow.current.style.display = 'inline';
                 if (window.innerWidth <= 740) {
@@ -498,18 +499,13 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
         }
     }, [moveToRulers]);
     useEffect(() => {
-        window.addEventListener("resize", positionOrangeRightArrow);
-        return () => {
-            window.removeEventListener("resize", positionOrangeRightArrow);
-        }
-    }, []);
-    useEffect(() => {
         const goneElements = [rulersTitleRef, rulersRulesIconRef, rulersRulesBox, rulersSettingsIconRef, rulersSettingsBox, inchesRulerRef, centimetersRulerRef, picasRulerRef, pixelsRulerRef, rulersResetButtonRef, rightOrangeArrow, rulersHomeButtonRef];
         for (let i = 0; i < goneElements.length; i++) {
             goneElements[i].current.style.display = 'none';
         }
         return () => {
             window.removeEventListener("resize", onAdjustWindowWidthRulers);
+            window.removeEventListener("resize", positionOrangeRightArrow);
         }
     }, []);
     return (

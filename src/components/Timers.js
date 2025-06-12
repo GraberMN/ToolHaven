@@ -535,6 +535,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers, moveToAIChat
                     timersNonTimerElements[i].current.style.opacity = '100';
                 }
                 window.addEventListener("resize", onAdjustWindowWidthTimers);
+                window.addEventListener("resize", positionPinkRightArrow);
                 rightPinkArrow.current.style.display = 'inline';
                 if (window.innerWidth <= 740) {
                     rightPinkArrow.current.style.transform = 'translateX(165px)';
@@ -559,10 +560,6 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers, moveToAIChat
         secondsValHolder.current.innerHTML = "0";
         setCountdownAlarmSource(bedsideCountdownAlarm);
         setStopwatchLapSoundSource(coinStopwatchLapSound);
-        window.addEventListener("resize", positionPinkRightArrow);
-        return () => {
-            window.removeEventListener("resize", positionPinkRightArrow);
-        }
     }, []);
     useEffect(() => {
         const goneElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox, timersContainerRef, countdownContentRef, stopwatchContentRef, rightPinkArrow, timersHomeButtonRef];
@@ -571,6 +568,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers, moveToAIChat
         }
         return () => {
             window.removeEventListener("resize", onAdjustWindowWidthTimers);
+            window.removeEventListener("resize", positionPinkRightArrow);
         }
     }, []);
     return (

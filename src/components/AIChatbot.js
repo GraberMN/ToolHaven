@@ -301,6 +301,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot, 
                     aiChatbotNonAIChatbotElements[i].current.style.opacity = '100';
                 }
                 window.addEventListener("resize", onAdjustWindowWidthAIChatbot);
+                window.addEventListener("resize", positionRedRightArrow);
                 userInputFieldRef.current.addEventListener("keydown", (e) => limitLines(e));
                 userInputFieldRef.current.addEventListener("input", (e) => limitLines(e));
                 rightRedArrow.current.style.display = 'inline';
@@ -320,7 +321,6 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot, 
         for (let i = 0; i < goneElements.length; i++) {
             goneElements[i].current.style.display = 'none';
         }
-        window.addEventListener("resize", positionRedRightArrow);
         return () => {
             window.removeEventListener("resize", onAdjustWindowWidthAIChatbot);
             window.removeEventListener("resize", positionRedRightArrow);

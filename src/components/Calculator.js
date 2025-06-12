@@ -317,6 +317,7 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
                     calcNonCalcElements[i].current.style.opacity = '100';
                 }
                 window.addEventListener("resize", onAdjustWindowWidth);
+                window.addEventListener("resize", positionBlueRightArrow);
                 rightBlueArrow.current.style.display = 'inline';
                 if (window.innerWidth <= 740) {
                     rightBlueArrow.current.style.transform = 'translateX(165px)';
@@ -329,12 +330,6 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
             }, 4000);
         }
     }, [moveToCalc]);
-    useEffect(() => {
-            window.addEventListener("resize", positionBlueRightArrow);
-            return () => {
-                window.removeEventListener("resize", positionBlueRightArrow);
-            }
-        }, []);
     useEffect(() => {
         inputField.current.value = "0";
         ansField.current.value = "ANS = 0";

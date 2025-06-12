@@ -4,7 +4,7 @@ import './imgIdentifier.css';
 import { pipeline, TextStreamer } from '@huggingface/transformers';
 
 function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveToImgIdentifier }) {
-    const [settingsIcon, rulesIcon, imgIdentifierThumbnailTransparent, homeButton] = imgIdentifierImagesArray;
+    const [settingsIcon, rulesIcon, imgIdentifierThumbnailTransparent, yellowRightArrow, homeButton] = imgIdentifierImagesArray;
     const [imgSource, setImgSource] = useState(null);
     const [imgBGStyling, setImgBGStyling] = useState('white');
     const [imgBorderColorVal, setImgBorderColorVal] = useState('#363030');
@@ -31,7 +31,8 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
     const imgIdentifierThumbnailTransparentRef = useRef(null);
     const imgIdentifierThinkingMessageRef = useRef(null);
     const imgIdentifierIdentificationTextRef = useRef(null);
-
+    const yellowRightArrowArea = useRef(null);
+    const rightYellowArrow = useRef(null);
     const imgIdentifierHomeButtonRef = useRef(null);
     const generateIdentification = async () => {
         try {
@@ -51,7 +52,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
                 skip_prompt: true
             });
             const result = await imageIdentifier(url, { max_new_tokens: 20, do_sample: false, streamer: textStreamer });
-            imgIdentifierIdentificationTextRef.current.innerHTML = `${result[0].label}<br>Confidence: ${Math.floor(result[0].score * 100)}%`;
+            imgIdentifierIdentificationTextRef.current.innerHTML = `<strong>${result[0].label}</strong><br>Confidence: ${Math.floor(result[0].score * 100)}%`;
             imgIdentifierThinkingMessageRef.current.style.visibility = 'hidden';
         }
         catch (error) {
@@ -128,10 +129,16 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
             if (element === imgIdentifierDisclaimerBox && window.innerWidth <= 740) {
                 imgIdentifierHomeButtonRef.current.style.visibility = 'hidden';
             }
+            if (element === imgIdentifierCitationBox && window.innerWidth <= 740) {
+                rightYellowArrow.current.style.visibility = 'hidden';
+            }
         } else {
             element.current.style.visibility = "hidden";
             if (element === imgIdentifierDisclaimerBox && window.innerWidth <= 740) {
                 imgIdentifierHomeButtonRef.current.style.visibility = 'visible';
+            }
+            if (element === imgIdentifierCitationBox && window.innerWidth <= 740) {
+                rightYellowArrow.current.style.visibility = 'visible';
             }
         }
     }
@@ -149,6 +156,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
     const onCitationCheck = () => {
         openOrClose(imgIdentifierCitationButtonRef);
         imgIdentifierCitationBox.current.style.visibility = 'hidden';
+        rightYellowArrow.current.style.visibility = 'visible';
     }
     const onAdjustWindowWidthImgIdentifier = () => {
         if (window.innerWidth <= 740) {
@@ -167,6 +175,36 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
             imgIdentifierSettingsBox.current.style.transform = 'translateX(60px)';
             imgIdentifierHomeButtonRef.current.style.transform = 'translateX(-367px)';
             imgIdentifierHomeButtonRef.current.style.visibility = 'visible';
+        }
+    }
+    const blurYellowRightArrow = () => {
+        rightYellowArrow.current.style.filter = 'blur(1px)';
+        yellowRightArrowArea.current.style.cursor = 'pointer';
+        if (window.innerWidth <= 740) {
+            rightYellowArrow.current.style.transform = 'translateX(165px) rotate(0.05turn)';
+        } else {
+            rightYellowArrow.current.style.transform = 'translateX(270px) rotate(0.05turn)';
+        }
+    }
+    const unBlurYellowRightArrow = () => {
+        rightYellowArrow.current.style.filter = 'blur(0px)';
+        if (window.innerWidth <= 740) {
+            rightYellowArrow.current.style.transform = 'translateX(165px) rotate(0turn)';
+        } else {
+            rightYellowArrow.current.style.transform = 'translateX(270px) rotate(0turn)';
+        }
+    }
+    const positionYellowRightArrow = () => {
+        if (rightYellowArrow.current.style.transform !== "null") {
+            if (window.innerWidth <= 740) {
+                rightYellowArrow.current.style.transform = 'translateX(165px)';
+                if (imgIdentifierCitationBox.current.style.visibility === 'visible') {
+                    rightYellowArrow.current.style.visibility = 'hidden';
+                }
+            } else {
+                rightYellowArrow.current.style.transform = 'translateX(270px)';
+                rightYellowArrow.current.style.visibility = 'visible';
+            }
         }
     }
     const animateElements = () => {
@@ -198,6 +236,9 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
     const readyForMove = (element) => {
         element.current.style.opacity = '0';
     }
+    const yellowRightArrowTransition = () => {
+
+    }
     useEffect(() => {
         if (moveToImgIdentifier) {
             imgIdentifierTitleRef.current.style.display = 'block';
@@ -220,7 +261,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
             firstImageStyleOption.current.checked = true;
             imgIdentifierDisclaimerCheckboxRef.current.checked = true;
             imgIdentifierCitationCheckboxRef.current.checked = true;
-            document.body.style.backgroundColor = 'hsl(0, 100.00%, 85.00%)';
+            document.body.style.backgroundColor = 'hsl(0, 100.00%, 88.00%)';
             setTimeout(() => {
                 animateElements();
                 imgIdentifierCitationBox.current.innerHTML = `@misc{dosovitskiy2021imageworth16x16words,
@@ -240,7 +281,10 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
                     imgIdentifierNonImgIdentifierElements[i].current.style.opacity = '100';
                 }
                 window.addEventListener("resize", onAdjustWindowWidthImgIdentifier);
+                window.addEventListener("resize", positionYellowRightArrow);
+                rightYellowArrow.current.style.display = 'inline';
                 if (window.innerWidth <= 740) {
+                    rightYellowArrow.current.style.transform = 'translateX(165px)';
                     imgIdentifierRulesIconRef.current.style.transform = 'translateX(-260px)';
                     imgIdentifierRulesBox.current.style.transform = 'translateX(-260px)';
                     imgIdentifierSettingsIconRef.current.style.transform = 'translateX(180px)';
@@ -251,9 +295,13 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
         }
     }, [moveToImgIdentifier]);
     useEffect(() => {
-        const goneElements = [imgIdentifierTitleRef, imgIdentifierRulesIconRef, imgIdentifierRulesBox, imgIdentifierSettingsIconRef, imgIdentifierSettingsBox, imgIdentifierRef, imgIdentifierHomeButtonRef];
+        const goneElements = [imgIdentifierTitleRef, imgIdentifierRulesIconRef, imgIdentifierRulesBox, imgIdentifierSettingsIconRef, imgIdentifierSettingsBox, imgIdentifierRef, rightYellowArrow, imgIdentifierHomeButtonRef];
         for (let i = 0; i < goneElements.length; i++) {
             goneElements[i].current.style.display = 'none';
+        }
+        return () => {
+            window.removeEventListener("resize", onAdjustWindowWidthImgIdentifier);
+            window.removeEventListener("resize", positionYellowRightArrow);
         }
     }, []);
     return (
@@ -303,7 +351,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
             <div id='imgIdentifierTitle' draggable={false} ref={imgIdentifierTitleRef}>Img Identifier</div>
             <span id='imgIdentifier' draggable={false} ref={imgIdentifierRef}>
                 <div id='imgIdentifierImgChooser' draggable={false}>
-                    <div id='imgIdentifierPicContainer' style={{ borderColor: imgBorderColorVal }} draggable={false} ref={imgIdentifierPicContainerRef}>
+                    <div id='imgIdentifierPicContainer' style={{ borderColor: imgBorderColorVal, backgroundColor: imgBGStyling }} draggable={false} ref={imgIdentifierPicContainerRef}>
                         <img id='imgIdentifierPic' draggable={false} ref={imgIdentifierPicRef} src={imgSource} alt='chosenImage' title="chosenImage" />
                     </div>
                     <input type='file' onChange={(e) => onFileChange(e)} id='chooseImgButton' ref={chooseImgButtonRef} accept='.png, .apng, .jpg, .jpeg, .ico, .webp, .jfif, .gif, .pjp, .bmp, .pjpeg, .avif' alt='chooseImgButton' title="chooseImgButton" hidden />
@@ -332,7 +380,10 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
                 </div>
             </span>
             <img onClick={() => window.location.reload()} id='imgIdentifierHomeButton' draggable={false} ref={imgIdentifierHomeButtonRef} src={homeButton} alt='toHome' title="toHome" />
-
+            <map name='toPaintbrushMap'>
+                <area onClick={() => window.innerWidth > 740 ? yellowRightArrowTransition(true) : yellowRightArrowTransition(false)} onMouseOver={() => blurYellowRightArrow()} onMouseOut={() => unBlurYellowRightArrow()} id='toPaintbrushMap' ref={yellowRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toPaintbrush' title="toPaintbrush"></area>
+            </map>
+            <img id='toPaintbrush' useMap='#toPaintbrushMap' draggable={false} ref={rightYellowArrow} src={yellowRightArrow} alt='toPaintbrush' />
         </div>
     );
 }
