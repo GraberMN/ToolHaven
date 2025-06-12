@@ -135,7 +135,7 @@ function Home({ homeImagesArray, moveToCalc, setMoveToCalc, moveToRulers, setMov
             </div>
             <div id='byContainer' draggable={false} ref={byContainerRef}>
                 <div id='byTitle'>By: Mateo Graber, </div>
-                <div id='byTitlePt2'>UF Comp Sci Freshman</div>
+                <div id='byTitlePt2'>UF Comp Sci Student</div>
                 <span id='bioContents'>
                     <img id='bioPic' draggable={false} src={bioPic} alt='myBioPic' title='myBioPic' />
                     <span id='contactGrid'>

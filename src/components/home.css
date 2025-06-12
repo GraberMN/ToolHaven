@@ -111,9 +111,11 @@ a {
     display: flex;
     margin-top: 10px;
     user-select: none;
+    color: black;
 }
 #byTitlePt2 {
     font-size: 29px;
+    color: black;
 }
 #bioPic {
     width: 100px;

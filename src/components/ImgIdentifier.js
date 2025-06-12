@@ -3,12 +3,13 @@ import { useState, useRef, useEffect } from 'react';
 import './imgIdentifier.css';
 import { pipeline, TextStreamer } from '@huggingface/transformers';
 
-function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveToImgIdentifier }) {
+function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveToImgIdentifier, moveToPaintbrush, setMoveToPaintbrush }) {
     const [settingsIcon, rulesIcon, imgIdentifierThumbnailTransparent, yellowRightArrow, homeButton] = imgIdentifierImagesArray;
     const [imgSource, setImgSource] = useState(null);
     const [imgBGStyling, setImgBGStyling] = useState('white');
     const [imgBorderColorVal, setImgBorderColorVal] = useState('#363030');
     const [profileBGColorVal, setProfileBGColorVal] = useState('#FFFFFF');
+    const [yellowRightArrowTransitionDone, setYellowRightArrowTransitionDone] = useState(false);
     const generateIdentificationCounter = useRef(0);
     const firstImageSizeOption = useRef(null);
     const firstImageStyleOption = useRef(null);
@@ -236,9 +237,53 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
     const readyForMove = (element) => {
         element.current.style.opacity = '0';
     }
-    const yellowRightArrowTransition = () => {
-
+    const yellowRightArrowTransition = (windowWidthBig) => {
+        setMoveToPaintbrush(true);
+        const hiddenElements = [imgIdentifierRulesBox, imgIdentifierSettingsBox, imgIdentifierDisclaimerBox, imgIdentifierCitationBox];
+        for (let i = 0; i < hiddenElements.length; i++) {
+            hiddenElements[i].current.style.visibility = 'hidden';
+        }
+        const shownElements = [imgIdentifierDisclaimerButtonRef, imgIdentifierCitationButtonRef];
+        for (let i = 0; i < shownElements.length; i++) {
+            shownElements[i].current.style.visibility = 'visible';
+        }
+        const centeyellowElements = [imgIdentifierTitleRef, imgIdentifierRef];
+        for (let i = 0; i < centeyellowElements.length; i++) {
+            readyForAnimation(centeyellowElements[i]);
+            centeyellowElements[i].current.style.animationName = 'fadeLeftImgIdentifier';
+        }
+        const imgIdentifierRulesElements = [imgIdentifierRulesIconRef, imgIdentifierRulesBox, imgIdentifierHomeButtonRef];
+        for (let i = 0; i < imgIdentifierRulesElements.length; i++) {
+            readyForAnimation(imgIdentifierRulesElements[i]);
+            if (windowWidthBig) {
+                imgIdentifierRulesElements[i].current.style.animationName = 'fadeLeftImgIdentifierRules';
+            } else {
+                imgIdentifierRulesElements[i].current.style.animationName = 'fadeLeftImgIdentifierRulesSmall';
+            }
+        }
+        readyForAnimation(imgIdentifierSettingsIconRef);
+        if (windowWidthBig) {
+            imgIdentifierSettingsIconRef.current.style.animationName = 'fadeLeftImgIdentifierSettingsIcon';
+        } else {
+            imgIdentifierSettingsIconRef.current.style.animationName = 'fadeLeftImgIdentifierSettingsIconSmall';
+        }
+        readyForAnimation(imgIdentifierSettingsBox);
+        if (windowWidthBig) {
+            imgIdentifierSettingsBox.current.style.animationName = 'fadeLeftImgIdentifierSettingsBox';
+        } else {
+            imgIdentifierSettingsBox.current.style.animationName = 'fadeLeftImgIdentifierSettingsBoxSmall';
+        }
+        rightYellowArrow.current.style.display = 'none';
+        setTimeout(() => setYellowRightArrowTransitionDone(true), 2000);
     }
+    useEffect(() => {
+        if (yellowRightArrowTransitionDone) {
+            const animImgIdentifierElements = [imgIdentifierTitleRef, imgIdentifierRulesIconRef, imgIdentifierRulesBox, imgIdentifierSettingsIconRef, imgIdentifierSettingsBox, imgIdentifierRef, imgIdentifierDisclaimerBox, imgIdentifierCitationBox, rightYellowArrow, imgIdentifierHomeButtonRef];
+            for (let i = 0; i < animImgIdentifierElements.length; i++) {
+                animImgIdentifierElements[i].current.style.display = 'none';
+            }
+        }
+    }, [yellowRightArrowTransitionDone]);
     useEffect(() => {
         if (moveToImgIdentifier) {
             imgIdentifierTitleRef.current.style.display = 'block';
@@ -261,7 +306,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
             firstImageStyleOption.current.checked = true;
             imgIdentifierDisclaimerCheckboxRef.current.checked = true;
             imgIdentifierCitationCheckboxRef.current.checked = true;
-            document.body.style.backgroundColor = 'hsl(0, 100.00%, 88.00%)';
+            document.body.style.backgroundColor = 'hsl(0, 100.00%, 89.00%)';
             setTimeout(() => {
                 animateElements();
                 imgIdentifierCitationBox.current.innerHTML = `@misc{dosovitskiy2021imageworth16x16words,

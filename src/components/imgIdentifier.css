@@ -455,6 +455,76 @@ input[type='checkbox' i] {
     animation-direction: normal;
     animation-fill-mode: forwards;
 }
+@keyframes fadeLeftImgIdentifier {
+    from {
+        opacity: 100;
+        transform: translateX(0vw);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-30vw);
+    }
+}
+@keyframes fadeLeftImgIdentifierRules {
+    from {
+        opacity: 100;
+        transform: translateX(calc(0vw - 367px));
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw - 367px));
+    }
+}
+@keyframes fadeLeftImgIdentifierRulesSmall {
+    from {
+        opacity: 100;
+        transform: translateX(calc(0vw - 260px));
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw - 260px));
+    }
+}
+@keyframes fadeLeftImgIdentifierSettingsIcon {
+    from {
+        opacity: 100;
+        transform: translateX(calc(0vw + 285px));
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw + 285px));
+    }
+}
+@keyframes fadeLeftImgIdentifierSettingsIconSmall {
+    from {
+        opacity: 100;
+        transform: translateX(calc(0vw + 180px));
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw + 180px));
+    }
+}
+@keyframes fadeLeftImgIdentifierSettingsBox {
+    from {
+        opacity: 100;
+        transform: translateX(calc(0vw + 60px));
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw + 60px));
+    }
+}
+@keyframes fadeLeftImgIdentifierSettingsBoxSmall {
+    from {
+        opacity: 100;
+        transform: translateX(calc(0vw - 45px));
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw - 45px));
+    }
+}
 @keyframes appearFromRightImgIdentifier {
     from {
         opacity: 0;

@@ -53,6 +53,7 @@ function App() {
   const [moveToTimers, setMoveToTimers] = useState(false);
   const [moveToAIChatbot, setMoveToAIChatbot] = useState(false);
   const [moveToImgIdentifier, setMoveToImgIdentifier] = useState(false);
+  const [moveToPaintbrush, setMoveToPaintbrush] = useState(false);
   return (
     <div className="App">
       <Home homeImagesArray={homeImagesArray} moveToCalc={moveToCalc} setMoveToCalc={setMoveToCalc} moveToRulers={moveToRulers} setMoveToRulers={setMoveToRulers} moveToTimers={moveToTimers} setMoveToTimers={setMoveToTimers} moveToAIChatbot={moveToAIChatbot} setMoveToAIChatbot={setMoveToAIChatbot} moveToImgIdentifier={moveToImgIdentifier} setMoveToImgIdentifier={setMoveToImgIdentifier} />
@@ -60,7 +61,7 @@ function App() {
       <Rulers rulersImagesArray={rulersImagesArray} moveToRulers={moveToRulers} setMoveToRulers={setMoveToRulers} moveToTimers={moveToTimers} setMoveToTimers={setMoveToTimers} />
       <Timers timersImagesArray={timersImagesArray} moveToTimers={moveToTimers} setMoveToTimers={setMoveToTimers} moveToAIChatbot={moveToAIChatbot} setMoveToAIChatbot={setMoveToAIChatbot} />
       <AIChatbot aiChatbotImagesArray={aiChatbotImagesArray} moveToAIChatbot={moveToAIChatbot} setMoveToAIChatbot={setMoveToAIChatbot} moveToImgIdentifier={moveToImgIdentifier} setMoveToImgIdentifier={setMoveToImgIdentifier} />
-      <ImgIdentifier imgIdentifierImagesArray={imgIdentifierImagesArray} moveToImgIdentifier={moveToImgIdentifier} setMoveToImgIdentifier={setMoveToImgIdentifier} />
+      <ImgIdentifier imgIdentifierImagesArray={imgIdentifierImagesArray} moveToImgIdentifier={moveToImgIdentifier} setMoveToImgIdentifier={setMoveToImgIdentifier} moveToPaintbrush={moveToPaintbrush} setMoveToPaintbrush={setMoveToPaintbrush} />
     </div>
   );
 }
