@@ -136,7 +136,11 @@ ul > span {
     margin-right: 8px;
 }
 #disclaimerSettingsText {
+    margin-left: -10px;
     margin-right: 22px;
+}
+#citationSettingsText {
+    margin-left: -10px;
 }
 ul {
     margin-top: 22px;
@@ -195,6 +199,23 @@ input[type='checkbox' i] {
 }
 #imgIdentifierPicContainer::-webkit-scrollbar-thumb {
     background-color: rgba(53, 47, 47, 0.993);
+    border-radius: 20px;
+
+}
+#imgIdentifierPicContainer::-webkit-scrollbar-track {
+    background: lightgrey;
+}
+#imgIdentifierPicContainer::-webkit-scrollbar-track-piece {
+    background: lightgrey;
+}
+#imgIdentifierPicContainer::-webkit-scrollbar-track-piece:horizontal {
+    margin-left: 3px;
+}
+#imgIdentifierPicContainer::-webkit-scrollbar-track-piece:vertical {
+    margin-top: 3px;
+}
+#imgIdentifierPicContainer::-webkit-scrollbar-corner {
+    background-color: lightgrey;
 }
 #imgIdentifierPic {
     width: 375px;

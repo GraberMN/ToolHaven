@@ -139,7 +139,11 @@ ul > span {
     padding-right: 4px;
 }
 #disclaimerSettingsText {
+    margin-left: -10px;
     margin-right: 22px;
+}
+#citationSettingsText {
+    margin-left: -10px;
 }
 ul {
     margin-top: 22px;

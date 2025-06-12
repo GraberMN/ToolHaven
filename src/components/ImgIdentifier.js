@@ -264,12 +264,15 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
                 <ul>
                     <li>Hover over the Identifier or any external button to find out what it is/represents.</li>
                     <li>The bottom left Home button takes you back to the Home page.</li>
-                    <li>The Settings tab lets you </li>
+                    <li>The Settings tab lets you change the image size and styling, show/hide the disclaimer/citation buttons, and change the profile background color.</li>
                     <li>The supported file extensions for this Image Identifier are .jpg, .jpeg, .png, their all caps equivalents, .jfif, .webp, .gif, .ico, .bmp, .apng, .pjp, .pjpeg, and .avif.</li>
-                    <li></li>
+                    <li>The image background's styling only makes a difference if the image is transparent.</li>
+                    <li>If the chosen image is square and smaller than or equal to 375px x 375px, both image size settings are identical.</li>
+                    <li>Highlighting and copy/pasting the identification text is always permitted.</li>
                     <li>When changing color in Settings, drag the pointer around for it to work seamlessly.</li>
                     <li>AI Model-Specific Rules:</li>
-                    <li id='lvl2li'>This Img Identifier </li>
+                    <li id='lvl2li'>This Img Identifier uses the Xenova/vit-base-patch16-224 AI Model for image classification.</li>
+                    <li id='lvl2li'>It allows 43 image identifications before requiring the user to go to Home and come back to this page.</li>
                 </ul>
             </span>
             <img onClick={() => openOrClose(imgIdentifierSettingsBox)} id='imgIdentifierSettingsIcon' draggable={false} src={settingsIcon} ref={imgIdentifierSettingsIconRef} alt='imgIdentifierSettingsIcon' title="imgIdentifierSettings" />
