@@ -450,6 +450,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
     }, [orangeRightArrowTransitionDone]);
     useEffect(() => {
         if (moveToRulers) {
+            document.body.style.pointerEvents = 'none';
             rulersTitleRef.current.style.display = 'block';
             rulersRulesIconRef.current.style.display = 'inline';
             rulersRulesBox.current.style.display = 'inline';
@@ -487,6 +488,7 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
                 window.addEventListener("resize", positionOrangeRightArrow);
                 allowRulerRotate();
                 rightOrangeArrow.current.style.display = 'inline';
+                document.body.style.pointerEvents = 'auto';
                 if (window.innerWidth <= 740) {
                     rightOrangeArrow.current.style.transform = 'translateX(165px)';
                     rulersRulesIconRef.current.style.transform = 'translateX(-260px)';

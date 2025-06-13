@@ -209,6 +209,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot, 
     }
     const redRightArrowTransition = (windowWidthBig) => {
         setMoveToImgIdentifier(true);
+        setMessageArray([]);
         const hiddenElements = [aiChatbotRulesBox, aiChatbotSettingsBox, disclaimerBox, citationBox];
         for (let i = 0; i < hiddenElements.length; i++) {
             hiddenElements[i].current.style.visibility = 'hidden';
@@ -259,9 +260,10 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot, 
                     animAIChatbotElements[i].current.style.display = 'none';
                 }
             }
-        }, [redRightArrowTransitionDone]);
+    }, [redRightArrowTransitionDone]);
     useEffect(() => {
         if (moveToAIChatbot) {
+            document.body.style.pointerEvents = 'none';
             aiChatbotTitleRef.current.style.display = 'block';
             aiChatbotRulesIconRef.current.style.display = 'inline';
             aiChatbotRulesBox.current.style.display = 'inline';
@@ -305,6 +307,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot, 
                 userInputFieldRef.current.addEventListener("keydown", (e) => limitLines(e));
                 userInputFieldRef.current.addEventListener("input", (e) => limitLines(e));
                 rightRedArrow.current.style.display = 'inline';
+                document.body.style.pointerEvents = 'auto';
                 if (window.innerWidth <= 740) {
                     rightRedArrow.current.style.transform = 'translateX(165px)';
                     aiChatbotRulesIconRef.current.style.transform = 'translateX(-260px)';

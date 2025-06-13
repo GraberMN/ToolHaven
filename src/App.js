@@ -4,6 +4,7 @@ import rulerThumbnail from './Images/RulerThumbnail.jpg';
 import timerThumbnail from './Images/TimerThumbnail.jpg';
 import aiChatbotThumbnail from './Images/AIChatbotThumbnail.jpg';
 import imgIdentifierThumbnail from './Images/ImgIdentifierThumbnail.jpg';
+import paintbrushThumbnail from './Images/PaintbrushThumbnail.jpg';
 import bioPic from './Images/Linkedin Bio Pic.jpg';
 import mateosPortfolio from './Images/MateosPortfolio.png';
 import gitHub from './Images/GitHub.png';
@@ -31,7 +32,7 @@ import pinkRightArrow from './Images/PinkRightArrow.png';
 import aiChatbotThumbnailTransparent from './Images/AIChatbotThumbnailTransparent.png';
 import redRightArrow from './Images/RedRightArrow.png';
 import imgIdentifierThumbnailTransparent from './Images/ImgIdentifierThumbnailTransparent.png';
-import yellowRightArrow from './Images/YellowRightArrow.png';
+import purpleRightArrow from './Images/PurpleRightArrow.png';
 import homeButton from './Images/HomeButton.png';
 import './App.css';
 import Home from './components/Home';
@@ -40,14 +41,16 @@ import Rulers from './components/Rulers';
 import Timers from './components/Timers';
 import AIChatbot from './components/AIChatbot';
 import ImgIdentifier from './components/ImgIdentifier';
+import Paintbrush from './components/Paintbrush';
 
 function App() {
-  const homeImagesArray = [calculatorThumbnail, rulerThumbnail, timerThumbnail, aiChatbotThumbnail, imgIdentifierThumbnail, bioPic, mateosPortfolio, gitHub, linkedIn, gmail, instagram, facebook, greenRightArrow];
+  const homeImagesArray = [calculatorThumbnail, rulerThumbnail, timerThumbnail, aiChatbotThumbnail, imgIdentifierThumbnail, paintbrushThumbnail, bioPic, mateosPortfolio, gitHub, linkedIn, gmail, instagram, facebook, greenRightArrow];
   const calcImagesArray = [settingsIcon, historyIcon, rulesIcon, blueRightArrow, homeButton];
   const rulersImagesArray = [inchesRuler, centimetersRuler, picasRuler, pixelsRuler, settingsIcon, rulesIcon, orangeRightArrow, homeButton];
   const timersImagesArray = [settingsIcon, rulesIcon, bedsideCountdownAlarm, digitalCountdownAlarm, chaoticCountdownAlarm, coinStopwatchLapSound, joyousStopwatchLapSound, notifStopwatchLapSound, pinkRightArrow, homeButton];
   const aiChatbotImagesArray = [settingsIcon, rulesIcon, aiChatbotThumbnailTransparent, redRightArrow, homeButton];
-  const imgIdentifierImagesArray = [settingsIcon, rulesIcon, imgIdentifierThumbnailTransparent, yellowRightArrow, homeButton];
+  const imgIdentifierImagesArray = [settingsIcon, rulesIcon, imgIdentifierThumbnailTransparent, purpleRightArrow, homeButton];
+  const paintbrushImagesArray = [settingsIcon, rulesIcon, homeButton];
   const [moveToCalc, setMoveToCalc] = useState(false);
   const [moveToRulers, setMoveToRulers] = useState(false);
   const [moveToTimers, setMoveToTimers] = useState(false);
@@ -56,12 +59,13 @@ function App() {
   const [moveToPaintbrush, setMoveToPaintbrush] = useState(false);
   return (
     <div className="App">
-      <Home homeImagesArray={homeImagesArray} moveToCalc={moveToCalc} setMoveToCalc={setMoveToCalc} moveToRulers={moveToRulers} setMoveToRulers={setMoveToRulers} moveToTimers={moveToTimers} setMoveToTimers={setMoveToTimers} moveToAIChatbot={moveToAIChatbot} setMoveToAIChatbot={setMoveToAIChatbot} moveToImgIdentifier={moveToImgIdentifier} setMoveToImgIdentifier={setMoveToImgIdentifier} />
+      <Home homeImagesArray={homeImagesArray} moveToCalc={moveToCalc} setMoveToCalc={setMoveToCalc} moveToRulers={moveToRulers} setMoveToRulers={setMoveToRulers} moveToTimers={moveToTimers} setMoveToTimers={setMoveToTimers} moveToAIChatbot={moveToAIChatbot} setMoveToAIChatbot={setMoveToAIChatbot} moveToImgIdentifier={moveToImgIdentifier} setMoveToImgIdentifier={setMoveToImgIdentifier} moveToPaintbrush={moveToPaintbrush} setMoveToPaintbrush={setMoveToPaintbrush} />
       <Calculator calcImagesArray={calcImagesArray} moveToCalc={moveToCalc} setMoveToCalc={setMoveToCalc} moveToRulers={moveToRulers} setMoveToRulers={setMoveToRulers} />
       <Rulers rulersImagesArray={rulersImagesArray} moveToRulers={moveToRulers} setMoveToRulers={setMoveToRulers} moveToTimers={moveToTimers} setMoveToTimers={setMoveToTimers} />
       <Timers timersImagesArray={timersImagesArray} moveToTimers={moveToTimers} setMoveToTimers={setMoveToTimers} moveToAIChatbot={moveToAIChatbot} setMoveToAIChatbot={setMoveToAIChatbot} />
       <AIChatbot aiChatbotImagesArray={aiChatbotImagesArray} moveToAIChatbot={moveToAIChatbot} setMoveToAIChatbot={setMoveToAIChatbot} moveToImgIdentifier={moveToImgIdentifier} setMoveToImgIdentifier={setMoveToImgIdentifier} />
       <ImgIdentifier imgIdentifierImagesArray={imgIdentifierImagesArray} moveToImgIdentifier={moveToImgIdentifier} setMoveToImgIdentifier={setMoveToImgIdentifier} moveToPaintbrush={moveToPaintbrush} setMoveToPaintbrush={setMoveToPaintbrush} />
+      <Paintbrush paintbrushImagesArray={paintbrushImagesArray} moveToPaintbrush={moveToPaintbrush} setMoveToPaintbrush={setMoveToPaintbrush} />
     </div>
   );
 }

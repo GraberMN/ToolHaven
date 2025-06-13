@@ -4,12 +4,12 @@ import './imgIdentifier.css';
 import { pipeline, TextStreamer } from '@huggingface/transformers';
 
 function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveToImgIdentifier, moveToPaintbrush, setMoveToPaintbrush }) {
-    const [settingsIcon, rulesIcon, imgIdentifierThumbnailTransparent, yellowRightArrow, homeButton] = imgIdentifierImagesArray;
+    const [settingsIcon, rulesIcon, imgIdentifierThumbnailTransparent, purpleRightArrow, homeButton] = imgIdentifierImagesArray;
     const [imgSource, setImgSource] = useState(null);
     const [imgBGStyling, setImgBGStyling] = useState('white');
     const [imgBorderColorVal, setImgBorderColorVal] = useState('#363030');
     const [profileBGColorVal, setProfileBGColorVal] = useState('#FFFFFF');
-    const [yellowRightArrowTransitionDone, setYellowRightArrowTransitionDone] = useState(false);
+    const [purpleRightArrowTransitionDone, setPurpleRightArrowTransitionDone] = useState(false);
     const generateIdentificationCounter = useRef(0);
     const firstImageSizeOption = useRef(null);
     const firstImageStyleOption = useRef(null);
@@ -32,8 +32,8 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
     const imgIdentifierThumbnailTransparentRef = useRef(null);
     const imgIdentifierThinkingMessageRef = useRef(null);
     const imgIdentifierIdentificationTextRef = useRef(null);
-    const yellowRightArrowArea = useRef(null);
-    const rightYellowArrow = useRef(null);
+    const purpleRightArrowArea = useRef(null);
+    const rightPurpleArrow = useRef(null);
     const imgIdentifierHomeButtonRef = useRef(null);
     const generateIdentification = async () => {
         try {
@@ -131,7 +131,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
                 imgIdentifierHomeButtonRef.current.style.visibility = 'hidden';
             }
             if (element === imgIdentifierCitationBox && window.innerWidth <= 740) {
-                rightYellowArrow.current.style.visibility = 'hidden';
+                rightPurpleArrow.current.style.visibility = 'hidden';
             }
         } else {
             element.current.style.visibility = "hidden";
@@ -139,7 +139,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
                 imgIdentifierHomeButtonRef.current.style.visibility = 'visible';
             }
             if (element === imgIdentifierCitationBox && window.innerWidth <= 740) {
-                rightYellowArrow.current.style.visibility = 'visible';
+                rightPurpleArrow.current.style.visibility = 'visible';
             }
         }
     }
@@ -157,7 +157,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
     const onCitationCheck = () => {
         openOrClose(imgIdentifierCitationButtonRef);
         imgIdentifierCitationBox.current.style.visibility = 'hidden';
-        rightYellowArrow.current.style.visibility = 'visible';
+        rightPurpleArrow.current.style.visibility = 'visible';
     }
     const onAdjustWindowWidthImgIdentifier = () => {
         if (window.innerWidth <= 740) {
@@ -178,33 +178,33 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
             imgIdentifierHomeButtonRef.current.style.visibility = 'visible';
         }
     }
-    const blurYellowRightArrow = () => {
-        rightYellowArrow.current.style.filter = 'blur(1px)';
-        yellowRightArrowArea.current.style.cursor = 'pointer';
+    const blurPurpleRightArrow = () => {
+        rightPurpleArrow.current.style.filter = 'blur(1px)';
+        purpleRightArrowArea.current.style.cursor = 'pointer';
         if (window.innerWidth <= 740) {
-            rightYellowArrow.current.style.transform = 'translateX(165px) rotate(0.05turn)';
+            rightPurpleArrow.current.style.transform = 'translateX(165px) rotate(0.05turn)';
         } else {
-            rightYellowArrow.current.style.transform = 'translateX(270px) rotate(0.05turn)';
+            rightPurpleArrow.current.style.transform = 'translateX(270px) rotate(0.05turn)';
         }
     }
-    const unBlurYellowRightArrow = () => {
-        rightYellowArrow.current.style.filter = 'blur(0px)';
+    const unBlurPurpleRightArrow = () => {
+        rightPurpleArrow.current.style.filter = 'blur(0px)';
         if (window.innerWidth <= 740) {
-            rightYellowArrow.current.style.transform = 'translateX(165px) rotate(0turn)';
+            rightPurpleArrow.current.style.transform = 'translateX(165px) rotate(0turn)';
         } else {
-            rightYellowArrow.current.style.transform = 'translateX(270px) rotate(0turn)';
+            rightPurpleArrow.current.style.transform = 'translateX(270px) rotate(0turn)';
         }
     }
-    const positionYellowRightArrow = () => {
-        if (rightYellowArrow.current.style.transform !== "null") {
+    const positionPurpleRightArrow = () => {
+        if (rightPurpleArrow.current.style.transform !== "null") {
             if (window.innerWidth <= 740) {
-                rightYellowArrow.current.style.transform = 'translateX(165px)';
+                rightPurpleArrow.current.style.transform = 'translateX(165px)';
                 if (imgIdentifierCitationBox.current.style.visibility === 'visible') {
-                    rightYellowArrow.current.style.visibility = 'hidden';
+                    rightPurpleArrow.current.style.visibility = 'hidden';
                 }
             } else {
-                rightYellowArrow.current.style.transform = 'translateX(270px)';
-                rightYellowArrow.current.style.visibility = 'visible';
+                rightPurpleArrow.current.style.transform = 'translateX(270px)';
+                rightPurpleArrow.current.style.visibility = 'visible';
             }
         }
     }
@@ -237,8 +237,13 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
     const readyForMove = (element) => {
         element.current.style.opacity = '0';
     }
-    const yellowRightArrowTransition = (windowWidthBig) => {
+    const purpleRightArrowTransition = (windowWidthBig) => {
         setMoveToPaintbrush(true);
+        setImgSource(null);
+        imgSelectedRef.current.innerHTML = 'No image chosen';
+        imgIdentifierIdentificationTextRef.current.innerHTML = '';
+        changeImageSizeToFitContainer(true);
+        changeImageStyleToVisible(true);
         const hiddenElements = [imgIdentifierRulesBox, imgIdentifierSettingsBox, imgIdentifierDisclaimerBox, imgIdentifierCitationBox];
         for (let i = 0; i < hiddenElements.length; i++) {
             hiddenElements[i].current.style.visibility = 'hidden';
@@ -247,10 +252,10 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
         for (let i = 0; i < shownElements.length; i++) {
             shownElements[i].current.style.visibility = 'visible';
         }
-        const centeyellowElements = [imgIdentifierTitleRef, imgIdentifierRef];
-        for (let i = 0; i < centeyellowElements.length; i++) {
-            readyForAnimation(centeyellowElements[i]);
-            centeyellowElements[i].current.style.animationName = 'fadeLeftImgIdentifier';
+        const centeredPurpleElements = [imgIdentifierTitleRef, imgIdentifierRef];
+        for (let i = 0; i < centeredPurpleElements.length; i++) {
+            readyForAnimation(centeredPurpleElements[i]);
+            centeredPurpleElements[i].current.style.animationName = 'fadeLeftImgIdentifier';
         }
         const imgIdentifierRulesElements = [imgIdentifierRulesIconRef, imgIdentifierRulesBox, imgIdentifierHomeButtonRef];
         for (let i = 0; i < imgIdentifierRulesElements.length; i++) {
@@ -273,19 +278,20 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
         } else {
             imgIdentifierSettingsBox.current.style.animationName = 'fadeLeftImgIdentifierSettingsBoxSmall';
         }
-        rightYellowArrow.current.style.display = 'none';
-        setTimeout(() => setYellowRightArrowTransitionDone(true), 2000);
+        rightPurpleArrow.current.style.display = 'none';
+        setTimeout(() => setPurpleRightArrowTransitionDone(true), 2000);
     }
     useEffect(() => {
-        if (yellowRightArrowTransitionDone) {
-            const animImgIdentifierElements = [imgIdentifierTitleRef, imgIdentifierRulesIconRef, imgIdentifierRulesBox, imgIdentifierSettingsIconRef, imgIdentifierSettingsBox, imgIdentifierRef, imgIdentifierDisclaimerBox, imgIdentifierCitationBox, rightYellowArrow, imgIdentifierHomeButtonRef];
+        if (purpleRightArrowTransitionDone) {
+            const animImgIdentifierElements = [imgIdentifierTitleRef, imgIdentifierRulesIconRef, imgIdentifierRulesBox, imgIdentifierSettingsIconRef, imgIdentifierSettingsBox, imgIdentifierRef, imgIdentifierDisclaimerBox, imgIdentifierCitationBox, rightPurpleArrow, imgIdentifierHomeButtonRef];
             for (let i = 0; i < animImgIdentifierElements.length; i++) {
                 animImgIdentifierElements[i].current.style.display = 'none';
             }
         }
-    }, [yellowRightArrowTransitionDone]);
+    }, [purpleRightArrowTransitionDone]);
     useEffect(() => {
         if (moveToImgIdentifier) {
+            document.body.style.pointerEvents = 'none';
             imgIdentifierTitleRef.current.style.display = 'block';
             imgIdentifierRulesIconRef.current.style.display = 'inline';
             imgIdentifierRulesBox.current.style.display = 'inline';
@@ -326,10 +332,11 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
                     imgIdentifierNonImgIdentifierElements[i].current.style.opacity = '100';
                 }
                 window.addEventListener("resize", onAdjustWindowWidthImgIdentifier);
-                window.addEventListener("resize", positionYellowRightArrow);
-                rightYellowArrow.current.style.display = 'inline';
+                window.addEventListener("resize", positionPurpleRightArrow);
+                rightPurpleArrow.current.style.display = 'inline';
+                document.body.style.pointerEvents = 'auto';
                 if (window.innerWidth <= 740) {
-                    rightYellowArrow.current.style.transform = 'translateX(165px)';
+                    rightPurpleArrow.current.style.transform = 'translateX(165px)';
                     imgIdentifierRulesIconRef.current.style.transform = 'translateX(-260px)';
                     imgIdentifierRulesBox.current.style.transform = 'translateX(-260px)';
                     imgIdentifierSettingsIconRef.current.style.transform = 'translateX(180px)';
@@ -340,13 +347,13 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
         }
     }, [moveToImgIdentifier]);
     useEffect(() => {
-        const goneElements = [imgIdentifierTitleRef, imgIdentifierRulesIconRef, imgIdentifierRulesBox, imgIdentifierSettingsIconRef, imgIdentifierSettingsBox, imgIdentifierRef, rightYellowArrow, imgIdentifierHomeButtonRef];
+        const goneElements = [imgIdentifierTitleRef, imgIdentifierRulesIconRef, imgIdentifierRulesBox, imgIdentifierSettingsIconRef, imgIdentifierSettingsBox, imgIdentifierRef, rightPurpleArrow, imgIdentifierHomeButtonRef];
         for (let i = 0; i < goneElements.length; i++) {
             goneElements[i].current.style.display = 'none';
         }
         return () => {
             window.removeEventListener("resize", onAdjustWindowWidthImgIdentifier);
-            window.removeEventListener("resize", positionYellowRightArrow);
+            window.removeEventListener("resize", positionPurpleRightArrow);
         }
     }, []);
     return (
@@ -426,9 +433,9 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
             </span>
             <img onClick={() => window.location.reload()} id='imgIdentifierHomeButton' draggable={false} ref={imgIdentifierHomeButtonRef} src={homeButton} alt='toHome' title="toHome" />
             <map name='toPaintbrushMap'>
-                <area onClick={() => window.innerWidth > 740 ? yellowRightArrowTransition(true) : yellowRightArrowTransition(false)} onMouseOver={() => blurYellowRightArrow()} onMouseOut={() => unBlurYellowRightArrow()} id='toPaintbrushMap' ref={yellowRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toPaintbrush' title="toPaintbrush"></area>
+                <area onClick={() => window.innerWidth > 740 ? purpleRightArrowTransition(true) : purpleRightArrowTransition(false)} onMouseOver={() => blurPurpleRightArrow()} onMouseOut={() => unBlurPurpleRightArrow()} id='toPaintbrushMap' ref={purpleRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toPaintbrush' title="toPaintbrush"></area>
             </map>
-            <img id='toPaintbrush' useMap='#toPaintbrushMap' draggable={false} ref={rightYellowArrow} src={yellowRightArrow} alt='toPaintbrush' />
+            <img id='toPaintbrush' useMap='#toPaintbrushMap' draggable={false} ref={rightPurpleArrow} src={purpleRightArrow} alt='toPaintbrush' />
         </div>
     );
 }

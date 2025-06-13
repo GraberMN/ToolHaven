@@ -291,6 +291,7 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
     }, [blueRightArrowTransitionDone]);
     useEffect(() => {
         if (moveToCalc) {
+            document.body.style.pointerEvents = 'none';
             inputField.current.style.display = 'inline';
             buttonContainer.current.style.display = 'grid';
             calcTitleRef.current.style.display = 'block';
@@ -319,6 +320,7 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
                 window.addEventListener("resize", onAdjustWindowWidth);
                 window.addEventListener("resize", positionBlueRightArrow);
                 rightBlueArrow.current.style.display = 'inline';
+                document.body.style.pointerEvents = 'auto';
                 if (window.innerWidth <= 740) {
                     rightBlueArrow.current.style.transform = 'translateX(165px)';
                     rulesIconRef.current.style.transform = 'translateX(-260px)';

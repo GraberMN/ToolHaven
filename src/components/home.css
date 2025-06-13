@@ -107,6 +107,12 @@ a {
 #imgIdentifierTool:active {
     border-style: dashed;
 }
+#paintbrushTool:hover {
+    border-color: hsl(273, 100%, 50%);
+}
+#paintbrushTool:active {
+    border-style: dashed;
+}
 #bioContents {
     display: flex;
     margin-top: 10px;

@@ -504,6 +504,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers, moveToAIChat
     }, [pinkRightArrowTransitionDone]);
     useEffect(() => {
         if (moveToTimers) {
+            document.body.style.pointerEvents = 'none';
             timersTitleRef.current.style.display = 'block';
             timersRulesIconRef.current.style.display = 'inline';
             timersRulesBox.current.style.display = 'inline';
@@ -537,6 +538,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers, moveToAIChat
                 window.addEventListener("resize", onAdjustWindowWidthTimers);
                 window.addEventListener("resize", positionPinkRightArrow);
                 rightPinkArrow.current.style.display = 'inline';
+                document.body.style.pointerEvents = 'auto';
                 if (window.innerWidth <= 740) {
                     rightPinkArrow.current.style.transform = 'translateX(165px)';
                     timersRulesIconRef.current.style.transform = 'translateX(-260px)';
