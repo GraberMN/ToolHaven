@@ -6,7 +6,7 @@
     margin: auto;
     transform: translateX(-367px);
     cursor: pointer;
-    border: solid hsl(273, 100%, 50%);
+    border: solid hsl(273, 100%, 60%);
     border-radius: 15px;
     background-color: rgba(0, 0, 0, 0.705);
     z-index: 999;
@@ -29,7 +29,7 @@
     border: solid;
     margin: auto;
     transform: translateX(-367px);
-    border-color: hsl(273, 100%, 50%);
+    border-color: hsl(273, 100%, 60%);
     border-radius: 20px;
     z-index: 997;
     background-color: white;
@@ -44,7 +44,7 @@
     height: auto;
 }
 #paintbrushRulesBox::-webkit-scrollbar-thumb {
-    background: hsl(273, 100%, 50%);
+    background: hsl(273, 100%, 60%);
     border-radius: 20px;
 }
 #paintbrushRulesBox::-webkit-scrollbar-track-piece {
@@ -59,6 +59,90 @@
     margin-top: 28px;
     margin-right: -60px;
     user-select: none;
+}
+#paintbrushSettingsIcon {
+    position: absolute;
+    width: 75px;
+    height: auto;
+    margin: auto;
+    transform: translateX(285px);
+    cursor: pointer;
+    border: solid hsl(273, 100%, 60%);
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.705);
+    z-index: 999;
+    display: inline;
+    user-select: none;
+}
+#paintbrushSettingsIcon:hover {
+    border-radius: 20px;
+}
+#paintbrushSettingsIcon:active {
+    border-style: dashed;
+}
+#paintbrushSettingsIcon:not(:hover) ~ #paintbrushSettingsBox {
+    border-top-right-radius: 15px;
+}
+#paintbrushSettingsBox {
+    position: absolute;
+    width: 300px;
+    height: 450px;
+    border: solid;
+    margin: auto;
+    transform: translateX(60px);
+    border-color: hsl(273, 100%, 60%);
+    border-radius: 20px;
+    z-index: 998;
+    background-color: white;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: inline;
+    user-select: none;
+}
+ul > input {
+    margin-left: -40px;
+    width: 200px;
+}
+ul > input[type='color' i] {
+    width: 200px;
+}
+ul > span {
+    position: absolute;
+    font-family: cursive;
+}
+#paintbrushSettingsTitle {
+    font-size: 30px;
+    font-weight: 600;
+    margin-top: 28px;
+    margin-right: 60px;
+    user-select: none;
+}
+ul {
+    margin-top: 22px;
+}
+li {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-family: cursive;
+    text-align: left;
+    list-style-type: square;
+    margin-right: 19px;
+}
+#lvl2li {
+    font-family: cursive;
+    margin-left: 25px;
+    list-style-type: circle;
+}
+#paintbrushInvisLi {
+    list-style-type: none;
+    padding-left: 4px;
+    margin-bottom: 10px;
+}
+.readyForAnim {
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
 }
 @keyframes appearFromRightPaintbrush {
     from {

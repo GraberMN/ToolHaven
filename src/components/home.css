@@ -108,7 +108,7 @@ a {
     border-style: dashed;
 }
 #paintbrushTool:hover {
-    border-color: hsl(273, 100%, 50%);
+    border-color: hsl(273, 100%, 60%);
 }
 #paintbrushTool:active {
     border-style: dashed;

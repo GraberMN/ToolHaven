@@ -6,6 +6,8 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
     const [settingsIcon, rulesIcon, homeButton] = paintbrushImagesArray;
     const paintbrushRulesIconRef = useRef(null);
     const paintbrushRulesBox = useRef(null);
+    const paintbrushSettingsIconRef = useRef(null);
+    const paintbrushSettingsBox = useRef(null);
     const openOrClose = (element) => {
         if (element.current.style.visibility === "hidden") {
             element.current.style.visibility = "visible";
@@ -17,13 +19,17 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
         if (window.innerWidth <= 740) {
             paintbrushRulesIconRef.current.style.transform = 'translateX(-260px)';
             paintbrushRulesBox.current.style.transform = 'translateX(-260px)';
+            paintbrushSettingsIconRef.current.style.transform = 'translateX(180px)';
+            paintbrushSettingsBox.current.style.transform = 'translateX(-45px)';
         } else {
             paintbrushRulesIconRef.current.style.transform = 'translateX(-367px)';
             paintbrushRulesBox.current.style.transform = 'translateX(-367px)';
+            paintbrushSettingsIconRef.current.style.transform = 'translateX(285px)';
+            paintbrushSettingsBox.current.style.transform = 'translateX(60px)';
         }
     }
     const animateElements = () => {
-        const paintbrushElements = [paintbrushRulesIconRef, paintbrushRulesBox];
+        const paintbrushElements = [paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox];
         for (let i = 0; i < paintbrushElements.length; i++) {
             readyForAnimation(paintbrushElements[i]);
         }
@@ -31,9 +37,13 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
         if (window.innerWidth > 740) {
             paintbrushRulesIconRef.current.style.animationName = 'appearFromRightPaintbrushRules';
             paintbrushRulesBox.current.style.animationName = 'appearFromRightPaintbrushRules';
+            paintbrushSettingsIconRef.current.style.animationName = 'appearFromRightPaintbrushSettingsIcon';
+            paintbrushSettingsBox.current.style.animationName = 'appearFromRightPaintbrushSettingsBox';
         } else {
             paintbrushRulesIconRef.current.style.animationName = 'appearFromRightPaintbrushRulesSmall';
             paintbrushRulesBox.current.style.animationName = 'appearFromRightPaintbrushRulesSmall';
+            paintbrushSettingsIconRef.current.style.animationName = 'appearFromRightPaintbrushSettingsIconSmall';
+            paintbrushSettingsBox.current.style.animationName = 'appearFromRightPaintbrushSettingsBoxSmall';
         }
 
     }
@@ -51,16 +61,19 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
             paintbrushRulesIconRef.current.style.display = 'inline';
             paintbrushRulesBox.current.style.display = 'inline';
             paintbrushRulesBox.current.style.visibility = 'hidden';
-            const paintbrushElements = [paintbrushRulesIconRef, paintbrushRulesBox];
+            paintbrushSettingsIconRef.current.style.display = 'inline';
+            paintbrushSettingsBox.current.style.display = 'inline';
+            paintbrushSettingsBox.current.style.visibility = 'hidden';
+            const paintbrushElements = [paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox];
             for (let i = 0; i < paintbrushElements.length; i++) {
                 readyForMove(paintbrushElements[i]);
             }
-            document.body.style.backgroundColor = 'hsl(272, 20.50%, 85.70%)';
+            document.body.style.backgroundColor = 'hsl(274, 25.30%, 83.70%)';
             setTimeout(() => {
                 animateElements();
             }, 2000);
             setTimeout(() => {
-                const paintbrushNonPaintbrushElements = [paintbrushRulesIconRef, paintbrushRulesBox];
+                const paintbrushNonPaintbrushElements = [paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox];
                 for (let i = 0; i < paintbrushNonPaintbrushElements.length; i++) {
                     paintbrushNonPaintbrushElements[i].current.style.animationName = 'none';
                     paintbrushNonPaintbrushElements[i].current.style.opacity = '100';
@@ -70,19 +83,21 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
                 if (window.innerWidth <= 740) {
                     paintbrushRulesIconRef.current.style.transform = 'translateX(-260px)';
                     paintbrushRulesBox.current.style.transform = 'translateX(-260px)';
+                    paintbrushSettingsIconRef.current.style.transform = 'translateX(180px)';
+                    paintbrushSettingsBox.current.style.transform = 'translateX(-45px)';
                 }
             }, 4000);
         }
     }, [moveToPaintbrush]);
     useEffect(() => {
-            const goneElements = [paintbrushRulesIconRef, paintbrushRulesBox];
-            for (let i = 0; i < goneElements.length; i++) {
-                goneElements[i].current.style.display = 'none';
-            }
-            return () => {
-                window.removeEventListener("resize", onAdjustWindowWidthPaintbrush);
-            }
-        }, []);
+        const goneElements = [paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox];
+        for (let i = 0; i < goneElements.length; i++) {
+            goneElements[i].current.style.display = 'none';
+        }
+        return () => {
+            window.removeEventListener("resize", onAdjustWindowWidthPaintbrush);
+        }
+    }, []);
     return (
         <div>
             <img onClick={() => openOrClose(paintbrushRulesBox)} id='paintbrushRulesIcon' draggable={false} src={rulesIcon} ref={paintbrushRulesIconRef} alt='paintbrushRulesIcon' title="paintbrushRules" />
@@ -100,6 +115,13 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
                     <li>Paint Tool-Specific Rules:</li>
                     <li id='lvl2li'></li>
                     <li id='lvl2li'></li>
+                </ul>
+            </span>
+            <img onClick={() => openOrClose(paintbrushSettingsBox)} id='paintbrushSettingsIcon' draggable={false} src={settingsIcon} ref={paintbrushSettingsIconRef} alt='paintbrushSettingsIcon' title="paintbrushSettings" />
+            <span id='paintbrushSettingsBox' draggable={false} ref={paintbrushSettingsBox}>
+                <div id='paintbrushSettingsTitle' draggable={false}>Settings</div>
+                <ul>
+                    <li></li>
                 </ul>
             </span>
         </div>
