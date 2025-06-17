@@ -1,4 +1,16 @@
-
+#paintbrushTitle {
+    position: relative;
+    text-align: center;
+    font-size: 43px;
+    font-family: cursive;
+    font-weight: bolder;
+    color: hsl(273, 100%, 60%);
+    display: block;
+    transform: translateX(30vw);
+    margin-top: 30px;
+    margin-bottom: 30px;
+    user-select: none;
+}
 #paintbrushRulesIcon {
     position: absolute;
     width: 75px;
@@ -137,6 +149,59 @@ li {
     list-style-type: none;
     padding-left: 4px;
     margin-bottom: 10px;
+}
+#paintbrushCanvas {
+    width: 600px;
+    height: 600px;
+    border: solid 5px rgba(53, 47, 47, 0.993);
+    background-color: white;
+    transform: translateX(30vw);
+    display: block;
+    margin: auto;
+    margin-top: 40px;
+    user-select: none;
+}
+#downloadButton {
+    width: 205px;
+    height: 35px;
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    align-content: center;
+    font-family: cursive;
+    font-size: 16px;
+    border: solid 3px rgba(53, 47, 47, 0.993);
+    border-radius: 10px;
+    background-color: white;
+    cursor: pointer;
+    user-select: none;
+}
+#downloadButton:hover {
+    background-color: lightcyan;
+}
+#downloadButton:active {
+    background-color: white;
+}
+#paintbrushHomeButton {
+    position: absolute;
+    width: 75px;
+    height: auto;
+    margin: auto;
+    margin-top: 2px;
+    transform: translateX(-367px);
+    cursor: pointer;
+    border: solid hsl(273, 100%, 60%);
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.705);
+    z-index: 999;
+    display: inline;
+    user-select: none;
+}
+#paintbrushHomeButton:hover {
+    border-radius: 20px;
+}
+#paintbrushHomeButton:active {
+    border-style: dashed;
 }
 .readyForAnim {
     animation-duration: 2s;

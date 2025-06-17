@@ -8,6 +8,10 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
     const paintbrushRulesBox = useRef(null);
     const paintbrushSettingsIconRef = useRef(null);
     const paintbrushSettingsBox = useRef(null);
+    const paintbrushTitleRef = useRef(null);
+    const paintbrushCanvasRef = useRef(null);
+    const downloadButtonRef = useRef(null);
+    const paintbrushHomeButtonRef = useRef(null);
     const openOrClose = (element) => {
         if (element.current.style.visibility === "hidden") {
             element.current.style.visibility = "visible";
@@ -21,31 +25,36 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
             paintbrushRulesBox.current.style.transform = 'translateX(-260px)';
             paintbrushSettingsIconRef.current.style.transform = 'translateX(180px)';
             paintbrushSettingsBox.current.style.transform = 'translateX(-45px)';
+            paintbrushHomeButtonRef.current.style.transform = 'translateX(-260px)';
         } else {
             paintbrushRulesIconRef.current.style.transform = 'translateX(-367px)';
             paintbrushRulesBox.current.style.transform = 'translateX(-367px)';
             paintbrushSettingsIconRef.current.style.transform = 'translateX(285px)';
             paintbrushSettingsBox.current.style.transform = 'translateX(60px)';
+            paintbrushHomeButtonRef.current.style.transform = 'translateX(-367px)';
         }
     }
     const animateElements = () => {
-        const paintbrushElements = [paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox];
+        const paintbrushElements = [paintbrushTitleRef, paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox, paintbrushCanvasRef, downloadButtonRef, paintbrushHomeButtonRef];
         for (let i = 0; i < paintbrushElements.length; i++) {
             readyForAnimation(paintbrushElements[i]);
         }
-
+        paintbrushTitleRef.current.style.animationName = 'appearFromRightPaintbrush';
         if (window.innerWidth > 740) {
             paintbrushRulesIconRef.current.style.animationName = 'appearFromRightPaintbrushRules';
             paintbrushRulesBox.current.style.animationName = 'appearFromRightPaintbrushRules';
             paintbrushSettingsIconRef.current.style.animationName = 'appearFromRightPaintbrushSettingsIcon';
             paintbrushSettingsBox.current.style.animationName = 'appearFromRightPaintbrushSettingsBox';
+            paintbrushHomeButtonRef.current.style.animationName = 'appearFromRightPaintbrushRules';
         } else {
             paintbrushRulesIconRef.current.style.animationName = 'appearFromRightPaintbrushRulesSmall';
             paintbrushRulesBox.current.style.animationName = 'appearFromRightPaintbrushRulesSmall';
             paintbrushSettingsIconRef.current.style.animationName = 'appearFromRightPaintbrushSettingsIconSmall';
             paintbrushSettingsBox.current.style.animationName = 'appearFromRightPaintbrushSettingsBoxSmall';
+            paintbrushHomeButtonRef.current.style.animationName = 'appearFromRightPaintbrushRulesSmall';
         }
-
+        paintbrushCanvasRef.current.style.animationName = 'appearFromRightPaintbrush';
+        downloadButtonRef.current.style.animationName = 'appearFromRightPaintbrush';
     }
     const readyForAnimation = (element) => {
         element.current.style.animationName = 'none';
@@ -58,13 +67,17 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
     useEffect(() => {
         if (moveToPaintbrush) {
             document.body.style.pointerEvents = 'none';
+            paintbrushTitleRef.current.style.display = 'block';
             paintbrushRulesIconRef.current.style.display = 'inline';
             paintbrushRulesBox.current.style.display = 'inline';
             paintbrushRulesBox.current.style.visibility = 'hidden';
             paintbrushSettingsIconRef.current.style.display = 'inline';
             paintbrushSettingsBox.current.style.display = 'inline';
             paintbrushSettingsBox.current.style.visibility = 'hidden';
-            const paintbrushElements = [paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox];
+            paintbrushCanvasRef.current.style.display = 'block';
+            downloadButtonRef.current.style.display = 'block';
+            paintbrushHomeButtonRef.current.style.display = 'inline';
+            const paintbrushElements = [paintbrushTitleRef, paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox, paintbrushCanvasRef, downloadButtonRef, paintbrushHomeButtonRef];
             for (let i = 0; i < paintbrushElements.length; i++) {
                 readyForMove(paintbrushElements[i]);
             }
@@ -73,7 +86,7 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
                 animateElements();
             }, 2000);
             setTimeout(() => {
-                const paintbrushNonPaintbrushElements = [paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox];
+                const paintbrushNonPaintbrushElements = [paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox, paintbrushHomeButtonRef];
                 for (let i = 0; i < paintbrushNonPaintbrushElements.length; i++) {
                     paintbrushNonPaintbrushElements[i].current.style.animationName = 'none';
                     paintbrushNonPaintbrushElements[i].current.style.opacity = '100';
@@ -85,12 +98,13 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
                     paintbrushRulesBox.current.style.transform = 'translateX(-260px)';
                     paintbrushSettingsIconRef.current.style.transform = 'translateX(180px)';
                     paintbrushSettingsBox.current.style.transform = 'translateX(-45px)';
+                    paintbrushHomeButtonRef.current.style.transform = 'translateX(-260px)';
                 }
             }, 4000);
         }
     }, [moveToPaintbrush]);
     useEffect(() => {
-        const goneElements = [paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox];
+        const goneElements = [paintbrushTitleRef, paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox, paintbrushCanvasRef, downloadButtonRef, paintbrushHomeButtonRef];
         for (let i = 0; i < goneElements.length; i++) {
             goneElements[i].current.style.display = 'none';
         }
@@ -124,6 +138,10 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
                     <li></li>
                 </ul>
             </span>
+            <div id='paintbrushTitle' draggable={false} ref={paintbrushTitleRef}>Paintbrush</div>
+            <span id='paintbrushCanvas' draggable={false} ref={paintbrushCanvasRef} alt='paintbrushCanvas' title='paintbrushCanvas'></span>
+            <button id='downloadButton' ref={downloadButtonRef}>Download Masterpiece</button>
+            <img onClick={() => window.location.reload()} id='paintbrushHomeButton' draggable={false} ref={paintbrushHomeButtonRef} src={homeButton} alt='toHome' title="toHome" />
         </div>
     )
 }
