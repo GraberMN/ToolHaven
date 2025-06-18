@@ -129,6 +129,9 @@ ul > span {
     margin-right: 60px;
     user-select: none;
 }
+#squareCanvasText {
+    margin-right: 10px;
+}
 ul {
     margin-top: 22px;
 }
@@ -150,15 +153,20 @@ li {
     padding-left: 4px;
     margin-bottom: 10px;
 }
+#paintbrushInvisLiRadio {
+    list-style-type: none;
+    padding-left: 0px;
+    margin-bottom: 10px;
+}
 #paintbrushCanvas {
+    position: relative;
     width: 600px;
     height: 600px;
     border: solid 5px rgba(53, 47, 47, 0.993);
     background-color: white;
-    transform: translateX(30vw);
     display: block;
     margin: auto;
-    margin-top: 40px;
+    margin-top: 39px;
     user-select: none;
 }
 #downloadButton {

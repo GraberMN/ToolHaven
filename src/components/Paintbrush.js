@@ -4,20 +4,36 @@ import './paintbrush.css';
 
 function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbrush }) {
     const [settingsIcon, rulesIcon, homeButton] = paintbrushImagesArray;
+    const [canvasBGColorVal, setCanvasBGColorVal] = useState('#FFFFFF');
+    const firstCanvasShapeOption = useRef(null);
     const paintbrushRulesIconRef = useRef(null);
     const paintbrushRulesBox = useRef(null);
     const paintbrushSettingsIconRef = useRef(null);
     const paintbrushSettingsBox = useRef(null);
     const paintbrushTitleRef = useRef(null);
+    const paintbrushCanvasContainerRef = useRef(null);
     const paintbrushCanvasRef = useRef(null);
     const downloadButtonRef = useRef(null);
     const paintbrushHomeButtonRef = useRef(null);
+    const changeCanvasShapeToSquare = (isChecked) => {
+        if (isChecked) {
+            paintbrushCanvasRef.current.style.width = '600px';
+        }
+    }
+    const changeCanvasShapeToRectangular = (isChecked) => {
+        if (isChecked) {
+            paintbrushCanvasRef.current.style.width = '1200px';
+        }
+    }
     const openOrClose = (element) => {
         if (element.current.style.visibility === "hidden") {
             element.current.style.visibility = "visible";
         } else {
             element.current.style.visibility = "hidden";
         }
+    }
+    const onCanvasBGColorChange = (e) => {
+        setCanvasBGColorVal(e.target.value);
     }
     const onAdjustWindowWidthPaintbrush = () => {
         if (window.innerWidth <= 740) {
@@ -35,7 +51,7 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
         }
     }
     const animateElements = () => {
-        const paintbrushElements = [paintbrushTitleRef, paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox, paintbrushCanvasRef, downloadButtonRef, paintbrushHomeButtonRef];
+        const paintbrushElements = [paintbrushTitleRef, paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox, paintbrushCanvasContainerRef, downloadButtonRef, paintbrushHomeButtonRef];
         for (let i = 0; i < paintbrushElements.length; i++) {
             readyForAnimation(paintbrushElements[i]);
         }
@@ -53,7 +69,7 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
             paintbrushSettingsBox.current.style.animationName = 'appearFromRightPaintbrushSettingsBoxSmall';
             paintbrushHomeButtonRef.current.style.animationName = 'appearFromRightPaintbrushRulesSmall';
         }
-        paintbrushCanvasRef.current.style.animationName = 'appearFromRightPaintbrush';
+        paintbrushCanvasContainerRef.current.style.animationName = 'appearFromRightPaintbrush';
         downloadButtonRef.current.style.animationName = 'appearFromRightPaintbrush';
     }
     const readyForAnimation = (element) => {
@@ -74,13 +90,14 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
             paintbrushSettingsIconRef.current.style.display = 'inline';
             paintbrushSettingsBox.current.style.display = 'inline';
             paintbrushSettingsBox.current.style.visibility = 'hidden';
-            paintbrushCanvasRef.current.style.display = 'block';
+            paintbrushCanvasContainerRef.current.style.display = 'block';
             downloadButtonRef.current.style.display = 'block';
             paintbrushHomeButtonRef.current.style.display = 'inline';
-            const paintbrushElements = [paintbrushTitleRef, paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox, paintbrushCanvasRef, downloadButtonRef, paintbrushHomeButtonRef];
+            const paintbrushElements = [paintbrushTitleRef, paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox, paintbrushCanvasContainerRef, downloadButtonRef, paintbrushHomeButtonRef];
             for (let i = 0; i < paintbrushElements.length; i++) {
                 readyForMove(paintbrushElements[i]);
             }
+            firstCanvasShapeOption.current.checked = 'true';
             document.body.style.backgroundColor = 'hsl(274, 25.30%, 83.70%)';
             setTimeout(() => {
                 animateElements();
@@ -104,7 +121,7 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
         }
     }, [moveToPaintbrush]);
     useEffect(() => {
-        const goneElements = [paintbrushTitleRef, paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox, paintbrushCanvasRef, downloadButtonRef, paintbrushHomeButtonRef];
+        const goneElements = [paintbrushTitleRef, paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox, paintbrushCanvasContainerRef, downloadButtonRef, paintbrushHomeButtonRef];
         for (let i = 0; i < goneElements.length; i++) {
             goneElements[i].current.style.display = 'none';
         }
@@ -121,8 +138,8 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
                     <li>Hover over the Paintbrush canvas or any button to find out what it is/represents.</li>
                     <li>The bottom left Home button takes you back to the Home page.</li>
                     <li>The Settings tab lets you .</li>
-                    <li>The supported file extensions for download are .</li>
-                    <li></li>
+                    <li>The produced masterpiece is downloaded as a .</li>
+                    <li>Square canvas is 600px x 600px, while rectangular canvas is 1200px x 600px.</li>
                     <li></li>
                     <li></li>
                     <li>When changing color in Settings, drag the pointer around for it to work seamlessly.</li>
@@ -135,11 +152,25 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
             <span id='paintbrushSettingsBox' draggable={false} ref={paintbrushSettingsBox}>
                 <div id='paintbrushSettingsTitle' draggable={false}>Settings</div>
                 <ul>
-                    <li></li>
+                    <li>Dimensions/shape of canvas:</li>
+                    <li id='paintbrushInvisLiRadio'>
+                        <input type='radio' onClick={(e) => changeCanvasShapeToSquare(e.target.checked)} name='canvasDimensionsShapeOptions' ref={firstCanvasShapeOption} title='squareCanvasShapeRadio' placeholder='squareCanvasShapeRadio' /><span id='squareCanvasText'>square</span>
+                        <input type='radio' onClick={(e) => changeCanvasShapeToRectangular(e.target.checked)} name='canvasDimensionsShapeOptions' title='rectangularCanvasShapeRadio' placeholder='rectangularCanvasShapeRadio' /><span id='rectangularCanvasText'>rectangular</span>
+                    </li>
+                    <li>Color of canvas background:</li>
+                    <input type='color' value={canvasBGColorVal} onChange={(e) => onCanvasBGColorChange(e)} id='canvasBGColorPicker' title="canvasBGColorPicker" placeholder='canvasBGColorPicker' />
+                    <li>Canvas tool options:</li>
+                    <li id='paintbrushInvisLi'></li>
+                    <li>Width of paintbrush stroke:</li>
+                    <li id='paintbrushInvisLi'></li>
+                    <li>Color of paintbrush stroke:</li>
+                    <li id='paintbrushInvisLi'></li>
                 </ul>
             </span>
             <div id='paintbrushTitle' draggable={false} ref={paintbrushTitleRef}>Paintbrush</div>
-            <span id='paintbrushCanvas' draggable={false} ref={paintbrushCanvasRef} alt='paintbrushCanvas' title='paintbrushCanvas'></span>
+            <div id='paintbrushCanvasContainer' draggable={false} ref={paintbrushCanvasContainerRef}>
+                <canvas id='paintbrushCanvas' style={{ backgroundColor: canvasBGColorVal }} draggable={false} ref={paintbrushCanvasRef} alt='paintbrushCanvas' title='paintbrushCanvas'></canvas>
+            </div>
             <button id='downloadButton' ref={downloadButtonRef}>Download Masterpiece</button>
             <img onClick={() => window.location.reload()} id='paintbrushHomeButton' draggable={false} ref={paintbrushHomeButtonRef} src={homeButton} alt='toHome' title="toHome" />
         </div>
