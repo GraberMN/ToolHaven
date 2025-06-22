@@ -538,27 +538,27 @@ function Rulers({ rulersImagesArray, moveToRulers, setMoveToRulers, moveToTimers
                 <ul>
                     <li>Displayed rulers:</li>
                     <li id='invisLi'>
-                        in.:<input type='checkbox' onClick={(e) => setInchesRulerCheckboxChecked(e.target.checked)} ref={inchesRulerCheckbox} id='inchesRulerCheckbox' title='inchesRulerCheckbox' placeholder='inchesRulerCheckbox' />
-                        cm:<input type='checkbox' onClick={(e) => setCentimetersRulerCheckboxChecked(e.target.checked)} id='centimetersRulerCheckbox' title='centimetersRulerCheckbox' placeholder='centimetersRulerCheckbox' />
-                        picas:<input type='checkbox' onClick={(e) => setPicasRulerCheckboxChecked(e.target.checked)} id='picasRulerCheckbox' title='picasRulerCheckbox' placeholder='picasRulerCheckbox' />
-                        px:<input type='checkbox' onClick={(e) => setPixelsRulerCheckboxChecked(e.target.checked)} id='pixelsRulerCheckbox' title='pixelsRulerCheckbox' placeholder='pixelsRulerCheckbox' />
+                        in.:<input type='checkbox' onClick={(e) => setInchesRulerCheckboxChecked(e.target.checked)} ref={inchesRulerCheckbox} id='inchesRulerCheckbox' title="inchesRulerCheckbox" placeholder='inchesRulerCheckbox' />
+                        cm:<input type='checkbox' onClick={(e) => setCentimetersRulerCheckboxChecked(e.target.checked)} id='centimetersRulerCheckbox' title="centimetersRulerCheckbox" placeholder='centimetersRulerCheckbox' />
+                        picas:<input type='checkbox' onClick={(e) => setPicasRulerCheckboxChecked(e.target.checked)} id='picasRulerCheckbox' title="picasRulerCheckbox" placeholder='picasRulerCheckbox' />
+                        px:<input type='checkbox' onClick={(e) => setPixelsRulerCheckboxChecked(e.target.checked)} id='pixelsRulerCheckbox' title="pixelsRulerCheckbox" placeholder='pixelsRulerCheckbox' />
                     </li>
                     <li>Color of inches ruler border:</li>
-                    <input type='color' value={inchesRulerBorderColorVal} onChange={(e) => onInchesRulerBorderColorChange(e)} id='inchesRulerBorderColorPicker' title='inchesRulerBorderColorPicker' placeholder='inchesRulerBorderColorPicker' />
+                    <input type='color' value={inchesRulerBorderColorVal} onChange={(e) => onInchesRulerBorderColorChange(e)} id='inchesRulerBorderColorPicker' title="inchesRulerBorderColorPicker" placeholder='inchesRulerBorderColorPicker' />
                     <li>Color of cm ruler border:</li>
-                    <input type='color' value={centimetersRulerBorderColorVal} onChange={(e) => onCentimetersRulerBorderColorChange(e)} id='centimetersRulerBorderColorPicker' title='centimetersRulerBorderColorPicker' placeholder='centimetersRulerBorderColorPicker' />
+                    <input type='color' value={centimetersRulerBorderColorVal} onChange={(e) => onCentimetersRulerBorderColorChange(e)} id='centimetersRulerBorderColorPicker' title="centimetersRulerBorderColorPicker" placeholder='centimetersRulerBorderColorPicker' />
                     <li>Color of picas ruler border:</li>
-                    <input type='color' value={picasRulerBorderColorVal} onChange={(e) => onPicasRulerBorderColorChange(e)} id='picasRulerBorderColorPicker' title='picasRulerBorderColorPicker' placeholder='picasRulerBorderColorPicker' />
+                    <input type='color' value={picasRulerBorderColorVal} onChange={(e) => onPicasRulerBorderColorChange(e)} id='picasRulerBorderColorPicker' title="picasRulerBorderColorPicker" placeholder='picasRulerBorderColorPicker' />
                     <li>Color of pixels ruler border:</li>
-                    <input type='color' value={pixelsRulerBorderColorVal} onChange={(e) => onPixelsRulerBorderColorChange(e)} id='pixelsRulerBorderColorPicker' title='pixelsRulerBorderColorPicker' placeholder='pixelsRulerBorderColorPicker' />
+                    <input type='color' value={pixelsRulerBorderColorVal} onChange={(e) => onPixelsRulerBorderColorChange(e)} id='pixelsRulerBorderColorPicker' title="pixelsRulerBorderColorPicker" placeholder='pixelsRulerBorderColorPicker' />
                 </ul>
             </span>
             <div id='rulersTitle' draggable={false} ref={rulersTitleRef}>Rulers</div>
-            <img id='inchesRuler' style={{ borderColor: inchesRulerBorderColorVal }} src={inchesRuler} ref={inchesRulerRef} alt='inchesRuler' title='inchesRuler' />
-            <img id='centimetersRuler' style={{ borderColor: centimetersRulerBorderColorVal }} src={centimetersRuler} ref={centimetersRulerRef} alt='centimetersRuler' title='centimetersRuler' />
-            <img id='picasRuler' style={{ borderColor: picasRulerBorderColorVal }} src={picasRuler} ref={picasRulerRef} alt='picasRuler' title='picasRuler' />
-            <img id='pixelsRuler' style={{ borderColor: pixelsRulerBorderColorVal }} src={pixelsRuler} ref={pixelsRulerRef} alt='pixelsRuler' title='pixelsRuler' />
-            <button onClick={() => resetRulers()} id='rulersResetButton' draggable={false} ref={rulersResetButtonRef} title='rulersResetButton'>Reset</button>
+            <img id='inchesRuler' style={{ borderColor: inchesRulerBorderColorVal }} src={inchesRuler} ref={inchesRulerRef} alt='inchesRuler' title="inchesRuler" />
+            <img id='centimetersRuler' style={{ borderColor: centimetersRulerBorderColorVal }} src={centimetersRuler} ref={centimetersRulerRef} alt='centimetersRuler' title="centimetersRuler" />
+            <img id='picasRuler' style={{ borderColor: picasRulerBorderColorVal }} src={picasRuler} ref={picasRulerRef} alt='picasRuler' title="picasRuler" />
+            <img id='pixelsRuler' style={{ borderColor: pixelsRulerBorderColorVal }} src={pixelsRuler} ref={pixelsRulerRef} alt='pixelsRuler' title="pixelsRuler" />
+            <button onClick={() => resetRulers()} id='rulersResetButton' draggable={false} ref={rulersResetButtonRef} title="rulersResetButton">Reset</button>
             <img onClick={() => window.location.reload()} id='rulersHomeButton' draggable={false} ref={rulersHomeButtonRef} src={homeButton} alt='toHome' title="toHome" />
             <map name='toTimersMap'>
                 <area onClick={() => window.innerWidth > 740 ? orangeRightArrowTransition(true) : orangeRightArrowTransition(false)} onMouseOver={() => blurOrangeRightArrow()} onMouseOut={() => unBlurOrangeRightArrow()} id='toTimersMap' ref={orangeRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toTimers' title="toTimers"></area>

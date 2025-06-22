@@ -603,66 +603,66 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers, moveToAIChat
                 <ul id='countdownSettingsList' ref={countdownSettingsListRef}>
                     <li>Alarm options for countdown:</li>
                     <li id='timerInvisLi'>
-                        <input type='radio' onClick={(e) => changeCountdownAlarmToBedside(e.target.checked)} name='countdownAlarmOptions' ref={firstCountdownAlarmOption} title='bedsideCountdownAlarmRadio' placeholder='bedsideCountdownAlarmRadio' /><span class='countdownAlarmType'>bedside</span>
-                        <input type='radio' onClick={(e) => changeCountdownAlarmToDigital(e.target.checked)} name='countdownAlarmOptions' title='digitalCountdownAlarmRadio' placeholder='digitalCountdownAlarmRadio' /><span class='countdownAlarmType'>digital</span>
-                        <input type='radio' onClick={(e) => changeCountdownAlarmToChaotic(e.target.checked)} name='countdownAlarmOptions' title='chaoticCountdownAlarmRadio' placeholder='chaoticCountdownAlarmRadio' /><span class='countdownAlarmType'>chaotic</span>
+                        <input type='radio' onClick={(e) => changeCountdownAlarmToBedside(e.target.checked)} name='countdownAlarmOptions' ref={firstCountdownAlarmOption} title="bedsideCountdownAlarmRadio" placeholder='bedsideCountdownAlarmRadio' /><span class='countdownAlarmType'>bedside</span>
+                        <input type='radio' onClick={(e) => changeCountdownAlarmToDigital(e.target.checked)} name='countdownAlarmOptions' title="digitalCountdownAlarmRadio" placeholder='digitalCountdownAlarmRadio' /><span class='countdownAlarmType'>digital</span>
+                        <input type='radio' onClick={(e) => changeCountdownAlarmToChaotic(e.target.checked)} name='countdownAlarmOptions' title="chaoticCountdownAlarmRadio" placeholder='chaoticCountdownAlarmRadio' /><span class='countdownAlarmType'>chaotic</span>
                     </li>
                     <audio src={countdownAlarmSource} ref={countdownAlarm}></audio>
                     <li>Volume of countdown alarm:</li>
-                    <input type='range' min={0} max={100} value={countdownAlarmVolume} onChange={(e) => setCountdownAlarmVolume(e.target.value)} title='countdownAlarmVolumeSlider' placeholder='countdownAlarmVolumeSlider' />
+                    <input type='range' min={0} max={100} value={countdownAlarmVolume} onChange={(e) => setCountdownAlarmVolume(e.target.value)} title="countdownAlarmVolumeSlider" placeholder='countdownAlarmVolumeSlider' />
                     <span title={countdownAlarmVolume + "% volume"}>{countdownAlarmVolume}</span>
                     <li>Color of countdown border:</li>
-                    <input type='color' value={countdownBorderColorVal} onChange={(e) => onCountdownBorderColorChange(e)} id='countdownBorderColorPicker' title='countdownBorderColorPicker' placeholder='countdownBorderColorPicker' />
+                    <input type='color' value={countdownBorderColorVal} onChange={(e) => onCountdownBorderColorChange(e)} id='countdownBorderColorPicker' title="countdownBorderColorPicker" placeholder='countdownBorderColorPicker' />
                 </ul>
                 <ul id='stopwatchSettingsList' ref={stopwatchSettingsListRef}>
                     <li>Lap sounds for stopwatch:</li>
                     <li id='timerInvisLi'>
-                        <input type='radio' onClick={(e) => changeStopwatchLapSoundToCoin(e.target.checked)} name='stopwatchLapSoundOptions' ref={firstStopwatchLapSoundOption} title='coinStopwatchLapSoundRadio' placeholder='coinStopwatchLapSoundRadio' /><span class='stopwatchLapSoundType'>coin</span>
-                        <input type='radio' onClick={(e) => changeStopwatchLapSoundToJoyous(e.target.checked)} name='stopwatchLapSoundOptions' title='joyousStopwatchLapSoundRadio' placeholder='joyousStopwatchLapSoundRadio' /><span class='stopwatchLapSoundType'>joyous</span>
-                        <input type='radio' onClick={(e) => changeStopwatchLapSoundToNotif(e.target.checked)} name='stopwatchLapSoundOptions' title='notifStopwatchLapSoundRadio' placeholder='notifStopwatchLapSoundRadio' /><span class='stopwatchLapSoundType'>notif</span>
+                        <input type='radio' onClick={(e) => changeStopwatchLapSoundToCoin(e.target.checked)} name='stopwatchLapSoundOptions' ref={firstStopwatchLapSoundOption} title="coinStopwatchLapSoundRadio" placeholder='coinStopwatchLapSoundRadio' /><span class='stopwatchLapSoundType'>coin</span>
+                        <input type='radio' onClick={(e) => changeStopwatchLapSoundToJoyous(e.target.checked)} name='stopwatchLapSoundOptions' title="joyousStopwatchLapSoundRadio" placeholder='joyousStopwatchLapSoundRadio' /><span class='stopwatchLapSoundType'>joyous</span>
+                        <input type='radio' onClick={(e) => changeStopwatchLapSoundToNotif(e.target.checked)} name='stopwatchLapSoundOptions' title="notifStopwatchLapSoundRadio" placeholder='notifStopwatchLapSoundRadio' /><span class='stopwatchLapSoundType'>notif</span>
                     </li>
                     <audio src={stopwatchLapSoundSource} ref={stopwatchLapSound}></audio>
                     <li>Volume of stopwatch lap sound:</li>
-                    <input type='range' min={0} max={100} value={stopwatchLapSoundVolume} onChange={(e) => setStopwatchLapSoundVolume(e.target.value)} title='stopwatchLapSoundVolumeSlider' placeholder='stopwatchLapSoundVolumeSlider' />
+                    <input type='range' min={0} max={100} value={stopwatchLapSoundVolume} onChange={(e) => setStopwatchLapSoundVolume(e.target.value)} title="stopwatchLapSoundVolumeSlider" placeholder='stopwatchLapSoundVolumeSlider' />
                     <span title={stopwatchLapSoundVolume + "% volume"}>{stopwatchLapSoundVolume}</span>
                     <li>Color of stopwatch border:</li>
-                    <input type='color' value={stopwatchBorderColorVal} onChange={(e) => onStopwatchBorderColorChange(e)} id='stopwatchBorderColorPicker' title='stopwatchBorderColorPicker' placeholder='stopwatchBorderColorPicker' />
+                    <input type='color' value={stopwatchBorderColorVal} onChange={(e) => onStopwatchBorderColorChange(e)} id='stopwatchBorderColorPicker' title="stopwatchBorderColorPicker" placeholder='stopwatchBorderColorPicker' />
                 </ul>
             </span>
             <div id='timersTitle' draggable={false} ref={timersTitleRef}>Timers</div>
             <span id='timersContainer' draggable={false} ref={timersContainerRef}>
-                <span onClick={() => onCountdownTabClick()} id='countdownTab' draggable={false} title='countdownTab'>Countdown</span>
-                <span onClick={() => onStopwatchTabClick()} id='stopwatchTab' draggable={false} title='stopwatchTab'>Stopwatch</span>
+                <span onClick={() => onCountdownTabClick()} id='countdownTab' draggable={false} title="countdownTab">Countdown</span>
+                <span onClick={() => onStopwatchTabClick()} id='stopwatchTab' draggable={false} title="stopwatchTab">Stopwatch</span>
                 <div id='countdownContent' ref={countdownContentRef}>
-                    <div id='countdownTimer' style={{ borderColor: countdownBorderColorVal }} ref={countdownTimerRef} title='countdownTimer'>
+                    <div id='countdownTimer' style={{ borderColor: countdownBorderColorVal }} ref={countdownTimerRef} title="countdownTimer">
                         <span ref={hoursValHolder}>{hoursVal.current}</span><span class='timeMeasurement'>hr</span> <span ref={minutesValHolder}>{minutesVal.current}</span><span class='timeMeasurement'>min</span> <span ref={secondsValHolder}>{secondsVal.current}</span><span class='timeMeasurement'>sec</span>
                     </div>
                     <span id='countdownTimerButtons'>
-                        <span onClick={() => startCountdown()} class='countdownTimerButton' id='countdownStart' title='countdownStart'>Start</span>
-                        <span onClick={() => pauseCountdown()} class='countdownTimerButton' id='countdownPause' title='countdownPause'>Pause</span>
-                        <span onClick={() => resetCountdown()} class='countdownTimerButton' id='countdownReset' title='countdownReset'>Reset</span>
-                        <span onClick={() => plus1Sec()} class='countdownTimerButton' id='countdown+1sec' title='countdown+1sec'>+1 sec</span>
-                        <span onClick={() => plus5Sec()} class='countdownTimerButton' id='countdown+5sec' title='countdown+5sec'>+5 sec</span>
-                        <span onClick={() => plus10Sec()} class='countdownTimerButton' id='countdown+10sec' title='countdown+10sec'>+10 sec</span>
-                        <span onClick={() => plus30Sec()} class='countdownTimerButton' id='countdown+30sec' title='countdown+30sec'>+30 sec</span>
-                        <span onClick={() => plus1Min()} class='countdownTimerButton' id='countdown+1min' title='countdown+1min'>+1 min</span>
-                        <span onClick={() => plus5Min()} class='countdownTimerButton' id='countdown+5min' title='countdown+5min'>+5 min</span>
-                        <span onClick={() => plus30Min()} class='countdownTimerButton' id='countdown+30min' title='countdown+30min'>+30 min</span>
-                        <span onClick={() => plus1Hr()} class='countdownTimerButton' id='countdown+1hr' title='countdown+1hr'>+1 hr</span>
-                        <span onClick={() => plus3Hr()} class='countdownTimerButton' id='countdown+3hr' title='countdown+3hr'>+3 hr</span>
+                        <span onClick={() => startCountdown()} class='countdownTimerButton' id='countdownStart' title="countdownStart">Start</span>
+                        <span onClick={() => pauseCountdown()} class='countdownTimerButton' id='countdownPause' title="countdownPause">Pause</span>
+                        <span onClick={() => resetCountdown()} class='countdownTimerButton' id='countdownReset' title="countdownReset">Reset</span>
+                        <span onClick={() => plus1Sec()} class='countdownTimerButton' id='countdown+1sec' title="countdown+1sec">+1 sec</span>
+                        <span onClick={() => plus5Sec()} class='countdownTimerButton' id='countdown+5sec' title="countdown+5sec">+5 sec</span>
+                        <span onClick={() => plus10Sec()} class='countdownTimerButton' id='countdown+10sec' title="countdown+10sec">+10 sec</span>
+                        <span onClick={() => plus30Sec()} class='countdownTimerButton' id='countdown+30sec' title="countdown+30sec">+30 sec</span>
+                        <span onClick={() => plus1Min()} class='countdownTimerButton' id='countdown+1min' title="countdown+1min">+1 min</span>
+                        <span onClick={() => plus5Min()} class='countdownTimerButton' id='countdown+5min' title="countdown+5min">+5 min</span>
+                        <span onClick={() => plus30Min()} class='countdownTimerButton' id='countdown+30min' title="countdown+30min">+30 min</span>
+                        <span onClick={() => plus1Hr()} class='countdownTimerButton' id='countdown+1hr' title="countdown+1hr">+1 hr</span>
+                        <span onClick={() => plus3Hr()} class='countdownTimerButton' id='countdown+3hr' title="countdown+3hr">+3 hr</span>
                     </span>
                 </div>
                 <div id='stopwatchContent' ref={stopwatchContentRef}>
-                    <div id='stopwatchTimer' style={{ borderColor: stopwatchBorderColorVal }} ref={stopwatchTimerRef} title='stopwatchTimer'>
+                    <div id='stopwatchTimer' style={{ borderColor: stopwatchBorderColorVal }} ref={stopwatchTimerRef} title="stopwatchTimer">
                         <span ref={stopwatchHoursValHolder}>{stopwatchHoursVal.current}</span><span class='timeMeasurement'>hr</span> <span ref={stopwatchMinutesValHolder}>{stopwatchMinutesVal.current}</span><span class='timeMeasurement'>min</span> <span ref={stopwatchSecondsValHolder}>{stopwatchSecondsVal.current}</span><span class='timeMeasurement'>sec</span>
                     </div>
                     <span id='stopwatchTimerButtons'>
-                        <span onClick={() => startStopwatch()} class='stopwatchTimerButton' id='stopwatchStart' title='stopwatchStart'>Start</span>
-                        <span onClick={() => pauseStopwatch()} class='stopwatchTimerButton' id='stopwatchPause' title='stopwatchPause'>Pause</span>
-                        <span onClick={() => nextLap()} class='stopwatchTimerButton' id='stopwatchNextLap' title='stopwatchNextLap'>Next Lap</span>
-                        <span onClick={() => resetStopwatch()} class='stopwatchTimerButton' id='stopwatchReset' title='stopwatchReset'>Reset</span>
+                        <span onClick={() => startStopwatch()} class='stopwatchTimerButton' id='stopwatchStart' title="stopwatchStart">Start</span>
+                        <span onClick={() => pauseStopwatch()} class='stopwatchTimerButton' id='stopwatchPause' title="stopwatchPause">Pause</span>
+                        <span onClick={() => nextLap()} class='stopwatchTimerButton' id='stopwatchNextLap' title="stopwatchNextLap">Next Lap</span>
+                        <span onClick={() => resetStopwatch()} class='stopwatchTimerButton' id='stopwatchReset' title="stopwatchReset">Reset</span>
                     </span>
-                    <div id='lapContainer' title='stopwatchLaps'>
+                    <div id='lapContainer' title="stopwatchLaps">
                         <div id='lapContainerTitle'>Laps</div>
                         <div id='bestLap' ref={bestLapDiv}></div>
                         <div id='worstLap' ref={worstLapDiv}></div>

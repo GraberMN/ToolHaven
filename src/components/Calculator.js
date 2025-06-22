@@ -375,22 +375,22 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
                 <div id='settingsTitle' draggable={false}>Settings</div>
                 <ul>
                     <li>Max d. places of calculations:</li>
-                    <input type='range' min={2} max={16} value={maxDecimalPlacesVal} onChange={(e) => setMaxDecimalPlacesVal(e.target.value)} title='maxDecimalPlacesSlider' placeholder='maxDecimalPlacesSlider' />
+                    <input type='range' min={2} max={16} value={maxDecimalPlacesVal} onChange={(e) => setMaxDecimalPlacesVal(e.target.value)} title="maxDecimalPlacesSlider" placeholder='maxDecimalPlacesSlider' />
                     <span title={maxDecimalPlacesVal + " decimal places"}>{maxDecimalPlacesVal}</span>
                     <li>Max entered characters:</li>
-                    <input type='range' min={5} max={27} value={maxCharVal} onChange={(e) => setMaxCarVal(e.target.value)} title='maxCharSlider' placeholder='maxCharSlider' />
+                    <input type='range' min={5} max={27} value={maxCharVal} onChange={(e) => setMaxCarVal(e.target.value)} title="maxCharSlider" placeholder='maxCharSlider' />
                     <span title={maxCharVal + " characters"}>{maxCharVal}</span>
                     <li>Color of input field border:</li>
-                    <input type='color' value={inputFieldBorderColorVal} onChange={(e) => onInputFieldBorderColorChange(e)} title='inputFieldBorderColorPicker' placeholder='inputFieldBorderColorPicker' />
+                    <input type='color' value={inputFieldBorderColorVal} onChange={(e) => onInputFieldBorderColorChange(e)} title="inputFieldBorderColorPicker" placeholder='inputFieldBorderColorPicker' />
                     <li>Color of button container:</li>
-                    <input type='color' value={buttonContainerColorVal} onChange={(e) => onButtonContainerColorChange(e)} title='buttonContainerColorPicker' placeholder='buttonContainerColorPicker' />
+                    <input type='color' value={buttonContainerColorVal} onChange={(e) => onButtonContainerColorChange(e)} title="buttonContainerColorPicker" placeholder='buttonContainerColorPicker' />
                 </ul>
             </span>
             <h1 id='calcTitle' draggable={false} ref={calcTitleRef}>Calculator</h1>
             <span id='calculator' draggable={false}>
-                <input type='text' id='inputField' style={{ borderColor: inputFieldBorderColorVal }} ref={inputField} maxLength={maxCharVal} title='inputField' placeholder='Loading...' readOnly />
-                <input type='text' id='ansField' ref={ansField} title='answerField' placeholder='Loading...' readOnly />
-                <img onClick={() => openOrClose(historyBox)} id='historyIcon' draggable={false} src={historyIcon} ref={historyIconRef} alt='historyIcon' title='calculationHistory' />
+                <input type='text' id='inputField' style={{ borderColor: inputFieldBorderColorVal }} ref={inputField} maxLength={maxCharVal} title="inputField" placeholder='Loading...' readOnly />
+                <input type='text' id='ansField' ref={ansField} title="answerField" placeholder='Loading...' readOnly />
+                <img onClick={() => openOrClose(historyBox)} id='historyIcon' draggable={false} src={historyIcon} ref={historyIconRef} alt='historyIcon' title="calculationHistory" />
                 <span id='historyBox' draggable={false} ref={historyBox}>
                     <div id='historyTitle'> History </div>
                     {
@@ -400,31 +400,31 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
                     }
                 </span>
                 <span id='buttons' style={{ backgroundColor: buttonContainerColorVal }} draggable={false} ref={buttonContainer}>
-                    <button onClick={() => clearDisplay()} className='deleter' title='clearAll'>C</button>
-                    <button onClick={() => appendToDisplay('7', true)} title='seven'>7</button>
-                    <button onClick={() => appendToDisplay('8', true)} title='eight'>8</button>
-                    <button onClick={() => appendToDisplay('9', true)} title='nine'>9</button>
-                    <button onClick={() => deleteLastFromDisplay()} className='deleter' title='deleteLast'>D</button>
-                    <button onClick={() => appendToDisplay(' ** ', false)} className='operator' title='exponentOperator'>^</button>
-                    <button onClick={() => appendToDisplay('4', true)} title='four'>4</button>
-                    <button onClick={() => appendToDisplay('5', true)} title='five'>5</button>
-                    <button onClick={() => appendToDisplay('6', true)} title='six'>6</button>
-                    <button onClick={() => appendToDisplay(' % ', false)} className='operator' title='modulus'>%</button>
-                    <button onClick={() => appendToDisplay(' * ', false)} className='operator' title='multiplicationSign'>*</button>
-                    <button onClick={() => appendToDisplay('1', true)} title='one'>1</button>
-                    <button onClick={() => appendToDisplay('2', true)} title='two'>2</button>
-                    <button onClick={() => appendToDisplay('3', true)} title='three'>3</button>
-                    <button onClick={() => appendToDisplay(' + ', false)} className='operator' title='plusSign'>+</button>
-                    <button onClick={() => appendToDisplay(' / ', false)} className='operator' title='divisionSign'>/</button>
-                    <button onClick={() => appendToDisplay('0', true)} title='zero'>0</button>
-                    <button onClick={() => appendToDisplay('.', false)} title='decimalPoint'>.</button>
-                    <button onClick={() => calculateDisplay()} id='equals' title='equalSign'>=</button>
-                    <button onClick={() => appendToDisplay(' - ', false)} className='operator' title='minus/negativeSign'>-</button>
-                    <button onClick={() => appendToDisplay('√', true)} className='operator' title='squareRoot'>√</button>
-                    <button onClick={() => appendToDisplay('π', true)} className='irrationalNum' title='pi'>π</button>
+                    <button onClick={() => clearDisplay()} className='deleter' title="clearAll">C</button>
+                    <button onClick={() => appendToDisplay('7', true)} title="seven">7</button>
+                    <button onClick={() => appendToDisplay('8', true)} title="eight">8</button>
+                    <button onClick={() => appendToDisplay('9', true)} title="nine">9</button>
+                    <button onClick={() => deleteLastFromDisplay()} className='deleter' title="deleteLast">D</button>
+                    <button onClick={() => appendToDisplay(' ** ', false)} className='operator' title="exponentOperator">^</button>
+                    <button onClick={() => appendToDisplay('4', true)} title="four">4</button>
+                    <button onClick={() => appendToDisplay('5', true)} title="five">5</button>
+                    <button onClick={() => appendToDisplay('6', true)} title="six">6</button>
+                    <button onClick={() => appendToDisplay(' % ', false)} className='operator' title="modulus">%</button>
+                    <button onClick={() => appendToDisplay(' * ', false)} className='operator' title="multiplicationSign">*</button>
+                    <button onClick={() => appendToDisplay('1', true)} title="one">1</button>
+                    <button onClick={() => appendToDisplay('2', true)} title="two">2</button>
+                    <button onClick={() => appendToDisplay('3', true)} title="three">3</button>
+                    <button onClick={() => appendToDisplay(' + ', false)} className='operator' title="plusSign">+</button>
+                    <button onClick={() => appendToDisplay(' / ', false)} className='operator' title="divisionSign">/</button>
+                    <button onClick={() => appendToDisplay('0', true)} title="zero">0</button>
+                    <button onClick={() => appendToDisplay('.', false)} title="decimalPoint">.</button>
+                    <button onClick={() => calculateDisplay()} id='equals' title="equalSign">=</button>
+                    <button onClick={() => appendToDisplay(' - ', false)} className='operator' title="minus/negativeSign">-</button>
+                    <button onClick={() => appendToDisplay('√', true)} className='operator' title="squareRoot">√</button>
+                    <button onClick={() => appendToDisplay('π', true)} className='irrationalNum' title="pi">π</button>
                     <button onClick={() => appendToDisplay('e', true)} className='irrationalNum' title="euler'sNumber">e</button>
-                    <button onClick={() => appendToDisplay(ans.current, true)} id='ans' title='previousAnswer'>ANS</button>
-                    <button onClick={() => appendToDisplay('!', false)} className='operator' title='factorial'>!</button>
+                    <button onClick={() => appendToDisplay(ans.current, true)} id='ans' title="previousAnswer">ANS</button>
+                    <button onClick={() => appendToDisplay('!', false)} className='operator' title="factorial">!</button>
                 </span>
             </span>
             <img onClick={() => window.location.reload()} id='homeButton' draggable={false} ref={homeButtonRef} src={homeButton} alt='toHome' title="toHome"/>

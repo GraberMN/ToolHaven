@@ -381,23 +381,23 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
                 <ul>
                     <li>Size of image in container:</li>
                     <li id='imgIdentifierInvisLiRadio'>
-                        <input type='radio' onClick={(e) => changeImageSizeToFitContainer(e.target.checked)} name='imageSizeOptions' ref={firstImageSizeOption} title='fitContainerImageSizeRadio' placeholder='fitContainerImageSizeRadio' /><span id='fitContainerSizeText'>fit container</span>
-                        <input type='radio' onClick={(e) => changeImageSizeToRealSize(e.target.checked)} name='imageSizeOptions' title='realImageSizeRadio' placeholder='realImageSizeRadio' /><span id='realSizeText'>real size</span>
+                        <input type='radio' onClick={(e) => changeImageSizeToFitContainer(e.target.checked)} name='imageSizeOptions' ref={firstImageSizeOption} title="fitContainerImageSizeRadio" placeholder='fitContainerImageSizeRadio' /><span id='fitContainerSizeText'>fit container</span>
+                        <input type='radio' onClick={(e) => changeImageSizeToRealSize(e.target.checked)} name='imageSizeOptions' title="realImageSizeRadio" placeholder='realImageSizeRadio' /><span id='realSizeText'>real size</span>
                     </li>
                     <li>Styling of image background:</li>
                     <li id='imgIdentifierInvisLiRadio'>
-                        <input type='radio' onClick={(e) => changeImageStyleToVisible(e.target.checked)} name='imageStyleOptions' ref={firstImageStyleOption} title='visibleImageStyleRadio' placeholder='visibleImageStyleRadio' /><span id='visibleStyleText'>visible (white)</span>
-                        <input type='radio' onClick={(e) => changeImageStyleToInvisible(e.target.checked)} name='imageStyleOptions' title='invisibleImageStyleRadio' placeholder='invisibleImageStyleRadio' /><span id='invisibleStyleText'>invisible</span>
+                        <input type='radio' onClick={(e) => changeImageStyleToVisible(e.target.checked)} name='imageStyleOptions' ref={firstImageStyleOption} title="visibleImageStyleRadio" placeholder='visibleImageStyleRadio' /><span id='visibleStyleText'>visible (white)</span>
+                        <input type='radio' onClick={(e) => changeImageStyleToInvisible(e.target.checked)} name='imageStyleOptions' title="invisibleImageStyleRadio" placeholder='invisibleImageStyleRadio' /><span id='invisibleStyleText'>invisible</span>
                     </li>
                     <li>Show/hide certain buttons:</li>
                     <li id='imgIdentifierInvisLi'>
-                        <input type='checkbox' onClick={() => onDisclaimerCheck()} id='disclaimerButtonCheckbox' ref={imgIdentifierDisclaimerCheckboxRef} title='disclaimerButtonCheckbox' placeholder='disclaimerButtonCheckbox' /><span id='disclaimerSettingsText'>Disclaimer</span>
-                        <input type='checkbox' onClick={() => onCitationCheck()} id='citationButtonCheckbox' ref={imgIdentifierCitationCheckboxRef} title='citationButtonCheckbox' placeholder='citationButtonCheckbox' /><span id='citationSettingsText'>Citation</span>
+                        <input type='checkbox' onClick={() => onDisclaimerCheck()} id='disclaimerButtonCheckbox' ref={imgIdentifierDisclaimerCheckboxRef} title="disclaimerButtonCheckbox" placeholder='disclaimerButtonCheckbox' /><span id='disclaimerSettingsText'>Disclaimer</span>
+                        <input type='checkbox' onClick={() => onCitationCheck()} id='citationButtonCheckbox' ref={imgIdentifierCitationCheckboxRef} title="citationButtonCheckbox" placeholder='citationButtonCheckbox' /><span id='citationSettingsText'>Citation</span>
                     </li>
                     <li>Color of image border:</li>
-                    <input type='color' value={imgBorderColorVal} onChange={(e) => onImgBorderColorChange(e)} id='imgBorderColorPicker' title='imgBorderColorPicker' placeholder='imgBorderColorPicker' />
+                    <input type='color' value={imgBorderColorVal} onChange={(e) => onImgBorderColorChange(e)} id='imgBorderColorPicker' title="imgBorderColorPicker" placeholder='imgBorderColorPicker' />
                     <li>Color of profile background:</li>
-                    <input type='color' value={profileBGColorVal} onChange={(e) => onProfileBGColorChange(e)} id='profileBGColorPicker' title='profileBGColorPicker' placeholder='profileBGColorPicker' />
+                    <input type='color' value={profileBGColorVal} onChange={(e) => onProfileBGColorChange(e)} id='profileBGColorPicker' title="profileBGColorPicker" placeholder='profileBGColorPicker' />
                 </ul>
             </span>
             <div id='imgIdentifierTitle' draggable={false} ref={imgIdentifierTitleRef}>Img Identifier</div>
@@ -418,7 +418,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
                         instead of as a conclusive source of knowledge. Users of this Img Identifier should always make sure to verify
                         its answers and generated identifications with their own logic and the Internet (perhaps Google Images).
                     </span>
-                    <div onClick={() => openOrClose(imgIdentifierCitationBox)} id='imgIdentifierCitationButton' ref={imgIdentifierCitationButtonRef} title='toCitation'>Citation</div>
+                    <div onClick={() => openOrClose(imgIdentifierCitationBox)} id='imgIdentifierCitationButton' ref={imgIdentifierCitationButtonRef} title="toCitation">Citation</div>
                     <span id='imgIdentifierCitationBox' draggable={false} ref={imgIdentifierCitationBox}></span>
                 </div>
                 <div id='imgIdentifierImgIdentifier' draggable={false}>

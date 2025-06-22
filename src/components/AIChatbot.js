@@ -352,25 +352,25 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot, 
                 <ul>
                     <li>Initial AI message options:</li>
                     <li id='aiChatbotInvisLiFirst'>
-                        <input type='radio' onClick={(e) => changeInitialAIMessageToHelpful(e.target.checked)} name='initialAIMessageOptions' ref={firstInitialAIMessageOption} title='helpfulInitialAIMessageRadio' placeholder='helpfulInitialAIMessageRadio' /><span class='initialAIMessageType'>helpful</span>
-                        <input type='radio' onClick={(e) => changeInitialAIMessageToAnnoyed(e.target.checked)} name='initialAIMessageOptions' title='annoyedInitialAIMessageRadio' placeholder='annoyedInitialAIMessageRadio' /><span class='initialAIMessageType'>annoyed</span>
-                        <input type='radio' onClick={(e) => changeInitialAIMessageToRobotic(e.target.checked)} name='initialAIMessageOptions' title='roboticInitialAIMessageRadio' placeholder='roboticInitialAIMessageRadio' /><span class='initialAIMessageType'>robotic</span>
+                        <input type='radio' onClick={(e) => changeInitialAIMessageToHelpful(e.target.checked)} name='initialAIMessageOptions' ref={firstInitialAIMessageOption} title="helpfulInitialAIMessageRadio" placeholder='helpfulInitialAIMessageRadio' /><span class='initialAIMessageType'>helpful</span>
+                        <input type='radio' onClick={(e) => changeInitialAIMessageToAnnoyed(e.target.checked)} name='initialAIMessageOptions' title="annoyedInitialAIMessageRadio" placeholder='annoyedInitialAIMessageRadio' /><span class='initialAIMessageType'>annoyed</span>
+                        <input type='radio' onClick={(e) => changeInitialAIMessageToRobotic(e.target.checked)} name='initialAIMessageOptions' title="roboticInitialAIMessageRadio" placeholder='roboticInitialAIMessageRadio' /><span class='initialAIMessageType'>robotic</span>
                     </li>
                     <li>Show/hide certain buttons:</li>
                     <li id='aiChatbotInvisLi'>
-                        <input type='checkbox' onClick={() => onDisclaimerCheck()} id='disclaimerButtonCheckbox' ref={disclaimerButtonCheckboxRef} title='disclaimerButtonCheckbox' placeholder='disclaimerButtonCheckbox' /><span id='disclaimerSettingsText'>Disclaimer</span>
-                        <input type='checkbox' onClick={() => onCitationCheck()} id='citationButtonCheckbox' ref={citationButtonCheckboxRef} title='citationButtonCheckbox' placeholder='citationButtonCheckbox' /><span id='citationSettingsText'>Citation</span>
+                        <input type='checkbox' onClick={() => onDisclaimerCheck()} id='disclaimerButtonCheckbox' ref={disclaimerButtonCheckboxRef} title="disclaimerButtonCheckbox" placeholder='disclaimerButtonCheckbox' /><span id='disclaimerSettingsText'>Disclaimer</span>
+                        <input type='checkbox' onClick={() => onCitationCheck()} id='citationButtonCheckbox' ref={citationButtonCheckboxRef} title="citationButtonCheckbox" placeholder='citationButtonCheckbox' /><span id='citationSettingsText'>Citation</span>
                     </li>
                     <li>Color of profile background:</li>
-                    <input type='color' value={profileBGColorVal} onChange={(e) => onProfileBGColorChange(e)} id='profileBGColorPicker' title='profileBGColorPicker' placeholder='profileBGColorPicker' />
+                    <input type='color' value={profileBGColorVal} onChange={(e) => onProfileBGColorChange(e)} id='profileBGColorPicker' title="profileBGColorPicker" placeholder='profileBGColorPicker' />
                     <li>Color of chat background:</li>
-                    <input type='color' value={chatBGColorVal} onChange={(e) => onChatBGColorChange(e)} id='chatBGColorPicker' title='chatBGColorPicker' placeholder='chatBGColorPicker' />
+                    <input type='color' value={chatBGColorVal} onChange={(e) => onChatBGColorChange(e)} id='chatBGColorPicker' title="chatBGColorPicker" placeholder='chatBGColorPicker' />
                 </ul>
             </span>
             <div id='aiChatbotTitle' draggable={false} ref={aiChatbotTitleRef}>AI Chatbot</div>
             <span id='aiChatbotContainer' draggable={false} ref={aiChatbotContainerRef}>
                 <div id='aiChatbotProfile' style={{ backgroundColor: profileBGColorVal }} ref={aiChatbotProfileRef}>
-                    <div onClick={() => openOrClose(disclaimerBox)} id='disclaimerButton' ref={disclaimerButtonRef} title='toDisclaimer'>Disclaimer</div>
+                    <div onClick={() => openOrClose(disclaimerBox)} id='disclaimerButton' ref={disclaimerButtonRef} title="toDisclaimer">Disclaimer</div>
                     <span id='disclaimerBox' draggable={false} ref={disclaimerBox}>
                         The compact SmolLM2 model used for this AI Chatbot is much better at comprehending and outputing in English.
                         The content that it generates may not always be correct, logical, or impartial. As a result, it should
@@ -378,8 +378,8 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot, 
                         always make sure to verify its answers and generated information with their own logic and credible sources.
                     </span>
                     <span id='thinkingMessage' ref={thinkingMessageRef}>Thinking...</span>
-                    <img id='aiChatbotPic' draggable={false} src={aiChatbotThumbnailTransparent} alt='aiChatbotPic' title='aiChatbotPic' />
-                    <div onClick={() => openOrClose(citationBox)} id='citationButton' ref={citationButtonRef} title='toCitation'>Citation</div>
+                    <img id='aiChatbotPic' draggable={false} src={aiChatbotThumbnailTransparent} alt='aiChatbotPic' title="aiChatbotPic" />
+                    <div onClick={() => openOrClose(citationBox)} id='citationButton' ref={citationButtonRef} title="toCitation">Citation</div>
                     <span id='citationBox' draggable={false} ref={citationBox}></span>
                 </div>
                 <div id='humanAIConvoContainer' style={{backgroundColor: chatBGColorVal}} ref={humanAIConvoContainerRef}>
@@ -390,7 +390,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot, 
                         )
                     }
                 </div>
-                <textarea type='text' id='userInputField' wrap='hard' ref={userInputFieldRef} title='userInputField' placeholder={'Type here to converse with AI Chatbot\nPress ENTER to send'}></textarea>
+                <textarea type='text' id='userInputField' wrap='hard' ref={userInputFieldRef} title="userInputField" placeholder={'Type here to converse with AI Chatbot\nPress ENTER to send'}></textarea>
             </span>
             <img onClick={() => window.location.reload()} id='aiChatbotHomeButton' draggable={false} ref={aiChatbotHomeButtonRef} src={homeButton} alt='toHome' title="toHome" />
             <map name='toImgIdentifierMap'>

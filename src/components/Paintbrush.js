@@ -4,8 +4,17 @@ import './paintbrush.css';
 
 function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbrush }) {
     const [settingsIcon, rulesIcon, homeButton] = paintbrushImagesArray;
+    const [strokeWidth, setStrokeWidth] = useState(5);
     const [canvasBGColorVal, setCanvasBGColorVal] = useState('#FFFFFF');
+    const [paintbrushStrokeColorVal, setPaintbrushStrokeColorVal] = useState('#000000')
+    const ctx = useRef(null);
+    const canvasOffsetXTracker = useRef(0);
+    const canvasOffsetYTracker = useRef(0);
+    const isPainting = useRef(false);
+    const drawingStartX = useRef(0);
+    const drawingStartY = useRef(0);
     const firstCanvasShapeOption = useRef(null);
+    const firstCanvasToolOption = useRef(null);
     const paintbrushRulesIconRef = useRef(null);
     const paintbrushRulesBox = useRef(null);
     const paintbrushSettingsIconRef = useRef(null);
@@ -13,8 +22,15 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
     const paintbrushTitleRef = useRef(null);
     const paintbrushCanvasContainerRef = useRef(null);
     const paintbrushCanvasRef = useRef(null);
+    const canvasButtons = useRef(null);
     const downloadButtonRef = useRef(null);
+    const clearButtonRef = useRef(null);
     const paintbrushHomeButtonRef = useRef(null);
+    const clearCanvas = () => {
+        if (ctx.current !== null) {
+            ctx.current.clearRect(0, 0, paintbrushCanvasRef.current.width, paintbrushCanvasRef.current.height);
+        }
+    }
     const changeCanvasShapeToSquare = (isChecked) => {
         if (isChecked) {
             paintbrushCanvasRef.current.style.width = '600px';
@@ -25,6 +41,12 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
             paintbrushCanvasRef.current.style.width = '1200px';
         }
     }
+    const changeCanvasToolToPaintbrush = () => {
+
+    }
+    const changeCanvasToolToEraser = () => {
+
+    }
     const openOrClose = (element) => {
         if (element.current.style.visibility === "hidden") {
             element.current.style.visibility = "visible";
@@ -34,6 +56,9 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
     }
     const onCanvasBGColorChange = (e) => {
         setCanvasBGColorVal(e.target.value);
+    }
+    const onPaintbrushStrokeColorChange = (e) => {
+        setPaintbrushStrokeColorVal(e.target.value);
     }
     const onAdjustWindowWidthPaintbrush = () => {
         if (window.innerWidth <= 740) {
@@ -51,7 +76,7 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
         }
     }
     const animateElements = () => {
-        const paintbrushElements = [paintbrushTitleRef, paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox, paintbrushCanvasContainerRef, downloadButtonRef, paintbrushHomeButtonRef];
+        const paintbrushElements = [paintbrushTitleRef, paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox, paintbrushCanvasContainerRef, canvasButtons, paintbrushHomeButtonRef];
         for (let i = 0; i < paintbrushElements.length; i++) {
             readyForAnimation(paintbrushElements[i]);
         }
@@ -70,7 +95,7 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
             paintbrushHomeButtonRef.current.style.animationName = 'appearFromRightPaintbrushRulesSmall';
         }
         paintbrushCanvasContainerRef.current.style.animationName = 'appearFromRightPaintbrush';
-        downloadButtonRef.current.style.animationName = 'appearFromRightPaintbrush';
+        canvasButtons.current.style.animationName = 'appearFromRightPaintbrush';
     }
     const readyForAnimation = (element) => {
         element.current.style.animationName = 'none';
@@ -91,13 +116,14 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
             paintbrushSettingsBox.current.style.display = 'inline';
             paintbrushSettingsBox.current.style.visibility = 'hidden';
             paintbrushCanvasContainerRef.current.style.display = 'block';
-            downloadButtonRef.current.style.display = 'block';
+            canvasButtons.current.style.display = 'block';
             paintbrushHomeButtonRef.current.style.display = 'inline';
-            const paintbrushElements = [paintbrushTitleRef, paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox, paintbrushCanvasContainerRef, downloadButtonRef, paintbrushHomeButtonRef];
+            const paintbrushElements = [paintbrushTitleRef, paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox, paintbrushCanvasContainerRef, canvasButtons, paintbrushHomeButtonRef];
             for (let i = 0; i < paintbrushElements.length; i++) {
                 readyForMove(paintbrushElements[i]);
             }
             firstCanvasShapeOption.current.checked = 'true';
+            firstCanvasToolOption.current.checked = 'true';
             document.body.style.backgroundColor = 'hsl(274, 25.30%, 83.70%)';
             setTimeout(() => {
                 animateElements();
@@ -109,6 +135,7 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
                     paintbrushNonPaintbrushElements[i].current.style.opacity = '100';
                 }
                 window.addEventListener("resize", onAdjustWindowWidthPaintbrush);
+                ctx.current = paintbrushCanvasRef.current.getContext("2d");
                 document.body.style.pointerEvents = 'auto';
                 if (window.innerWidth <= 740) {
                     paintbrushRulesIconRef.current.style.transform = 'translateX(-260px)';
@@ -121,7 +148,7 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
         }
     }, [moveToPaintbrush]);
     useEffect(() => {
-        const goneElements = [paintbrushTitleRef, paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox, paintbrushCanvasContainerRef, downloadButtonRef, paintbrushHomeButtonRef];
+        const goneElements = [paintbrushTitleRef, paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox, paintbrushCanvasContainerRef, canvasButtons, paintbrushHomeButtonRef];
         for (let i = 0; i < goneElements.length; i++) {
             goneElements[i].current.style.display = 'none';
         }
@@ -154,24 +181,31 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
                 <ul>
                     <li>Dimensions/shape of canvas:</li>
                     <li id='paintbrushInvisLiRadio'>
-                        <input type='radio' onClick={(e) => changeCanvasShapeToSquare(e.target.checked)} name='canvasDimensionsShapeOptions' ref={firstCanvasShapeOption} title='squareCanvasShapeRadio' placeholder='squareCanvasShapeRadio' /><span id='squareCanvasText'>square</span>
-                        <input type='radio' onClick={(e) => changeCanvasShapeToRectangular(e.target.checked)} name='canvasDimensionsShapeOptions' title='rectangularCanvasShapeRadio' placeholder='rectangularCanvasShapeRadio' /><span id='rectangularCanvasText'>rectangular</span>
+                        <input type='radio' onClick={(e) => changeCanvasShapeToSquare(e.target.checked)} name='canvasDimensionsShapeOptions' ref={firstCanvasShapeOption} title="squareCanvasShapeRadio" placeholder='squareCanvasShapeRadio' /><span id='squareCanvasText'>square</span>
+                        <input type='radio' onClick={(e) => changeCanvasShapeToRectangular(e.target.checked)} name='canvasDimensionsShapeOptions' title="rectangularCanvasShapeRadio" placeholder='rectangularCanvasShapeRadio' /><span id='rectangularCanvasText'>rectangular</span>
                     </li>
                     <li>Color of canvas background:</li>
                     <input type='color' value={canvasBGColorVal} onChange={(e) => onCanvasBGColorChange(e)} id='canvasBGColorPicker' title="canvasBGColorPicker" placeholder='canvasBGColorPicker' />
                     <li>Canvas tool options:</li>
-                    <li id='paintbrushInvisLi'></li>
-                    <li>Width of paintbrush stroke:</li>
-                    <li id='paintbrushInvisLi'></li>
-                    <li>Color of paintbrush stroke:</li>
-                    <li id='paintbrushInvisLi'></li>
+                    <li id='paintbrushInvisLiRadio'>
+                        <input type='radio' onClick={(e) => changeCanvasToolToPaintbrush(e.target.checked)} name='canvasToolOptions' ref={firstCanvasToolOption} title="paintbrushCanvasToolRadio" placeholder='paintbrushCanvasToolRadio' /><span id='paintbrushToolText'>paintbrush</span>
+                        <input type='radio' onClick={(e) => changeCanvasToolToEraser(e.target.checked)} name='canvasToolOptions' title="eraserCanvasToolRadio" placeholder='eraserCanvasToolRadio' /><span id='eraserToolText'>eraser</span>
+                    </li>
+                    <li>Stroke width of both tools:</li>
+                    <input type='range' min={1} max={100} value={strokeWidth} onChange={(e) => setStrokeWidth(e.target.value)} title="strokeWidthSlider" placeholder='strokeWidthSlider' />
+                    <span title={strokeWidth + " pixels"}>{strokeWidth}</span>
+                    <li>Stroke color of paintbrush:</li>
+                    <input type='color' value={paintbrushStrokeColorVal} onChange={(e) => onPaintbrushStrokeColorChange(e)} id='paintbrushStrokeColorPicker' title="paintbrushStrokeColorPicker" placeholder='paintbrushStrokeColorPicker' />
                 </ul>
             </span>
             <div id='paintbrushTitle' draggable={false} ref={paintbrushTitleRef}>Paintbrush</div>
             <div id='paintbrushCanvasContainer' draggable={false} ref={paintbrushCanvasContainerRef}>
-                <canvas id='paintbrushCanvas' style={{ backgroundColor: canvasBGColorVal }} draggable={false} ref={paintbrushCanvasRef} alt='paintbrushCanvas' title='paintbrushCanvas'></canvas>
+                <canvas id='paintbrushCanvas' style={{ backgroundColor: canvasBGColorVal }} draggable={false} ref={paintbrushCanvasRef} alt='paintbrushCanvas' title="paintbrushCanvas"></canvas>
             </div>
-            <button id='downloadButton' ref={downloadButtonRef}>Download Masterpiece</button>
+            <div style={{ display: 'flex', justifyContent: 'center' }} ref={canvasButtons}>
+                <button id='downloadButton' draggable={false} ref={downloadButtonRef} title="downloadButton">Download Masterpiece</button>
+                <button onClick={() => clearCanvas()} id='clearButton' draggable={false} ref={clearButtonRef} title="clearCanvasButton">Clear</button>
+            </div>
             <img onClick={() => window.location.reload()} id='paintbrushHomeButton' draggable={false} ref={paintbrushHomeButtonRef} src={homeButton} alt='toHome' title="toHome" />
         </div>
     )
