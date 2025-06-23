@@ -8,7 +8,7 @@
     display: block;
     transform: translateX(30vw);
     margin-top: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 39px;
     user-select: none;
 }
 #paintbrushRulesIcon {
@@ -169,7 +169,7 @@ li {
     background-color: white;
     display: block;
     margin: auto;
-    margin-top: 39px;
+    padding: 0;
     user-select: none;
 }
 #downloadButton {
