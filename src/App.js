@@ -33,6 +33,7 @@ import aiChatbotThumbnailTransparent from './Images/AIChatbotThumbnailTransparen
 import redRightArrow from './Images/RedRightArrow.png';
 import imgIdentifierThumbnailTransparent from './Images/ImgIdentifierThumbnailTransparent.png';
 import purpleRightArrow from './Images/PurpleRightArrow.png';
+import warningSign from './Images/warningSign.png';
 import homeButton from './Images/HomeButton.png';
 import './App.css';
 import Home from './components/Home';
@@ -50,7 +51,7 @@ function App() {
   const timersImagesArray = [settingsIcon, rulesIcon, bedsideCountdownAlarm, digitalCountdownAlarm, chaoticCountdownAlarm, coinStopwatchLapSound, joyousStopwatchLapSound, notifStopwatchLapSound, pinkRightArrow, homeButton];
   const aiChatbotImagesArray = [settingsIcon, rulesIcon, aiChatbotThumbnailTransparent, redRightArrow, homeButton];
   const imgIdentifierImagesArray = [settingsIcon, rulesIcon, imgIdentifierThumbnailTransparent, purpleRightArrow, homeButton];
-  const paintbrushImagesArray = [settingsIcon, rulesIcon, homeButton];
+  const paintbrushImagesArray = [settingsIcon, rulesIcon, warningSign, homeButton];
   const [moveToCalc, setMoveToCalc] = useState(false);
   const [moveToRulers, setMoveToRulers] = useState(false);
   const [moveToTimers, setMoveToTimers] = useState(false);

@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import './paintbrush.css';
 
 function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbrush }) {
-    const [settingsIcon, rulesIcon, homeButton] = paintbrushImagesArray;
+    const [settingsIcon, rulesIcon, warningSign, homeButton] = paintbrushImagesArray;
     const [strokeWidth, setStrokeWidth] = useState(5);
     const [canvasBGColorVal, setCanvasBGColorVal] = useState('#FFFFFF');
     const [paintbrushStrokeColorVal, setPaintbrushStrokeColorVal] = useState('#000000')
@@ -24,6 +24,7 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
     const canvasButtons = useRef(null);
     const downloadButtonRef = useRef(null);
     const clearButtonRef = useRef(null);
+    const canvasNotOnPageRef = useRef(null);
     const paintbrushHomeButtonRef = useRef(null);
     const startPainting = (e) => {
         isPainting.current = true;
@@ -68,6 +69,10 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
             ctx.current.scale(0.5, 1);
             canvasShapeTracker.current = 'rectangular';
             canvasOffsetTracker.current = paintbrushCanvasRef.current.getBoundingClientRect();
+            if (window.innerWidth < 1210) {
+                canvasNotOnPageRef.current.style.display = 'inline';
+                document.body.style.pointerEvents = 'none';
+            }
         }
     }
     const changeCanvasToolToPaintbrush = () => {
@@ -97,12 +102,31 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
             paintbrushSettingsIconRef.current.style.transform = 'translateX(180px)';
             paintbrushSettingsBox.current.style.transform = 'translateX(-45px)';
             paintbrushHomeButtonRef.current.style.transform = 'translateX(-260px)';
+            if (canvasShapeTracker.current === 'square') {
+                if (window.innerWidth < 610) {
+                    canvasNotOnPageRef.current.style.display = 'inline';
+                    document.body.style.pointerEvents = 'none';
+                } else {
+                    canvasNotOnPageRef.current.style.display = 'none';
+                    document.body.style.pointerEvents = 'auto';
+                }
+            } else {
+                canvasNotOnPageRef.current.style.display = 'inline';
+                document.body.style.pointerEvents = 'none';
+            }
         } else {
             paintbrushRulesIconRef.current.style.transform = 'translateX(-367px)';
             paintbrushRulesBox.current.style.transform = 'translateX(-367px)';
             paintbrushSettingsIconRef.current.style.transform = 'translateX(285px)';
             paintbrushSettingsBox.current.style.transform = 'translateX(60px)';
             paintbrushHomeButtonRef.current.style.transform = 'translateX(-367px)';
+            if (window.innerWidth < 1210 && canvasShapeTracker.current === 'rectangular') {
+                canvasNotOnPageRef.current.style.display = 'inline';
+                document.body.style.pointerEvents = 'none';
+            } else {
+                canvasNotOnPageRef.current.style.display = 'none';
+                document.body.style.pointerEvents = 'auto';
+            }
         }
     }
     const animateElements = () => {
@@ -185,12 +209,16 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
                     paintbrushSettingsIconRef.current.style.transform = 'translateX(180px)';
                     paintbrushSettingsBox.current.style.transform = 'translateX(-45px)';
                     paintbrushHomeButtonRef.current.style.transform = 'translateX(-260px)';
+                    if (window.innerWidth < 610) {
+                        canvasNotOnPageRef.current.style.display = 'inline';
+                        document.body.style.pointerEvents = 'none';
+                    }
                 }
             }, 4000);
         }
     }, [moveToPaintbrush]);
     useEffect(() => {
-        const goneElements = [paintbrushTitleRef, paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox, paintbrushCanvasRef, canvasButtons, paintbrushHomeButtonRef];
+        const goneElements = [paintbrushTitleRef, paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox, paintbrushCanvasRef, canvasButtons, canvasNotOnPageRef, paintbrushHomeButtonRef];
         for (let i = 0; i < goneElements.length; i++) {
             goneElements[i].current.style.display = 'none';
         }
@@ -209,8 +237,8 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
                     <li>The Settings tab lets you .</li>
                     <li>The produced masterpiece is downloaded as a .</li>
                     <li>Square canvas is 600px x 600px, while rectangular canvas is 1200px x 600px.</li>
-                    <li></li>
-                    <li></li>
+                    <li>If you leave the canvas while painting, simply click again to continue painting.</li>
+                    <li>When the canvas is not fully visible, a warning pops up, and all is disabled.</li>
                     <li>When changing color in Settings, drag the pointer around for it to work seamlessly.</li>
                     <li>Paint Tool-Specific Rules:</li>
                     <li id='lvl2li'></li>
@@ -241,10 +269,14 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
                 </ul>
             </span>
             <div id='paintbrushTitle' draggable={false} ref={paintbrushTitleRef}>Paintbrush</div>
-            <canvas id='paintbrushCanvas' style={{ backgroundColor: canvasBGColorVal }} onMouseDown={(e) => startPainting(e)} onMouseMove={(e) => paint(e)} onMouseUp={() => finishLine()} draggable={false} ref={paintbrushCanvasRef} alt='paintbrushCanvas' title="paintbrushCanvas"></canvas>
+            <canvas id='paintbrushCanvas' style={{ backgroundColor: canvasBGColorVal }} onMouseDown={(e) => startPainting(e)} onMouseMove={(e) => paint(e)} onMouseUp={() => finishLine()} onMouseOut={() => finishLine()} draggable={false} ref={paintbrushCanvasRef} alt='paintbrushCanvas' title="paintbrushCanvas"></canvas>
             <div style={{ display: 'flex', justifyContent: 'center' }} ref={canvasButtons}>
                 <button id='downloadButton' draggable={false} ref={downloadButtonRef} title="downloadButton">Download Masterpiece</button>
                 <button onClick={() => clearCanvas()} id='clearButton' draggable={false} ref={clearButtonRef} title="clearCanvasButton">Clear</button>
+            </div>
+            <div id='canvasNotOnPage' ref={canvasNotOnPageRef}>
+                <img id='canvasNotOnPageImage' draggable={false} src={warningSign} alt='warningSign'/>
+                <span id='canvasNotOnPageText'>Canvas Not Fully Visible</span>
             </div>
             <img onClick={() => window.location.reload()} id='paintbrushHomeButton' draggable={false} ref={paintbrushHomeButtonRef} src={homeButton} alt='toHome' title="toHome" />
         </div>

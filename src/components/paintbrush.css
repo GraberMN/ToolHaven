@@ -212,6 +212,32 @@ li {
 #clearButton:active {
     background-color: white;
 }
+#canvasNotOnPage {
+    width: 250px;
+    height: 100px;
+    position: absolute;
+    border: solid 5px rgba(53, 47, 47, 0.993);
+    background-color: gray;
+    border-radius: 20px;
+    font-family: cursive;
+    font-size: 20px;
+    font-weight: bold;
+    transform: translateX(-127px) translateY(-413px);
+    display: inline;
+    z-index: 999;
+    user-select: none;
+}
+#canvasNotOnPageImage {
+    width: 75px;
+    height: auto;
+    position: absolute;
+    transform: translateX(-110px) translateY(10px);
+    user-select: none;
+}
+#canvasNotOnPageText {
+    position: absolute;
+    transform: translateX(-20px) translateY(20px);
+}
 #paintbrushHomeButton {
     position: absolute;
     width: 75px;
