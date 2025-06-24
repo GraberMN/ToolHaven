@@ -11,6 +11,7 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
     const canvasOffsetTracker = useRef(0);
     const canvasShapeTracker = useRef('square');
     const isPainting = useRef(false);
+    const isEraserClicked = useRef(false);
     const paintingStartX = useRef(0);
     const paintingStartY = useRef(0);
     const firstCanvasShapeOption = useRef(null);
@@ -19,6 +20,8 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
     const paintbrushRulesBox = useRef(null);
     const paintbrushSettingsIconRef = useRef(null);
     const paintbrushSettingsBox = useRef(null);
+    const canvasBGColorPickerRef = useRef(null);
+    const paintbrushStrokeColorPickerRef = useRef(null);
     const paintbrushTitleRef = useRef(null);
     const paintbrushCanvasRef = useRef(null);
     const canvasButtons = useRef(null);
@@ -47,6 +50,10 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
     const clearCanvas = () => {
         if (ctx.current !== null) {
             ctx.current.clearRect(0, 0, paintbrushCanvasRef.current.width * 4, paintbrushCanvasRef.current.height * 4);
+            firstCanvasToolOption.current.checked = true;
+            changeCanvasToolToPaintbrush();
+            canvasBGColorPickerRef.current.style.pointerEvents = 'auto';
+            isEraserClicked.current = false;
         }
     }
     const changeCanvasShapeToSquare = (isChecked) => {
@@ -72,14 +79,22 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
             if (window.innerWidth < 1210) {
                 canvasNotOnPageRef.current.style.display = 'inline';
                 document.body.style.pointerEvents = 'none';
+                paintbrushStrokeColorPickerRef.current.style.pointerEvents = 'none';
+                if (!(isEraserClicked.current)) {
+                    canvasBGColorPickerRef.current.style.pointerEvents = 'none';
+                }
             }
         }
     }
     const changeCanvasToolToPaintbrush = () => {
-
+        ctx.current.strokeStyle = paintbrushStrokeColorVal;
+        paintbrushStrokeColorPickerRef.current.style.pointerEvents = 'auto';
     }
     const changeCanvasToolToEraser = () => {
-
+        ctx.current.strokeStyle = canvasBGColorVal;
+        canvasBGColorPickerRef.current.style.pointerEvents = 'none';
+        paintbrushStrokeColorPickerRef.current.style.pointerEvents = 'none';
+        isEraserClicked.current = true;
     }
     const openOrClose = (element) => {
         if (element.current.style.visibility === "hidden") {
@@ -106,13 +121,27 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
                 if (window.innerWidth < 610) {
                     canvasNotOnPageRef.current.style.display = 'inline';
                     document.body.style.pointerEvents = 'none';
+                    paintbrushStrokeColorPickerRef.current.style.pointerEvents = 'none';
+                    if (!(isEraserClicked.current)) {
+                        canvasBGColorPickerRef.current.style.pointerEvents = 'none';
+                    }
                 } else {
                     canvasNotOnPageRef.current.style.display = 'none';
                     document.body.style.pointerEvents = 'auto';
+                    if (firstCanvasToolOption.current.checked) {
+                        paintbrushStrokeColorPickerRef.current.style.pointerEvents = 'auto';
+                        if (!(isEraserClicked.current)) {
+                            canvasBGColorPickerRef.current.style.pointerEvents = 'auto';
+                        }
+                    }
                 }
             } else {
                 canvasNotOnPageRef.current.style.display = 'inline';
                 document.body.style.pointerEvents = 'none';
+                paintbrushStrokeColorPickerRef.current.style.pointerEvents = 'none';
+                if (!(isEraserClicked.current)) {
+                    canvasBGColorPickerRef.current.style.pointerEvents = 'none';
+                }
             }
         } else {
             paintbrushRulesIconRef.current.style.transform = 'translateX(-367px)';
@@ -123,9 +152,19 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
             if (window.innerWidth < 1210 && canvasShapeTracker.current === 'rectangular') {
                 canvasNotOnPageRef.current.style.display = 'inline';
                 document.body.style.pointerEvents = 'none';
+                paintbrushStrokeColorPickerRef.current.style.pointerEvents = 'none';
+                if (!(isEraserClicked.current)) {
+                    canvasBGColorPickerRef.current.style.pointerEvents = 'none';
+                }
             } else {
                 canvasNotOnPageRef.current.style.display = 'none';
                 document.body.style.pointerEvents = 'auto';
+                if (firstCanvasToolOption.current.checked) {
+                    paintbrushStrokeColorPickerRef.current.style.pointerEvents = 'auto';
+                    if (!(isEraserClicked.current)) {
+                        canvasBGColorPickerRef.current.style.pointerEvents = 'auto';
+                    }
+                }
             }
         }
     }
@@ -203,6 +242,7 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
                 canvasOffsetTracker.current = paintbrushCanvasRef.current.getBoundingClientRect();
                 ctx.current.scale(0.5, 0.25);
                 document.body.style.pointerEvents = 'auto';
+                document.body.style.overflowY = 'hidden';
                 if (window.innerWidth <= 740) {
                     paintbrushRulesIconRef.current.style.transform = 'translateX(-260px)';
                     paintbrushRulesBox.current.style.transform = 'translateX(-260px)';
@@ -212,6 +252,7 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
                     if (window.innerWidth < 610) {
                         canvasNotOnPageRef.current.style.display = 'inline';
                         document.body.style.pointerEvents = 'none';
+                        paintbrushStrokeColorPickerRef.current.style.pointerEvents = 'none';
                     }
                 }
             }, 4000);
@@ -255,17 +296,17 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
                         <input type='radio' onClick={(e) => changeCanvasShapeToRectangular(e.target.checked)} name='canvasDimensionsShapeOptions' title="rectangularCanvasShapeRadio" placeholder='rectangularCanvasShapeRadio' /><span id='rectangularCanvasText'>rectangular</span>
                     </li>
                     <li>Color of canvas background:</li>
-                    <input type='color' value={canvasBGColorVal} onChange={(e) => onCanvasBGColorChange(e)} id='canvasBGColorPicker' title="canvasBGColorPicker" placeholder='canvasBGColorPicker' />
+                    <input type='color' value={canvasBGColorVal} onChange={(e) => onCanvasBGColorChange(e)} id='canvasBGColorPicker' ref={canvasBGColorPickerRef} title="canvasBGColorPicker" placeholder='canvasBGColorPicker' />
                     <li>Canvas tool options:</li>
                     <li id='paintbrushInvisLiRadio'>
                         <input type='radio' onClick={(e) => changeCanvasToolToPaintbrush(e.target.checked)} name='canvasToolOptions' ref={firstCanvasToolOption} title="paintbrushCanvasToolRadio" placeholder='paintbrushCanvasToolRadio' /><span id='paintbrushToolText'>paintbrush</span>
                         <input type='radio' onClick={(e) => changeCanvasToolToEraser(e.target.checked)} name='canvasToolOptions' title="eraserCanvasToolRadio" placeholder='eraserCanvasToolRadio' /><span id='eraserToolText'>eraser</span>
                     </li>
                     <li>Stroke width of both tools:</li>
-                    <input type='range' min={1} max={30} value={strokeWidth} onChange={(e) => setStrokeWidth(e.target.value)} title="strokeWidthSlider" placeholder='strokeWidthSlider' />
+                    <input type='range' min={1} max={50} value={strokeWidth} onChange={(e) => setStrokeWidth(e.target.value)} title="strokeWidthSlider" placeholder='strokeWidthSlider' />
                     <span title={strokeWidth + " pixels"}>{strokeWidth}</span>
                     <li>Stroke color of paintbrush:</li>
-                    <input type='color' value={paintbrushStrokeColorVal} onChange={(e) => onPaintbrushStrokeColorChange(e)} id='paintbrushStrokeColorPicker' title="paintbrushStrokeColorPicker" placeholder='paintbrushStrokeColorPicker' />
+                    <input type='color' value={paintbrushStrokeColorVal} onChange={(e) => onPaintbrushStrokeColorChange(e)} id='paintbrushStrokeColorPicker' ref={paintbrushStrokeColorPickerRef} title="paintbrushStrokeColorPicker" placeholder='paintbrushStrokeColorPicker' />
                 </ul>
             </span>
             <div id='paintbrushTitle' draggable={false} ref={paintbrushTitleRef}>Paintbrush</div>
