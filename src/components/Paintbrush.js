@@ -9,6 +9,7 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
     const [paintbrushStrokeColorVal, setPaintbrushStrokeColorVal] = useState('#000000')
     const ctx = useRef(null);
     const canvasOffsetTracker = useRef(0);
+    const canvasShapeTracker = useRef('square');
     const isPainting = useRef(false);
     const paintingStartX = useRef(0);
     const paintingStartY = useRef(0);
@@ -49,12 +50,24 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
     }
     const changeCanvasShapeToSquare = (isChecked) => {
         if (isChecked) {
+            if (canvasShapeTracker.current === 'square') {
+                return;
+            }
             paintbrushCanvasRef.current.style.width = '600px';
+            ctx.current.scale(2, 1);
+            canvasShapeTracker.current = 'square';
+            canvasOffsetTracker.current = paintbrushCanvasRef.current.getBoundingClientRect();
         }
     }
     const changeCanvasShapeToRectangular = (isChecked) => {
         if (isChecked) {
+            if (canvasShapeTracker.current === 'rectangular') {
+                return;
+            }
             paintbrushCanvasRef.current.style.width = '1200px';
+            ctx.current.scale(0.5, 1);
+            canvasShapeTracker.current = 'rectangular';
+            canvasOffsetTracker.current = paintbrushCanvasRef.current.getBoundingClientRect();
         }
     }
     const changeCanvasToolToPaintbrush = () => {
@@ -77,6 +90,7 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
         setPaintbrushStrokeColorVal(e.target.value);
     }
     const onAdjustWindowWidthPaintbrush = () => {
+        canvasOffsetTracker.current = paintbrushCanvasRef.current.getBoundingClientRect();
         if (window.innerWidth <= 740) {
             paintbrushRulesIconRef.current.style.transform = 'translateX(-260px)';
             paintbrushRulesBox.current.style.transform = 'translateX(-260px)';
