@@ -45,7 +45,7 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
     }
     const clearCanvas = () => {
         if (ctx.current !== null) {
-            ctx.current.clearRect(0, 0, paintbrushCanvasRef.current.width, paintbrushCanvasRef.current.height);
+            ctx.current.clearRect(0, 0, paintbrushCanvasRef.current.width * 4, paintbrushCanvasRef.current.height * 4);
         }
     }
     const changeCanvasShapeToSquare = (isChecked) => {
