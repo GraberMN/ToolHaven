@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import './paintbrush.css';
 
 function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbrush }) {
-    const [settingsIcon, rulesIcon, warningSign, homeButton] = paintbrushImagesArray;
+    const [settingsIcon, rulesIcon, warningSign, lock, homeButton] = paintbrushImagesArray;
     const [strokeWidth, setStrokeWidth] = useState(5);
     const [canvasBGColorVal, setCanvasBGColorVal] = useState('#FFFFFF');
     const [paintbrushStrokeColorVal, setPaintbrushStrokeColorVal] = useState('#000000')
@@ -22,6 +22,8 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
     const paintbrushSettingsBox = useRef(null);
     const canvasBGColorPickerRef = useRef(null);
     const paintbrushStrokeColorPickerRef = useRef(null);
+    const canvasBGColorLockRef = useRef(null);
+    const paintbrushStrokeColorLockRef = useRef(null);
     const paintbrushTitleRef = useRef(null);
     const paintbrushCanvasRef = useRef(null);
     const canvasButtons = useRef(null);
@@ -54,6 +56,8 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
             changeCanvasToolToPaintbrush();
             canvasBGColorPickerRef.current.style.pointerEvents = 'auto';
             isEraserClicked.current = false;
+            canvasBGColorLockRef.current.style.visibility = 'hidden';
+            paintbrushStrokeColorLockRef.current.style.visibility = 'hidden';
         }
     }
     const changeCanvasShapeToSquare = (isChecked) => {
@@ -89,12 +93,19 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
     const changeCanvasToolToPaintbrush = () => {
         ctx.current.strokeStyle = paintbrushStrokeColorVal;
         paintbrushStrokeColorPickerRef.current.style.pointerEvents = 'auto';
+        canvasBGColorLockRef.current.style.visibility = 'hidden';
+        paintbrushStrokeColorLockRef.current.style.visibility = 'hidden';
+        if (isEraserClicked.current) {
+            canvasBGColorLockRef.current.style.visibility = 'visible';
+        }
     }
     const changeCanvasToolToEraser = () => {
         ctx.current.strokeStyle = canvasBGColorVal;
         canvasBGColorPickerRef.current.style.pointerEvents = 'none';
         paintbrushStrokeColorPickerRef.current.style.pointerEvents = 'none';
         isEraserClicked.current = true;
+        canvasBGColorLockRef.current.style.visibility = 'visible';
+        paintbrushStrokeColorLockRef.current.style.visibility = 'visible';
     }
     const openOrClose = (element) => {
         if (element.current.style.visibility === "hidden") {
@@ -276,6 +287,7 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
                     <li>Hover over the Paintbrush canvas or any button to find out what it is/represents.</li>
                     <li>The bottom left Home button takes you back to the Home page.</li>
                     <li>The Settings tab lets you .</li>
+                    <li>The Settings locks show when the color pickers are disabled based on the selected tool, and the Clear button unlocks both.</li>
                     <li>The produced masterpiece is downloaded as a .</li>
                     <li>Square canvas is 600px x 600px, while rectangular canvas is 1200px x 600px.</li>
                     <li>If you leave the canvas while painting, simply click again to continue painting.</li>
@@ -296,6 +308,7 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
                         <input type='radio' onClick={(e) => changeCanvasShapeToRectangular(e.target.checked)} name='canvasDimensionsShapeOptions' title="rectangularCanvasShapeRadio" placeholder='rectangularCanvasShapeRadio' /><span id='rectangularCanvasText'>rectangular</span>
                     </li>
                     <li>Color of canvas background:</li>
+                    <img id='canvasBGColorLock' src={lock} ref={canvasBGColorLockRef} />
                     <input type='color' value={canvasBGColorVal} onChange={(e) => onCanvasBGColorChange(e)} id='canvasBGColorPicker' ref={canvasBGColorPickerRef} title="canvasBGColorPicker" placeholder='canvasBGColorPicker' />
                     <li>Canvas tool options:</li>
                     <li id='paintbrushInvisLiRadio'>
@@ -306,6 +319,7 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
                     <input type='range' min={1} max={50} value={strokeWidth} onChange={(e) => setStrokeWidth(e.target.value)} title="strokeWidthSlider" placeholder='strokeWidthSlider' />
                     <span title={strokeWidth + " pixels"}>{strokeWidth}</span>
                     <li>Stroke color of paintbrush:</li>
+                    <img id='paintbrushStrokeColorLock' src={lock} ref={paintbrushStrokeColorLockRef} />
                     <input type='color' value={paintbrushStrokeColorVal} onChange={(e) => onPaintbrushStrokeColorChange(e)} id='paintbrushStrokeColorPicker' ref={paintbrushStrokeColorPickerRef} title="paintbrushStrokeColorPicker" placeholder='paintbrushStrokeColorPicker' />
                 </ul>
             </span>

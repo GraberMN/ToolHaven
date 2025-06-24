@@ -135,6 +135,18 @@ ul > span {
 #paintbrushToolText {
     margin-right: 10px;
 }
+#canvasBGColorLock {
+    width: 30px;
+    height: auto;
+    position: absolute;
+    visibility: hidden;
+}
+#paintbrushStrokeColorLock {
+    width: 30px;
+    height: auto;
+    position: absolute;
+    visibility: hidden;
+}
 ul {
     margin-top: 22px;
 }
@@ -217,7 +229,7 @@ li {
     height: 100px;
     position: absolute;
     border: solid 5px rgba(53, 47, 47, 0.993);
-    background-color: gray;
+    background-color: rgb(168, 168, 168);
     border-radius: 20px;
     font-family: cursive;
     font-size: 20px;
