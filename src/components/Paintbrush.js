@@ -10,6 +10,8 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
     const ctx = useRef(null);
     const canvasOffsetTracker = useRef(0);
     const canvasShapeTracker = useRef('square');
+    const canvasURL = useRef(null);
+    const anchorElementRef = useRef(null);
     const isPainting = useRef(false);
     const isEraserClicked = useRef(false);
     const paintingStartX = useRef(0);
@@ -49,15 +51,26 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
         ctx.current.stroke();
         ctx.current.beginPath();
     }
+    const downloadMasterpiece = () => {
+        canvasURL.current = paintbrushCanvasRef.current.toDataURL("image/png", 0.5);
+        anchorElementRef.current = document.createElement("a");
+        anchorElementRef.current.href = canvasURL.current;
+        anchorElementRef.current.download = 'myMasterpiece';
+        anchorElementRef.current.click();
+        anchorElementRef.current.remove();
+    }
     const clearCanvas = () => {
         if (ctx.current !== null) {
-            ctx.current.clearRect(0, 0, paintbrushCanvasRef.current.width * 4, paintbrushCanvasRef.current.height * 4);
+            ctx.current.clearRect(0, 0, paintbrushCanvasRef.current.width, paintbrushCanvasRef.current.height);
             firstCanvasToolOption.current.checked = true;
             changeCanvasToolToPaintbrush();
             canvasBGColorPickerRef.current.style.pointerEvents = 'auto';
             isEraserClicked.current = false;
             canvasBGColorLockRef.current.style.visibility = 'hidden';
             paintbrushStrokeColorLockRef.current.style.visibility = 'hidden';
+            setCanvasBGColorVal('#FFFFFF');
+            ctx.current.fillStyle = canvasBGColorVal;
+            ctx.current.fillRect(0, 0, paintbrushCanvasRef.current.width, paintbrushCanvasRef.current.height);
         }
     }
     const changeCanvasShapeToSquare = (isChecked) => {
@@ -66,9 +79,11 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
                 return;
             }
             paintbrushCanvasRef.current.style.width = '600px';
-            ctx.current.scale(2, 1);
+            paintbrushCanvasRef.current.width = 600;
+            paintbrushCanvasRef.current.height = 600;
             canvasShapeTracker.current = 'square';
             canvasOffsetTracker.current = paintbrushCanvasRef.current.getBoundingClientRect();
+            clearCanvas();
         }
     }
     const changeCanvasShapeToRectangular = (isChecked) => {
@@ -77,9 +92,11 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
                 return;
             }
             paintbrushCanvasRef.current.style.width = '1200px';
-            ctx.current.scale(0.5, 1);
+            paintbrushCanvasRef.current.width = 1200;
+            paintbrushCanvasRef.current.height = 600;
             canvasShapeTracker.current = 'rectangular';
             canvasOffsetTracker.current = paintbrushCanvasRef.current.getBoundingClientRect();
+            clearCanvas();
             if (window.innerWidth < 1210) {
                 canvasNotOnPageRef.current.style.display = 'inline';
                 document.body.style.pointerEvents = 'none';
@@ -110,8 +127,21 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
     const openOrClose = (element) => {
         if (element.current.style.visibility === "hidden") {
             element.current.style.visibility = "visible";
+            if (element === paintbrushSettingsBox && isEraserClicked.current) {
+                if (firstCanvasToolOption.current.checked) {
+                    canvasBGColorLockRef.current.style.visibility = 'visible';
+                    paintbrushStrokeColorLockRef.current.style.visibility = 'hidden';
+                } else {
+                    canvasBGColorLockRef.current.style.visibility = 'visible';
+                    paintbrushStrokeColorLockRef.current.style.visibility = 'visible';
+                }
+            }
         } else {
             element.current.style.visibility = "hidden";
+            if (element === paintbrushSettingsBox && isEraserClicked.current) {
+                canvasBGColorLockRef.current.style.visibility = 'hidden';
+                paintbrushStrokeColorLockRef.current.style.visibility = 'hidden';
+            }
         }
     }
     const onCanvasBGColorChange = (e) => {
@@ -211,6 +241,12 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
     }
     useEffect(() => {
         if (ctx.current !== null) {
+            ctx.current.fillStyle = canvasBGColorVal;
+            ctx.current.fillRect(0, 0, paintbrushCanvasRef.current.width, paintbrushCanvasRef.current.height);
+        }
+    }, [canvasBGColorVal]);
+    useEffect(() => {
+        if (ctx.current !== null) {
             ctx.current.lineWidth = strokeWidth;
         }
     }, [strokeWidth]);
@@ -251,7 +287,8 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
                 window.addEventListener("resize", onAdjustWindowWidthPaintbrush);
                 ctx.current = paintbrushCanvasRef.current.getContext("2d");
                 canvasOffsetTracker.current = paintbrushCanvasRef.current.getBoundingClientRect();
-                ctx.current.scale(0.5, 0.25);
+                ctx.current.fillStyle = '#FFFFFF';
+                ctx.current.fillRect(0, 0, paintbrushCanvasRef.current.width, paintbrushCanvasRef.current.height);
                 document.body.style.pointerEvents = 'auto';
                 document.body.style.overflowY = 'hidden';
                 if (window.innerWidth <= 740) {
@@ -266,6 +303,7 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
                         paintbrushStrokeColorPickerRef.current.style.pointerEvents = 'none';
                     }
                 }
+                alert('Please choose the canvas background color and shape before starting to paint. Choosing them while painting deletes the painting done so far.');
             }, 4000);
         }
     }, [moveToPaintbrush]);
@@ -286,16 +324,17 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
                 <ul>
                     <li>Hover over the Paintbrush canvas or any button to find out what it is/represents.</li>
                     <li>The bottom left Home button takes you back to the Home page.</li>
-                    <li>The Settings tab lets you .</li>
+                    <li>The Settings tab lets you change the canvas' styling, select the paintbrush or eraser, and adjust the stroke width/color.</li>
                     <li>The Settings locks show when the color pickers are disabled based on the selected tool, and the Clear button unlocks both.</li>
-                    <li>The produced masterpiece is downloaded as a .</li>
+                    <li>Changing the canvas shape clears the canvas just like the Clear button.</li>
+                    <li>The painted masterpiece is downloaded as a .png with same size/shape as the canvas.</li>
                     <li>Square canvas is 600px x 600px, while rectangular canvas is 1200px x 600px.</li>
                     <li>If you leave the canvas while painting, simply click again to continue painting.</li>
                     <li>When the canvas is not fully visible, a warning pops up, and all is disabled.</li>
                     <li>When changing color in Settings, drag the pointer around for it to work seamlessly.</li>
-                    <li>Paint Tool-Specific Rules:</li>
-                    <li id='lvl2li'></li>
-                    <li id='lvl2li'></li>
+                    <li>Canvas Tool-Specific Rules:</li>
+                    <li id='lvl2li'>Paintbrush: any stroke color, 1-50 stroke width, disables canvas BG color picker if eraser chosen beforehand.</li>
+                    <li id='lvl2li'>Eraser: transparent or no stroke color, 1-50 stroke width, disables both color pickers if it is currently chosen.</li>
                 </ul>
             </span>
             <img onClick={() => openOrClose(paintbrushSettingsBox)} id='paintbrushSettingsIcon' draggable={false} src={settingsIcon} ref={paintbrushSettingsIconRef} alt='paintbrushSettingsIcon' title="paintbrushSettings" />
@@ -324,9 +363,9 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
                 </ul>
             </span>
             <div id='paintbrushTitle' draggable={false} ref={paintbrushTitleRef}>Paintbrush</div>
-            <canvas id='paintbrushCanvas' style={{ backgroundColor: canvasBGColorVal }} onMouseDown={(e) => startPainting(e)} onMouseMove={(e) => paint(e)} onMouseUp={() => finishLine()} onMouseOut={() => finishLine()} draggable={false} ref={paintbrushCanvasRef} alt='paintbrushCanvas' title="paintbrushCanvas"></canvas>
+            <canvas id='paintbrushCanvas' onMouseDown={(e) => startPainting(e)} onMouseMove={(e) => paint(e)} onMouseUp={() => finishLine()} onMouseOut={() => finishLine()} draggable={false} ref={paintbrushCanvasRef} width={600} height={600} alt='paintbrushCanvas' title="paintbrushCanvas"></canvas>
             <div style={{ display: 'flex', justifyContent: 'center' }} ref={canvasButtons}>
-                <button id='downloadButton' draggable={false} ref={downloadButtonRef} title="downloadButton">Download Masterpiece</button>
+                <button onClick={() => downloadMasterpiece()} id='downloadButton' draggable={false} ref={downloadButtonRef} title="downloadButton">Download Masterpiece</button>
                 <button onClick={() => clearCanvas()} id='clearButton' draggable={false} ref={clearButtonRef} title="clearCanvasButton">Clear</button>
             </div>
             <div id='canvasNotOnPage' ref={canvasNotOnPageRef}>

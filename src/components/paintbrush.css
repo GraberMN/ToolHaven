@@ -182,6 +182,7 @@ li {
     display: block;
     margin: auto;
     padding: 0;
+    cursor: crosshair;
     user-select: none;
 }
 #downloadButton {
