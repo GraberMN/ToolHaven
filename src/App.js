@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import calculatorThumbnail from './Images/CalculatorThumbnail.jpg';
 import rulerThumbnail from './Images/RulerThumbnail.jpg';
 import timerThumbnail from './Images/TimerThumbnail.jpg';
@@ -68,6 +69,7 @@ function App() {
       <AIChatbot aiChatbotImagesArray={aiChatbotImagesArray} moveToAIChatbot={moveToAIChatbot} setMoveToAIChatbot={setMoveToAIChatbot} moveToImgIdentifier={moveToImgIdentifier} setMoveToImgIdentifier={setMoveToImgIdentifier} />
       <ImgIdentifier imgIdentifierImagesArray={imgIdentifierImagesArray} moveToImgIdentifier={moveToImgIdentifier} setMoveToImgIdentifier={setMoveToImgIdentifier} moveToPaintbrush={moveToPaintbrush} setMoveToPaintbrush={setMoveToPaintbrush} />
       <Paintbrush paintbrushImagesArray={paintbrushImagesArray} moveToPaintbrush={moveToPaintbrush} setMoveToPaintbrush={setMoveToPaintbrush} />
+      <Analytics />
     </div>
   );
 }
