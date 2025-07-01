@@ -259,6 +259,14 @@ input[type='checkbox' i] {
     display: inline;
     user-select: none;
 }
+#copyrightNoticeRulers {
+    position: absolute;
+    width: 350px;
+    font-family: cursive;
+    transform: translateX(-168px);
+    display: inline;
+    user-select: none;
+}
 .readyForAnim {
     animation-duration: 2s;
     animation-iteration-count: 1;
@@ -343,6 +351,16 @@ input[type='checkbox' i] {
     to {
         opacity: 0;
         transform: translateX(calc(-6px + 20vw - 50%));
+    }
+}
+@keyframes fadeLeftCopyrightRulers {
+    from {
+        opacity: 100;
+        transform: translateX(calc(0vw - 168px));
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw - 168px));
     }
 }
 @keyframes appearFromRightRulers {
@@ -434,5 +452,15 @@ input[type='checkbox' i] {
     to {
         opacity: 0;
         transform: translateX(calc(50vw - 50%));
+    }
+}
+@keyframes appearFromRightCopyrightRulers {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw - 168px));
+    }
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw - 168px));
     }
 }

@@ -414,6 +414,14 @@ input[type='checkbox' i] {
     display: inline;
     user-select: none;
 }
+#copyrightNoticeAIChatbot {
+    position: absolute;
+    width: 350px;
+    font-family: cursive;
+    transform: translateX(-168px);
+    display: inline;
+    user-select: none;
+}
 .readyForAnim {
     animation-duration: 2s;
     animation-iteration-count: 1;
@@ -490,6 +498,16 @@ input[type='checkbox' i] {
         transform: translateX(calc(-30vw - 45px));
     }
 }
+@keyframes fadeLeftCopyrightAIChatbot {
+    from {
+        opacity: 100;
+        transform: translateX(calc(0vw - 168px));
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw - 168px));
+    }
+}
 @keyframes appearFromRightAIChatbot {
     from {
         opacity: 0;
@@ -558,5 +576,15 @@ input[type='checkbox' i] {
     to {
         opacity: 100;
         transform: translateX(calc(0vw - 45px));
+    }
+}
+@keyframes appearFromRightCopyrightAIChatbot {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw - 168px));
+    }
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw - 168px));
     }
 }

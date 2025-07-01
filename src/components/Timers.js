@@ -52,6 +52,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers, moveToAIChat
     const pinkRightArrowArea = useRef(null);
     const rightPinkArrow = useRef(null);
     const timersHomeButtonRef = useRef(null);
+    const copyrightNoticeTimersRef = useRef(null);
     const startCountdown = () => {
         if (countdownInterval.current !== null) {
             return;
@@ -429,7 +430,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers, moveToAIChat
         }
     }
     const animateElements = () => {
-        const timersElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox, timersContainerRef, timersHomeButtonRef];
+        const timersElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox, timersContainerRef, timersHomeButtonRef, copyrightNoticeTimersRef];
         for (let i = 0; i < timersElements.length; i++) {
             readyForAnimation(timersElements[i]);
         }
@@ -448,6 +449,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers, moveToAIChat
             timersHomeButtonRef.current.style.animationName = 'appearFromRightTimersRulesSmall';
         }
         timersContainerRef.current.style.animationName = 'appearFromRightTimers';
+        copyrightNoticeTimersRef.current.style.animationName = 'appearFromRightCopyrightTimers';
     }
     const readyForAnimation = (element) => {
         element.current.style.animationName = 'none';
@@ -491,12 +493,14 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers, moveToAIChat
         } else {
             timersSettingsBox.current.style.animationName = 'fadeLeftTimersSettingsBoxSmall';
         }
+        readyForAnimation(copyrightNoticeTimersRef);
+        copyrightNoticeTimersRef.current.style.animationName = 'fadeLeftCopyrightTimers';
         rightPinkArrow.current.style.display = 'none';
         setTimeout(() => setPinkRightArrowTransitionDone(true), 2000);
     }
     useEffect(() => {
         if (pinkRightArrowTransitionDone) {
-            const animTimersElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox, timersContainerRef, countdownContentRef, stopwatchContentRef, rightPinkArrow, timersHomeButtonRef];
+            const animTimersElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox, timersContainerRef, countdownContentRef, stopwatchContentRef, rightPinkArrow, timersHomeButtonRef, copyrightNoticeTimersRef];
             for (let i = 0; i < animTimersElements.length; i++) {
                 animTimersElements[i].current.style.display = 'none';
             }
@@ -518,7 +522,8 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers, moveToAIChat
             countdownContentRef.current.style.display = 'block';
             stopwatchContentRef.current.style.display = 'none';
             timersHomeButtonRef.current.style.display = 'inline';
-            const timersElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox, timersContainerRef, timersHomeButtonRef];
+            copyrightNoticeTimersRef.current.style.display = 'inline';
+            const timersElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox, timersContainerRef, timersHomeButtonRef, copyrightNoticeTimersRef];
             for (let i = 0; i < timersElements.length; i++) {
                 readyForMove(timersElements[i]);
             }
@@ -564,7 +569,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers, moveToAIChat
         setStopwatchLapSoundSource(coinStopwatchLapSound);
     }, []);
     useEffect(() => {
-        const goneElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox, timersContainerRef, countdownContentRef, stopwatchContentRef, rightPinkArrow, timersHomeButtonRef];
+        const goneElements = [timersTitleRef, timersRulesIconRef, timersRulesBox, timersSettingsIconRef, timersSettingsBox, timersContainerRef, countdownContentRef, stopwatchContentRef, rightPinkArrow, timersHomeButtonRef, copyrightNoticeTimersRef];
         for (let i = 0; i < goneElements.length; i++) {
             goneElements[i].current.style.display = 'none';
         }
@@ -679,6 +684,7 @@ function Timers({ timersImagesArray, moveToTimers, setMoveToTimers, moveToAIChat
                 <area onClick={() => window.innerWidth > 740 ? pinkRightArrowTransition(true) : pinkRightArrowTransition(false)} onMouseOver={() => blurPinkRightArrow()} onMouseOut={() => unBlurPinkRightArrow()} id='toAIChatbotMap' ref={pinkRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toAIChatbot' title="toAIChatbot"></area>
             </map>
             <img id='toAIChatbot' useMap='#toAIChatbotMap' draggable={false} ref={rightPinkArrow} src={pinkRightArrow} alt='toAIChatbot' />
+            <div id='copyrightNoticeTimers' ref={copyrightNoticeTimersRef}> © 2025 Mateo Graber. All rights reserved. </div>
         </div>
     );
 }

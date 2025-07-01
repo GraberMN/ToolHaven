@@ -400,6 +400,14 @@ li {
     display: inline;
     user-select: none;
 }
+#copyrightNoticeTimers {
+    position: absolute;
+    width: 350px;
+    font-family: cursive;
+    transform: translateX(-168px);
+    display: inline;
+    user-select: none;
+}
 .readyForAnim {
     animation-duration: 2s;
     animation-iteration-count: 1;
@@ -476,6 +484,16 @@ li {
         transform: translateX(calc(-30vw - 45px));
     }
 }
+@keyframes fadeLeftCopyrightTimers {
+    from {
+        opacity: 100;
+        transform: translateX(calc(0vw - 168px));
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw - 168px));
+    }
+}
 @keyframes appearFromRightTimers {
     from {
         opacity: 0;
@@ -544,5 +562,15 @@ li {
     to {
         opacity: 100;
         transform: translateX(calc(0vw - 45px));
+    }
+}
+@keyframes appearFromRightCopyrightTimers {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw - 168px));
+    }
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw - 168px));
     }
 }

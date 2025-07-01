@@ -11,6 +11,7 @@ function Home({ homeImagesArray, moveToCalc, setMoveToCalc, moveToRulers, setMov
     const byContainerRef = useRef(null);
     const rightGreenArrow = useRef(null);
     const greenRightArrowArea = useRef(null);
+    const copyrightNoticeRef = useRef(null);
     const blurGreenRightArrow = () => {
         rightGreenArrow.current.style.filter = 'blur(1px)';
         greenRightArrowArea.current.style.cursor = 'pointer';
@@ -49,6 +50,8 @@ function Home({ homeImagesArray, moveToCalc, setMoveToCalc, moveToRulers, setMov
             readyForAnimation(changedRelativeElements[i]);
             changedRelativeElements[i].current.style.animationName = 'fadeLeft';
         }
+        readyForAnimation(copyrightNoticeRef);
+        copyrightNoticeRef.current.style.animationName = 'fadeLeftCopyright';
         rightGreenArrow.current.style.display = 'none';
         setTimeout(() => setGreenRightArrowTransitionDone(true), 2000);
     }
@@ -59,6 +62,8 @@ function Home({ homeImagesArray, moveToCalc, setMoveToCalc, moveToRulers, setMov
             readyForAnimation(changedRelativeElements[i]);
             changedRelativeElements[i].current.style.animationName = 'fadeLeft';
         }
+        readyForAnimation(copyrightNoticeRef);
+        copyrightNoticeRef.current.style.animationName = 'fadeLeftCopyright';
         rightGreenArrow.current.style.display = 'none';
         setTimeout(() => setGreenRightArrowTransitionDone(true), 2000);
     }
@@ -69,6 +74,8 @@ function Home({ homeImagesArray, moveToCalc, setMoveToCalc, moveToRulers, setMov
             readyForAnimation(changedRelativeElements[i]);
             changedRelativeElements[i].current.style.animationName = 'fadeLeft';
         }
+        readyForAnimation(copyrightNoticeRef);
+        copyrightNoticeRef.current.style.animationName = 'fadeLeftCopyright';
         rightGreenArrow.current.style.display = 'none';
         setTimeout(() => setGreenRightArrowTransitionDone(true), 2000);
     }
@@ -79,6 +86,8 @@ function Home({ homeImagesArray, moveToCalc, setMoveToCalc, moveToRulers, setMov
             readyForAnimation(changedRelativeElements[i]);
             changedRelativeElements[i].current.style.animationName = 'fadeLeft';
         }
+        readyForAnimation(copyrightNoticeRef);
+        copyrightNoticeRef.current.style.animationName = 'fadeLeftCopyright';
         rightGreenArrow.current.style.display = 'none';
         setTimeout(() => setGreenRightArrowTransitionDone(true), 2000);
     }
@@ -89,6 +98,8 @@ function Home({ homeImagesArray, moveToCalc, setMoveToCalc, moveToRulers, setMov
             readyForAnimation(changedRelativeElements[i]);
             changedRelativeElements[i].current.style.animationName = 'fadeLeft';
         }
+        readyForAnimation(copyrightNoticeRef);
+        copyrightNoticeRef.current.style.animationName = 'fadeLeftCopyright';
         rightGreenArrow.current.style.display = 'none';
         setTimeout(() => setGreenRightArrowTransitionDone(true), 2000);
     }
@@ -99,6 +110,8 @@ function Home({ homeImagesArray, moveToCalc, setMoveToCalc, moveToRulers, setMov
             readyForAnimation(changedRelativeElements[i]);
             changedRelativeElements[i].current.style.animationName = 'fadeLeft';
         }
+        readyForAnimation(copyrightNoticeRef);
+        copyrightNoticeRef.current.style.animationName = 'fadeLeftCopyright';
         rightGreenArrow.current.style.display = 'none';
         setTimeout(() => setGreenRightArrowTransitionDone(true), 2000);
     }
@@ -109,12 +122,14 @@ function Home({ homeImagesArray, moveToCalc, setMoveToCalc, moveToRulers, setMov
             readyForAnimation(changedRelativeElements[i]);
             changedRelativeElements[i].current.style.animationName = 'fadeLeft';
         }
+        readyForAnimation(copyrightNoticeRef);
+        copyrightNoticeRef.current.style.animationName = 'fadeLeftCopyright';
         rightGreenArrow.current.style.display = 'none';
         setTimeout(() => setGreenRightArrowTransitionDone(true), 2000);
     }
     useEffect(() => {
         if (greenRightArrowTransitionDone) {
-            const homeElements = [homeTitleRef, projectNameRef, toolsContainerRef, byContainerRef];
+            const homeElements = [homeTitleRef, projectNameRef, toolsContainerRef, byContainerRef, copyrightNoticeRef];
             for (let i = 0; i < homeElements.length; i++) {
                 homeElements[i].current.style.display = 'none';
             }
@@ -163,6 +178,7 @@ function Home({ homeImagesArray, moveToCalc, setMoveToCalc, moveToRulers, setMov
                 <area onClick={() => greenRightArrowTransition()} onMouseOver={() => blurGreenRightArrow()} onMouseOut={() => unBlurGreenRightArrow()} id='toCalcMap' ref={greenRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toCalculator' title="toCalculator"></area>
             </map>
             <img id='toCalc' useMap='#toCalcMap' draggable={false} ref={rightGreenArrow} src={greenRightArrow} alt='toCalc' />
+            <div id='copyrightNotice' ref={copyrightNoticeRef}> © 2025 Mateo Graber. All rights reserved. </div>
         </div>
     );
 }

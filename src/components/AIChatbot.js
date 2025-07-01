@@ -33,6 +33,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot, 
     const redRightArrowArea = useRef(null);
     const rightRedArrow = useRef(null);
     const aiChatbotHomeButtonRef = useRef(null);
+    const copyrightNoticeAIChatbotRef = useRef(null);
     const generateResponse = async () => {
         try {
             const textGenerator = await pipeline('text-generation', 'HuggingFaceTB/SmolLM2-360M-Instruct', { dtype: 'q8' });
@@ -179,7 +180,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot, 
         }
     }
     const animateElements = () => {
-        const aiChatbotElements = [aiChatbotTitleRef, aiChatbotRulesIconRef, aiChatbotRulesBox, aiChatbotSettingsIconRef, aiChatbotSettingsBox, aiChatbotContainerRef, aiChatbotHomeButtonRef];
+        const aiChatbotElements = [aiChatbotTitleRef, aiChatbotRulesIconRef, aiChatbotRulesBox, aiChatbotSettingsIconRef, aiChatbotSettingsBox, aiChatbotContainerRef, aiChatbotHomeButtonRef, copyrightNoticeAIChatbotRef];
         for (let i = 0; i < aiChatbotElements.length; i++) {
             readyForAnimation(aiChatbotElements[i]);
         }
@@ -198,6 +199,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot, 
             aiChatbotHomeButtonRef.current.style.animationName = 'appearFromRightAIChatbotRulesSmall';
         }
         aiChatbotContainerRef.current.style.animationName = 'appearFromRightAIChatbot';
+        copyrightNoticeAIChatbotRef.current.style.animationName = 'appearFromRightCopyrightAIChatbot';
     }
     const readyForAnimation = (element) => {
         element.current.style.animationName = 'none';
@@ -244,6 +246,8 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot, 
         } else {
             aiChatbotSettingsBox.current.style.animationName = 'fadeLeftAIChatbotSettingsBoxSmall';
         }
+        readyForAnimation(copyrightNoticeAIChatbotRef);
+        copyrightNoticeAIChatbotRef.current.style.animationName = 'fadeLeftCopyrightAIChatbot';
         rightRedArrow.current.style.display = 'none';
         setTimeout(() => setRedRightArrowTransitionDone(true), 2000);
     }
@@ -255,7 +259,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot, 
     }, [messageArray]);
     useEffect(() => {
             if (redRightArrowTransitionDone) {
-                const animAIChatbotElements = [aiChatbotTitleRef, aiChatbotRulesIconRef, aiChatbotRulesBox, aiChatbotSettingsIconRef, aiChatbotSettingsBox, aiChatbotContainerRef, disclaimerBox, citationBox, rightRedArrow, aiChatbotHomeButtonRef];
+                const animAIChatbotElements = [aiChatbotTitleRef, aiChatbotRulesIconRef, aiChatbotRulesBox, aiChatbotSettingsIconRef, aiChatbotSettingsBox, aiChatbotContainerRef, disclaimerBox, citationBox, rightRedArrow, aiChatbotHomeButtonRef, copyrightNoticeAIChatbotRef];
                 for (let i = 0; i < animAIChatbotElements.length; i++) {
                     animAIChatbotElements[i].current.style.display = 'none';
                 }
@@ -276,7 +280,8 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot, 
             disclaimerBox.current.style.visibility = 'hidden';
             thinkingMessageRef.current.style.visibility = 'hidden';
             aiChatbotHomeButtonRef.current.style.display = 'inline';
-            const aiChatbotElements = [aiChatbotTitleRef, aiChatbotRulesIconRef, aiChatbotRulesBox, aiChatbotSettingsIconRef, aiChatbotSettingsBox, aiChatbotContainerRef, aiChatbotHomeButtonRef];
+            copyrightNoticeAIChatbotRef.current.style.display = 'inline';
+            const aiChatbotElements = [aiChatbotTitleRef, aiChatbotRulesIconRef, aiChatbotRulesBox, aiChatbotSettingsIconRef, aiChatbotSettingsBox, aiChatbotContainerRef, aiChatbotHomeButtonRef, copyrightNoticeAIChatbotRef];
             for (let i = 0; i < aiChatbotElements.length; i++) {
                 readyForMove(aiChatbotElements[i]);
             }
@@ -320,7 +325,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot, 
         }
     }, [moveToAIChatbot]);
     useEffect(() => {
-        const goneElements = [aiChatbotTitleRef, aiChatbotRulesIconRef, aiChatbotRulesBox, aiChatbotSettingsIconRef, aiChatbotSettingsBox, aiChatbotContainerRef, rightRedArrow, aiChatbotHomeButtonRef];
+        const goneElements = [aiChatbotTitleRef, aiChatbotRulesIconRef, aiChatbotRulesBox, aiChatbotSettingsIconRef, aiChatbotSettingsBox, aiChatbotContainerRef, rightRedArrow, aiChatbotHomeButtonRef, copyrightNoticeAIChatbotRef];
         for (let i = 0; i < goneElements.length; i++) {
             goneElements[i].current.style.display = 'none';
         }
@@ -397,6 +402,7 @@ function AIChatbot({ aiChatbotImagesArray, moveToAIChatbot, setMoveToAIChatbot, 
                 <area onClick={() => window.innerWidth > 740 ? redRightArrowTransition(true) : redRightArrowTransition(false)} onMouseOver={() => blurRedRightArrow()} onMouseOut={() => unBlurRedRightArrow()} id='toImgIdentifierMap' ref={redRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toImgIdentifier' title="toImgIdentifier"></area>
             </map>
             <img id='toImgIdentifier' useMap='#toImgIdentifierMap' draggable={false} ref={rightRedArrow} src={redRightArrow} alt='toImgIdentifier' />
+            <div id='copyrightNoticeAIChatbot' ref={copyrightNoticeAIChatbotRef}> © 2025 Mateo Graber. All rights reserved. </div>
         </div>
     );
 }

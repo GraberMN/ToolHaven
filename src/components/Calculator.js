@@ -25,6 +25,7 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
     const blueRightArrowArea = useRef(null);
     const rightBlueArrow = useRef(null);
     const homeButtonRef = useRef(null);
+    const copyrightNoticeCalcRef = useRef(null);
     const appendToDisplay = (input, isNum) => {
         if (inputField.current.value === "Error" || inputField.current.value === "NaN" || inputField.current.value === "undefined" || inputField.current.value === "Infinity") {
             isNum ? inputField.current.value = "" : inputField.current.value = "0";
@@ -188,7 +189,7 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
         }
     }
     const animateElements = () => {
-        const calcElements = [inputField, buttonContainer, calcTitleRef, rulesIconRef, rulesBox, settingsIconRef, settingsBox, historyIconRef, historyBox, ansField, rightBlueArrow, homeButtonRef];
+        const calcElements = [inputField, buttonContainer, calcTitleRef, rulesIconRef, rulesBox, settingsIconRef, settingsBox, historyIconRef, historyBox, ansField, rightBlueArrow, homeButtonRef, copyrightNoticeCalcRef];
         for (let i = 0; i < calcElements.length; i++) {
             readyForAnimation(calcElements[i]);
         }
@@ -211,6 +212,7 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
         historyIconRef.current.style.animationName = 'appearFromRightHistoryIcon';
         historyBox.current.style.animationName = 'appearFromRightHistoryBox';
         ansField.current.style.animationName = 'appearFromRightAnsField';
+        copyrightNoticeCalcRef.current.style.animationName = 'appearFromRightCopyright';
     }
     const readyForAnimation = (element) => {
         element.current.style.animationName = 'none';
@@ -257,6 +259,8 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
         historyBox.current.style.animationName = 'fadeLeftHistoryBox';
         readyForAnimation(ansField);
         ansField.current.style.animationName = 'fadeLeftAnsField';
+        readyForAnimation(copyrightNoticeCalcRef);
+        copyrightNoticeCalcRef.current.style.animationName = 'fadeLeftCopyright';
         rightBlueArrow.current.style.display = 'none';
         setTimeout(() => setBlueRightArrowTransitionDone(true), 2000);
     }
@@ -283,7 +287,7 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
     }
     useEffect(() => {
         if (blueRightArrowTransitionDone) {
-            const animElements = [inputField, buttonContainer, calcTitleRef, rulesIconRef, rulesBox, settingsIconRef, settingsBox, historyIconRef, historyBox, ansField, homeButtonRef];
+            const animElements = [inputField, buttonContainer, calcTitleRef, rulesIconRef, rulesBox, settingsIconRef, settingsBox, historyIconRef, historyBox, ansField, homeButtonRef, copyrightNoticeCalcRef];
             for (let i = 0; i < animElements.length; i++) {
                 animElements[i].current.style.display = 'none';
             }
@@ -303,7 +307,8 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
             historyBox.current.style.display = 'inline';
             ansField.current.style.display = 'inline';
             homeButtonRef.current.style.display = 'inline';
-            const calcElements = [inputField, buttonContainer, calcTitleRef, rulesIconRef, rulesBox, settingsIconRef, settingsBox, historyIconRef, historyBox, ansField, homeButtonRef];
+            copyrightNoticeCalcRef.current.style.display = 'inline';
+            const calcElements = [inputField, buttonContainer, calcTitleRef, rulesIconRef, rulesBox, settingsIconRef, settingsBox, historyIconRef, historyBox, ansField, homeButtonRef, copyrightNoticeCalcRef];
             for (let i = 0; i < calcElements.length; i++) {
                 readyForMove(calcElements[i]);
             }
@@ -340,7 +345,7 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
         historyBox.current.style.visibility = "hidden";
         beforeEval.current = "0";
         ans.current = "0";
-        const calcElements = [inputField, buttonContainer, calcTitleRef, rulesIconRef, rulesBox, settingsIconRef, settingsBox, historyIconRef, historyBox, ansField, rightBlueArrow, homeButtonRef];
+        const calcElements = [inputField, buttonContainer, calcTitleRef, rulesIconRef, rulesBox, settingsIconRef, settingsBox, historyIconRef, historyBox, ansField, rightBlueArrow, homeButtonRef, copyrightNoticeCalcRef];
         for (let i = 0; i < calcElements.length; i++) {
             calcElements[i].current.style.display = 'none';
         }
@@ -432,6 +437,7 @@ function Calculator({ calcImagesArray, moveToRulers, setMoveToRulers, moveToCalc
                 <area onClick={() => window.innerWidth > 740 ? blueRightArrowTransition(true) : blueRightArrowTransition(false)} onMouseOver={() => blurBlueRightArrow()} onMouseOut={() => unBlurBlueRightArrow()} id='toRulersMap' ref={blueRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toRulers' title="toRulers"></area>
             </map>
             <img id='toRulers' useMap='#toRulersMap' draggable={false} ref={rightBlueArrow} src={blueRightArrow} alt='toRulers' />
+            <div id='copyrightNoticeCalc' ref={copyrightNoticeCalcRef}> © 2025 Mateo Graber. All rights reserved. </div>
         </div>
     );
 }

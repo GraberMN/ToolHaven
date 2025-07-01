@@ -33,6 +33,7 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
     const clearButtonRef = useRef(null);
     const canvasNotOnPageRef = useRef(null);
     const paintbrushHomeButtonRef = useRef(null);
+    const copyrightNoticePaintbrushRef = useRef(null);
     const startPainting = (e) => {
         isPainting.current = true;
         paintingStartX.current = e.clientX;
@@ -210,7 +211,7 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
         }
     }
     const animateElements = () => {
-        const paintbrushElements = [paintbrushTitleRef, paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox, paintbrushCanvasRef, canvasButtons, paintbrushHomeButtonRef];
+        const paintbrushElements = [paintbrushTitleRef, paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox, paintbrushCanvasRef, canvasButtons, paintbrushHomeButtonRef, copyrightNoticePaintbrushRef];
         for (let i = 0; i < paintbrushElements.length; i++) {
             readyForAnimation(paintbrushElements[i]);
         }
@@ -230,6 +231,7 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
         }
         paintbrushCanvasRef.current.style.animationName = 'appearFromRightPaintbrush';
         canvasButtons.current.style.animationName = 'appearFromRightPaintbrush';
+        copyrightNoticePaintbrushRef.current.style.animationName = 'appearFromRightCopyrightPaintbrush';
     }
     const readyForAnimation = (element) => {
         element.current.style.animationName = 'none';
@@ -268,7 +270,8 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
             paintbrushCanvasRef.current.style.display = 'block';
             canvasButtons.current.style.display = 'block';
             paintbrushHomeButtonRef.current.style.display = 'inline';
-            const paintbrushElements = [paintbrushTitleRef, paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox, paintbrushCanvasRef, canvasButtons, paintbrushHomeButtonRef];
+            copyrightNoticePaintbrushRef.current.style.display = 'inline';
+            const paintbrushElements = [paintbrushTitleRef, paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox, paintbrushCanvasRef, canvasButtons, paintbrushHomeButtonRef, copyrightNoticePaintbrushRef];
             for (let i = 0; i < paintbrushElements.length; i++) {
                 readyForMove(paintbrushElements[i]);
             }
@@ -308,7 +311,7 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
         }
     }, [moveToPaintbrush]);
     useEffect(() => {
-        const goneElements = [paintbrushTitleRef, paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox, paintbrushCanvasRef, canvasButtons, canvasNotOnPageRef, paintbrushHomeButtonRef];
+        const goneElements = [paintbrushTitleRef, paintbrushRulesIconRef, paintbrushRulesBox, paintbrushSettingsIconRef, paintbrushSettingsBox, paintbrushCanvasRef, canvasButtons, canvasNotOnPageRef, paintbrushHomeButtonRef, copyrightNoticePaintbrushRef];
         for (let i = 0; i < goneElements.length; i++) {
             goneElements[i].current.style.display = 'none';
         }
@@ -373,6 +376,7 @@ function Paintbrush({ paintbrushImagesArray, moveToPaintbrush, setMoveToPaintbru
                 <span id='canvasNotOnPageText'>Canvas Not Fully Visible</span>
             </div>
             <img onClick={() => window.location.reload()} id='paintbrushHomeButton' draggable={false} ref={paintbrushHomeButtonRef} src={homeButton} alt='toHome' title="toHome" />
+            <div id='copyrightNoticePaintbrush' ref={copyrightNoticePaintbrushRef}> © 2025 Mateo Graber. All rights reserved. </div>
         </div>
     )
 }

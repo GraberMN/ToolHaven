@@ -349,6 +349,14 @@ button:active {
     display: inline;
     user-select: none;
 }
+#copyrightNoticeCalc {
+    position: absolute;
+    width: 350px;
+    font-family: cursive;
+    transform: translateX(-168px);
+    display: inline;
+    user-select: none;
+}
 .readyForAnim {
     animation-duration: 2s;
     animation-iteration-count: 1;
@@ -469,6 +477,16 @@ button:active {
         transform: translateX(calc(-30vw - 493px));
     }
 }
+@keyframes fadeLeftCopyright {
+    from {
+        opacity: 100;
+        transform: translateX(calc(0vw - 168px));
+    }
+    to {
+        opacity: 0;
+        transform: translateX(calc(-30vw - 168px));
+    }
+}
 @keyframes appearFromLeft {
     from {
         opacity: 0;
@@ -587,5 +605,15 @@ button:active {
     to {
         opacity: 100;
         transform: translateX(calc(0vw - 493px));
+    }
+}
+@keyframes appearFromRightCopyright {
+    from {
+        opacity: 0;
+        transform: translateX(calc(30vw - 168px));
+    }
+    to {
+        opacity: 100;
+        transform: translateX(calc(0vw - 168px));
     }
 }

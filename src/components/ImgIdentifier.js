@@ -35,6 +35,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
     const purpleRightArrowArea = useRef(null);
     const rightPurpleArrow = useRef(null);
     const imgIdentifierHomeButtonRef = useRef(null);
+    const copyrightNoticeImgIdentifierRef = useRef(null);
     const generateIdentification = async () => {
         try {
             if (imgSource === null || imgSource === '') {
@@ -209,7 +210,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
         }
     }
     const animateElements = () => {
-        const imgIdentifierElements = [imgIdentifierTitleRef, imgIdentifierRulesIconRef, imgIdentifierRulesBox, imgIdentifierSettingsIconRef, imgIdentifierSettingsBox, imgIdentifierRef, imgIdentifierHomeButtonRef];
+        const imgIdentifierElements = [imgIdentifierTitleRef, imgIdentifierRulesIconRef, imgIdentifierRulesBox, imgIdentifierSettingsIconRef, imgIdentifierSettingsBox, imgIdentifierRef, imgIdentifierHomeButtonRef, copyrightNoticeImgIdentifierRef];
         for (let i = 0; i < imgIdentifierElements.length; i++) {
             readyForAnimation(imgIdentifierElements[i]);
         }
@@ -228,6 +229,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
             imgIdentifierHomeButtonRef.current.style.animationName = 'appearFromRightImgIdentifierRulesSmall';
         }
         imgIdentifierRef.current.style.animationName = 'appearFromRightImgIdentifier';
+        copyrightNoticeImgIdentifierRef.current.style.animationName = 'appearFromRightCopyrightImgIdentifier';
     }
     const readyForAnimation = (element) => {
         element.current.style.animationName = 'none';
@@ -278,12 +280,14 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
         } else {
             imgIdentifierSettingsBox.current.style.animationName = 'fadeLeftImgIdentifierSettingsBoxSmall';
         }
+        readyForAnimation(copyrightNoticeImgIdentifierRef);
+        copyrightNoticeImgIdentifierRef.current.style.animationName = 'fadeLeftCopyrightImgIdentifier';
         rightPurpleArrow.current.style.display = 'none';
         setTimeout(() => setPurpleRightArrowTransitionDone(true), 2000);
     }
     useEffect(() => {
         if (purpleRightArrowTransitionDone) {
-            const animImgIdentifierElements = [imgIdentifierTitleRef, imgIdentifierRulesIconRef, imgIdentifierRulesBox, imgIdentifierSettingsIconRef, imgIdentifierSettingsBox, imgIdentifierRef, imgIdentifierDisclaimerBox, imgIdentifierCitationBox, rightPurpleArrow, imgIdentifierHomeButtonRef];
+            const animImgIdentifierElements = [imgIdentifierTitleRef, imgIdentifierRulesIconRef, imgIdentifierRulesBox, imgIdentifierSettingsIconRef, imgIdentifierSettingsBox, imgIdentifierRef, imgIdentifierDisclaimerBox, imgIdentifierCitationBox, rightPurpleArrow, imgIdentifierHomeButtonRef, copyrightNoticeImgIdentifierRef];
             for (let i = 0; i < animImgIdentifierElements.length; i++) {
                 animImgIdentifierElements[i].current.style.display = 'none';
             }
@@ -304,7 +308,8 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
             imgIdentifierDisclaimerBox.current.style.visibility = 'hidden';
             imgIdentifierThinkingMessageRef.current.style.visibility = 'hidden';
             imgIdentifierHomeButtonRef.current.style.display = 'inline';
-            const imgIdentifierElements = [imgIdentifierTitleRef, imgIdentifierRulesIconRef, imgIdentifierRulesBox, imgIdentifierSettingsIconRef, imgIdentifierSettingsBox, imgIdentifierRef, imgIdentifierHomeButtonRef];
+            copyrightNoticeImgIdentifierRef.current.style.display = 'inline';
+            const imgIdentifierElements = [imgIdentifierTitleRef, imgIdentifierRulesIconRef, imgIdentifierRulesBox, imgIdentifierSettingsIconRef, imgIdentifierSettingsBox, imgIdentifierRef, imgIdentifierHomeButtonRef, copyrightNoticeImgIdentifierRef];
             for (let i = 0; i < imgIdentifierElements.length; i++) {
                 readyForMove(imgIdentifierElements[i]);
             }
@@ -347,7 +352,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
         }
     }, [moveToImgIdentifier]);
     useEffect(() => {
-        const goneElements = [imgIdentifierTitleRef, imgIdentifierRulesIconRef, imgIdentifierRulesBox, imgIdentifierSettingsIconRef, imgIdentifierSettingsBox, imgIdentifierRef, rightPurpleArrow, imgIdentifierHomeButtonRef];
+        const goneElements = [imgIdentifierTitleRef, imgIdentifierRulesIconRef, imgIdentifierRulesBox, imgIdentifierSettingsIconRef, imgIdentifierSettingsBox, imgIdentifierRef, rightPurpleArrow, imgIdentifierHomeButtonRef, copyrightNoticeImgIdentifierRef];
         for (let i = 0; i < goneElements.length; i++) {
             goneElements[i].current.style.display = 'none';
         }
@@ -436,6 +441,7 @@ function ImgIdentifier({ imgIdentifierImagesArray, moveToImgIdentifier, setMoveT
                 <area onClick={() => window.innerWidth > 740 ? purpleRightArrowTransition(true) : purpleRightArrowTransition(false)} onMouseOver={() => blurPurpleRightArrow()} onMouseOut={() => unBlurPurpleRightArrow()} id='toPaintbrushMap' ref={purpleRightArrowArea} shape='poly' coords='34, 103.4, 29, 96.8, 23, 89, 20, 78.1, 20, 67.1, 22, 57.2, 26, 48.4, 32, 42.9, 38, 38.5, 45, 36.3, 54, 34.1, 66, 34.1, 66, 42.9, 70, 45.1, 92, 24.2, 71, 5.5, 67, 7.7, 67, 17.6, 55, 17.6, 45, 17.6, 35, 20.9, 25, 29.7, 15, 39.6, 9, 59.4, 12, 74.8, 16, 85.8, 22, 96.8, 30, 103.4' alt='toPaintbrush' title="toPaintbrush"></area>
             </map>
             <img id='toPaintbrush' useMap='#toPaintbrushMap' draggable={false} ref={rightPurpleArrow} src={purpleRightArrow} alt='toPaintbrush' />
+            <div id='copyrightNoticeImgIdentifier' ref={copyrightNoticeImgIdentifierRef}> © 2025 Mateo Graber. All rights reserved. </div>
         </div>
     );
 }
